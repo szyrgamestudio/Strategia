@@ -29,7 +29,12 @@ public class WyburRas : MonoBehaviour
     public Image strzalka1;
     public Image strzalka2;
 
+    public GameObject updaterZiom;
+
+    private PhotonView photonView;
+
     public void Start(){
+        photonView = updaterZiom.GetComponent<PhotonView>();
         team[id]=id;
         lewy.sprite = teamArt[id];
         if(id>=2)
@@ -61,6 +66,7 @@ public class WyburRas : MonoBehaviour
                 if(rasa[id]==2)
                     rasa[id]=0;
                 main.sprite = rasaArt[rasa[id]];
+                photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
             break;
             case 3: 
                 heros[id]++;
@@ -76,6 +82,11 @@ public class WyburRas : MonoBehaviour
             break;
         }
     }
+    [PunRPC]
+    public void UpdateSprite(Sprite sprite)
+    {
+        this.main.sprite = sprite;
+    }
     public void lewo()
     {
         switch(wybierany){
@@ -84,6 +95,7 @@ public class WyburRas : MonoBehaviour
                 if(rasa[id]==-1)
                     rasa[id]=1;
                 main.sprite = rasaArt[rasa[id]];
+                photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
             break;
             case 3: 
                 heros[id]--;
@@ -218,7 +230,6 @@ public class WyburRas : MonoBehaviour
                 {
                     photonView = gameObject.AddComponent<PhotonView>();
                 }
-
                 photonView.RPC("LoadSceneRPC", RpcTarget.All);
             }
         }
