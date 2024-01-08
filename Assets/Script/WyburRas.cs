@@ -102,24 +102,25 @@ public class WyburRas : MonoBehaviour
                 if (rasa[id] == 2)
                     rasa[id] = 0;
                 main.sprite = rasaArt[rasa[id]];
-                photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
+                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
                 break;
             case 3:
                 heros[id]++;
                 if (heros[id] == 2)
                     heros[id] = 0;
                 prawy.sprite = herosArt[heros[id]];
+                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
                 break;
             case 2:
                 team[id]++;
                 if (team[id] == 4)
                     team[id] = 0;
                 lewy.sprite = teamArt[team[id]];
+                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
                 break;
 
         }
         Debug.Log(rasa[id]);
-        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
     }
     public void lewo()
     {
@@ -130,23 +131,24 @@ public class WyburRas : MonoBehaviour
                 if (rasa[id] == -1)
                     rasa[id] = 1;
                 main.sprite = rasaArt[rasa[id]];
-                photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
+                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
                 break;
             case 3:
                 heros[id]--;
                 if (heros[id] == -1)
                     heros[id] = 1;
                 prawy.sprite = herosArt[heros[id]];
+                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
                 break;
             case 2:
                 team[id]--;
                 if (team[id] == -1)
                     team[id] = 3;
                 lewy.sprite = teamArt[team[id]];
+                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
                 break;
         }
 
-        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
     }
     public void lewyGora()
     {
