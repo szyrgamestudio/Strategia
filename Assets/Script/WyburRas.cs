@@ -33,14 +33,17 @@ public class WyburRas : MonoBehaviour
 
     private PhotonView photonView;
 
-    public void Start(){
+
+
+    public void Start()
+    {
         photonView = updaterZiom.GetComponent<PhotonView>();
-        team[id]=id;
+        team[id] = id;
         lewy.sprite = teamArt[id];
-        if(id>=2)
+        if (id >= 2)
         {
             loockArt.enabled = true;
-            aktywny[id]=false;
+            aktywny[id] = false;
             unlockArt.enabled = false;
             main.enabled = false;
             lewy.enabled = false;
@@ -50,108 +53,149 @@ public class WyburRas : MonoBehaviour
         }
         else
         {
-            aktywny[id]=true;
+            aktywny[id] = true;
             unlockArt.enabled = false;
             loockArt.enabled = false;
         }
     }
 
-
-
-    public void prawo()
-    {
-        switch(wybierany){
-            case 1: 
-                rasa[id]++;
-                if(rasa[id]==2)
-                    rasa[id]=0;
-                main.sprite = rasaArt[rasa[id]];
-                photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
-            break;
-            case 3: 
-                heros[id]++;
-                if(heros[id]==2)
-                    heros[id]=0;
-                prawy.sprite = herosArt[heros[id]];
-            break;
-            case 2: 
-                team[id]++;
-                if(team[id]==4)
-                    team[id]=0;
-                lewy.sprite = teamArt[team[id]];
-            break;
-        }
-    }
     [PunRPC]
     public void UpdateSprite(Sprite sprite)
     {
         this.main.sprite = sprite;
     }
-    public void lewo()
+
+    [PunRPC]
+    public void SynchronizeChoice(int selected, int value)
     {
-        switch(wybierany){
-            case 1: 
-                rasa[id]--;
-                if(rasa[id]==-1)
-                    rasa[id]=1;
+        Debug.Log($"SynchronizeChoice RPC called with selected: {selected}, value: {value}");
+        switch (selected)
+        {
+            case 1:
+                rasa[id] = value;
+                main.sprite = rasaArt[rasa[id]];
+                break;
+            case 3:
+                heros[id] = value;
+                prawy.sprite = herosArt[heros[id]];
+                break;
+            case 2:
+                team[id] = value;
+                lewy.sprite = teamArt[team[id]];
+                break;
+        }
+    }
+
+
+    [PunRPC]
+    public void SynchronizeMovement(Image A, Image B, Image C)
+    {
+        StartCoroutine(PrzeniesObiekty(A, B, C));
+    }
+
+    public void prawo()
+    {
+        switch (wybierany)
+        {
+            case 1:
+                rasa[id]++;
+                if (rasa[id] == 2)
+                    rasa[id] = 0;
                 main.sprite = rasaArt[rasa[id]];
                 photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
-            break;
-            case 3: 
-                heros[id]--;
-                if(heros[id]==-1)
-                    heros[id]=1;
+                break;
+            case 3:
+                heros[id]++;
+                if (heros[id] == 2)
+                    heros[id] = 0;
                 prawy.sprite = herosArt[heros[id]];
-            break;
-            case 2: 
-                team[id]--;
-                if(team[id]==-1)
-                    team[id]=3;
+                break;
+            case 2:
+                team[id]++;
+                if (team[id] == 4)
+                    team[id] = 0;
                 lewy.sprite = teamArt[team[id]];
-            break;
+                break;
+
         }
+        Debug.Log(rasa[id]);
+        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
+    }
+    public void lewo()
+    {
+        switch (wybierany)
+        {
+            case 1:
+                rasa[id]--;
+                if (rasa[id] == -1)
+                    rasa[id] = 1;
+                main.sprite = rasaArt[rasa[id]];
+                photonView.RPC("UpdateSprite", RpcTarget.All, rasaArt[rasa[id]]);
+                break;
+            case 3:
+                heros[id]--;
+                if (heros[id] == -1)
+                    heros[id] = 1;
+                prawy.sprite = herosArt[heros[id]];
+                break;
+            case 2:
+                team[id]--;
+                if (team[id] == -1)
+                    team[id] = 3;
+                lewy.sprite = teamArt[team[id]];
+                break;
+        }
+
+        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
     }
     public void lewyGora()
     {
-    switch(wybierany){
-        case 1:
-            StartCoroutine(PrzeniesObiekty(prawy, main, lewy));
-            wybierany = 2;
-        break;
-        case 3:
-            StartCoroutine(PrzeniesObiekty(prawy, lewy, main));
-            wybierany = 2;
-        break;
-     }
+        switch (wybierany)
+        {
+            case 1:
+                StartCoroutine(PrzeniesObiekty(prawy, main, lewy));
+                wybierany = 2;
+                break;
+            case 3:
+                StartCoroutine(PrzeniesObiekty(prawy, lewy, main));
+                wybierany = 2;
+                break;
+        }
+        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy);
 
     }
     public void prawyGora()
     {
-    switch(wybierany){
-        case 2:
-            StartCoroutine(PrzeniesObiekty(prawy, main, lewy));
-            wybierany = 3;
-        break;
-        case 1:
-            StartCoroutine(PrzeniesObiekty(prawy, lewy, main));
-            wybierany = 3;
-        break;
-     }
+        switch (wybierany)
+        {
+            case 2:
+                StartCoroutine(PrzeniesObiekty(prawy, main, lewy));
+                wybierany = 3;
+                break;
+            case 1:
+                StartCoroutine(PrzeniesObiekty(prawy, lewy, main));
+                wybierany = 3;
+                break;
+        }
+        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy);
     }
     public void mainGora()
     {
-    switch(wybierany){
-        case 2:
-            StartCoroutine(PrzeniesObiekty(prawy, lewy, main));
-            wybierany = 1;
-        break;
-        case 3:
-            StartCoroutine(PrzeniesObiekty(prawy, main, lewy));
-            wybierany = 1;
-        break;
-     }
+        switch (wybierany)
+        {
+            case 2:
+                StartCoroutine(PrzeniesObiekty(prawy, lewy, main));
+                wybierany = 1;
+                break;
+            case 3:
+                StartCoroutine(PrzeniesObiekty(prawy, main, lewy));
+                wybierany = 1;
+                break;
+        }
+
+        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, lewy, main);
     }
-    IEnumerator PrzeniesObiekty(Image A, Image B ,Image C)
+    IEnumerator PrzeniesObiekty(Image A, Image B, Image C)
     {
         // Zdefiniuj nowe pozycje
         Vector3 nowaPozycjaMain = C.transform.position;
@@ -183,24 +227,24 @@ public class WyburRas : MonoBehaviour
     public void loock()
     {
         aktywny[id] = true;
-        loockArt.enabled =false;
-        unlockArt.enabled=true;
-            main.enabled = true;
-            lewy.enabled = true;
-            prawy.enabled = true;
-            strzalka1.enabled = true;
-            strzalka2.enabled = true;
+        loockArt.enabled = false;
+        unlockArt.enabled = true;
+        main.enabled = true;
+        lewy.enabled = true;
+        prawy.enabled = true;
+        strzalka1.enabled = true;
+        strzalka2.enabled = true;
     }
     public void unloock()
     {
         aktywny[id] = false;
-        loockArt.enabled=true;
-        unlockArt.enabled=false;
-            main.enabled = false;
-            lewy.enabled = false;
-            prawy.enabled = false;
-            strzalka1.enabled = false;
-            strzalka2.enabled = false;
+        loockArt.enabled = true;
+        unlockArt.enabled = false;
+        main.enabled = false;
+        lewy.enabled = false;
+        prawy.enabled = false;
+        strzalka1.enabled = false;
+        strzalka2.enabled = false;
     }
     public void zacznij()
     {
@@ -224,7 +268,7 @@ public class WyburRas : MonoBehaviour
 
                 // Spróbuj pobrać komponent PhotonView
                 PhotonView photonView = GetComponent<PhotonView>();
-                
+
                 // Jeśli nie istnieje, dodaj go dynamicznie
                 if (photonView == null)
                 {
