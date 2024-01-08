@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0756c5758ee1aa54abcf1f3e3fbe3234
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Nin: {instanceID: 0}
+  - Nout: {instanceID: 0}
+  - skos: {instanceID: 0}
+  - bok: {instanceID: 0}
+  - puste: {instanceID: 0}
+  - Greenskos: {instanceID: 0}
+  - Greenbok: {instanceID: 0}
+  - kafelek: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

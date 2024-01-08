@@ -1,0 +1,60 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Kragmagi : MonoBehaviour
+{
+    public float targetZ = -1.0f; // Pożądana pozycja 'z'
+    public bool wybudowany;
+    public float targetX; // Przesuń te deklaracje zmiennych na poziom klasy, nie w funkcji Update
+    public float targetY;
+    public GameObject ObiektRuszany;
+    public Sprite zolte;
+
+    public static GameObject budowlaniec;
+
+    public static bool pomoc = false;
+
+    void LateUpdate()
+    {
+        if (wybudowany == false) // Użyj '==' do porównywania, a nie '='
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            
+            targetX = Mathf.Round(mousePosition.x);
+            targetY = Mathf.Round(mousePosition.y);
+            transform.position = new Vector3(targetX, targetY, targetZ);
+            if (Input.GetMouseButtonDown(0))
+                {
+                if (Walka.odleglosc(budowlaniec,ObiektRuszany) == 1
+                && Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia == 1) 
+                    {
+                        if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete)
+                        {
+                            Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia = 2;
+                            Menu.kafelki[(int)targetX][(int)targetY].GetComponent<SpriteRenderer>().sprite = zolte;
+                            Pole.Clean2();
+                            Menu.zloto[Menu.tura]-=5;
+                            Menu.drewno[Menu.tura]-=5;
+                            Budowlaniec.wybieranie = false;
+                            Destroy(ObiektRuszany);
+                        }
+
+                    }
+                }
+            if (Walka.odleglosc(budowlaniec,ObiektRuszany) == 1
+            && Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia == 1) 
+            {
+                ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);
+            }
+            else
+            {
+                ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 0.0f);
+            }
+            Pole.Clean2();
+        }
+    }
+}

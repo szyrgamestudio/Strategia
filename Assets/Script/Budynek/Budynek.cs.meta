@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4ee0b89e9c5d3a140b479838da2f3cef
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - budynek: {instanceID: 0}
+  - healthGracza: {instanceID: 0}
+  - obramowka: {instanceID: 0}
+  - wybrane: {instanceID: 0}
+  - TextShowDMG: {instanceID: 0}
+  - customCursor: {instanceID: 0}
+  - buildCursor: {instanceID: 0}
+  - strzalka: {instanceID: 0}
+  - budowaArt: {instanceID: 0}
+  - budynekArt: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
