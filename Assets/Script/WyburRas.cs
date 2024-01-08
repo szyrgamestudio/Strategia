@@ -92,6 +92,15 @@ public class WyburRas : MonoBehaviour
     {
         StartCoroutine(PrzeniesObiekty(A, B, C));
     }
+    [PunRPC]
+    public void SynchronizeTransform(Vector3 nowePołożenieA,Vector3 nowePołożenieB,Vector3 nowePołożenieC)
+    {
+        Debug.Log("dziwka");
+        lewy.transform.position = nowePołożenieA;
+        prawy.transform.position = nowePołożenieB;
+        main.transform.position = nowePołożenieC;
+    }
+    
 
     public void prawo()
     {
@@ -120,7 +129,6 @@ public class WyburRas : MonoBehaviour
                 break;
 
         }
-        Debug.Log(rasa[id]);
     }
     public void lewo()
     {
@@ -225,6 +233,7 @@ public class WyburRas : MonoBehaviour
         A.rectTransform.position = nowaPozycjaMain;
         B.rectTransform.position = nowaPozycjaLewy;
         C.rectTransform.position = nowaPozycjaPrawy;
+        photonView.RPC("SynchronizeTransform", RpcTarget.All, lewy.transform.position, prawy.transform.position, main.transform.position);
     }
     public void loock()
     {

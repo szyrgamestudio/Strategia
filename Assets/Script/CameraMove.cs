@@ -55,21 +55,22 @@ public class CameraMove : MonoBehaviour
             }
 
             // Przesuwanie kamery przy trzymaniu myszy
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(0))
             {
                 isDragging = true;
                 dragOrigin = Input.mousePosition;
             }
-            if (Input.GetMouseButtonUp(2))
+            if (Input.GetMouseButtonUp(0))
             {
                 isDragging = false;
             }
             if (isDragging)
             {
                 Vector3 difference = Camera.main.ScreenToViewportPoint(dragOrigin - Input.mousePosition);
-                Vector3 move = new Vector3(difference.x * 20, difference.y * 20, 0);
+                Vector3 move = new Vector3(difference.x * 75, difference.y * 75, 0);
                 transform.Translate(move * cameraSpeed * Time.deltaTime);
                 dragOrigin = Input.mousePosition;
+                UstawKamere();
             }
 
             // Przesuwanie kamery za pomocą przycisków
