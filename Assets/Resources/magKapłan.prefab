@@ -458,7 +458,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &5923605083522260468
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -475,7 +475,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4206257038861824468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +685,7 @@ GameObject:
   - component: {fileID: 3363862987525969316}
   - component: {fileID: 4091823217414137628}
   - component: {fileID: 7022607786726823304}
+  - component: {fileID: -7559896109578479431}
   m_Layer: 0
   m_Name: "magKap\u0142an"
   m_TagString: Untagged
@@ -905,6 +907,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.211255, y: 10.135107}
   m_EdgeRadius: 0
+--- !u!114 &-7559896109578479431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7463416832612274143
 GameObject:
   m_ObjectHideFlags: 0

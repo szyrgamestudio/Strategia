@@ -716,7 +716,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &3814951449959087855
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -733,7 +733,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5343109764899699620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +763,7 @@ GameObject:
   - component: {fileID: 4077524004233977690}
   - component: {fileID: 1477849319925252952}
   - component: {fileID: 7022607786726823304}
+  - component: {fileID: 641337051438856885}
   m_Layer: 0
   m_Name: Arcymag
   m_TagString: Untagged
@@ -1002,6 +1004,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.211255, y: 10.135107}
   m_EdgeRadius: 0
+--- !u!114 &641337051438856885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7388736326227657724
 GameObject:
   m_ObjectHideFlags: 0

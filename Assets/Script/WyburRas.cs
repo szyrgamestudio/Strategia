@@ -40,7 +40,7 @@ public class WyburRas : MonoBehaviour
         photonView = updaterZiom.GetComponent<PhotonView>();
         team[id] = id;
         lewy.sprite = teamArt[id];
-        if (id >= 2)
+        if (id >= 2 && !MenuGlowne.multi)
         {
             loockArt.enabled = true;
             aktywny[id] = false;
@@ -104,6 +104,7 @@ public class WyburRas : MonoBehaviour
 
     public void prawo()
     {
+        if(id+1 == Ip.ip || !MenuGlowne.multi)
         switch (wybierany)
         {
             case 1:
@@ -132,6 +133,7 @@ public class WyburRas : MonoBehaviour
     }
     public void lewo()
     {
+        if(id+1 == Ip.ip || !MenuGlowne.multi)
         switch (wybierany)
         {
             case 1:
@@ -160,6 +162,7 @@ public class WyburRas : MonoBehaviour
     }
     public void lewyGora()
     {
+        if(id+1 == Ip.ip || !MenuGlowne.multi)
         switch (wybierany)
         {
             case 1:
@@ -176,6 +179,7 @@ public class WyburRas : MonoBehaviour
     }
     public void prawyGora()
     {
+        if(id+1 == Ip.ip || !MenuGlowne.multi)
         switch (wybierany)
         {
             case 2:
@@ -191,6 +195,7 @@ public class WyburRas : MonoBehaviour
     }
     public void mainGora()
     {
+        if(id+1 == Ip.ip || !MenuGlowne.multi)
         switch (wybierany)
         {
             case 2:
@@ -273,10 +278,15 @@ public class WyburRas : MonoBehaviour
         }
         else
         {
-            if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount >= 1) //zmienic na 2
+            if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount >= 1 && Ip.ip==1) //zmienic na 2
             {
                 Menu.IloscGraczy = PhotonNetwork.CurrentRoom.PlayerCount;
-
+                Debug.Log(Menu.IloscGraczy);
+                Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+                for(int i = 0 ; i<4;i++)
+                    aktywny[i] = false;
+                for(int i = 0 ; i<Menu.IloscGraczy;i++)
+                    aktywny[i] = true;
                 // Spróbuj pobrać komponent PhotonView
                 PhotonView photonView = GetComponent<PhotonView>();
 
