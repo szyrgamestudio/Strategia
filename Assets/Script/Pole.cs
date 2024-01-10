@@ -51,12 +51,14 @@ public class Pole : MonoBehaviour
 void AktualizujPołożenie()
 {
     PhotonView photonView = GetComponent<PhotonView>();
-    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout, nazwa, spriteName);
+    Debug.Log("dwa");
+    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout, kafelek.name, GetComponent<SpriteRenderer>().sprite);
 }
 
 [PunRPC]
-void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout, string nazwa, string spriteName)
+void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout, string nazwa, Sprite spriteName)
 {
+    Debug.Log("tczy");
     Zajete = zajete;
     ZajeteLot = zajeteLot;
     this.woda = woda;
@@ -67,31 +69,24 @@ void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, 
     Nin = nin;
     CzasDrogi = czasDrogi;
     Nout = nout;
-    // Aktualizacja nazwy i sprite'a
-    this.nazwa = kafelek.name;
-    this.spriteName = kafelek.GetComponent<SpriteRenderer>().sprite;
-
-    // Dodaj dowolne dodatkowe aktualizacje dla nazwy i sprite'a
-    UpdateNazwaISprite();
+    this.nazwa = name;
+    this.spriteName = spriteName;
+    aktualizujDane();
 }
-
-void UpdateNazwaISprite()
+void aktualizujDane()
 {
-    // Tutaj dodaj kod aktualizacji dla nazwy i sprite'a
-    // np. dla SpriteRenderer.sprite możesz użyć:
-    SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-    spriteRenderer.sprite = spriteName;  // Zmiana tutaj
-
-    // Aktualizuj nazwę obiektu (kafelek) na podstawie nowej nazwy
+    Debug.Log("cztery");
+    GetComponent<SpriteRenderer>().sprite = spriteName;
     kafelek.name = nazwa;
-    // Możesz również zaktualizować tekst nazwy, jeśli używasz tekstu do wyświetlania nazwy
-    // np. nazwaText.text = nazwa;
 }
+
 
 
 
     public void OnMouseDown()
     {
+        Debug.Log("jeden");
+        AktualizujPołożenie();
         if(!Menu.NIERUSZAC)
             OnMouse();
     }
