@@ -21,19 +21,20 @@ public class MapLoad : MonoBehaviour
 
     public void LoadMapData()
     {
-// Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
-string filePath = Path.Combine(Application.dataPath, "Maps", nazwa);
+        Debug.Log("dziala");
+    // Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
+    string filePath = Path.Combine(Application.dataPath, "Maps", nazwa);
 
-// Lista przechowująca dane mapy (listy liczb całkowitych)
-List<List<int>> tempMapData = new List<List<int>>();
-List<List<int>> tempMapHigh = new List<List<int>>();
-List<List<int>> tempMapGold = new List<List<int>>();
-List<List<int>> tempMapUnit = new List<List<int>>();
-List<List<int>> tempMapEnemy = new List<List<int>>();
+    // Lista przechowująca dane mapy (listy liczb całkowitych)
+    List<List<int>> tempMapData = new List<List<int>>();
+    List<List<int>> tempMapHigh = new List<List<int>>();
+    List<List<int>> tempMapGold = new List<List<int>>();
+    List<List<int>> tempMapUnit = new List<List<int>>();
+    List<List<int>> tempMapEnemy = new List<List<int>>();
 
-// Sprawdzenie, czy plik istnieje
-if (File.Exists(filePath))
-{
+    // Sprawdzenie, czy plik istnieje
+    if (File.Exists(filePath))
+    {
     // Utworzenie obiektu do odczytu danych z pliku
         using (StreamReader reader = new StreamReader(filePath))
         {
@@ -134,7 +135,10 @@ if (File.Exists(filePath))
                     Vector3 TilePosition = new Vector3(x, y, 3);
                     GameObject newUnit = null;
                     if(MenuGlowne.multi)
+                    {
                         newUnit = PhotonNetwork.Instantiate(kafelek.name, TilePosition, Quaternion.identity);
+                        Debug.Log(x + " " + y);
+                    }
                     else
                         newUnit = Instantiate(kafelek, TilePosition, Quaternion.identity);
                     newUnit.transform.SetParent(transform);
@@ -262,5 +266,46 @@ if (File.Exists(filePath))
             if(team == 3)
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 270.0f);
         }
+    }
+        private string currentScene;
+
+    void Start()
+    {
+            // Pobierz początkową scenę
+            currentScene = SceneManager.GetActiveScene().name;
+
+            // Wyślij informacje o scenie do innych graczy
+            GetComponent<PhotonView>().RPC("UpdateSceneInfo", RpcTarget.OthersBuffered, currentScene);
+    }
+
+    [PunRPC]
+    void UpdateSceneInfo(string sceneName)
+    {
+        // Otrzymaj informacje o scenie od innego gracza
+        currentScene = sceneName;
+
+        // Zaktualizuj liczbę graczy na danej scenie na swoim graczu
+        int playerCountOnScene = CountPlayersOnScene(currentScene);
+        Debug.Log("Liczba graczy na scenie " + currentScene + ": " + playerCountOnScene + "    " + Ip.ip);
+        if(playerCountOnScene == 2 && Ip.ip == 1)
+            LoadMapData();
+    }
+
+    int CountPlayersOnScene(string sceneName)
+    {
+        // Tutaj możesz zaimplementować logikę, która zlicza graczy na danej scenie
+        // Przykład: przejście przez PhotonNetwork.PlayerList i sprawdzenie ich aktualnej sceny
+        int count = 0;
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            Debug.Log(PhotonNetwork.PlayerList);
+            // Przykładowe założenie: każdy gracz ma zmienną przechowującą aktualną scenę
+            // Sprawdź czy gracz jest na aktualnej scenie
+            if (player.CustomProperties.ContainsKey("CurrentScene") && (string)player.CustomProperties["CurrentScene"] == sceneName)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
