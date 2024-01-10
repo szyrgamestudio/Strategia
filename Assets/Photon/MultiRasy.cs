@@ -42,6 +42,9 @@ public class MultiRasy : MonoBehaviourPunCallbacks
             // Pobierz aktualną liczbę graczy w pokoju
             playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
 
+            if(Ip.ip==0)
+                Ip.ip = PhotonNetwork.CurrentRoom.PlayerCount;
+
             // Wyświetl informację o liczbie graczy w konsoli
             Debug.Log("Liczba graczy w pokoju: " + playerCount);
         }
