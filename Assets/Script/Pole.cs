@@ -52,11 +52,11 @@ void AktualizujPołożenie()
 {
     PhotonView photonView = GetComponent<PhotonView>();
     Debug.Log("dwa");
-    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout, kafelek.name, GetComponent<SpriteRenderer>().sprite);
+    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout);//, kafelek.name, GetComponent<SpriteRenderer>().sprite);
 }
 
 [PunRPC]
-void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout, string nazwa, Sprite spriteName)
+void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout)//, string nazwa, Sprite spriteName)
 {
     Debug.Log("tczy");
     Zajete = zajete;
@@ -69,9 +69,9 @@ void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, 
     Nin = nin;
     CzasDrogi = czasDrogi;
     Nout = nout;
-    this.nazwa = name;
-    this.spriteName = spriteName;
-    aktualizujDane();
+    // this.nazwa = name;
+    // this.spriteName = spriteName;
+    // aktualizujDane();
 }
 void aktualizujDane()
 {
