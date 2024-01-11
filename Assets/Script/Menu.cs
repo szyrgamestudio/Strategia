@@ -79,8 +79,8 @@ public class Menu : MonoBehaviour
             kafelki[i] = new GameObject[BoardSizeY];
         }
 
-        // if(!MenuGlowne.multi || Ip.ip == 1) 
-        //     GetComponent<MapLoad>().LoadMapData();
+         if(!MenuGlowne.multi) 
+             GetComponent<MapLoad>().LoadMapData();
 
         if(IloscGraczy==0)
             IloscGraczy=2;

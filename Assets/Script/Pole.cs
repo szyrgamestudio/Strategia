@@ -28,8 +28,10 @@ public class Pole : MonoBehaviour
     public int Nin;
     public int CzasDrogi;
     public int Nout;
-    private Sprite spriteName;
-    private string nazwa;
+    public int spriteName;
+    public string nazwa;
+
+    private bool koniec;
 
     public static int[] pomocnicza;
 
@@ -45,18 +47,25 @@ public class Pole : MonoBehaviour
     {
         if(Menu.Next)
             Clean2();
-        // if(MenuGlowne.multi)
-        //     AktualizujPołożenie();
+        if(Menu.Next)
+        {
+            koniec = true;
+        }
+        if(koniec && !Menu.Next && Ip.ip==1)
+        {
+            koniec = false;
+            AktualizujPołożenie();
+        }
     }
 void AktualizujPołożenie()
 {
     PhotonView photonView = GetComponent<PhotonView>();
     Debug.Log("dwa");
-    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout);//, kafelek.name, GetComponent<SpriteRenderer>().sprite);
+    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout, kafelek.name, spriteName);
 }
 
 [PunRPC]
-void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout)//, string nazwa, Sprite spriteName)
+void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout, string nazwa, int spriteName)
 {
     Debug.Log("tczy");
     Zajete = zajete;
@@ -69,14 +78,15 @@ void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, 
     Nin = nin;
     CzasDrogi = czasDrogi;
     Nout = nout;
-    // this.nazwa = name;
-    // this.spriteName = spriteName;
-    // aktualizujDane();
+    this.nazwa = nazwa;
+    this.spriteName = spriteName;
+     aktualizujDane();
 }
 void aktualizujDane()
 {
     Debug.Log("cztery");
-    GetComponent<SpriteRenderer>().sprite = spriteName;
+   
+    kafelek.GetComponent<SpriteRenderer>().sprite = MapLoad.obrazStatic[spriteName];
     kafelek.name = nazwa;
 }
 
@@ -85,8 +95,6 @@ void aktualizujDane()
 
     public void OnMouseDown()
     {
-        Debug.Log("jeden");
-        AktualizujPołożenie();
         if(!Menu.NIERUSZAC)
             OnMouse();
     }

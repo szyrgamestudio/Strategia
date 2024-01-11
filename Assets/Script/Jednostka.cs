@@ -49,7 +49,7 @@ public class Jednostka : MonoBehaviour
     public Animator animator;
     public GameObject pocisk;
     
-private Vector3 aktualnePołożenie;  
+    private Vector3 aktualnePołożenie;  
     void Start()
     {
         switch(druzyna)
@@ -90,7 +90,6 @@ private Vector3 aktualnePołożenie;
     {
         RectTransform textTransform = TextShowDMG.GetComponent<RectTransform>();
         Color textColor = TextShowDMG.color;
-         // Wartość alpha (przezroczystość) od 0 (pełna przezroczystość) do 1 (brak przezroczystości)
         
         for(int i=0;i<40;i++)
         {
@@ -198,13 +197,15 @@ private Vector3 aktualnePołożenie;
         // strzal.transform.position = newPosition;
         strzal.GetComponent<Pocisk>().cel = cel;
     }
-    void AktualizujPołożenie()
+    IEnumerator AktualizujPołożenie()
     {
+        yield return new WaitForSeconds(0.1f);
         Vector3 nowePołożenie = transform.position;
-
+        Debug.Log(nowePołożenie + "   " + aktualnePołożenie);
         // Sprawdź, czy pozycja się zmieniła od ostatniego razu
         if (nowePołożenie != aktualnePołożenie)
         {
+            Debug.Log("pizda");
             // Zaktualizuj położenie i statystyki, a następnie wywołaj RPC, aby poinformować innych graczy
             PhotonView photonView = GetComponent<PhotonView>();
             aktualnePołożenie = nowePołożenie;
@@ -260,7 +261,8 @@ private Vector3 aktualnePołożenie;
     {
         if(MenuGlowne.multi)
         {
-            AktualizujPołożenie();
+            aktualnePołożenie = transform.position;
+            StartCoroutine(AktualizujPołożenie());
         }
         if(jednostka==Select)
             wybrane.enabled = true;

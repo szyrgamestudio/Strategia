@@ -9,6 +9,7 @@ using Photon.Pun;
 public class MapLoad : MonoBehaviour
 {
     public Sprite[] obraz = new Sprite[66];
+    public static Sprite[] obrazStatic = new Sprite[66];
     public string nazwa;// = "mmap1.txt";
     public GameObject kafelek;
     public bool wysokoscStart;
@@ -146,6 +147,7 @@ public class MapLoad : MonoBehaviour
                     newUnit.GetComponent<SpriteRenderer>().sprite = obraz[kafelekObraz[x, y]];
                     Pole staty = newUnit.GetComponent<Pole>();
                     staty.poziom = kafelekWysokosc[x, y];
+                    staty.spriteName = kafelekObraz[x, y];
                     if (kafelekObraz[x, y] == 0)
                     {
                         staty.las = true;
@@ -271,6 +273,7 @@ public class MapLoad : MonoBehaviour
 
     void Start()
     {
+        obrazStatic = obraz;
         // Pobierz początkową scenę
         currentScene = SceneManager.GetActiveScene().name;
 

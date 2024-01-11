@@ -115,6 +115,8 @@ MonoBehaviour:
   Nin: 0
   CzasDrogi: 0
   Nout: 0
+  spriteName: 0
+  nazwa: 
 --- !u!114 &6933001233453431645
 MonoBehaviour:
   m_ObjectHideFlags: 0
