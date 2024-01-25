@@ -41,7 +41,6 @@ public class Pole : MonoBehaviour
         lista2 = new GameObject[4000];
         droga = new GameObject[2500];
         pomocnicza = new int[3];
-
     }
     void Update()
     {
@@ -56,18 +55,17 @@ public class Pole : MonoBehaviour
             koniec = false;
             AktualizujPołożenie();
         }
+        
     }
 void AktualizujPołożenie()
 {
     PhotonView photonView = GetComponent<PhotonView>();
-    Debug.Log("dwa");
     photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout, kafelek.name, spriteName);
 }
 
 [PunRPC]
 void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout, string nazwa, int spriteName)
 {
-    Debug.Log("tczy");
     Zajete = zajete;
     ZajeteLot = zajeteLot;
     this.woda = woda;
@@ -84,8 +82,6 @@ void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, 
 }
 void aktualizujDane()
 {
-    Debug.Log("cztery");
-   
     kafelek.GetComponent<SpriteRenderer>().sprite = MapLoad.obrazStatic[spriteName];
     kafelek.name = nazwa;
 }
@@ -100,6 +96,7 @@ void aktualizujDane()
     }
     public void OnMouse()
     {
+        Debug.Log(Menu.tura);
         if(!idzie)
         {
             

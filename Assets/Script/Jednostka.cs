@@ -192,29 +192,22 @@ public class Jednostka : MonoBehaviour
     public void animacjaPocisk(GameObject cel)
     {
         GameObject strzal = Instantiate(pocisk, jednostka.transform.position, Quaternion.identity); 
-        // Vector3 newPosition = strzal.transform.position;
-        // strzal.z = -3f; // Zmiana pozycji w trzecim wymiarze (Z)
-        // strzal.transform.position = newPosition;
         strzal.GetComponent<Pocisk>().cel = cel;
     }
-    IEnumerator AktualizujPołożenie()
+    IEnumerator AktualizujPołożenie(float HP)
     {
         yield return new WaitForSeconds(0.1f);
         Vector3 nowePołożenie = transform.position;
-        Debug.Log(nowePołożenie + "   " + aktualnePołożenie);
-        // Sprawdź, czy pozycja się zmieniła od ostatniego razu
-        if (nowePołożenie != aktualnePołożenie)
+
+        if (nowePołożenie != aktualnePołożenie || HP != this.HP)
         {
             Debug.Log("pizda");
-            // Zaktualizuj położenie i statystyki, a następnie wywołaj RPC, aby poinformować innych graczy
             PhotonView photonView = GetComponent<PhotonView>();
             aktualnePołożenie = nowePołożenie;
 
-            // Aktualizuj statystyki
-            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
-                            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, spanie, nr_jednostki, koniec);
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, this.HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
+                            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
 
-            // Aktualizuj położenie
             photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, aktualnePołożenie);
         }
     }
@@ -229,7 +222,7 @@ public class Jednostka : MonoBehaviour
     [PunRPC]
     void ZaktualizujStatystykiRPC(int druzyna, int sojusz, float HP, float maxHP, float atak, float obrona, int zasieg, int maxszybkosc,
                                    int szybkosc, float mindmg, float maxdmg, int zdolnosci, bool zbieracz, bool lata, int cena,
-                                   string nazwa, bool akcja, bool spanie, int nr_jednostki, bool koniec)
+                                   string nazwa, bool akcja, int nr_jednostki, bool koniec)
     {
         // RPC wywołane na wszystkich klientach - zaktualizuj statystyki jednostki
         this.druzyna = druzyna;
@@ -249,7 +242,6 @@ public class Jednostka : MonoBehaviour
         this.cena = cena;
         this.nazwa = nazwa;
         this.akcja = akcja;
-        this.spanie = spanie;
         this.nr_jednostki = nr_jednostki;
         this.koniec = koniec;
     }
@@ -262,7 +254,7 @@ public class Jednostka : MonoBehaviour
         if(MenuGlowne.multi)
         {
             aktualnePołożenie = transform.position;
-            StartCoroutine(AktualizujPołożenie());
+            StartCoroutine(AktualizujPołożenie(HP));
         }
         if(jednostka==Select)
             wybrane.enabled = true;
