@@ -67,7 +67,7 @@ public class CameraMove : MonoBehaviour
             if (isDragging)
             {
                 Vector3 difference = Camera.main.ScreenToViewportPoint(dragOrigin - Input.mousePosition);
-                Vector3 move = new Vector3(difference.x * 75, difference.y * 75, 0);
+                Vector3 move = new Vector3(difference.x * 69, difference.y * 69, 0);
                 transform.Translate(move * cameraSpeed * Time.deltaTime);
                 dragOrigin = Input.mousePosition;
                 UstawKamere();

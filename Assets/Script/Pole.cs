@@ -41,9 +41,16 @@ public class Pole : MonoBehaviour
         lista2 = new GameObject[4000];
         droga = new GameObject[2500];
         pomocnicza = new int[3];
+        if(Ip.ip == 1)
+            AktualizujPołożenie();
+        Menu.kafelki[(int)transform.position.x][(int)transform.position.y] = kafelek;
     }
     void Update()
     {
+        if(MenuGlowne.multi)
+        {
+            StartCoroutine(Aktualizuj(Zajete));
+        }
         if(Menu.Next)
             Clean2();
         if(Menu.Next)
@@ -55,39 +62,45 @@ public class Pole : MonoBehaviour
             koniec = false;
             AktualizujPołożenie();
         }
-        
     }
-void AktualizujPołożenie()
-{
-    PhotonView photonView = GetComponent<PhotonView>();
-    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, Nin, CzasDrogi, Nout, kafelek.name, spriteName);
-}
 
-[PunRPC]
-void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int nin, int czasDrogi, int nout, string nazwa, int spriteName)
-{
-    Zajete = zajete;
-    ZajeteLot = zajeteLot;
-    this.woda = woda;
-    this.las = las;
-    poziom = level;
-    zloto = gold;
-    magia = magic;
-    Nin = nin;
-    CzasDrogi = czasDrogi;
-    Nout = nout;
-    this.nazwa = nazwa;
-    this.spriteName = spriteName;
-     aktualizujDane();
-}
-void aktualizujDane()
-{
-    kafelek.GetComponent<SpriteRenderer>().sprite = MapLoad.obrazStatic[spriteName];
-    kafelek.name = nazwa;
-}
+    IEnumerator Aktualizuj(bool Zajete)
+    {
+        yield return new WaitForSeconds(0.1f);
 
+        if (Zajete != this.Zajete)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia,   CzasDrogi, kafelek.name, spriteName);
+        }
+    }
 
+    void AktualizujPołożenie()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, CzasDrogi, kafelek.name, spriteName);
+    }
 
+    [PunRPC]
+    void ZaktualizujStatystykiRPC(bool zajete, bool zajeteLot, bool woda, bool las, int level, int gold, int magic, int czasDrogi, string nazwa, int spriteName)
+    {
+        Zajete = zajete;
+        ZajeteLot = zajeteLot;
+        this.woda = woda;
+        this.las = las;
+        poziom = level;
+        zloto = gold;
+        magia = magic;
+        CzasDrogi = czasDrogi;
+        this.nazwa = nazwa;
+        this.spriteName = spriteName;
+        aktualizujDane();
+    }
+    void aktualizujDane()
+    {
+        kafelek.GetComponent<SpriteRenderer>().sprite = MapLoad.obrazStatic[spriteName];
+        kafelek.name = nazwa;
+    }
 
     public void OnMouseDown()
     {

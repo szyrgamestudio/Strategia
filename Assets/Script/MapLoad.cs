@@ -138,7 +138,6 @@ public class MapLoad : MonoBehaviour
                     if (MenuGlowne.multi)
                     {
                         newUnit = PhotonNetwork.Instantiate(kafelek.name, TilePosition, Quaternion.identity);
-                        Debug.Log(x + " " + y);
                     }
                     else
                         newUnit = Instantiate(kafelek, TilePosition, Quaternion.identity);
@@ -234,11 +233,14 @@ public class MapLoad : MonoBehaviour
             yield return new WaitForSeconds(0.015f);
             GameObject nowy = null;
             if (MenuGlowne.multi)
+            {
                 nowy = PhotonNetwork.Instantiate(jednostki[ip].name, new Vector3(x, y, -2f), Quaternion.identity);
+            }
             else
                 nowy = Instantiate(jednostki[ip], new Vector3(x, y, -2f), Quaternion.identity);
             //PhotonView photonView = nowy.AddComponent<PhotonView>();
             nowy.GetComponent<Jednostka>().druzyna = team;
+            Debug.Log(nowy.GetComponent<Jednostka>().druzyna + " " + team);
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
             if (ip == 10 || ip == 9)
@@ -247,6 +249,11 @@ public class MapLoad : MonoBehaviour
             {
                 Menu.NPC.Add(nowy);
                 nowy.GetComponent<Jednostka>().spanie = true;
+            }
+            if (MenuGlowne.multi)
+            {
+                nowy.GetComponent<Jednostka>().Aktualizuj();
+                nowy.GetComponent<Jednostka>().Start();
             }
         }
     }

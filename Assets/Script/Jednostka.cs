@@ -48,9 +48,11 @@ public class Jednostka : MonoBehaviour
     public GameObject canvasAnimacji;
     public Animator animator;
     public GameObject pocisk;
+
+    private bool wybrany;
     
     private Vector3 aktualnePołożenie;  
-    void Start()
+    public void Start()
     {
         switch(druzyna)
         {
@@ -194,14 +196,15 @@ public class Jednostka : MonoBehaviour
         GameObject strzal = Instantiate(pocisk, jednostka.transform.position, Quaternion.identity); 
         strzal.GetComponent<Pocisk>().cel = cel;
     }
-    IEnumerator AktualizujPołożenie(float HP)
+    IEnumerator AktualizujPołożenie(float HP, bool wybrany)
     {
         yield return new WaitForSeconds(0.1f);
         Vector3 nowePołożenie = transform.position;
 
-        if (nowePołożenie != aktualnePołożenie || HP != this.HP)
+        if (nowePołożenie != aktualnePołożenie || HP != this.HP || wybrany != this.wybrany)
         {
             Debug.Log("pizda");
+            //wybrany = this.wybrany
             PhotonView photonView = GetComponent<PhotonView>();
             aktualnePołożenie = nowePołożenie;
 
@@ -210,6 +213,15 @@ public class Jednostka : MonoBehaviour
 
             photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, aktualnePołożenie);
         }
+    }
+    public void Aktualizuj()
+    {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, this.HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
+                            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
+
+            //photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, aktualnePołożenie);
+
     }
 
     [PunRPC]
@@ -251,10 +263,14 @@ public class Jednostka : MonoBehaviour
     
     void Update()
     {
+        if(jednostka == Select)
+            wybrany = true;
+        else
+            wybrany = false;
         if(MenuGlowne.multi)
         {
             aktualnePołożenie = transform.position;
-            StartCoroutine(AktualizujPołożenie(HP));
+            StartCoroutine(AktualizujPołożenie(HP, wybrany));
         }
         if(jednostka==Select)
             wybrane.enabled = true;

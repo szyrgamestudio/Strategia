@@ -97,6 +97,27 @@ public class Menu : MonoBehaviour
         {
             usunSelect2();
         }
+        if(MenuGlowne.multi)
+        {
+            StartCoroutine(Aktualizuj(tura));
+        }
+    }
+
+    IEnumerator Aktualizuj(int tura)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if (tura != Menu.tura)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura);
+        }
+    }
+
+    [PunRPC]
+    void ZaktualizujStatystykiRPC(int tura)
+    {
+        Menu.tura = tura;
     }
 
     public static void usunSelect2()
