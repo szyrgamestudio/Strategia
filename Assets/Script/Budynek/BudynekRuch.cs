@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class BudynekRuch : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class BudynekRuch : MonoBehaviour
     public GameObject canvasRuch;
     public GameObject pole;
 
+    private bool update;
+
     public static GameObject budowlaniec;
 
     public static bool pomoc = false;
@@ -21,6 +24,14 @@ public class BudynekRuch : MonoBehaviour
 
     //private bool polepomoc = true;
 
+    void Start()
+    {
+        if(MenuGlowne.multi)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
+        }
+    }
 
     void LateUpdate()
     {
@@ -74,6 +85,16 @@ public class BudynekRuch : MonoBehaviour
                 }
             }
         }
+        else{
+            if(!update && MenuGlowne.multi)
+            {
+                update = true;
+                Vector3 nowePołożenie = transform.position;
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
+            }
+                
+        }
         if(ObiektRuszany == Jednostka.Select || wybudowany == false)
         {
             if (Input.GetKeyDown(KeyCode.Q)) // Sprawdza, czy klawisz "Q" został naciśnięty
@@ -103,5 +124,17 @@ public class BudynekRuch : MonoBehaviour
             // polepomoc = false;
         }
 
+    }
+    
+    [PunRPC]
+    void ZaktualizujPołożenieRPC(Vector3 nowePołożenie)
+    {
+        // RPC wywołane na wszystkich klientach - zaktualizuj położenie jednostki
+        transform.position = nowePołożenie;
+    }
+    [PunRPC]
+    void ZaktualizujWybudowany()
+    {
+        this.wybudowany = true;
     }
 }

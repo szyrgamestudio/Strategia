@@ -60,17 +60,17 @@ public class Menu : MonoBehaviour
     {
         if(!MenuGlowne.wczytka)
         {
-        kamera = camerapriv;
+            kamera = camerapriv;
 
 
-        zloto[1] = 14;
-        drewno[1] = 14;
-        zloto[2] = 15;
-        drewno[2] = 15;
-        zloto[3] = 16;
-        drewno[3] = 16;
-        zloto[4] = 17;
-        drewno[4] = 17;
+            zloto[1] = 14;
+            drewno[1] = 14;
+            zloto[2] = 15;
+            drewno[2] = 15;
+            zloto[3] = 16;
+            drewno[3] = 16;
+            zloto[4] = 17;
+            drewno[4] = 17;
         }
 
         kafelki = new GameObject[BoardSizeX][];
@@ -78,7 +78,6 @@ public class Menu : MonoBehaviour
         {
             kafelki[i] = new GameObject[BoardSizeY];
         }
-
          if(!MenuGlowne.multi) 
              GetComponent<MapLoad>().LoadMapData();
 
@@ -97,27 +96,39 @@ public class Menu : MonoBehaviour
         {
             usunSelect2();
         }
-        if(MenuGlowne.multi)
+        // if(MenuGlowne.multi)
+        // {
+        //     StartCoroutine(Aktualizuj(tura, IloscGraczy));
+        // }
+        switch (tura)
         {
-            StartCoroutine(Aktualizuj(tura));
+            case 0: KolejnaTuraButton.color = new Color(0.0f, 0.0f, 0.0f); break;
+            case 1: KolejnaTuraButton.color = new Color(1.0f, 0.0f, 0.0f); break;
+            case 2: KolejnaTuraButton.color = new Color(0.0f, 1.0f, 0.0f); break;
+            case 3: KolejnaTuraButton.color = new Color(0.0f, 0.0f, 1.0f); break;
+            case 4: KolejnaTuraButton.color = new Color(1.0f, 1.0f, 0.0f); break;
         }
     }
 
-    IEnumerator Aktualizuj(int tura)
+    IEnumerator Aktualizuj(int tura, int IloscGraczy)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
-        if (tura != Menu.tura)
+        if (tura != Menu.tura || IloscGraczy != Menu.IloscGraczy)
         {
             PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura);
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
         }
     }
 
     [PunRPC]
-    void ZaktualizujStatystykiRPC(int tura)
+    void ZaktualizujStatystykiRPC(int tura, int BoardSizeX, int BoardSizeY, int IloscGraczy, int nrTury)
     {
         Menu.tura = tura;
+        Menu.BoardSizeX = BoardSizeX;
+        Menu.BoardSizeY = BoardSizeY;
+        Menu.IloscGraczy = IloscGraczy;
+        Menu.nrTury = nrTury;
     }
 
     public static void usunSelect2()
@@ -156,6 +167,8 @@ public class Menu : MonoBehaviour
         {
             NaPewnoKoniec = 0;
             tura++;
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
             int zostalo = 0;
             for(int i = 1; i<5;i++)
                 if(bazyIlosc[i]==0)
@@ -183,14 +196,7 @@ public class Menu : MonoBehaviour
             if(tura != 0)
                 StartCoroutine(Ratusz.ruchPlynnyCamery(tura));
             StartCoroutine(Przelocznik());
-            switch (tura)
-            {
-                case 0: KolejnaTuraButton.color = new Color(0.0f, 0.0f, 0.0f); break;
-                case 1: KolejnaTuraButton.color = new Color(1.0f, 0.0f, 0.0f); break;
-                case 2: KolejnaTuraButton.color = new Color(0.0f, 1.0f, 0.0f); break;
-                case 3: KolejnaTuraButton.color = new Color(0.0f, 0.0f, 1.0f); break;
-                case 4: KolejnaTuraButton.color = new Color(1.0f, 1.0f, 0.0f); break;
-            }
+
             if(tura == 0)
             {
                 if(Menu.NPC.Count != 0)
@@ -356,6 +362,7 @@ public class Menu : MonoBehaviour
     }
 
     public static bool preNext;
+
     public IEnumerator PrzedKoniec()
     {
         preNext = true;

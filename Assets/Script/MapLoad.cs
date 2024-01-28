@@ -262,7 +262,13 @@ public class MapLoad : MonoBehaviour
         if (WyburRas.aktywny[team - 1] == true)
         {
             yield return new WaitForSeconds(0.015f);
-            GameObject nowy = Instantiate(budyneki[ip], new Vector3(x, y, -1.5f), Quaternion.identity);
+            GameObject nowy = null;
+            if (MenuGlowne.multi)
+            {
+                nowy = PhotonNetwork.Instantiate(budyneki[ip].name, new Vector3(x, y, -2f), Quaternion.identity);
+            }
+            else
+                nowy = Instantiate(budyneki[ip], new Vector3(x, y, -2f), Quaternion.identity);
             nowy.GetComponent<Budynek>().druzyna = team;
             nowy.GetComponent<Budynek>().punktyBudowy = nowy.GetComponent<Budynek>().punktyBudowyMax;
             nowy.GetComponent<BudynekRuch>().wybudowany = true;
@@ -274,6 +280,11 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 180.0f);
             if (team == 3)
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 270.0f);
+            if (MenuGlowne.multi)
+            {
+                nowy.GetComponent<Jednostka>().Aktualizuj();
+                nowy.GetComponent<Budynek>().Start();
+            }
         }
     }
     private string currentScene;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Budynek : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class Budynek : MonoBehaviour
 
     public float damage; //informacja o dmg dla innych plikow pomocnicza
 
-    void Start()
+    public void Start()
     {
         switch(druzyna)
         {
@@ -167,6 +168,10 @@ public class Budynek : MonoBehaviour
 
     void Update()
     {
+         if(MenuGlowne.multi)
+        {
+            StartCoroutine(AktualizujPołożenie(HP,punktyBudowy));
+        }
         if(punktyBudowy<punktyBudowyMax)
          //   budynek.GetComponent<SpriteRenderer>().sprite = budowaArt;
             budynek.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
@@ -195,10 +200,42 @@ public class Budynek : MonoBehaviour
         else{
             healthGracza.value = HP;
             healthGracza.maxValue = maxHP;
+        }   
+    }
+        IEnumerator AktualizujPołożenie(float HP, int punktyBudowy)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+
+        if (punktyBudowy != this.punktyBudowy || HP != this.HP)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, HP,  maxHP, obrona, zdolnosci, zloto, drewno, punktyBudowy, punktyBudowyMax, poZniszczeniu);
         }
-        
+    }
+    public void Aktualizuj()
+    {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, HP,  maxHP, obrona, zdolnosci, zloto, drewno, punktyBudowy, punktyBudowyMax, poZniszczeniu);
     }
 
+    [PunRPC]
+    void ZaktualizujStatystykiRPC(int druzyna, int sojusz, float HP, float maxHP, int obrona, int zdolnosci, int zloto, int drewno, int punktyBudowy, int punktyBudowyMax, int poZniszczeniu)
+    {
+        this.druzyna = druzyna;
+        this.sojusz = sojusz;
+        this.HP = HP;
+        this.maxHP = maxHP;
+        this.obrona = obrona;
+        this.zdolnosci = zdolnosci;
+        this.zloto = zloto;
+        this.drewno = drewno;
+        budynek.GetComponent<BudynekRuch>().wybudowany = true;
+        this.punktyBudowy = punktyBudowy;
+        this.punktyBudowyMax = punktyBudowyMax;
+
+        this.poZniszczeniu = poZniszczeniu;
+    }
         public void ShowDMG(float dmg, Color myColor)
     {
         TextShowDMG.text = dmg.ToString();
