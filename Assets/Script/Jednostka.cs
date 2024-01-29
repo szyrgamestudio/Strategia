@@ -103,6 +103,13 @@ public class Jednostka : MonoBehaviour
     }
     public void OnMouseDown()
     {
+        if(MenuGlowne.multi)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, this.HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
+            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
+            photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, transform.position);
+        }
         if(!Menu.NIERUSZAC)
             OnMouse();
     }
@@ -203,7 +210,6 @@ public class Jednostka : MonoBehaviour
 
         if (nowePołożenie != aktualnePołożenie || HP != this.HP || wybrany != this.wybrany)
         {
-            Debug.Log("pizda");
             //wybrany = this.wybrany
             PhotonView photonView = GetComponent<PhotonView>();
             aktualnePołożenie = nowePołożenie;

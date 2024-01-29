@@ -230,7 +230,6 @@ public class Budynek : MonoBehaviour
         this.zdolnosci = zdolnosci;
         this.zloto = zloto;
         this.drewno = drewno;
-        budynek.GetComponent<BudynekRuch>().wybudowany = true;
         this.punktyBudowy = punktyBudowy;
         this.punktyBudowyMax = punktyBudowyMax;
 

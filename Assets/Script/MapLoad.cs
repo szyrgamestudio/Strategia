@@ -280,10 +280,13 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 180.0f);
             if (team == 3)
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 270.0f);
+            
             if (MenuGlowne.multi)
             {
-                nowy.GetComponent<Jednostka>().Aktualizuj();
+                nowy.GetComponent<Budynek>().Aktualizuj();
                 nowy.GetComponent<Budynek>().Start();
+                // if(ip==0)
+                //     nowy.GetComponent<>
             }
         }
     }

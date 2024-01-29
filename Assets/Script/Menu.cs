@@ -96,6 +96,10 @@ public class Menu : MonoBehaviour
         {
             usunSelect2();
         }
+        if(MenuGlowne.multi && (Ip.ip == IloscGraczy - tura + 1))
+            NIERUSZAC = false;
+        else
+            NIERUSZAC = true;
         // if(MenuGlowne.multi)
         // {
         //     StartCoroutine(Aktualizuj(tura, IloscGraczy));
@@ -140,7 +144,7 @@ public class Menu : MonoBehaviour
 
     public void NextTurn()
     {
-        if(!NIERUSZAC)
+        if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == IloscGraczy - tura + 1 || tura == 0)))
         {
         NaPewnoKoniec++;
         StartCoroutine(PrzedKoniec());
