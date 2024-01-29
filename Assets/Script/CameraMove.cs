@@ -17,7 +17,7 @@ public class CameraMove : MonoBehaviour
 
     void Update()
     {
-        if (!Menu.NIERUSZAC)
+        if (!Menu.NIERUSZAC || MenuGlowne.multi)
         {
             // Odczytywanie wejścia od gracza
             float horizontalInput = Input.GetAxis("Horizontal");
