@@ -552,11 +552,12 @@ GameObject:
   - component: {fileID: 300910691063939994}
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
-  - component: {fileID: 4598297130092857797}
+  - component: {fileID: 6630053050888283458}
   - component: {fileID: 337435299929857363}
   - component: {fileID: 8956365773136594117}
+  - component: {fileID: -9031954956011199783}
   m_Layer: 0
-  m_Name: koszary
+  m_Name: Gildia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +620,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f1701dd4865cc2041bf28ef8de17a611, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52589ca435b6a3b44987c163fe2e1602, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -648,10 +649,10 @@ MonoBehaviour:
   HP: 20
   maxHP: 20
   obrona: 2
-  zdolnosci: 5
+  zdolnosci: 3
   zloto: 4
   drewno: 10
-  nazwa: Koszary
+  nazwa: "Gildia mag\xF3w"
   punktyBudowy: 0
   punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}
@@ -695,7 +696,7 @@ MonoBehaviour:
   budowaArt: {fileID: 21300000, guid: ce4146226e9398e49b001b6dce500b03, type: 3}
   budynekArt: {fileID: 21300000, guid: f1701dd4865cc2041bf28ef8de17a611, type: 3}
   damage: 0
---- !u!114 &4598297130092857797
+--- !u!114 &6630053050888283458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -704,29 +705,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17703da1a044b04e8a78a51e732b3d2, type: 3}
+  m_Script: {fileID: 11500000, guid: af07928edc503af49bc14df11fffcae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
   pole: {fileID: 0}
   druzyna: 0
-  lucznik: {fileID: 6268565104842363223, guid: e97f082e89f9f314b9bd8e4992a76018, type: 3}
-  piechur: {fileID: 6268565104842363223, guid: 4ab54183f021f3346a9703124ba3f78d, type: 3}
-  rycerz: {fileID: 6268565104842363223, guid: 1392be7e02a22914abfb16af6fefc5c7, type: 3}
-  kusznik: {fileID: 6268565104842363223, guid: 358950ccade2e86449aca3289ee7b750, type: 3}
-  kawalerzysta: {fileID: 6268565104842363223, guid: 1cc552c4875d844458fb2dda6e438c41, type: 3}
+  zbieraczMagi: {fileID: 6268565104842363223, guid: db85f2bde42e5024c89f47cefa7cd06b, type: 3}
+  magOgnia: {fileID: 6268565104842363223, guid: b52a6ae921e408e4393738c4ff506ea3, type: 3}
+  magDruid: {fileID: 6268565104842363223, guid: eecf2a986ea8a5547894b370df5e6c50, type: 3}
+  magKaplan: {fileID: 6268565104842363223, guid: bad8d21d418c10748b08125a90b51925, type: 3}
   budynki:
-  - {fileID: 21300000, guid: e8fb6ded53ba5354bb5fdc676e9ec680, type: 3}
-  - {fileID: 21300000, guid: f8165f0939262a345b3f9af4719e79d7, type: 3}
-  - {fileID: 21300000, guid: a3f6c08a66cb4cd498cae1b4d331b6e7, type: 3}
-  - {fileID: 21300000, guid: 5ab70830e440c234e92766410f3017bc, type: 3}
-  - {fileID: 21300000, guid: b181cb06c8f58654584d885627d814ce, type: 3}
+  - {fileID: 21300000, guid: 96384f8bc5ae19f419e9226cb5faa4cc, type: 3}
+  - {fileID: 21300000, guid: 04848c1c4fe62e946b6e5571505e26d7, type: 3}
+  - {fileID: 21300000, guid: 79cd33b4c26577f45944073ad2178de1, type: 3}
   teksty:
-  - Podstawowa jednostka
-  - "\u0141ucznik"
-  - Mega tankowny ziomal
-  - Kusznik
-  - "Koszary musz\u0105 s\u0105siadowa\u0107 z placem"
+  - "Pyroman opiera si\u0119 na zakl\u0119ciach ofensywnych"
+  - "Niewyspecializowany druid posiada zdolno\u015Bci ka\u017Cdego rodzaju druida"
+  - "Kap\u0142an specializuje si\u0119 w b\u0142ogos\u0142awie\u0144stwach"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:
@@ -774,6 +770,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.24, y: 10.24}
   m_EdgeRadius: 0
+--- !u!114 &-9031954956011199783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580749336134018094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6088450102703511075
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,7 +934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b3122eeeb88d4374c8bce3201427fa03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68a3208906b96e94f8435e1804ed734d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

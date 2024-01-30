@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using System;
 
 public class WyburRas : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class WyburRas : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log("Id " + id);
         photonView = updaterZiom.GetComponent<PhotonView>();
         team[id] = id;
         lewy.sprite = teamArt[id];

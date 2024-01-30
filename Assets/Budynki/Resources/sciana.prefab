@@ -553,10 +553,10 @@ GameObject:
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
   - component: {fileID: 337435299929857363}
-  - component: {fileID: -570508393017795340}
   - component: {fileID: 8956365773136594117}
+  - component: {fileID: -3324692776510950574}
   m_Layer: 0
-  m_Name: tartak
+  m_Name: sciana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b22146b9eee25b9478e4fffa593fc859, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 337f98df400c10c4383057fdda63850c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -645,15 +645,15 @@ MonoBehaviour:
   budynek: {fileID: 5580749336134018094}
   druzyna: 1
   sojusz: 0
-  HP: 5
-  maxHP: 5
-  obrona: 1
+  HP: 3
+  maxHP: 3
+  obrona: 2
   zdolnosci: 0
-  zloto: 6
-  drewno: 14
-  nazwa: Tartak
+  zloto: 2
+  drewno: 3
+  nazwa: sciana
   punktyBudowy: 0
-  punktyBudowyMax: 4
+  punktyBudowyMax: 0
   healthGracza: {fileID: 8826697438269049201}
   gradient:
     serializedVersion: 2
@@ -715,18 +715,6 @@ MonoBehaviour:
   canvasRuch: {fileID: 630609693175150352}
   pole: {fileID: 0}
   prekoniec: 0
---- !u!114 &-570508393017795340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5580749336134018094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa28a70941b8ef438ce6fa92944a772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8956365773136594117
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -753,6 +741,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.24, y: 10.24}
   m_EdgeRadius: 0
+--- !u!114 &-3324692776510950574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580749336134018094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6088450102703511075
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,9 +874,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.39297754, y: 0.87552845}
+  m_SizeDelta: {x: 44.089, y: 17.993}
+  m_Pivot: {x: 0.49108675, y: 0.9804916}
 --- !u!222 &7789355820720825721
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -888,14 +898,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efe7afe1db090284f9790596a54ca450, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9bf93458c692cb044b91c5ade767cac3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -971,7 +981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cba5a3daeda421a4aba55c75e4d28c91, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 030ebee517380704c8752368cc8c5f18, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
