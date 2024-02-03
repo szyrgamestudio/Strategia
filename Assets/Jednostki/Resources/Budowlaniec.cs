@@ -210,12 +210,11 @@ public class Budowlaniec : MonoBehaviour
                         Przycisk.jednostka[10]=false;
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=2)
                             {
-                            Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().trudnosc % 2);
-                            if(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().trudnosc % 2 == 0)
+                            if(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga == false && 
+                            Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia == 0)
                             {
-                                Debug.Log("dwa");
                                 Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().trudnosc -= 1;
-                                Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<SpriteRenderer>().sprite = droga;
+                                Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().updateDroga(1);
                                 Menu.zloto[Menu.tura]-=0;
                                 Menu.drewno[Menu.tura]-=2;
                                 

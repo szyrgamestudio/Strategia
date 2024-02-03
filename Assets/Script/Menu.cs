@@ -96,10 +96,11 @@ public class Menu : MonoBehaviour
         {
             usunSelect2();
         }
-        if(MenuGlowne.multi && (Ip.ip == IloscGraczy - tura + 1))
-            NIERUSZAC = false;
-        else
-            NIERUSZAC = true;
+        if(MenuGlowne.multi)
+            if((Ip.ip == IloscGraczy - tura + 1))
+                NIERUSZAC = false;
+            else
+                NIERUSZAC = true;
         // if(MenuGlowne.multi)
         // {
         //     StartCoroutine(Aktualizuj(tura, IloscGraczy));

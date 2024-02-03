@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3520108190265880060}
   - component: {fileID: 6933001233453431645}
   - component: {fileID: 7657479129259456595}
+  - component: {fileID: 7814376249498987276}
   - component: {fileID: 2400305906543381605}
   - component: {fileID: 439480021697962430}
   m_Layer: 0
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3520108190265880061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 1, z: 0}
-  m_LocalScale: {x: 0.18, y: 0.18, z: 1}
+  m_LocalScale: {x: 0.185, y: 0.184, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 851028199476742391}
@@ -116,6 +117,8 @@ MonoBehaviour:
   Nin: 0
   CzasDrogi: 0
   Nout: 0
+  spriteName: 0
+  nazwa: 
 --- !u!114 &6933001233453431645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +165,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.6252775, y: 5.5950108}
   m_EdgeRadius: 0
+--- !u!114 &7814376249498987276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3520108190265880061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57fcd12d9048e5469d504654eee99e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droga: 0
+  drogaArt:
+  - {fileID: 21300000, guid: 6a0f1fb82e198bb4bb5054bae6d5c1c0, type: 3}
+  - {fileID: 21300000, guid: 75c0de3f7fbfe924eb61be24c7bac54a, type: 3}
+  - {fileID: 21300000, guid: f95787a411c50d443a391d5167778c32, type: 3}
+  - {fileID: 21300000, guid: 767a99c2e46d1844f918119c9267580f, type: 3}
+  - {fileID: 21300000, guid: 31f5a2f92607283429d9bcea19d0a955, type: 3}
+  - {fileID: 21300000, guid: e862e8a50572ed44cb6be9b286136a5b, type: 3}
+  - {fileID: 21300000, guid: d66d17388b85d5a48954b9a502383f13, type: 3}
+  - {fileID: 21300000, guid: ab23619b6d8482d4c8c63303f26db3ff, type: 3}
+  - {fileID: 21300000, guid: 92c49131f874c0c468e5d51aa05458e0, type: 3}
+  - {fileID: 21300000, guid: 5f89cd7d04a609d45932da19302ef9e3, type: 3}
+  - {fileID: 21300000, guid: ab33bfc50c7e7234391df4c2dc16d57e, type: 3}
+  - {fileID: 21300000, guid: e2f8a6694b009954cb00b4e648eb8298, type: 3}
+  - {fileID: 21300000, guid: 68b447ee8b0e9b1458cca24ac5c28ddd, type: 3}
+  - {fileID: 21300000, guid: 3b0c235624fae4c49a7742032ff65099, type: 3}
+  - {fileID: 21300000, guid: 443ad3f8f5d609f428bf93d615652b4a, type: 3}
+  - {fileID: 21300000, guid: 431f07ba7278ca94287035fadcb9583f, type: 3}
+  kafelek: {fileID: 3520108190265880061}
 --- !u!114 &2400305906543381605
 MonoBehaviour:
   m_ObjectHideFlags: 0
