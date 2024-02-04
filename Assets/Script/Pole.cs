@@ -109,7 +109,6 @@ public class Pole : MonoBehaviour
     }
     public void OnMouse()
     {
-        Debug.Log(Menu.tura);
         if(!idzie)
         {
             

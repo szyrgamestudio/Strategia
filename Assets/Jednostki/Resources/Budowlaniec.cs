@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Budowlaniec : MonoBehaviour
 {
@@ -92,8 +93,18 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=6 && Menu.drewno[Menu.tura]>=15)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
-                            BudowanyObiekt = Instantiate(ratusz, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
-                            BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+                            if (MenuGlowne.multi)
+                            {
+                                ratusz.GetComponent<BudynekRuch>().wybudowany = false;
+                                ratusz.GetComponent<Budynek>().druzyna = Ip.ip;
+                                BudowanyObiekt = PhotonNetwork.Instantiate(ratusz.name, new Vector3(-10, -10, -2f), Quaternion.identity);
+                                BudowanyObiekt.GetComponent<BudynekRuch>().startMulti();
+                            }
+                            else
+                            {
+                                BudowanyObiekt = Instantiate(ratusz, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
+                                BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+                            }
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
                             }
@@ -211,7 +222,8 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=2)
                             {
                             if(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga == false && 
-                            Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia == 0)
+                            Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia == 0 &&
+                            Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().las == false)
                             {
                                 Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().trudnosc -= 1;
                                 Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().updateDroga(1);

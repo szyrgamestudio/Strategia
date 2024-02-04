@@ -38,7 +38,6 @@ public class WyburRas : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("Id " + id);
         photonView = updaterZiom.GetComponent<PhotonView>();
         team[id] = id;
         lewy.sprite = teamArt[id];

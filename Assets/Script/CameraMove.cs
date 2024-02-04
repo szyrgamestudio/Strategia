@@ -55,12 +55,12 @@ public class CameraMove : MonoBehaviour
             }
 
             // Przesuwanie kamery przy trzymaniu myszy
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(2))
             {
                 isDragging = true;
                 dragOrigin = Input.mousePosition;
             }
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(2))
             {
                 isDragging = false;
             }

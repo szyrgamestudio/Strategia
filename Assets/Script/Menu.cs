@@ -62,7 +62,6 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-
             zloto[1] = 14;
             drewno[1] = 14;
             zloto[2] = 15;
@@ -97,10 +96,17 @@ public class Menu : MonoBehaviour
             usunSelect2();
         }
         if(MenuGlowne.multi)
-            if((Ip.ip == IloscGraczy - tura + 1))
+            if((Ip.ip == tura))
                 NIERUSZAC = false;
             else
                 NIERUSZAC = true;
+        if(tura > IloscGraczy && Ip.ip == 1)
+        {
+            Debug.Log("obecnie jest" + tura);
+            tura=0;
+            turaNPC.value = 0;
+            StartCoroutine(NPCtura(0));
+        }
         // if(MenuGlowne.multi)
         // {
         //     StartCoroutine(Aktualizuj(tura, IloscGraczy));
@@ -145,7 +151,7 @@ public class Menu : MonoBehaviour
 
     public void NextTurn()
     {
-        if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == IloscGraczy - tura + 1 || tura == 0)))
+        if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
         {
         NaPewnoKoniec++;
         StartCoroutine(PrzedKoniec());

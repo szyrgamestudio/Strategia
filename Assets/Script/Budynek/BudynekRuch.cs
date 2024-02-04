@@ -26,12 +26,20 @@ public class BudynekRuch : MonoBehaviour
 
     void Start()
     {
-        if(MenuGlowne.multi)
-        {
-            PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
-        }
+
     }
+    public void startMultiMap()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
+    }
+    public void startMulti()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
+        wybudowany = false;
+    }
+
 
     void LateUpdate()
     {
@@ -112,7 +120,7 @@ public class BudynekRuch : MonoBehaviour
                     ObiektRuszany.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, -90.0f);
             }
         }
-        if (wybudowany)// && polepomoc)
+        if (wybudowany && ObiektRuszany.transform.position.x != -10f)
         {
             switch (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z)
             {

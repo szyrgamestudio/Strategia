@@ -38,6 +38,8 @@ public class Budynek : MonoBehaviour
     public Sprite budowaArt;
     public Sprite budynekArt;
 
+    public bool update;
+
     public float damage; //informacja o dmg dla innych plikow pomocnicza
 
     public void Start()
@@ -63,7 +65,6 @@ public class Budynek : MonoBehaviour
     {
         if (moznaBudowac)
         {
-            Debug.Log("d");
             punktyBudowy += Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura];
             Jednostka.Select.GetComponent<Budowlaniec>().GetComponent<Jednostka>().akcja = false;
             ShowDMG(Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura], new Color(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 0.0f));
@@ -168,7 +169,7 @@ public class Budynek : MonoBehaviour
 
     void Update()
     {
-         if(MenuGlowne.multi)
+         if(MenuGlowne.multi && !update)
         {
             StartCoroutine(AktualizujPołożenie(HP,punktyBudowy));
         }
@@ -201,13 +202,18 @@ public class Budynek : MonoBehaviour
             healthGracza.value = HP;
             healthGracza.maxValue = maxHP;
         }   
+        if(update)
+            StartCoroutine(DisableAfterDelay());
+    }
+        IEnumerator DisableAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f); // Oczekiwanie przez 1 sekundę
+        update = false;
     }
         IEnumerator AktualizujPołożenie(float HP, int punktyBudowy)
     {
         yield return new WaitForSeconds(0.1f);
-
-
-        if (punktyBudowy != this.punktyBudowy || HP != this.HP)
+        if (punktyBudowy != this.punktyBudowy || HP != this.HP && !update)
         {
             PhotonView photonView = GetComponent<PhotonView>();
             photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, HP,  maxHP, obrona, zdolnosci, zloto, drewno, punktyBudowy, punktyBudowyMax, poZniszczeniu);
@@ -234,6 +240,7 @@ public class Budynek : MonoBehaviour
         this.punktyBudowyMax = punktyBudowyMax;
 
         this.poZniszczeniu = poZniszczeniu;
+        this.update = true;
     }
         public void ShowDMG(float dmg, Color myColor)
     {

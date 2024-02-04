@@ -22,7 +22,6 @@ public class MapLoad : MonoBehaviour
 
     public void LoadMapData()
     {
-        Debug.Log("dziala");
         // Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
         string filePath = Path.Combine(Application.dataPath, "Maps", nazwa);
 
@@ -240,7 +239,6 @@ public class MapLoad : MonoBehaviour
                 nowy = Instantiate(jednostki[ip], new Vector3(x, y, -2f), Quaternion.identity);
             //PhotonView photonView = nowy.AddComponent<PhotonView>();
             nowy.GetComponent<Jednostka>().druzyna = team;
-            Debug.Log(nowy.GetComponent<Jednostka>().druzyna + " " + team);
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
             if (ip == 10 || ip == 9)
@@ -285,6 +283,7 @@ public class MapLoad : MonoBehaviour
             {
                 nowy.GetComponent<Budynek>().Aktualizuj();
                 nowy.GetComponent<Budynek>().Start();
+                nowy.GetComponent<BudynekRuch>().startMultiMap();
                 // if(ip==0)
                 //     nowy.GetComponent<>
             }
@@ -310,7 +309,6 @@ public class MapLoad : MonoBehaviour
 
         // Zaktualizuj liczbę graczy na danej scenie na swoim graczu
         int playerCountOnScene = CountPlayersOnScene(currentScene);
-        Debug.Log("Liczba graczy na scenie " + currentScene + ": " + playerCountOnScene + "    " + Ip.ip);
         if (playerCountOnScene == 2 && Ip.ip == 1)
             LoadMapData();
     }
@@ -322,7 +320,6 @@ public class MapLoad : MonoBehaviour
         int count = 0;
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            Debug.Log(PhotonNetwork.PlayerList);
             // Przykładowe założenie: każdy gracz ma zmienną przechowującą aktualną scenę
             count++;
         }

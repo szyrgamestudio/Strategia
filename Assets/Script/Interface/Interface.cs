@@ -29,11 +29,15 @@ public class Interface : MonoBehaviour
 
         twarz.sprite = (Jednostka.Select != null) ? Jednostka.Select.GetComponent<SpriteRenderer>().sprite : puste;
 
-        zlotoText.text = Menu.zloto[Menu.tura].ToString();
-        drewnoText.text = Menu.drewno[Menu.tura].ToString();
-        diamentText.text = Menu.diament[Menu.tura].ToString();
-        magiaText.text = Menu.magia[Menu.tura].ToString();
-        ludnoscText.text = Menu.ludnosc[Menu.tura].ToString() + "/" + Menu.maxludnosc[Menu.tura].ToString();
+        int wyswietlanaWartosc = Menu.tura;
+        if(MenuGlowne.multi)
+            wyswietlanaWartosc = Ip.ip;
+        zlotoText.text = Menu.zloto[wyswietlanaWartosc].ToString();
+        drewnoText.text = Menu.drewno[wyswietlanaWartosc].ToString();
+        diamentText.text = Menu.diament[wyswietlanaWartosc].ToString();
+        magiaText.text = Menu.magia[wyswietlanaWartosc].ToString();
+        ludnoscText.text = Menu.ludnosc[wyswietlanaWartosc].ToString() + "/" + Menu.maxludnosc[wyswietlanaWartosc].ToString();
+
         if (ruch)
         {
             ruch = false;
