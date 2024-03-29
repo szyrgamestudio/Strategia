@@ -50,8 +50,8 @@ public class Jednostka : MonoBehaviour
     public GameObject pocisk;
 
     private bool wybrany;
-    
-    private Vector3 aktualnePołożenie;  
+
+
     public void Start()
     {
         switch(druzyna)
@@ -103,13 +103,6 @@ public class Jednostka : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        if(MenuGlowne.multi)
-        {
-            PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, this.HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
-            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
-            photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, transform.position);
-        }
         if(!Menu.NIERUSZAC)
             OnMouse();
     }
@@ -131,7 +124,7 @@ public class Jednostka : MonoBehaviour
             if(Select != null && CzyJednostka && Select.GetComponent<Jednostka>().druzyna == Menu.tura && sojusz != Select.GetComponent<Jednostka>().sojusz && 
             (Select.GetComponent<Jednostka>().zasieg>=Walka.odleglosc(jednostka, Select) && Select.GetComponent<Jednostka>().akcja && (Select.GetComponent<Jednostka>().zasieg > 1 || Select.GetComponent<Jednostka>().lata || !jednostka.GetComponent<Jednostka>().lata)))
             {
-                zaatakowanie();
+                zaatakowanie(Jednostka.Select);
             }
             else
             {
@@ -151,26 +144,26 @@ public class Jednostka : MonoBehaviour
         }
     }
 
-    public void zaatakowanie()
+    public void zaatakowanie(GameObject atakujacy)
     {
-        if(Select.GetComponent<Jednostka>().nazwa == "Wilk")
-            Select.GetComponent<Jednostka>().atak += Select.GetComponent<Wilk>().dodatkowyAtak();
-        Jednostka Atakujacy = Select.GetComponent<Jednostka>();
-        if(Atakujacy.zasieg>=Walka.odleglosc(jednostka, Select) && Atakujacy.akcja && (Atakujacy.zasieg > 1 || Atakujacy.lata || !jednostka.GetComponent<Jednostka>().lata))
+        if(atakujacy.GetComponent<Jednostka>().nazwa == "Wilk")
+            atakujacy.GetComponent<Jednostka>().atak += atakujacy.GetComponent<Wilk>().dodatkowyAtak();
+        Jednostka Atakujacy = atakujacy.GetComponent<Jednostka>();
+        if(Atakujacy.zasieg>=Walka.odleglosc(jednostka, atakujacy) && Atakujacy.akcja && (Atakujacy.zasieg > 1 || Atakujacy.lata || !jednostka.GetComponent<Jednostka>().lata))
          {
             float result;
-            if(Select.GetComponent<Jednostka>().lata || jednostka.GetComponent<Jednostka>().lata)
+            if(atakujacy.GetComponent<Jednostka>().lata || jednostka.GetComponent<Jednostka>().lata)
                 result = UnityEngine.Random.Range(Atakujacy.mindmg, Atakujacy.maxdmg) * (float)(1 + 0.1 * (Atakujacy.atak - obrona));
             else
             {
-            result = UnityEngine.Random.Range((float)Atakujacy.mindmg, (float)Atakujacy.maxdmg) * (1f + 0.1f * ((float)Atakujacy.atak + (Menu.kafelki[(int)Select.transform.position.x][(int)Select.transform.position.y].GetComponent<Pole>().poziom -Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().poziom) - (float)obrona));
+            result = UnityEngine.Random.Range((float)Atakujacy.mindmg, (float)Atakujacy.maxdmg) * (1f + 0.1f * ((float)Atakujacy.atak + (Menu.kafelki[(int)atakujacy.transform.position.x][(int)atakujacy.transform.position.y].GetComponent<Pole>().poziom -Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().poziom) - (float)obrona));
             }
 
             float roundedResult = (float)Math.Round(result, 1);
 
-            if(Select.GetComponent<Jednostka>().nazwa == "Wilk")
-                Select.GetComponent<Jednostka>().atak -= Select.GetComponent<Wilk>().dodatkowyAtak();
-            if(Walka.odleglosc(jednostka, Select)==1)
+            if(atakujacy.GetComponent<Jednostka>().nazwa == "Wilk")
+                atakujacy.GetComponent<Jednostka>().atak -= atakujacy.GetComponent<Wilk>().dodatkowyAtak();
+            if(Walka.odleglosc(jednostka, atakujacy)==1)
                 Atakujacy.animacjaMiecz(jednostka);
             else
                 Atakujacy.animacjaPocisk(jednostka);
@@ -203,23 +196,7 @@ public class Jednostka : MonoBehaviour
         GameObject strzal = Instantiate(pocisk, jednostka.transform.position, Quaternion.identity); 
         strzal.GetComponent<Pocisk>().cel = cel;
     }
-    IEnumerator AktualizujPołożenie(float HP, bool wybrany)
-    {
-        yield return new WaitForSeconds(0.1f);
-        Vector3 nowePołożenie = transform.position;
 
-        if (nowePołożenie != aktualnePołożenie || HP != this.HP || wybrany != this.wybrany)
-        {
-            //wybrany = this.wybrany
-            PhotonView photonView = GetComponent<PhotonView>();
-            aktualnePołożenie = nowePołożenie;
-
-            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, this.HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
-                            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
-
-            photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, aktualnePołożenie);
-        }
-    }
     public void Aktualizuj()
     {
             PhotonView photonView = GetComponent<PhotonView>();
@@ -273,11 +250,6 @@ public class Jednostka : MonoBehaviour
             wybrany = true;
         else
             wybrany = false;
-        if(MenuGlowne.multi)
-        {
-            aktualnePołożenie = transform.position;
-            StartCoroutine(AktualizujPołożenie(HP, wybrany));
-        }
         if(jednostka==Select)
             wybrane.enabled = true;
         else    

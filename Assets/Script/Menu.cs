@@ -250,7 +250,7 @@ public class Menu : MonoBehaviour
                     Jednostka.Select = postacGracza;//NPC[id];
                     Interface.przeniesDoSelect();
                     yield return new WaitForSeconds(0.2f);
-                    Jednostka.Select = NPC[id];
+                   // Jednostka.Select = NPC[id];
                     Jednostka.CzyJednostka = true;
 
                 if(Walka.odleglosc(postacGracza, NPC[id]) != 1)
@@ -262,7 +262,7 @@ public class Menu : MonoBehaviour
                         
                         Pole.Clean2();
                         yield return new WaitForSeconds(0.09f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse();
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
                         yield return new WaitForSeconds(0.09f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
@@ -273,7 +273,7 @@ public class Menu : MonoBehaviour
                     {
                         Pole.Clean2();
                         yield return new WaitForSeconds(0.09f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse();
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
                         yield return new WaitForSeconds(0.09f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
@@ -284,7 +284,7 @@ public class Menu : MonoBehaviour
                     {
                         Pole.Clean2();
                         yield return new WaitForSeconds(0.09f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse();
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
                         yield return new WaitForSeconds(0.09f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
@@ -295,7 +295,7 @@ public class Menu : MonoBehaviour
                     {
                         Pole.Clean2();
                         yield return new WaitForSeconds(0.2f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse();
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
                         yield return new WaitForSeconds(0.2f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
@@ -303,9 +303,9 @@ public class Menu : MonoBehaviour
                     }
                     Pole.Clean2();
                     if(pole != null) {
-                    pole.GetComponent<Pole>().OnMouse();
+                    pole.GetComponent<Pole>().OnMouse(NPC[id],1);
                     yield return new WaitForSeconds(0.15f);
-                    pole.GetComponent<Pole>().OnMouse();
+                    pole.GetComponent<Pole>().OnMouse(NPC[id],1);
                     yield return new WaitForSeconds(0.3f * close);
                     }
                     usunSelect2();
@@ -319,7 +319,7 @@ public class Menu : MonoBehaviour
 
                 if(pole != null)
                 {
-                    postacGracza.GetComponent<Jednostka>().zaatakowanie();
+                    postacGracza.GetComponent<Jednostka>().zaatakowanie(NPC[id]);
                 }
                 
                 

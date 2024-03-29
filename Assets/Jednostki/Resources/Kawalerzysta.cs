@@ -115,7 +115,7 @@ public class Kawalerzysta : MonoBehaviour
         Menu.kafelki[(int)pozycja.x][(int)(pozycja.y + x * wzrostSily)].GetComponent<Pole>().OnMouseDown();
         yield return new WaitForSeconds(0.5f * wzrostSily);
         jednostka.GetComponent<Jednostka>().atak += wzrostSily;
-        Jednostka.Select2.GetComponent<Jednostka>().zaatakowanie();
+        Jednostka.Select2.GetComponent<Jednostka>().zaatakowanie(jednostka);
         jednostka.GetComponent<Jednostka>().atak -= wzrostSily;
         Menu.usunSelect2();
     }
@@ -128,7 +128,7 @@ public class Kawalerzysta : MonoBehaviour
         jednostka.GetComponent<Jednostka>().zasieg += 4;
         yield return new WaitForSeconds(0.45f * wzrostSily);
         jednostka.GetComponent<Jednostka>().atak += wzrostSily;
-        Jednostka.Select2.GetComponent<Jednostka>().zaatakowanie();
+        Jednostka.Select2.GetComponent<Jednostka>().zaatakowanie(jednostka);
         jednostka.GetComponent<Jednostka>().atak -= wzrostSily;
         jednostka.GetComponent<Jednostka>().zasieg -= 4;
         Menu.usunSelect2();

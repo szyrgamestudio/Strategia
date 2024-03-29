@@ -251,7 +251,8 @@ public class MapLoad : MonoBehaviour
             if (MenuGlowne.multi)
             {
                 nowy.GetComponent<Jednostka>().Aktualizuj();
-                nowy.GetComponent<Jednostka>().Start();
+                if(Ip.ip != 1)
+                    nowy.GetComponent<Jednostka>().Start();
             }
         }
     }
@@ -284,8 +285,6 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Budynek>().Aktualizuj();
                 nowy.GetComponent<Budynek>().Start();
                 nowy.GetComponent<BudynekRuch>().startMultiMap();
-                // if(ip==0)
-                //     nowy.GetComponent<>
             }
         }
     }

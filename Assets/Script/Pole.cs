@@ -47,21 +47,21 @@ public class Pole : MonoBehaviour
     }
     void Update()
     {
-        if(MenuGlowne.multi)
-        {
-            StartCoroutine(Aktualizuj(Zajete));
-        }
+        // if(MenuGlowne.multi)
+        // {
+        //     StartCoroutine(Aktualizuj(Zajete));
+        // }
         if(Menu.Next)
             Clean2();
         if(Menu.Next)
         {
             koniec = true;
         }
-        if(koniec && !Menu.Next && Ip.ip==1)
-        {
-            koniec = false;
-            AktualizujPołożenie();
-        }
+        // if(koniec && !Menu.Next && Ip.ip==1)
+        // {
+        //     koniec = false;
+        //     AktualizujPołożenie();
+        // }
     }
 
     IEnumerator Aktualizuj(bool Zajete)
@@ -102,68 +102,81 @@ public class Pole : MonoBehaviour
         kafelek.name = nazwa;
     }
 
+    [PunRPC]
+    void ZaktualizujRuch(int idJednostki, int ip)
+    {
+        Debug.Log("Id jednostki: " + idJednostki + "  team " + Menu.tura);
+        if(Ip.ip != ip)
+            OnMouse(Menu.jednostki[Menu.tura , idJednostki], 0);
+        Debug.Log("Id jednostki: " + idJednostki);
+    }
+
     public void OnMouseDown()
     {
         if(!Menu.NIERUSZAC)
-            OnMouse();
+            OnMouse(Jednostka.Select, 1);
     }
-    public void OnMouse()
+    public void OnMouse(GameObject poruszany, int dostane)
     {
+        Debug.Log("Jednostki: " + poruszany.GetComponent<Jednostka>().nr_jednostki + " " + poruszany.name);
         if(!idzie)
         {
             
-            // PhotonView view = Jednostka.Select.GetComponent<PhotonView>();
-            // if (!MenuGlowne.multi || view.IsMine)
-            // {
-                if(droga[0]==null)
+            if(MenuGlowne.multi && dostane == 1)
+            {
+                Debug.Log("cztery");
+                PhotonView photonView = GetComponent<PhotonView>();
+                Debug.Log("nr jednostki: " + poruszany.GetComponent<Jednostka>().nr_jednostki + " " + poruszany.name);
+                photonView.RPC("ZaktualizujRuch", RpcTarget.All, poruszany.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
+            }
+
+            if(droga[0]==null)
+            {
+                if((poruszany!=null && !Zajete && !ZajeteLot && Jednostka.CzyJednostka && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura) || dostane == 0)
                 {
-                    if(Jednostka.Select!=null && !Zajete && !ZajeteLot && Jednostka.CzyJednostka && Jednostka.Select.GetComponent<Jednostka>().druzyna == Menu.tura)
+                    Debug.Log("trzy");
+                    Debug.Log(poruszany.name);
+                    int x = (int)poruszany.transform.position.x;
+                    int y = (int)poruszany.transform.position.y;
+                    pomocnicza[0]=1;
+                    pomocnicza[1]=1;
+                    pomocnicza[2] = poruszany.GetComponent<Jednostka>().szybkosc;
+                    lista1[0] = Menu.kafelki[x][y];
+                    lista2[0] = Menu.kafelki[(int)kafelek.transform.position.x][(int)kafelek.transform.position.y];
+                    int n=0;
+                    while(spr()==0 && n<25)
                     {
-                        int x = (int)Jednostka.Select.transform.position.x;
-                        int y = (int)Jednostka.Select.transform.position.y;
-                        pomocnicza[0]=1;
-                        pomocnicza[1]=1;
-                        pomocnicza[2] = Jednostka.Select.GetComponent<Jednostka>().szybkosc;
-                        lista1[0] = Menu.kafelki[x][y];
-                        lista2[0] = Menu.kafelki[(int)kafelek.transform.position.x][(int)kafelek.transform.position.y];
-                        int n=0;
-                        while(spr()==0 && n<25)
-                        {
-                            if(Jednostka.Select.GetComponent<Jednostka>().lata)
-                                wybordrogiLot(n);
-                            else
+                        if(poruszany.GetComponent<Jednostka>().lata)
+                            wybordrogiLot(n);
+                        else
                                 wybordrogi(n);
-                            n++;
-                            if(n==25)
-                            {
-                                Clean();
-                            }        
-                        }
+                        n++;
+                        if(n==25)
+                        {
+                            Clean();
+                         }        
                     }
                 }
-                else
+            }
+            else
+            {
+                if(kafelek==LastDroga)
                 {
-                    if(kafelek==LastDroga)
-                    {
-                    Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().Zajete = false;
-                    Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().ZajeteLot = false;
-                    Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().postac = null;
+                    Menu.kafelki[(int)poruszany.transform.position.x][(int)poruszany.transform.position.y].GetComponent<Pole>().Zajete = false;
+                    Menu.kafelki[(int)poruszany.transform.position.x][(int)poruszany.transform.position.y].GetComponent<Pole>().ZajeteLot = false;
+                    Menu.kafelki[(int)poruszany.transform.position.x][(int)poruszany.transform.position.y].GetComponent<Pole>().postac = null;
                     
                     idzie = true;
-                if(Jednostka.Select.GetComponent<Jednostka>().lata)
-                    StartCoroutine(LotPowoli());
+                if(poruszany.GetComponent<Jednostka>().lata)
+                    StartCoroutine(LotPowoli(poruszany));
                 else
-                        StartCoroutine(RuchPowoli());
-
-                    //postac = Jednostka.Select;
-
-                    }
-                    else
-                    {
-                        Clean2();
-                    }
+                    StartCoroutine(RuchPowoli(poruszany));
                 }
-           // }
+                else
+                {
+                    Clean2();
+                }
+            }
         }
     }
     public int spr()
@@ -620,9 +633,8 @@ int i=0;
             }     
     }
 
-     IEnumerator RuchPowoli()
+     IEnumerator RuchPowoli(GameObject ziomek)
      {
-        GameObject ziomek = Jednostka.Select;
          int ko=0;
         GameObject blok = null;
         while(droga[ko + 1]!=null)
@@ -662,12 +674,11 @@ int i=0;
         }
         Clean2();
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().Zajete = true;
-        Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().postac = Jednostka.Select; 
+        Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().postac = ziomek; 
         idzie = false;
     }
-        IEnumerator LotPowoli()
+        IEnumerator LotPowoli(GameObject ziomek)
      {
-        GameObject ziomek = Jednostka.Select;
          int ko=0;
         GameObject blok = null;
         while(droga[ko + 1]!=null)
@@ -706,8 +717,8 @@ int i=0;
             }
         }
         Clean2();
-        Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().ZajeteLot = true;
-        postac = Jednostka.Select;
+        Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().ZajeteLot = true;
+        postac = ziomek;
         idzie = false;
     }
         

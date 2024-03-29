@@ -36,7 +36,7 @@ public class Rycerz : MonoBehaviour
                 if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) == 1 && odrzut)
                 {
                     odrzut = false;
-                    Jednostka.Select2.GetComponent<Jednostka>().zaatakowanie();
+                    Jednostka.Select2.GetComponent<Jednostka>().zaatakowanie(jednostka);
 
                     Vector3 offset = Jednostka.Select2.transform.position - jednostka.transform.position;
 
@@ -59,7 +59,7 @@ public class Rycerz : MonoBehaviour
                             jednostka.GetComponent<Jednostka>().zasieg += 1;
                             if(Atakujacy != null)
                             {
-                                Atakujacy.zaatakowanie();
+                                Atakujacy.zaatakowanie(jednostka);
                             }
                             else
                             {
