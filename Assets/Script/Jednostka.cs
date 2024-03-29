@@ -79,6 +79,19 @@ public class Jednostka : MonoBehaviour
         Menu.ludnosc[druzyna]++;
     }
 
+    public void rozlozenie()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("rozlozenieMulti", RpcTarget.All);
+    }
+    
+    [PunRPC]
+    public void rozlozenieMulti()
+    {
+        Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = true;
+        Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac = jednostka;
+    }
+
         public void ShowDMG(float dmg, Color myColor)
     {
         TextShowDMG.text = dmg.ToString();

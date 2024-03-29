@@ -105,10 +105,8 @@ public class Pole : MonoBehaviour
     [PunRPC]
     void ZaktualizujRuch(int idJednostki, int ip)
     {
-        Debug.Log("Id jednostki: " + idJednostki + "  team " + Menu.tura);
         if(Ip.ip != ip)
             OnMouse(Menu.jednostki[Menu.tura , idJednostki], 0);
-        Debug.Log("Id jednostki: " + idJednostki);
     }
 
     public void OnMouseDown()
@@ -118,15 +116,12 @@ public class Pole : MonoBehaviour
     }
     public void OnMouse(GameObject poruszany, int dostane)
     {
-        Debug.Log("Jednostki: " + poruszany.GetComponent<Jednostka>().nr_jednostki + " " + poruszany.name);
         if(!idzie)
         {
             
             if(MenuGlowne.multi && dostane == 1)
             {
-                Debug.Log("cztery");
                 PhotonView photonView = GetComponent<PhotonView>();
-                Debug.Log("nr jednostki: " + poruszany.GetComponent<Jednostka>().nr_jednostki + " " + poruszany.name);
                 photonView.RPC("ZaktualizujRuch", RpcTarget.All, poruszany.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
             }
 
@@ -134,8 +129,6 @@ public class Pole : MonoBehaviour
             {
                 if((poruszany!=null && !Zajete && !ZajeteLot && Jednostka.CzyJednostka && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura) || dostane == 0)
                 {
-                    Debug.Log("trzy");
-                    Debug.Log(poruszany.name);
                     int x = (int)poruszany.transform.position.x;
                     int y = (int)poruszany.transform.position.y;
                     pomocnicza[0]=1;

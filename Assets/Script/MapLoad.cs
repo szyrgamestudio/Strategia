@@ -253,6 +253,7 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Jednostka>().Aktualizuj();
                 if(Ip.ip != 1)
                     nowy.GetComponent<Jednostka>().Start();
+                nowy.GetComponent<Jednostka>().rozlozenie();
             }
         }
     }

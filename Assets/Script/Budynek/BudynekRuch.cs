@@ -96,10 +96,12 @@ public class BudynekRuch : MonoBehaviour
         else{
             if(!update && MenuGlowne.multi)
             {
+             
                 update = true;
                 Vector3 nowePołożenie = transform.position;
                 PhotonView photonView = GetComponent<PhotonView>();
                 photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
+                photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
             }
                 
         }
@@ -139,10 +141,13 @@ public class BudynekRuch : MonoBehaviour
     {
         // RPC wywołane na wszystkich klientach - zaktualizuj położenie jednostki
         transform.position = nowePołożenie;
+
     }
     [PunRPC]
     void ZaktualizujWybudowany()
     {
         this.wybudowany = true;
+        Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y].GetComponent<Pole>().Zajete = true;
+        Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y].GetComponent<Pole>().postac = ObiektRuszany;
     }
 }
