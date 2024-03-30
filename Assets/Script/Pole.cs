@@ -127,7 +127,7 @@ public class Pole : MonoBehaviour
 
             if(droga[0]==null)
             {
-                if((poruszany!=null && !Zajete && !ZajeteLot && Jednostka.CzyJednostka && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura) || dostane == 0)
+                if((poruszany!=null && !Zajete && !ZajeteLot && ( Jednostka.CzyJednostka && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura) || dostane == 0))
                 {
                     int x = (int)poruszany.transform.position.x;
                     int y = (int)poruszany.transform.position.y;
@@ -321,6 +321,28 @@ public class Pole : MonoBehaviour
         }
     }
    public static void Clean2()
+    {
+        int i = 0;
+
+        while(droga[i]!=null)
+        {
+            droga[i].GetComponent<Pole>().Nin=0;
+            droga[i].GetComponent<Pole>().Nout=0;
+            droga[i].GetComponent<Pole>().CzasDrogi=0;
+            droga[i]=null;
+            i++;
+        }
+    if(MenuGlowne.multi)
+        Menu.kafelki[0][0].GetComponent<Pole>().wywolajCealn();
+    }
+    public void wywolajCealn()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("CleanMulti", RpcTarget.All, Ip.ip);
+    }
+
+    [PunRPC]
+    public void CleanMulti(int ip)
     {
         int i = 0;
 
