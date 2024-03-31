@@ -138,6 +138,7 @@ public class Jednostka : MonoBehaviour
             (Select.GetComponent<Jednostka>().zasieg>=Walka.odleglosc(jednostka, Select) && Select.GetComponent<Jednostka>().akcja && (Select.GetComponent<Jednostka>().zasieg > 1 || Select.GetComponent<Jednostka>().lata || !jednostka.GetComponent<Jednostka>().lata)))
             {
                 zaatakowanie(Jednostka.Select);
+
             }
             else
             {
@@ -155,6 +156,14 @@ public class Jednostka : MonoBehaviour
             }
             
         }
+    }
+
+    
+    [PunRPC]
+    public void zaatakowanieMulti(int id, int ip, float hp)
+    {
+        if(ip != Ip.ip)
+            HP -= hp;
     }
 
     public void zaatakowanie(GameObject atakujacy)
@@ -184,8 +193,18 @@ public class Jednostka : MonoBehaviour
             {
                 roundedResult = 1;
             }
+                if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("zaatakowanieMulti", RpcTarget.All, Jednostka.Select.GetComponent<Jednostka>().nr_jednostki, Ip.ip, roundedResult);
+                    }
             HP -= roundedResult;
-
+            if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("zaatakowanieMulti", RpcTarget.All, Jednostka.Select.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
+                    Debug.Log("1");
+                }
             ShowDMG(roundedResult, new Color(1.0f, 0.0f, 0.0f, 1.0f));
             Atakujacy.akcja = false;
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);

@@ -114,21 +114,31 @@ public class Pole : MonoBehaviour
         if(!Menu.NIERUSZAC)
             OnMouse(Jednostka.Select, 1);
     }
+
+    public void OnMouse(GameObject poruszany, int dostane, bool dwa)
+    {
+        OnMouse(poruszany,dostane);
+        OnMouse(poruszany,dostane);
+    }
+
     public void OnMouse(GameObject poruszany, int dostane)
     {
         if(!idzie)
         {
-            
+            Debug.Log(poruszany.name + "333");
             if(MenuGlowne.multi && dostane == 1)
             {
+                Debug.Log(poruszany.name + "444");
                 PhotonView photonView = GetComponent<PhotonView>();
-                photonView.RPC("ZaktualizujRuch", RpcTarget.All, poruszany.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
+                if(poruszany != null)
+                    photonView.RPC("ZaktualizujRuch", RpcTarget.All, poruszany.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
             }
 
             if(droga[0]==null)
             {
                 if((poruszany!=null && !Zajete && !ZajeteLot && ( Jednostka.CzyJednostka && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura) || dostane == 0))
                 {
+                    Debug.Log(poruszany.name +  "555");
                     int x = (int)poruszany.transform.position.x;
                     int y = (int)poruszany.transform.position.y;
                     pomocnicza[0]=1;
@@ -153,6 +163,7 @@ public class Pole : MonoBehaviour
             }
             else
             {
+                Debug.Log(poruszany.name + "666");
                 if(kafelek==LastDroga)
                 {
                     Menu.kafelki[(int)poruszany.transform.position.x][(int)poruszany.transform.position.y].GetComponent<Pole>().Zajete = false;

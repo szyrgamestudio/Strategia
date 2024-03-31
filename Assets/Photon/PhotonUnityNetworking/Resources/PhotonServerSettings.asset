@@ -53,6 +53,8 @@ MonoBehaviour:
   - ZaktualizujRuch
   - rozlozenieMulti
   - CleanMulti
+  - zaatakowanieMulti
+  - ZaktualizujNPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-//using System.Collections.Generic;
 
 
 public class Menu : MonoBehaviour
@@ -55,6 +54,8 @@ public class Menu : MonoBehaviour
 
     public Slider turaNPC;
     public Text nrTuryText;
+
+    public int NPCCount;
 
     private void Start()
     {
@@ -151,66 +152,104 @@ public class Menu : MonoBehaviour
 
     public void NextTurn()
     {
-        if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
-        {
-        NaPewnoKoniec++;
-        StartCoroutine(PrzedKoniec());
-        for (int i = 0; i < 50; i++)
-        {
-            if (jednostki[tura, i] == null)
-            {
-                i--;
-                break;
 
-            }
-            if (jednostki[tura, i].GetComponent<Jednostka>().szybkosc == jednostki[tura, i].GetComponent<Jednostka>().maxszybkosc &&
-            jednostki[tura, i].activeSelf && jednostki[tura, i].GetComponent<Jednostka>().akcja && !jednostki[tura, i].GetComponent<Jednostka>().spanie && NaPewnoKoniec != 2)
+
+        if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
             {
-                NumerTypa = i;
-                idInfo = 0;
-                for(int k = 0; k<=2;k++)
-                    infoText[k].text = infoString[k];
-                InfoKolejnaTura.SetActive(true);
+            NaPewnoKoniec++;
+            StartCoroutine(PrzedKoniec());
+            for (int i = 0; i < 50; i++)
+            {
+                if (jednostki[tura, i] == null)
+                {
+                    i--;
+                    break;
+                }
+                if (jednostki[tura, i].GetComponent<Jednostka>().szybkosc == jednostki[tura, i].GetComponent<Jednostka>().maxszybkosc &&
+                jednostki[tura, i].activeSelf && jednostki[tura, i].GetComponent<Jednostka>().akcja && !jednostki[tura, i].GetComponent<Jednostka>().spanie && NaPewnoKoniec != 2)
+                {
+                    NumerTypa = i;
+                    idInfo = 0;
+                    for(int k = 0; k<=2;k++)
+                        infoText[k].text = infoString[k];
+                    InfoKolejnaTura.SetActive(true);
+                    NaPewnoKoniec = 0;
+                }
+            }
+            if (NaPewnoKoniec > 0)
+            {
                 NaPewnoKoniec = 0;
+                tura++;
+
+                int zostalo = 0;
+                for(int i = 1; i<5;i++)
+                    if(bazyIlosc[i]==0)
+                    {
+                        WyburRas.aktywny[i-1] = false;
+                        zostalo++;
+                    }
+                Debug.Log("1 " + tura);
+                if(zostalo == 3)
+                    SceneManager.LoadScene(3);
+                    
+                
+                for(int xd = 1; xd<5;xd++)
+                    if (tura == xd && !WyburRas.aktywny[xd-1])
+                        tura++;
+                if (tura > IloscGraczy)
+                    tura = 0;
+                Debug.Log("2 " + tura);
+                if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
+                }
+
+                Debug.Log("3 " + tura);
+
+                Jednostka.Select = null;
+                PanelUnit.SetActive(false);
+                PanelBuild.SetActive(false);
+                przyciskiClear();
+
+                usunSelect2();
+                if(tura != 0)
+                    StartCoroutine(Ratusz.ruchPlynnyCamery(tura));
+                StartCoroutine(Przelocznik());
+
+                if(tura == 0)
+                {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("ZaktualizujNPC", RpcTarget.All);
+                    }
+                    else
+                    {
+                        if(Menu.NPC.Count != 0)
+                        {
+                            NIERUSZAC = true;
+                            turaNPC.value = 0;
+                            StartCoroutine(NPCtura(0));
+                        }
+                        else
+                        {
+                            nrTury++;
+                            nrTuryText.text = "Tura: " + nrTury.ToString();
+                            tura++;
+                        }
+                    }
+                }
             }
         }
-        if (NaPewnoKoniec > 0)
+    }
+
+    [PunRPC]
+    void ZaktualizujNPC()
+    {
+        if(Ip.ip == 1)
         {
-            NaPewnoKoniec = 0;
-            tura++;
-            PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
-            int zostalo = 0;
-            for(int i = 1; i<5;i++)
-                if(bazyIlosc[i]==0)
-                {
-                    WyburRas.aktywny[i-1] = false;
-                    zostalo++;
-                }
-            //Debug.Log(zostalo);
-            if(zostalo == 3)
-                SceneManager.LoadScene(3);
-                    
-            
-            for(int xd = 1; xd<5;xd++)
-                if (tura == xd && !WyburRas.aktywny[xd-1])
-                    tura++;
-            if (tura > 4)
-                tura = 0;
-
-            Jednostka.Select = null;
-            PanelUnit.SetActive(false);
-            PanelBuild.SetActive(false);
-            przyciskiClear();
-
-            usunSelect2();
-            if(tura != 0)
-                StartCoroutine(Ratusz.ruchPlynnyCamery(tura));
-            StartCoroutine(Przelocznik());
-
-            if(tura == 0)
-            {
-                if(Menu.NPC.Count != 0)
+            if(Menu.NPC.Count != 0)
                 {
                     NIERUSZAC = true;
                     turaNPC.value = 0;
@@ -218,12 +257,10 @@ public class Menu : MonoBehaviour
                 }
                 else
                 {
-                    nrTury++;
-                    nrTuryText.text = "Tura: " + nrTury.ToString();
-                    tura++;
-                }
+                nrTury++;
+                nrTuryText.text = "Tura: " + nrTury.ToString();
+                tura++;
             }
-        }
         }
     }
     public static bool istnieje(int x, int y)
@@ -303,10 +340,10 @@ public class Menu : MonoBehaviour
                     }
                     Pole.Clean2();
                     if(pole != null) {
-                    pole.GetComponent<Pole>().OnMouse(NPC[id],1);
-                    yield return new WaitForSeconds(0.15f);
-                    pole.GetComponent<Pole>().OnMouse(NPC[id],1);
-                    yield return new WaitForSeconds(0.3f * close);
+                        pole.GetComponent<Pole>().OnMouse(NPC[id],1,true);
+                        // yield return new WaitForSeconds(0.15f);
+                        // pole.GetComponent<Pole>().OnMouse(NPC[id],1);
+                        yield return new WaitForSeconds(0.3f * close);
                     }
                     usunSelect2();
                     
