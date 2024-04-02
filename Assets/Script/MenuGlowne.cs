@@ -12,6 +12,8 @@ public class MenuGlowne : MonoBehaviour
     public float speed = -3f;
     public static bool wczytka;
     public static bool multi;
+    
+    public static bool nieCelanMulti;
 
     void Start()
     {

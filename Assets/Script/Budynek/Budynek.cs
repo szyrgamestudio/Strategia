@@ -123,6 +123,13 @@ public class Budynek : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    public void zaatakowanieMulti(int ip, float hp)
+    {
+        if(ip != Ip.ip)
+            HP -= hp;
+    }
+
     public void zaatakowanie()
     {
         Jednostka Atakujacy = Jednostka.Select.GetComponent<Jednostka>();
@@ -137,6 +144,11 @@ public class Budynek : MonoBehaviour
                             {
                                 roundedResult = 1;
                             }
+                                if(MenuGlowne.multi)
+                            {
+                                PhotonView photonView = GetComponent<PhotonView>();
+                                photonView.RPC("zaatakowanieMulti", RpcTarget.All, Ip.ip, roundedResult);
+                            }
                             HP -= roundedResult;
                             damage = roundedResult;
                             if(HP<=0)
@@ -147,6 +159,7 @@ public class Budynek : MonoBehaviour
                                 else{poZniszczeniu=2;}
                             }
                             ShowDMG(roundedResult, new Color(1.0f, 0.0f, 0.0f, 1.0f));
+                            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                         }
                         else
                         {
@@ -169,10 +182,10 @@ public class Budynek : MonoBehaviour
 
     void Update()
     {
-         if(MenuGlowne.multi && !update)
-        {
-            StartCoroutine(AktualizujPołożenie(HP,punktyBudowy));
-        }
+    //      if(MenuGlowne.multi && !update)
+    //     {
+    //         StartCoroutine(AktualizujPołożenie(HP,punktyBudowy));
+    //     }
         if(punktyBudowy<punktyBudowyMax)
          //   budynek.GetComponent<SpriteRenderer>().sprite = budowaArt;
             budynek.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);

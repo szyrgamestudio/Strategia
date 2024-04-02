@@ -103,7 +103,6 @@ public class Menu : MonoBehaviour
                 NIERUSZAC = true;
         if(tura > IloscGraczy && Ip.ip == 1)
         {
-            Debug.Log("obecnie jest" + tura);
             tura=0;
             turaNPC.value = 0;
             StartCoroutine(NPCtura(0));
@@ -188,7 +187,6 @@ public class Menu : MonoBehaviour
                         WyburRas.aktywny[i-1] = false;
                         zostalo++;
                     }
-                Debug.Log("1 " + tura);
                 if(zostalo == 3)
                     SceneManager.LoadScene(3);
                     
@@ -198,14 +196,12 @@ public class Menu : MonoBehaviour
                         tura++;
                 if (tura > IloscGraczy)
                     tura = 0;
-                Debug.Log("2 " + tura);
                 if(MenuGlowne.multi)
                 {
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
                 }
 
-                Debug.Log("3 " + tura);
 
                 Jednostka.Select = null;
                 PanelUnit.SetActive(false);
@@ -278,7 +274,6 @@ public class Menu : MonoBehaviour
             NPC.RemoveAt(id);
         GameObject postacGracza = przeszukanie(1, NPC[id]);
         yield return new WaitForSeconds(0.15f);
-        Debug.Log(id);
         if(postacGracza != null)
             {
                 GameObject pole = null;
@@ -292,15 +287,15 @@ public class Menu : MonoBehaviour
 
                 if(Walka.odleglosc(postacGracza, NPC[id]) != 1)
                 {
-
+                    MenuGlowne.nieCelanMulti = true;
                     int x = (int)postacGracza.transform.position.x + 1; int y = (int)postacGracza.transform.position.y;
                     if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
                     {
-                        
                         Pole.Clean2();
-                        yield return new WaitForSeconds(0.09f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
-                        yield return new WaitForSeconds(0.09f);
+                        yield return new WaitForSeconds(0.209f);
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                        //yield return new WaitForSeconds(0.09f);
+
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
                             pole = kafelki[x][y];}
@@ -309,9 +304,9 @@ public class Menu : MonoBehaviour
                     if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
                     {
                         Pole.Clean2();
-                        yield return new WaitForSeconds(0.09f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
-                        yield return new WaitForSeconds(0.09f);
+                        yield return new WaitForSeconds(0.209f);
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                        //yield return new WaitForSeconds(0.09f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
                             pole = kafelki[x][y];}
@@ -320,9 +315,9 @@ public class Menu : MonoBehaviour
                     if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
                     {
                         Pole.Clean2();
-                        yield return new WaitForSeconds(0.09f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
-                        yield return new WaitForSeconds(0.09f);
+                        yield return new WaitForSeconds(0.209f);
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                        //yield return new WaitForSeconds(0.09f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
                             pole = kafelki[x][y];}
@@ -331,9 +326,9 @@ public class Menu : MonoBehaviour
                     if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
                     {
                         Pole.Clean2();
-                        yield return new WaitForSeconds(0.2f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],1);
-                        yield return new WaitForSeconds(0.2f);
+                        yield return new WaitForSeconds(0.22f);
+                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                        //yield return new WaitForSeconds(0.2f);
                         if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
                             close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
                             pole = kafelki[x][y];}
@@ -347,12 +342,16 @@ public class Menu : MonoBehaviour
                     }
                     usunSelect2();
                     
-                } else{
+                } 
+                else
+                {
                     int x = (int)postacGracza.transform.position.x; int y = (int)postacGracza.transform.position.y;
                     pole = kafelki[x][y];
                     close = 1;
                     yield return new WaitForSeconds(0.15f);
                 }
+
+                MenuGlowne.nieCelanMulti = false;
 
                 if(pole != null)
                 {
@@ -395,7 +394,6 @@ public class Menu : MonoBehaviour
                         Jednostka czek = help.GetComponent<Jednostka>();
                         if(czek!=null && help.GetComponent<Jednostka>().druzyna != 0 && czek.HP>0.1 && !czek.lata)
                         {
-                            Debug.Log(help);
                             zwrot = help;
                         }
                     }
