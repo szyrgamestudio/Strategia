@@ -34,6 +34,14 @@ public class Opcje : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            opcjeOn();
+        }
+    }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
