@@ -765,7 +765,7 @@ GameObject:
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 641337051438856885}
   m_Layer: 0
-  m_Name: Arcymag
+  m_Name: arcymag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

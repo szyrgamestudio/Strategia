@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Koszary : MonoBehaviour
 {
@@ -23,7 +24,16 @@ public class Koszary : MonoBehaviour
     {
         druzyna = budynek.GetComponent<Budynek>().druzyna;
     }
-
+    public void jednostkaMulti(string nazwa, ref GameObject nowyZbieracz)
+    {
+        nowyZbieracz = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        nowyZbieracz.transform.position = pole.transform.position;
+        nowyZbieracz.GetComponent<Jednostka>().druzyna = budynek.GetComponent<Budynek>().druzyna;
+        nowyZbieracz.GetComponent<Jednostka>().sojusz = budynek.GetComponent<Budynek>().sojusz;
+        nowyZbieracz.transform.position = new Vector3(nowyZbieracz.transform.position.x, nowyZbieracz.transform.position.y, -2f);
+        nowyZbieracz.GetComponent<Jednostka>().Aktualizuj();
+        nowyZbieracz.GetComponent<Jednostka>().AktualizujPol();    
+    }
     void Update()
     {
         if(budynek == Jednostka.Select)
@@ -35,15 +45,21 @@ public class Koszary : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= piechur.GetComponent<Jednostka>().cena;
-                        GameObject nowyLucznik = Instantiate(piechur, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyLucznik.transform.position;
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("piechur",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(piechur, pole.transform.position, Quaternion.identity); 
+                        Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyLucznik.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
-                        nowyLucznik.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
-                        nowyLucznik.transform.position = newPosition;
-                        nowyLucznik.GetComponent<Jednostka>().druzyna = druzyna;
+                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
+                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
+                        nowyZbieracz.transform.position = newPosition;
+                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
                         pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyLucznik;
+                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
                 if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>= lucznik.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
@@ -52,7 +68,13 @@ public class Koszary : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= lucznik.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = Instantiate(lucznik, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("lucznik",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(lucznik, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
@@ -68,7 +90,13 @@ public class Koszary : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= rycerz.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = Instantiate(rycerz, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("rycerz",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(rycerz, pole.transform.position, Quaternion.identity); 
                         nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
                         Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
@@ -86,7 +114,13 @@ public class Koszary : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= kusznik.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = Instantiate(kusznik, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("kusznik",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(kusznik, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
@@ -102,7 +136,13 @@ public class Koszary : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= kawalerzysta.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = Instantiate(kawalerzysta, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("kawalerzysta",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(kawalerzysta, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];

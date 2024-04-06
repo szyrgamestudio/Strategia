@@ -231,14 +231,27 @@ public class Jednostka : MonoBehaviour
                             mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
 
             //photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, aktualnePołożenie);
-
+    }
+    public void AktualizujPol()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, jednostka.transform.position, Ip.ip);
     }
 
     [PunRPC]
-    void ZaktualizujPołożenieRPC(Vector3 nowePołożenie)
+    void ZaktualizujPołożenieRPC(Vector3 nowePołożenie, int ip)
     {
         // RPC wywołane na wszystkich klientach - zaktualizuj położenie jednostki
-        transform.position = nowePołożenie;
+        if(ip != Ip.ip)
+        {
+            transform.position = nowePołożenie;
+            if(!lata)
+                Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = true;
+            else
+                Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().ZajeteLot = true;
+            Debug.Log(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].name);
+            Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac = jednostka;
+        }
     }
 
     [PunRPC]

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Ratusz : MonoBehaviour
 {
@@ -34,6 +35,17 @@ public class Ratusz : MonoBehaviour
         StartCoroutine(przyporzadkuj());
     }
 
+    public void jednostkaMulti(string nazwa, ref GameObject nowyZbieracz)
+    {
+        nowyZbieracz = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        nowyZbieracz.transform.position = pole.transform.position;
+        nowyZbieracz.GetComponent<Jednostka>().druzyna = budynek.GetComponent<Budynek>().druzyna;
+        nowyZbieracz.GetComponent<Jednostka>().sojusz = budynek.GetComponent<Budynek>().sojusz;
+        nowyZbieracz.transform.position = new Vector3(nowyZbieracz.transform.position.x, nowyZbieracz.transform.position.y, -2f);
+        nowyZbieracz.GetComponent<Jednostka>().Aktualizuj();
+        nowyZbieracz.GetComponent<Jednostka>().AktualizujPol();    
+    }
+
     void Update()
     {
         ramka.enabled = budynek.GetComponent<Budynek>().strzalka.enabled;
@@ -46,7 +58,13 @@ public class Ratusz : MonoBehaviour
                if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                 {
                     Menu.zloto[Menu.tura] -= zbieracz.GetComponent<Jednostka>().cena;
-                    GameObject nowyZbieracz = Instantiate(zbieracz, pole.transform.position, Quaternion.identity); 
+                    GameObject nowyZbieracz = null;
+                    if(MenuGlowne.multi)
+                    {
+                        jednostkaMulti("zbieracz",ref nowyZbieracz);
+                    }
+                    else
+                        nowyZbieracz = Instantiate(zbieracz, pole.transform.position, Quaternion.identity); 
                     Vector3 newPosition = nowyZbieracz.transform.position;
                     newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                     nowyZbieracz.transform.position = newPosition;
@@ -61,7 +79,13 @@ public class Ratusz : MonoBehaviour
                if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                 {
                     Menu.zloto[Menu.tura] -= poszukiwacz.GetComponent<Jednostka>().cena;
-                    GameObject nowyZbieracz = Instantiate(poszukiwacz, pole.transform.position, Quaternion.identity); 
+                    GameObject nowyZbieracz = null;
+                    if(MenuGlowne.multi)
+                    {
+                        jednostkaMulti("poszukiwacz",ref nowyZbieracz);
+                    }
+                    else
+                    nowyZbieracz = Instantiate(poszukiwacz, pole.transform.position, Quaternion.identity); 
                     Vector3 newPosition = nowyZbieracz.transform.position;
                     newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                     nowyZbieracz.transform.position = newPosition;
@@ -76,7 +100,13 @@ public class Ratusz : MonoBehaviour
                if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                 {
                     Menu.zloto[Menu.tura] -= budowlaniec.GetComponent<Jednostka>().cena;
-                    GameObject nowyZbieracz = Instantiate(budowlaniec, pole.transform.position, Quaternion.identity); 
+                    GameObject nowyZbieracz = null;
+                    if(MenuGlowne.multi)
+                    {
+                        jednostkaMulti("budowlaniec",ref nowyZbieracz);
+                    }
+                    else
+                    nowyZbieracz = Instantiate(budowlaniec, pole.transform.position, Quaternion.identity); 
                     Vector3 newPosition = nowyZbieracz.transform.position;
                     newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                     nowyZbieracz.transform.position = newPosition;
@@ -91,7 +121,13 @@ public class Ratusz : MonoBehaviour
                if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                 {
                     Menu.zloto[Menu.tura] -= adept.GetComponent<Jednostka>().cena;
-                    GameObject nowyZbieracz = Instantiate(adept, pole.transform.position, Quaternion.identity); 
+                    GameObject nowyZbieracz = null;
+                    if(MenuGlowne.multi)
+                    {
+                        jednostkaMulti("adept",ref nowyZbieracz);
+                    }
+                    else
+                    nowyZbieracz = Instantiate(adept, pole.transform.position, Quaternion.identity); 
                     Vector3 newPosition = nowyZbieracz.transform.position;
                     newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                     nowyZbieracz.transform.position = newPosition;

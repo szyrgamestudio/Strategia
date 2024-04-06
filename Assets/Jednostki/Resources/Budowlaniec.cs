@@ -95,10 +95,7 @@ public class Budowlaniec : MonoBehaviour
                             BudynekRuch.budowlaniec = jednostka; 
                             if (MenuGlowne.multi)
                             {
-                                ratusz.GetComponent<BudynekRuch>().wybudowany = false;
-                                ratusz.GetComponent<Budynek>().druzyna = Ip.ip;
-                                BudowanyObiekt = PhotonNetwork.Instantiate(ratusz.name, new Vector3(-10, -10, -2f), Quaternion.identity);
-                                BudowanyObiekt.GetComponent<BudynekRuch>().startMulti();
+                                budowanieMulti("ratusz");
                             }
                             else
                             {
@@ -115,7 +112,13 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=5 && Menu.drewno[Menu.tura]>=5)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
-                            BudowanyObiekt = Instantiate(kopalnia, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
+                            
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("kopalnia");
+                            }
+                            else
+                                BudowanyObiekt = Instantiate(kopalnia, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
@@ -127,7 +130,12 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=6 && Menu.drewno[Menu.tura]>=14)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
-                            BudowanyObiekt = Instantiate(tartak, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("tartak");
+                            }
+                            else
+                                BudowanyObiekt = Instantiate(tartak, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
@@ -139,7 +147,12 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=2 && Menu.drewno[Menu.tura]>=5)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
-                            BudowanyObiekt = Instantiate(chatka, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("chatka");
+                            }
+                            else
+                                BudowanyObiekt = Instantiate(chatka, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
@@ -151,6 +164,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=4 && Menu.drewno[Menu.tura]>=10)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("koszary");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(koszary, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -163,6 +181,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=4 && Menu.drewno[Menu.tura]>=10)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("plac");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(plac, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -175,6 +198,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=4 && Menu.drewno[Menu.tura]>=10)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("gildia");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(gildia, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -198,6 +226,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=5 && Menu.drewno[Menu.tura]>=9 && !Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna])
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("medyk");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(medyk, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -210,6 +243,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=3 && Menu.drewno[Menu.tura]>=7)
                             {
                             Wieza.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("wierza");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(wierza, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Wieza>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -241,6 +279,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=8 && Menu.drewno[Menu.tura]>=8 && Menu.ratuszPoziom[jednostka.GetComponent<Jednostka>().druzyna] != 0)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("portal");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(portal, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -253,6 +296,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=3)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("sciana");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(sciana, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -265,6 +313,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=3 && Menu.drewno[Menu.tura]>=12)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("kuznia");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(kuznia, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
@@ -337,6 +390,13 @@ public class Budowlaniec : MonoBehaviour
     //     Jednostka.wybieranie = false;
     //     Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     // }
+    public void budowanieMulti(string nazwa)
+    {
+        BudowanyObiekt = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+        BudowanyObiekt.GetComponent<Budynek>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;
+        BudowanyObiekt.GetComponent<Budynek>().Aktualizuj();
+    }
 
      void OnMouseDown()
     {

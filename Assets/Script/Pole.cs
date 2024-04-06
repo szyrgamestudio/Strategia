@@ -51,11 +51,16 @@ public class Pole : MonoBehaviour
         // {
         //     StartCoroutine(Aktualizuj(Zajete));
         // }
-        if(Menu.Next)
-            Clean2();
+        // if(Menu.Next)
+        //     Clean2();
         if(Menu.Next)
         {
             koniec = true;
+        }
+        if(!Menu.Next && koniec)
+        {
+            koniec = false;
+            Clean2();
         }
         // if(koniec && !Menu.Next && Ip.ip==1)
         // {
@@ -350,7 +355,7 @@ public class Pole : MonoBehaviour
     [PunRPC]
     public void CleanMulti(int ip)
     {
-        int i = 0;
+    int i = 0;
     if(ip!=Ip.ip && !MenuGlowne.nieCelanMulti)
     {
         while(droga[i]!=null)

@@ -66,6 +66,11 @@ public class Budynek : MonoBehaviour
         if (moznaBudowac)
         {
             punktyBudowy += Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura];
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("budowanieMulti", RpcTarget.All, Ip.ip, Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura]);
+            }
             Jednostka.Select.GetComponent<Budowlaniec>().GetComponent<Jednostka>().akcja = false;
             ShowDMG(Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura], new Color(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 0.0f));
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -129,6 +134,12 @@ public class Budynek : MonoBehaviour
         if(ip != Ip.ip)
             HP -= hp;
     }
+    [PunRPC]
+    public void budowanieMulti(int ip, int hp)
+    {
+        if(ip != Ip.ip)
+            punktyBudowy += hp;
+    }
 
     public void zaatakowanie()
     {
@@ -153,6 +164,11 @@ public class Budynek : MonoBehaviour
                             damage = roundedResult;
                             if(HP<=0)
                             {
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = GetComponent<PhotonView>();
+                                    photonView.RPC("deadMulti", RpcTarget.All, Ip.ip);
+                                }
                                 Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
                                 if(poZniszczeniu==0)
                                     Destroy(budynek);
@@ -165,6 +181,11 @@ public class Budynek : MonoBehaviour
                         {
                             if(punktyBudowy == 0)
                             {
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = GetComponent<PhotonView>();
+                                    photonView.RPC("deadMulti", RpcTarget.All, Ip.ip);
+                                }
                                 Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
                                 if(poZniszczeniu==0)
                                     Destroy(budynek);
@@ -173,6 +194,11 @@ public class Budynek : MonoBehaviour
                             else
                             {
                                 ShowDMG(punktyBudowy, new Color(1.0f, 0.0f, 0.0f, 1.0f));
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = GetComponent<PhotonView>();
+                                    photonView.RPC("budowanieMulti", RpcTarget.All, Ip.ip, -punktyBudowy);
+                                }
                                 punktyBudowy = 0;
                             }
                         }
@@ -218,6 +244,19 @@ public class Budynek : MonoBehaviour
         if(update)
             StartCoroutine(DisableAfterDelay());
     }
+
+    [PunRPC]
+    public void deadMulti(int ip)
+    {
+        if(ip != Ip.ip)
+        {
+            Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
+            if(poZniszczeniu==0)
+                Destroy(budynek);
+            else{poZniszczeniu=2;}
+        }
+    }
+
         IEnumerator DisableAfterDelay()
     {
         yield return new WaitForSeconds(0.3f); // Oczekiwanie przez 1 sekundę

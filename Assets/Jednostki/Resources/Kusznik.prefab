@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 7022607786726823304}
   - component: {fileID: -2158740724799754802}
   m_Layer: 0
-  m_Name: Kusznik
+  m_Name: kusznik
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

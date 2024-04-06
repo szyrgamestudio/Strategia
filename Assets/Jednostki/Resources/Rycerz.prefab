@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 7022607786726823304}
   - component: {fileID: -3323394231332968697}
   m_Layer: 0
-  m_Name: Rycerz
+  m_Name: rycerz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

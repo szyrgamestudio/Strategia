@@ -687,7 +687,7 @@ GameObject:
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 7457887591311504553}
   m_Layer: 0
-  m_Name: Wilk
+  m_Name: wilk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
