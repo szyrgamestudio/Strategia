@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Apteka : MonoBehaviour
 {
@@ -27,7 +28,16 @@ public class Apteka : MonoBehaviour
         druzyna = budynek.GetComponent<Budynek>().druzyna;
         budynek.GetComponent<Budynek>().poZniszczeniu = 1;
     }
-
+    public void jednostkaMulti(string nazwa, ref GameObject nowyZbieracz)
+    {
+        nowyZbieracz = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        nowyZbieracz.transform.position = pole.transform.position;
+        nowyZbieracz.GetComponent<Jednostka>().druzyna = budynek.GetComponent<Budynek>().druzyna;
+        nowyZbieracz.GetComponent<Jednostka>().sojusz = budynek.GetComponent<Budynek>().sojusz;
+        nowyZbieracz.transform.position = new Vector3(nowyZbieracz.transform.position.x, nowyZbieracz.transform.position.y, -2f);
+        nowyZbieracz.GetComponent<Jednostka>().Aktualizuj();
+        nowyZbieracz.GetComponent<Jednostka>().AktualizujPol();    
+    }
     void Update()
     {
         if(budynek == Jednostka.Select)
@@ -39,7 +49,13 @@ public class Apteka : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= medyk.GetComponent<Jednostka>().cena;
-                        GameObject nowyLucznik = Instantiate(medyk, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyLucznik = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("medyk",ref nowyLucznik);
+                        }
+                        else
+                            nowyLucznik = Instantiate(medyk, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyLucznik.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyLucznik.transform.position = newPosition;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // Dodano using dla UnityEngine.UI
+using Photon.Pun;
 
 public class Kopalnia : MonoBehaviour
 {
@@ -33,12 +34,7 @@ public class Kopalnia : MonoBehaviour
         if(budynek == Jednostka.Select)
         {
             pole = budynek.GetComponent<BudynekRuch>().pole;
-            for(int i = 0; i<6;i++)
-            {
-            kopacze[i].enabled = false;
-            if(slot[i] != null)
-                kopacze[i].enabled = true;
-            }
+            obrazki();
             //////////////////////////////////////////
         GameObject[] polaDookola = new GameObject[5];
             int k = 0;
@@ -87,11 +83,6 @@ public class Kopalnia : MonoBehaviour
 
     // Zresetuj flagę, aby przygotować się na kolejną aktualizację
     foundZbieracz = false;
-
-            
-
-
-
             if(Przycisk.budynek[0] == true)
             {
                 Przycisk.budynek[0] = false;
@@ -101,6 +92,11 @@ public class Kopalnia : MonoBehaviour
                     {
                         if(slot[i]==null)
                         {
+                            if(MenuGlowne.multi)
+                            {
+                                PhotonView photonView = GetComponent<PhotonView>();
+                                photonView.RPC("multiWchodzi", RpcTarget.All, Ip.ip, polePomoc.GetComponent<Pole>().postac.GetComponent<Jednostka>().nr_jednostki, i);
+                            }
                             slot[i] = polePomoc.GetComponent<Pole>().postac;
                             slot[i].SetActive(false);
                             polePomoc.GetComponent<Pole>().Zajete=false;
@@ -115,6 +111,11 @@ public class Kopalnia : MonoBehaviour
                 Przycisk.budynek[1] = false;
                 if(slot[0]!=null && !pole.GetComponent<Pole>().Zajete) 
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiOut", RpcTarget.All, Ip.ip, 0, (int)pole.transform.position.x, (int)pole.transform.position.y);
+                    }
                     slot[0].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     slot[0].transform.position = new Vector3(pole.transform.position.x,pole.transform.position.y,-2f);
@@ -129,6 +130,11 @@ public class Kopalnia : MonoBehaviour
                 Przycisk.budynek[2] = false;
                 if(slot[1]!=null && !pole.GetComponent<Pole>().Zajete) 
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiOut", RpcTarget.All, Ip.ip, 1, (int)pole.transform.position.x, (int)pole.transform.position.y);
+                    }
                     slot[1].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     pole.GetComponent<Pole>().postac = slot[1];
@@ -142,6 +148,11 @@ public class Kopalnia : MonoBehaviour
                 Przycisk.budynek[3] = false;
                 if(slot[2]!=null && !pole.GetComponent<Pole>().Zajete) 
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiOut", RpcTarget.All, Ip.ip, 2, (int)pole.transform.position.x, (int)pole.transform.position.y);
+                    }
                     slot[2].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     pole.GetComponent<Pole>().postac = slot[2];
@@ -155,6 +166,11 @@ public class Kopalnia : MonoBehaviour
                 Przycisk.budynek[4] = false;
                 if(slot[3]!=null && !pole.GetComponent<Pole>().Zajete) 
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiOut", RpcTarget.All, Ip.ip, 3, (int)pole.transform.position.x, (int)pole.transform.position.y);
+                    }
                     slot[3].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     pole.GetComponent<Pole>().postac = slot[3];
@@ -168,6 +184,11 @@ public class Kopalnia : MonoBehaviour
                 Przycisk.budynek[5] = false;
                 if(slot[4]!=null && !pole.GetComponent<Pole>().Zajete) 
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiOut", RpcTarget.All, Ip.ip, 4, (int)pole.transform.position.x, (int)pole.transform.position.y);
+                    }
                     slot[4].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     pole.GetComponent<Pole>().postac = slot[4];
@@ -181,6 +202,11 @@ public class Kopalnia : MonoBehaviour
                 Przycisk.budynek[6] = false;
                 if(slot[5]!=null && !pole.GetComponent<Pole>().Zajete) 
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiOut", RpcTarget.All, Ip.ip, 5, (int)pole.transform.position.x, (int)pole.transform.position.y);
+                    }
                     slot[5].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     pole.GetComponent<Pole>().postac = slot[5];
@@ -208,7 +234,6 @@ public class Kopalnia : MonoBehaviour
                     InterfaceBuild.paskikopalnia[i+1].maxValue = 1f;
                     InterfaceBuild.paskikopalnia[i+1].value = 0f;
                 }
-                
             }
             
         }
@@ -289,6 +314,11 @@ public class Kopalnia : MonoBehaviour
             {
                 if(slot[i]==null)
                 {
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("multiWchodzi", RpcTarget.All, Ip.ip, Jednostka.Select.GetComponent<Jednostka>().nr_jednostki, i);
+                    }
                     slot[i] = polePomoc.GetComponent<Pole>().postac;
                     slot[i].SetActive(false);
                     polePomoc.GetComponent<Pole>().Zajete=false;
@@ -297,6 +327,44 @@ public class Kopalnia : MonoBehaviour
                 }
             }
 
+        }
+    }
+    public void obrazki()
+    {
+            for(int i = 0; i<6;i++)
+            {
+            kopacze[i].enabled = false;
+            if(slot[i] != null)
+                kopacze[i].enabled = true;
+            }
+    }
+    [PunRPC]
+    public void multiWchodzi(int ip, int id, int i)
+    {
+        if(Ip.ip != ip)
+        {
+            slot[i] = Menu.jednostki[Menu.tura,id];
+            slot[i].SetActive(false);
+            polePomoc = Menu.kafelki[(int)slot[i].transform.position.x][(int)slot[i].transform.position.y];
+            polePomoc.GetComponent<Pole>().Zajete=false;
+            polePomoc.GetComponent<Pole>().postac=null;
+            obrazki();
+        }
+    }
+        [PunRPC]
+    public void multiOut(int ip, int i, int x, int y)
+    {
+        if(Ip.ip != ip)
+        {
+            GameObject pole = Menu.kafelki[x][y];
+            slot[i].SetActive(true);
+            pole.GetComponent<Pole>().Zajete = true;
+            slot[i].transform.position = new Vector3(pole.transform.position.x,pole.transform.position.y,-2f);
+            Debug.Log(pole.name);
+            pole.GetComponent<Pole>().postac = slot[0];
+            InterfaceBuild.obrazkikopalnia[i+1].GetComponent<Image>().sprite = puste;
+            slot[i] = null;
+            obrazki();
         }
     }
 }

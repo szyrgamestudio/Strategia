@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Plac : MonoBehaviour
 {
@@ -21,7 +22,16 @@ public class Plac : MonoBehaviour
     {
         druzyna = budynek.GetComponent<Budynek>().druzyna;
     }
-
+    public void jednostkaMulti(string nazwa, ref GameObject nowyZbieracz)
+    {
+        nowyZbieracz = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        nowyZbieracz.transform.position = pole.transform.position;
+        nowyZbieracz.GetComponent<Jednostka>().druzyna = budynek.GetComponent<Budynek>().druzyna;
+        nowyZbieracz.GetComponent<Jednostka>().sojusz = budynek.GetComponent<Budynek>().sojusz;
+        nowyZbieracz.transform.position = new Vector3(nowyZbieracz.transform.position.x, nowyZbieracz.transform.position.y, -2f);
+        nowyZbieracz.GetComponent<Jednostka>().Aktualizuj();
+        nowyZbieracz.GetComponent<Jednostka>().AktualizujPol();    
+    }
     void Update()
     {
         if(budynek == Jednostka.Select)
@@ -33,7 +43,13 @@ public class Plac : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= jaskolka.GetComponent<Jednostka>().cena;
-                        GameObject nowyLucznik = Instantiate(jaskolka, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyLucznik = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("jaskolka",ref nowyLucznik);
+                        }
+                        else
+                            nowyLucznik = Instantiate(jaskolka, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyLucznik.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyLucznik.GetComponent<Jednostka>().obrona += Kuznia.update4[druzyna];
@@ -52,7 +68,13 @@ public class Plac : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= wilk.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = Instantiate(wilk, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("wilk",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(wilk, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
@@ -69,7 +91,13 @@ public class Plac : MonoBehaviour
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                     {
                         Menu.zloto[Menu.tura] -= gryf.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = Instantiate(gryf, pole.transform.position, Quaternion.identity); 
+                        GameObject nowyZbieracz = null;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti("gryf",ref nowyZbieracz);
+                        }
+                        else
+                            nowyZbieracz = Instantiate(gryf, pole.transform.position, Quaternion.identity); 
                         Vector3 newPosition = nowyZbieracz.transform.position;
                         newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
                         nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
