@@ -215,6 +215,11 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=5 && Menu.drewno[Menu.tura]>=5)
                             {
                             Kragmagi.budowlaniec = jednostka; 
+                            if (MenuGlowne.multi)
+                            {
+                                budowanieMulti("kragmagi");
+                            }
+                            else
                             BudowanyObiekt = Instantiate(kragmagi, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
@@ -263,6 +268,12 @@ public class Budowlaniec : MonoBehaviour
                             Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia == 0 &&
                             Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().las == false)
                             {
+                                Debug.Log("jeden");
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = GetComponent<PhotonView>();
+                                    photonView.RPC("drogaMulti", RpcTarget.All, Ip.ip,(int)Jednostka.Select.transform.position.x,(int)Jednostka.Select.transform.position.y);
+                                }
                                 Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().trudnosc -= 1;
                                 Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().updateDroga(1);
                                 Menu.zloto[Menu.tura]-=0;
@@ -383,13 +394,15 @@ public class Budowlaniec : MonoBehaviour
             }
         }
     }
-    // private void budowanieVoid()
-    // {
-    //     Jednostka.Select2 = null;
-    //     budowanie = false;
-    //     Jednostka.wybieranie = false;
-    //     Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-    // }
+    [PunRPC]
+    public void drogaMulti(int ip, int x, int y)
+    {
+        if(Ip.ip != ip)
+        {
+            Menu.kafelki[x][y].GetComponent<Pole>().trudnosc -= 1;
+            Menu.kafelki[x][y].GetComponent<Droga>().updateDroga(1);
+        }
+    }
     public void budowanieMulti(string nazwa)
     {
         BudowanyObiekt = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);

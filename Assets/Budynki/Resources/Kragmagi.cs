@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Kragmagi : MonoBehaviour
 {
@@ -36,6 +37,12 @@ public class Kragmagi : MonoBehaviour
                         {
                             Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia = 2;
                             Menu.kafelki[(int)targetX][(int)targetY].GetComponent<SpriteRenderer>().sprite = zolte;
+                            Debug.Log("Cipa");
+                            if(MenuGlowne.multi)
+                            {
+                                PhotonView photonView = GetComponent<PhotonView>();
+                                photonView.RPC("multi", RpcTarget.All, Ip.ip, (int)targetX, (int)targetY);
+                            }
                             Pole.Clean2();
                             Menu.zloto[Menu.tura]-=5;
                             Menu.drewno[Menu.tura]-=5;
@@ -55,6 +62,18 @@ public class Kragmagi : MonoBehaviour
                 ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 0.0f);
             }
             Pole.Clean2();
+        }
+    }
+
+    [PunRPC]
+    public void multi(int ip, int x, int y)
+    {
+        Debug.Log("Cipa");
+        if(Ip.ip != ip)
+        {
+            Menu.kafelki[x][y].GetComponent<Pole>().magia = 2;
+            Menu.kafelki[x][y].GetComponent<SpriteRenderer>().sprite = zolte;
+            Destroy(ObiektRuszany);
         }
     }
 }
