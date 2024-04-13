@@ -210,8 +210,9 @@ public class Menu : MonoBehaviour
                 przyciskiClear();
 
                 usunSelect2();
-                if(tura != 0)
-                    StartCoroutine(Ratusz.ruchPlynnyCamery(tura));
+                if(!MenuGlowne.multi)
+                    if(tura != 0)
+                        StartCoroutine(Ratusz.ruchPlynnyCamery(tura));
                 //StartCoroutine(Przelocznik());
 
                 if(tura == 0)

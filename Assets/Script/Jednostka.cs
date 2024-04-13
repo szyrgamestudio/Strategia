@@ -131,7 +131,8 @@ public class Jednostka : MonoBehaviour
         {
             if(jednostka == Select)
             {
-                Interface.przeniesDoSelect();
+                if(!(MenuGlowne.multi && Menu.tura==0))
+                    Interface.przeniesDoSelect();
             }
 
             if(Select != null && CzyJednostka && Select.GetComponent<Jednostka>().druzyna == Menu.tura && sojusz != Select.GetComponent<Jednostka>().sojusz && 
