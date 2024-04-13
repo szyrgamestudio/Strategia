@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class MagKaplan : MonoBehaviour
 {
@@ -63,7 +64,13 @@ public class MagKaplan : MonoBehaviour
                 {
                     Menu.magia[Menu.tura]-=8;
                     podpalenie = false;
+                    float pomocMulti = Jednostka.Select2.GetComponent<Jednostka>().HP - Jednostka.Select2.GetComponent<Jednostka>().maxHP * (float)1.1;
                     Jednostka.Select2.GetComponent<Jednostka>().HP = Jednostka.Select2.GetComponent<Jednostka>().maxHP * (float)1.1;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, pomocMulti,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                    }
                     Menu.usunSelect2();
                 }
             }
@@ -72,6 +79,16 @@ public class MagKaplan : MonoBehaviour
                 ignis = false;
                 fireBall = false;
             }
+    }
+    [PunRPC]
+    public void dmg(int ip, int id, int dmg, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Debug.Log(Oponenet.name);
+            Oponenet.GetComponent<Jednostka>().HP -= dmg;
+        }
     }
      void OnMouseDown()
     {

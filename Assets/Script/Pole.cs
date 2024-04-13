@@ -110,7 +110,7 @@ public class Pole : MonoBehaviour
     [PunRPC]
     void ZaktualizujRuch(int idJednostki, int ip)
     {
-        if(Ip.ip != ip)
+        if(Ip.ip != ip )
             OnMouse(Menu.jednostki[Menu.tura , idJednostki], 0);
     }
 
@@ -133,7 +133,7 @@ public class Pole : MonoBehaviour
             if(MenuGlowne.multi && dostane == 1)
             {
                 PhotonView photonView = GetComponent<PhotonView>();
-                if(poruszany != null)
+                if(poruszany != null && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura)
                     photonView.RPC("ZaktualizujRuch", RpcTarget.All, poruszany.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
             }
 

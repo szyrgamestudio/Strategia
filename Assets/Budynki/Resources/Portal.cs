@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // Dodano using dla UnityEngine.UI
+using Photon.Pun;
 
 public class Portal : MonoBehaviour
 {
@@ -72,7 +73,13 @@ public class Portal : MonoBehaviour
                     }
                     if(j>0)
                     {
-                        teleport(portal[nr_portal[Random.Range(0, j)]],pole.GetComponent<Pole>().postac);
+                        int n = Random.Range(0, j);
+                    teleport(portal[nr_portal[n]],pole.GetComponent<Pole>().postac);
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("trzyMulti", RpcTarget.All,Ip.ip,n,pole.GetComponent<Pole>().postac.GetComponent<Jednostka>().nr_jednostki);
+                    }
                         for(int i = 0; i<50; i++)
                         {
                             nr_portal[j] = 0;    
@@ -84,20 +91,22 @@ public class Portal : MonoBehaviour
             if(Przycisk.budynek[1] == true)
             {
                 Przycisk.budynek[1] = false;
-                if(dostepny)
-                    InterfaceBuild.przyciski[1].GetComponent<Image>().sprite = budynki[0];
-                else
-                    InterfaceBuild.przyciski[1].GetComponent<Image>().sprite = budynki[1];
-                dostepny = !dostepny;
+                jeden();
+                if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("jedenMulti", RpcTarget.All,Ip.ip);
+                    }
             }
             if(Przycisk.budynek[2] == true)
             {
                 Przycisk.budynek[2] = false;
-                if(id < 9)
-                    id++;
-                else
-                    id=0;
-                InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = budynki[id];
+                dwa();
+                if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("dwaMulti", RpcTarget.All,Ip.ip);
+                    }
             }
         }
         if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax && dopisz)
@@ -113,6 +122,48 @@ public class Portal : MonoBehaviour
             }
         }
     }
+    [PunRPC]
+    public void jedenMulti(int ip)
+    {
+        if(ip != Ip.ip)
+        {
+            jeden();
+        }
+    }
+        [PunRPC]
+    public void dwaMulti(int ip)
+    {
+        if(ip != Ip.ip)
+        {
+            dwa();
+        }
+    }
+    [PunRPC]
+    public void trzyMulti(int ip, int n, int nr)
+    {
+        if(ip != Ip.ip)
+        {
+            teleport(portal[nr_portal[n]],Menu.jednostki[Menu.tura,nr]);
+        }
+    }
+    public void jeden()
+    {
+                if(dostepny)
+                    InterfaceBuild.przyciski[1].GetComponent<Image>().sprite = budynki[0];
+                else
+                    InterfaceBuild.przyciski[1].GetComponent<Image>().sprite = budynki[1];
+                dostepny = !dostepny;
+    }
+    public void dwa()
+    {
+                if(id < 9)
+                    id++;
+                else
+                    id=0;
+                InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = budynki[id];
+    }
+
+
     public void teleport(GameObject portal2, GameObject jednostka)
     {
         budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete = false;

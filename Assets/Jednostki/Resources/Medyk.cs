@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Medyk : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class Medyk : MonoBehaviour
                 {
                     leczenie = false;
                     Jednostka.Select2.GetComponent<Jednostka>().HP += 3;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, -3,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                    }
                     Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(3f,new Color(0.0f, 1.0f, 0.0f, 1.0f));
                     Menu.usunSelect2();
                 }
@@ -39,6 +45,18 @@ public class Medyk : MonoBehaviour
                 leczenie = false;
             }
     }
+
+    [PunRPC]
+    public void dmg(int ip, int id, int dmg, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Debug.Log(Oponenet.name);
+            Oponenet.GetComponent<Jednostka>().HP -= dmg;
+        }
+    }
+
      void OnMouseDown()
     {
         if(jednostka == Jednostka.Select)

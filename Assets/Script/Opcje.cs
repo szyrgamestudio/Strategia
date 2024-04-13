@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Photon.Pun;
+using System;
+
 
 public class Opcje : MonoBehaviour
 {
@@ -13,6 +16,11 @@ public class Opcje : MonoBehaviour
 
     public GameObject opcje;
     public GameObject tworcy;
+
+    public bool pierwszyRaz;
+
+    public Slider glos;
+
 
     void Start()
     {
@@ -30,8 +38,11 @@ public class Opcje : MonoBehaviour
             }
         }
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex; // Ustawianie wartości dropdown na aktualną rozdzielczość
-        resolutionDropdown.RefreshShownValue();
+        //resolutionDropdown.value = currentResolutionIndex; // Ustawianie wartości dropdown na aktualną rozdzielczość
+        //resolutionDropdown.RefreshShownValue();
+        float volume;
+        audioMixer.GetFloat("volume", out volume);
+        glos.value = (float)-Math.Log(-volume, 2);
     }
 
     void Update()
@@ -46,12 +57,23 @@ public class Opcje : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+                // Update dropdown value
+        resolutionDropdown.value = resolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
+        public void CofnijMenu(int resolutionIndex)
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+        SceneManager.LoadScene(0);
     }
 
     public void SetVolume(float volume)
     {
         Debug.Log(volume);
-        audioMixer.SetFloat("volume", volume);
+        audioMixer.SetFloat("volume", (float)(-Math.Pow(2,-volume)+1));
     }
 
 

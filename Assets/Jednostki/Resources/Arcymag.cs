@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Arcymag : MonoBehaviour
 {
@@ -79,6 +80,11 @@ public class Arcymag : MonoBehaviour
                 {
                     ignis = false;
                     Menu.magia[Menu.tura]-=4;
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = GetComponent<PhotonView>();
+                                    photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, 4, Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                                }
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 4;
                     jednostka.GetComponent<Jednostka>().akcja = false;
                     Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(4f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
@@ -94,6 +100,11 @@ public class Arcymag : MonoBehaviour
                             {
                                 GameObject postka = Menu.kafelki[(int)Jednostka.Select2.transform.position.x + i][(int)Jednostka.Select2.transform.position.y + j].GetComponent<Pole>().postac;
                                 postka.GetComponent<Jednostka>().HP -= 3;
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = GetComponent<PhotonView>();
+                                    photonView.RPC("dmg", RpcTarget.All,Ip.ip, postka.GetComponent<Jednostka>().nr_jednostki, 3,postka.GetComponent<Jednostka>().druzyna);
+                                }
                                 jednostka.GetComponent<Jednostka>().akcja = false;
                                 postka.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
                             }
@@ -118,6 +129,16 @@ public class Arcymag : MonoBehaviour
                 if(regenMany)
                     Menu.magia[Menu.tura]++;
             }
+    }
+    [PunRPC]
+    public void dmg(int ip, int id, int dmg, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Debug.Log(Oponenet.name);
+            Oponenet.GetComponent<Jednostka>().HP -= dmg;
+        }
     }
 
      void OnMouseDown()

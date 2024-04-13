@@ -228,7 +228,7 @@ public class Jednostka : MonoBehaviour
     {
             PhotonView photonView = GetComponent<PhotonView>();
             photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, druzyna, sojusz, this.HP, maxHP, atak, obrona, zasieg, maxszybkosc, szybkosc,
-                            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec);
+                            mindmg, maxdmg, zdolnosci, zbieracz, lata, cena, nazwa, akcja, nr_jednostki, koniec, Ip.ip);
 
             //photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, aktualnePołożenie);
     }
@@ -257,9 +257,10 @@ public class Jednostka : MonoBehaviour
     [PunRPC]
     void ZaktualizujStatystykiRPC(int druzyna, int sojusz, float HP, float maxHP, float atak, float obrona, int zasieg, int maxszybkosc,
                                    int szybkosc, float mindmg, float maxdmg, int zdolnosci, bool zbieracz, bool lata, int cena,
-                                   string nazwa, bool akcja, int nr_jednostki, bool koniec)
+                                   string nazwa, bool akcja, int nr_jednostki, bool koniec, int ip)
     {
-        // RPC wywołane na wszystkich klientach - zaktualizuj statystyki jednostki
+        if(ip != Ip.ip)
+        {
         this.druzyna = druzyna;
         this.sojusz = sojusz;
         this.HP = HP;
@@ -279,6 +280,7 @@ public class Jednostka : MonoBehaviour
         this.akcja = akcja;
         this.nr_jednostki = nr_jednostki;
         this.koniec = koniec;
+        }
     }
 
 
@@ -302,7 +304,7 @@ public class Jednostka : MonoBehaviour
         {
             koniec = true;
         }
-        if(koniec && !Menu.Next && druzyna == Menu.tura)
+        if(koniec && !Menu.Next )//&& (druzyna+1)%(Menu.IloscGraczy+1) == Menu.tura)
         {
             koniec = false;
             koniecTury();
@@ -366,6 +368,9 @@ public class Jednostka : MonoBehaviour
             case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
             case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
         }
+        if(MenuGlowne.multi && druzyna == Ip.ip)
+            Aktualizuj();
+
     }
 
 

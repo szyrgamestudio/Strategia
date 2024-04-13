@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Palladyn : MonoBehaviour
 {
@@ -60,12 +61,22 @@ public class Palladyn : MonoBehaviour
                     if(rozniaca < Menu.magia[Menu.tura])
                     {
                         Jednostka.Select2.GetComponent<Jednostka>().HP += rozniaca;
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, -rozniaca,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                        }
                         Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(rozniaca,new Color(0.0f, 1.0f, 0.0f, 1.0f));
                         Menu.magia[Menu.tura] -= (int)rozniaca;
                     }
                     else
                     {
                         Jednostka.Select2.GetComponent<Jednostka>().HP += (float)Menu.magia[Menu.tura];
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, -(float)Menu.magia[Menu.tura],Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                        }
                         Jednostka.Select2.GetComponent<Jednostka>().ShowDMG((float)Menu.magia[Menu.tura],new Color(0.0f, 1.0f, 0.0f, 1.0f));
                         Menu.magia[Menu.tura] = 0;
                     }
@@ -102,6 +113,18 @@ public class Palladyn : MonoBehaviour
             }
 
     }
+
+    [PunRPC]
+    public void dmg(int ip, int id, int dmg, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Debug.Log(Oponenet.name);
+            Oponenet.GetComponent<Jednostka>().HP -= dmg;
+        }
+    }
+
      void OnMouseDown()
     {
         if(jednostka == Jednostka.Select)

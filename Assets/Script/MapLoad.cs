@@ -20,6 +20,14 @@ public class MapLoad : MonoBehaviour
     public GameObject[] jednostki;
     public GameObject[] budyneki;
 
+    [PunRPC]
+    public void manaZwieksz(int ip, int i)
+    {
+        Debug.Log("i: " + i);
+        if(Ip.ip != ip)
+            Menu.magia[1 + (i)] += 6;
+    }
+
     public void LoadMapData()
     {
         // Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
@@ -202,7 +210,14 @@ public class MapLoad : MonoBehaviour
                     }
                     if (WyburRas.heros[i] == 1)
                     {
+                        Debug.Log("cipa");
                         Menu.magia[1 + (i)] += 6;
+                        if(MenuGlowne.multi)
+                        {
+                            Debug.Log("chuj");
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("manaZwieksz", RpcTarget.All,Ip.ip, i);
+                        }
                         StartCoroutine(ludzik(8, kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
                         StartCoroutine(ludzik(10, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
                     }

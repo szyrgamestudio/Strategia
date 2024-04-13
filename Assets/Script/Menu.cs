@@ -177,6 +177,7 @@ public class Menu : MonoBehaviour
             }
             if (NaPewnoKoniec > 0)
             {
+                StartCoroutine(Przelocznik());
                 NaPewnoKoniec = 0;
                 tura++;
 
@@ -187,8 +188,8 @@ public class Menu : MonoBehaviour
                         WyburRas.aktywny[i-1] = false;
                         zostalo++;
                     }
-                if(zostalo == 3)
-                    SceneManager.LoadScene(3);
+                // if(zostalo == 3)
+                //     SceneManager.LoadScene(3);   //KONIEC GRY
                     
                 
                 for(int xd = 1; xd<5;xd++)
@@ -211,7 +212,7 @@ public class Menu : MonoBehaviour
                 usunSelect2();
                 if(tura != 0)
                     StartCoroutine(Ratusz.ruchPlynnyCamery(tura));
-                StartCoroutine(Przelocznik());
+                //StartCoroutine(Przelocznik());
 
                 if(tura == 0)
                 {

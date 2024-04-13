@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Wieza : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Wieza : MonoBehaviour
     public static bool pomoc = false;
     public Slider healthGracza;
     public Gradient gradient;
+
+    private bool update;
 
     public int punktyBudowy;
     public int punktyBudowyMax;
@@ -115,8 +118,25 @@ public class Wieza : MonoBehaviour
             }
 
             Pole.Clean2();
+        }  
+        else{
+            if(!update && MenuGlowne.multi)
+            {
+                update = true;
+                Vector3 nowePołożenie = transform.position;
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
+                photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
+            }
         }
-       
+    }
+    [PunRPC]
+    void buduj(int ip, int buduj)
+    {
+        if(ip!=Ip.ip)
+        {
+            punktyBudowy += buduj;
+        }
     }
     void OnMouseDown()
     {
@@ -125,6 +145,11 @@ public class Wieza : MonoBehaviour
             Debug.Log("jeden");
             punktyBudowy += budujacy.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura];
             Debug.Log("dwa");
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("buduj", RpcTarget.All, Ip.ip,(budujacy.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura]));
+            }
             budujacy.GetComponent<Jednostka>().akcja = false;
             ShowDMG(budujacy.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura], new Color(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 0.0f));
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -212,5 +237,19 @@ public class Wieza : MonoBehaviour
         // Ustaw kolor paska zdrowia
         Image fillImage = healthGracza.fillRect.GetComponent<Image>();
         fillImage.color = healthColor;
+    }
+    [PunRPC]
+    void ZaktualizujPołożenieRPC(Vector3 nowePołożenie)
+    {
+        // RPC wywołane na wszystkich klientach - zaktualizuj położenie jednostki
+        transform.position = nowePołożenie;
+
+    }
+    [PunRPC]
+    void ZaktualizujWybudowany()
+    {
+        this.wybudowany = true;
+        Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y].GetComponent<Pole>().Zajete = true;
+        Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y].GetComponent<Pole>().postac = ObiektRuszany;
     }
 }

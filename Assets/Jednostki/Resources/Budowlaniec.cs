@@ -233,7 +233,7 @@ public class Budowlaniec : MonoBehaviour
                             BudynekRuch.budowlaniec = jednostka; 
                             if (MenuGlowne.multi)
                             {
-                                budowanieMulti("medyk");
+                                budowanieMulti("apteka");
                             }
                             else
                             BudowanyObiekt = Instantiate(medyk, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
@@ -250,7 +250,7 @@ public class Budowlaniec : MonoBehaviour
                             Wieza.budowlaniec = jednostka; 
                             if (MenuGlowne.multi)
                             {
-                                budowanieMulti("wierza");
+                                budowanieMulti("wieza");
                             }
                             else
                             BudowanyObiekt = Instantiate(wierza, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
@@ -261,9 +261,16 @@ public class Budowlaniec : MonoBehaviour
                     }
                 if(Przycisk.jednostka[10]==true)
                     {
+                        Debug.Log("czas");
                         Przycisk.jednostka[10]=false;
-                        if(wybieranie == false && Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=2)
+                        if(Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=2)
                             {
+                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().Zajete);
+                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga);
+                                Debug.Log("sex");
+                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga);
+                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia);
+                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().las);
                             if(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga == false && 
                             Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia == 0 &&
                             Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().las == false)

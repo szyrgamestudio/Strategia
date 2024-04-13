@@ -61,6 +61,12 @@ MonoBehaviour:
   - multiOut
   - multi
   - drogaMulti
+  - buduj
+  - dwaMulti
+  - jedenMulti
+  - trzyMulti
+  - dmg
+  - manaZwieksz
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

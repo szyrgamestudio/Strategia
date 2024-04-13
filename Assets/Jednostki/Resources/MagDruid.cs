@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class MagDruid : MonoBehaviour
 {
@@ -73,6 +74,11 @@ public class MagDruid : MonoBehaviour
                     Menu.magia[Menu.tura]-=5;
                     leczenie = false;  
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 3;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, 3,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                    }
                     Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
                     piorun(2,Jednostka.Select2);
                     Menu.usunSelect2();
@@ -83,6 +89,17 @@ public class MagDruid : MonoBehaviour
                 leczenie = false;
             }
 
+    }
+
+    [PunRPC]
+    public void dmg(int ip, int id, int dmg, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Debug.Log(Oponenet.name);
+            Oponenet.GetComponent<Jednostka>().HP -= dmg;
+        }
     }
 
     private void piorun(int x, GameObject y)
@@ -97,6 +114,11 @@ public class MagDruid : MonoBehaviour
                     {
                         GameObject postka = Menu.kafelki[(int)y.transform.position.x + i][(int)y.transform.position.y + j].GetComponent<Pole>().postac;
                         postka.GetComponent<Jednostka>().HP -= 3;
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("dmg", RpcTarget.All,Ip.ip, postka.GetComponent<Jednostka>().nr_jednostki, 3,postka.GetComponent<Jednostka>().druzyna);
+                        }
                         postka.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
                         piorun(x-1,postka);
                         i = 3;

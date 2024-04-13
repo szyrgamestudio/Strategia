@@ -103,7 +103,6 @@ public class BudynekRuch : MonoBehaviour
                 photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
                 photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
             }
-                
         }
         if(ObiektRuszany == Jednostka.Select || wybudowany == false)
         {
