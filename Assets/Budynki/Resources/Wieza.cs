@@ -36,7 +36,7 @@ public class Wieza : MonoBehaviour
     {
         healthGracza.maxValue = punktyBudowyMax;
         healthGracza.value = punktyBudowy;
-        Menu.ludnosc[druzyna]--;
+        // Menu.ludnosc[druzyna]--;
         moznaBudowac = false;
     }
 
@@ -79,10 +79,17 @@ public class Wieza : MonoBehaviour
           //  budynek.GetComponent<SpriteRenderer>().sprite = budynekArt;
         UpdateHealthBarColor();
     }
-
+    public void dedMulti()
+    {
+        if(MenuGlowne.multi)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ded", RpcTarget.All);
+        }
+    }
     void LateUpdate()
     {
-        if (wybudowany == false) // Użyj '==' do porównywania, a nie '='
+        if (wybudowany == false && (!MenuGlowne.multi || Menu.tura == Ip.ip)) // Użyj '==' do porównywania, a nie '='
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -96,6 +103,7 @@ public class Wieza : MonoBehaviour
                     {
                         if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete)
                         {
+                            update = true;
                             wybudowany = true;
                             Budowlaniec.wybieranie = false;
                             pomoc = true;
@@ -120,9 +128,9 @@ public class Wieza : MonoBehaviour
             Pole.Clean2();
         }  
         else{
-            if(!update && MenuGlowne.multi)
+            if(update && MenuGlowne.multi)
             {
-                update = true;
+                update = false;
                 Vector3 nowePołożenie = transform.position;
                 PhotonView photonView = GetComponent<PhotonView>();
                 photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
@@ -170,6 +178,11 @@ public class Wieza : MonoBehaviour
                     {
                         if(punktyBudowy == 0)
                         {
+                            if(MenuGlowne.multi)
+                            {
+                                PhotonView photonView = GetComponent<PhotonView>();
+                                photonView.RPC("ded", RpcTarget.All);
+                            }
                             Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
                             Destroy(budynek);
                         }
@@ -241,9 +254,12 @@ public class Wieza : MonoBehaviour
     [PunRPC]
     void ZaktualizujPołożenieRPC(Vector3 nowePołożenie)
     {
-        // RPC wywołane na wszystkich klientach - zaktualizuj położenie jednostki
         transform.position = nowePołożenie;
-
+    }
+    [PunRPC]
+    void ded()
+    {
+        Destroy(ObiektRuszany);
     }
     [PunRPC]
     void ZaktualizujWybudowany()

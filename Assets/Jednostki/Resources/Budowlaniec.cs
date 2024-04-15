@@ -56,18 +56,21 @@ public class Budowlaniec : MonoBehaviour
                     Apteka apteka2 = BudowanyObiekt.GetComponent<Apteka>();
                     if(apteka2 != null)
                         Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna] = false;
+                    BudowanyObiekt.GetComponent<BudynekRuch>().dedMulti();
                     Destroy(BudowanyObiekt);
                     wybieranie = false;
                 }
                 Wieza wiezaSkrypt = BudowanyObiekt.GetComponent<Wieza>();
                 if(wiezaSkrypt != null)
                 {
+                    BudowanyObiekt.GetComponent<Wieza>().dedMulti();
                     Destroy(BudowanyObiekt);
                     wybieranie = false;
                 }
                 Kragmagi krag = BudowanyObiekt.GetComponent<Kragmagi>();
                 if(krag != null)
                 {
+                    BudowanyObiekt.GetComponent<Kragmagi>().dedMulti();
                     Destroy(BudowanyObiekt);
                     wybieranie = false;
                 }
@@ -149,7 +152,7 @@ public class Budowlaniec : MonoBehaviour
                             BudynekRuch.budowlaniec = jednostka; 
                             if (MenuGlowne.multi)
                             {
-                                budowanieMulti("chatka");
+                                budowanieMulti("chatki");
                             }
                             else
                                 BudowanyObiekt = Instantiate(chatka, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
@@ -248,13 +251,21 @@ public class Budowlaniec : MonoBehaviour
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=3 && Menu.drewno[Menu.tura]>=7)
                             {
                             Wieza.budowlaniec = jednostka; 
+                            // Menu.ludnosc[jednostka.GetComponent<Jednostka>().druzyna]--;
+                            // Debug.Log(jednostka.GetComponent<Jednostka>().druzyna);
+                            // Debug.Log(Menu.ludnosc[jednostka.GetComponent<Jednostka>().druzyna]);v
                             if (MenuGlowne.multi)
                             {
-                                budowanieMulti("wieza");
+                                BudowanyObiekt = PhotonNetwork.Instantiate("wieza", new Vector3(-10f, 0, 1), Quaternion.identity);
+                                BudowanyObiekt.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+                                BudowanyObiekt.GetComponent<Jednostka>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;
+                                BudowanyObiekt.GetComponent<Jednostka>().Aktualizuj();
                             }
                             else
-                            BudowanyObiekt = Instantiate(wierza, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
-                            BudowanyObiekt.GetComponent<Wieza>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+                            {
+                                BudowanyObiekt = Instantiate(wierza, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
+                            }
+                            BudowanyObiekt.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
                             }
@@ -412,7 +423,7 @@ public class Budowlaniec : MonoBehaviour
     }
     public void budowanieMulti(string nazwa)
     {
-        BudowanyObiekt = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        BudowanyObiekt = PhotonNetwork.Instantiate(nazwa, new Vector3(-10f, 0, 1), Quaternion.identity);
         BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
         BudowanyObiekt.GetComponent<Budynek>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;
         BudowanyObiekt.GetComponent<Budynek>().Aktualizuj();

@@ -39,12 +39,21 @@ public class BudynekRuch : MonoBehaviour
         photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
         wybudowany = false;
     }
-
-
-    void LateUpdate()
+    public void dedMulti()
     {
-        if (wybudowany == false) // Użyj '==' do porównywania, a nie '='
+        if(MenuGlowne.multi)
         {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ded", RpcTarget.All);
+        }
+    }
+
+
+    void Update()
+    {
+        if (wybudowany == false && (!MenuGlowne.multi || ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip)) // Użyj '==' do porównywania, a nie '='
+        {
+            Debug.Log(ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip);
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -58,6 +67,7 @@ public class BudynekRuch : MonoBehaviour
                     if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete && !Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().ZajeteLot)
                     {
                         wybudowany = true;
+                        update = true; // chyba
                         // Budowa.wybieranie = false;
                         pomoc = true;
                         Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete = true;
@@ -87,6 +97,11 @@ public class BudynekRuch : MonoBehaviour
                 if(!wybudowany)
                 {
                     Apteka apteka2 = ObiektRuszany.GetComponent<Apteka>();
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("ded", RpcTarget.All);
+                    }
                     if(apteka2 != null)
                         Apteka.apteka[budowlaniec.GetComponent<Jednostka>().druzyna] = false;
                     Destroy(ObiektRuszany);
@@ -94,10 +109,10 @@ public class BudynekRuch : MonoBehaviour
             }
         }
         else{
-            if(!update && MenuGlowne.multi)
+            if(update && MenuGlowne.multi)
             {
              
-                update = true;
+                update = false;
                 Vector3 nowePołożenie = transform.position;
                 PhotonView photonView = GetComponent<PhotonView>();
                 photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
@@ -121,7 +136,7 @@ public class BudynekRuch : MonoBehaviour
                     ObiektRuszany.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, -90.0f);
             }
         }
-        if (wybudowany && ObiektRuszany.transform.position.x != -10f)
+        if (wybudowany && ObiektRuszany.transform.position.x != -10f && (!MenuGlowne.multi || ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip))
         {
             switch (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z)
             {
@@ -138,10 +153,16 @@ public class BudynekRuch : MonoBehaviour
     [PunRPC]
     void ZaktualizujPołożenieRPC(Vector3 nowePołożenie)
     {
-        // RPC wywołane na wszystkich klientach - zaktualizuj położenie jednostki
         transform.position = nowePołożenie;
-
     }
+
+    [PunRPC]
+    void ded()
+    {
+        Debug.Log("o chuj");
+        Destroy(ObiektRuszany);
+    }
+
     [PunRPC]
     void ZaktualizujWybudowany()
     {

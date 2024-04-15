@@ -151,8 +151,6 @@ public class Menu : MonoBehaviour
 
     public void NextTurn()
     {
-
-
         if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
             {
             NaPewnoKoniec++;
@@ -282,7 +280,8 @@ public class Menu : MonoBehaviour
                 int close = 99;
                     yield return new WaitForSeconds(0.2f);
                     Jednostka.Select = postacGracza;//NPC[id];
-                    Interface.przeniesDoSelect();
+                    if(!(MenuGlowne.multi && Menu.tura==0))
+                        Interface.przeniesDoSelect();
                     yield return new WaitForSeconds(0.2f);
                    // Jednostka.Select = NPC[id];
                     Jednostka.CzyJednostka = true;

@@ -332,6 +332,18 @@ public class Pole : MonoBehaviour
             i++;
         }
     }
+   public static void Clean2(int spr)
+    {
+        int i = 0;
+        while(droga[i]!=null)
+        {
+            droga[i].GetComponent<Pole>().Nin=0;
+            droga[i].GetComponent<Pole>().Nout=0;
+            droga[i].GetComponent<Pole>().CzasDrogi=0;
+            droga[i]=null;
+            i++;
+        }
+    }
    public static void Clean2()
     {
         int i = 0;
@@ -677,7 +689,6 @@ int i=0;
                 }
                 break;
             }     
-
         }
         int k = 0;
         while(droga[k+1]!=null && droga[k + 1] != blok)
@@ -700,7 +711,8 @@ int i=0;
                 break;
             }
         }
-        Clean2();
+
+        Clean2(0);
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().Zajete = true;
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().postac = ziomek; 
         idzie = false;
@@ -744,7 +756,7 @@ int i=0;
                 break;
             }
         }
-        Clean2();
+        Clean2(0);
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().ZajeteLot = true;
         postac = ziomek;
         idzie = false;

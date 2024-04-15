@@ -72,7 +72,6 @@ public class Opcje : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        Debug.Log(volume);
         audioMixer.SetFloat("volume", (float)(-Math.Pow(2,-volume)+1));
     }
 

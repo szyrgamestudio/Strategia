@@ -20,7 +20,7 @@ public class Kragmagi : MonoBehaviour
 
     void LateUpdate()
     {
-        if (wybudowany == false) // Użyj '==' do porównywania, a nie '='
+        if (wybudowany == false  && (!MenuGlowne.multi || Menu.tura == Ip.ip)) // Użyj '==' do porównywania, a nie '='
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -47,6 +47,11 @@ public class Kragmagi : MonoBehaviour
                             Menu.zloto[Menu.tura]-=5;
                             Menu.drewno[Menu.tura]-=5;
                             Budowlaniec.wybieranie = false;
+                            if(MenuGlowne.multi)
+                            {
+                                PhotonView photonView = GetComponent<PhotonView>();
+                                photonView.RPC("ded", RpcTarget.All);
+                            }
                             Destroy(ObiektRuszany);
                         }
 
@@ -64,7 +69,19 @@ public class Kragmagi : MonoBehaviour
             Pole.Clean2();
         }
     }
-
+        public void dedMulti()
+    {
+        if(MenuGlowne.multi)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("ded", RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    void ded()
+    {
+        Destroy(ObiektRuszany);
+    }
     [PunRPC]
     public void multi(int ip, int x, int y)
     {

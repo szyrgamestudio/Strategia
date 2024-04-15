@@ -76,7 +76,8 @@ public class Jednostka : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Menu.jednostki[druzyna , Menu.ludnosc[druzyna]] = jednostka;
         nr_jednostki = Menu.ludnosc[druzyna];
-        Menu.ludnosc[druzyna]++;
+        if(!GetComponent<Wieza>())
+            Menu.ludnosc[druzyna]++;
     }
 
     public void rozlozenie()
@@ -132,7 +133,10 @@ public class Jednostka : MonoBehaviour
             if(jednostka == Select)
             {
                 if(!(MenuGlowne.multi && Menu.tura==0))
+                {
+                    Debug.Log("cc");
                     Interface.przeniesDoSelect();
+                }
             }
 
             if(Select != null && CzyJednostka && Select.GetComponent<Jednostka>().druzyna == Menu.tura && sojusz != Select.GetComponent<Jednostka>().sojusz && 
