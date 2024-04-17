@@ -69,13 +69,29 @@ public class Rycerz : MonoBehaviour
                             jednostka.GetComponent<Jednostka>().akcja = false;
                             jednostka.GetComponent<Jednostka>().zasieg -= 1;
                         }   
+
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("odrzutMulti", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki,Jednostka.Select2.GetComponent<Jednostka>().druzyna, Jednostka.Select2.transform.position);
+                    }
+
                     Menu.usunSelect2();
+
                 }
             }
             else
             {
                 odrzut = false;
             }
+    }
+    [PunRPC]
+    void odrzutMulti(int ip,int id, int team, Vector3 pozycja)
+    {
+        if(ip != Ip.ip)
+        {
+            Menu.jednostki[team,id].transform.position = pozycja;
+        }
     }
      void OnMouseDown()
     {

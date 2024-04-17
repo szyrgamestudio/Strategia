@@ -789,12 +789,13 @@ MonoBehaviour:
   zdolnosci: 14
   zbieracz: 0
   lata: 0
-  cena: 10
+  cena: 8
   nazwa: Budowlaniec
   akcja: 1
   spanie: 0
   nr_jednostki: 10
   koniec: 0
+  poczatek: 0
   healthGracza: {fileID: 5058078432872962624}
   gradient:
     serializedVersion: 2

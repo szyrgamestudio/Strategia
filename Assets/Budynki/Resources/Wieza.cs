@@ -99,7 +99,7 @@ public class Wieza : MonoBehaviour
             transform.position = new Vector3(targetX, targetY, targetZ);
             if (Input.GetMouseButtonDown(0))
             {
-                if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec,ObiektRuszany) == 1) 
+                if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec,ObiektRuszany) == 1 && punktyBudowy < punktyBudowyMax) 
                     {
                         if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete)
                         {
@@ -134,7 +134,7 @@ public class Wieza : MonoBehaviour
                 Vector3 nowePołożenie = transform.position;
                 PhotonView photonView = GetComponent<PhotonView>();
                 photonView.RPC("ZaktualizujPołożenieRPC", RpcTarget.All, nowePołożenie);
-                photonView.RPC("ZaktualizujWybudowany", RpcTarget.All);
+                photonView.RPC("ZaktualizujWybudowany", RpcTarget.All, druzyna);
             }
         }
     }
@@ -262,10 +262,11 @@ public class Wieza : MonoBehaviour
         Destroy(ObiektRuszany);
     }
     [PunRPC]
-    void ZaktualizujWybudowany()
+    void ZaktualizujWybudowany(int druzyna)
     {
         this.wybudowany = true;
         Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y].GetComponent<Pole>().Zajete = true;
         Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y].GetComponent<Pole>().postac = ObiektRuszany;
+        this.druzyna = druzyna;
     }
 }

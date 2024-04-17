@@ -89,6 +89,7 @@ public class Apteka : MonoBehaviour
                     regeneracja++;
                 }
             }
+        Debug.Log(Menu.heros[druzyna].name);
         if(!Menu.heros[druzyna].activeSelf && regeneracja >= 10 && !budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete
         && Menu.ludnosc[druzyna] < Menu.maxludnosc[druzyna])
         {

@@ -53,7 +53,6 @@ public class BudynekRuch : MonoBehaviour
     {
         if (wybudowany == false && (!MenuGlowne.multi || ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip)) // Użyj '==' do porównywania, a nie '='
         {
-            Debug.Log(ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip);
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 

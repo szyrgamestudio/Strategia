@@ -37,6 +37,7 @@ public class Jednostka : MonoBehaviour
 
     public int nr_jednostki;
     public bool koniec;
+    public bool poczatek;
 
     public Slider healthGracza;
     public Gradient gradient;
@@ -68,7 +69,8 @@ public class Jednostka : MonoBehaviour
             sojusz = 0;
         healthGracza.maxValue = maxHP;
         healthGracza.value = HP;
-        StartCoroutine(przyporzadkuj());
+        if(!GetComponent<Wieza>())
+            StartCoroutine(przyporzadkuj());
     }
 
     IEnumerator przyporzadkuj()
@@ -76,8 +78,7 @@ public class Jednostka : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Menu.jednostki[druzyna , Menu.ludnosc[druzyna]] = jednostka;
         nr_jednostki = Menu.ludnosc[druzyna];
-        if(!GetComponent<Wieza>())
-            Menu.ludnosc[druzyna]++;
+        Menu.ludnosc[druzyna]++;
     }
 
     public void rozlozenie()
@@ -85,7 +86,31 @@ public class Jednostka : MonoBehaviour
         PhotonView photonView = GetComponent<PhotonView>();
         photonView.RPC("rozlozenieMulti", RpcTarget.All);
     }
-    
+    [PunRPC]
+    public void poprawkaMulti(float x, float y)
+    {
+        if(jednostka.transform.position.x != x || jednostka.transform.position.y != y)
+        {
+            if(lata)
+            {
+                Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().ZajeteLot = false;
+                Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().ZajeteLot = true;
+            }
+            else
+            {
+                Menu.kafelki[(int)(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = false;
+                Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
+            }
+            if(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac == jednostka)
+            {
+                Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac = null;
+                Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = jednostka;
+            }
+            Vector3 wekto = new Vector3(x, y, jednostka.transform.position.z);
+            jednostka.transform.position = wekto;
+
+        }
+    }
     [PunRPC]
     public void rozlozenieMulti()
     {
@@ -134,7 +159,6 @@ public class Jednostka : MonoBehaviour
             {
                 if(!(MenuGlowne.multi && Menu.tura==0))
                 {
-                    Debug.Log("cc");
                     Interface.przeniesDoSelect();
                 }
             }
@@ -285,6 +309,15 @@ public class Jednostka : MonoBehaviour
         this.akcja = akcja;
         this.nr_jednostki = nr_jednostki;
         this.koniec = koniec;
+        poczatek = true;
+            switch(druzyna)
+            {
+                case 0: obramowka.color = new Color(0.0f, 0.0f, 0.0f); break;
+                case 1: obramowka.color = new Color(1.0f, 0.0f, 0.0f); break;
+                case 2: obramowka.color = new Color(0.0f, 1.0f, 0.0f); break;
+                case 3: obramowka.color = new Color(0.0f, 0.0f, 1.0f); break;
+                case 4: obramowka.color = new Color(1.0f, 1.0f, 0.0f); break;
+            }
         }
     }
 
@@ -312,6 +345,16 @@ public class Jednostka : MonoBehaviour
         if(koniec && !Menu.Next )//&& (druzyna+1)%(Menu.IloscGraczy+1) == Menu.tura)
         {
             koniec = false;
+            if(MenuGlowne.multi && !poczatek)
+            {
+                poczatek = true;
+                Aktualizuj();
+                if(jednostka == Menu.heros[druzyna])
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("heros", RpcTarget.All);
+                }
+            }
             koniecTury();
         }
         if (Input.GetKeyDown(KeyCode.Z) && druzyna == Menu.tura && jednostka==Select)
@@ -323,6 +366,13 @@ public class Jednostka : MonoBehaviour
         {
             umieranie();
         }
+    }
+
+    [PunRPC]
+    public void heros()
+    {
+        Menu.heros[druzyna] = jednostka;
+        Debug.Log(jednostka.name);
     }
 
     public void umieranie()
@@ -374,7 +424,11 @@ public class Jednostka : MonoBehaviour
             case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
         }
         if(MenuGlowne.multi && druzyna == Ip.ip)
+        {
             Aktualizuj();
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("poprawkaMulti", RpcTarget.All, jednostka.transform.position.x, jednostka.transform.position.y);
+        }
 
     }
 

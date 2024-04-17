@@ -654,7 +654,7 @@ MonoBehaviour:
   drewno: 10
   nazwa: Koszary
   punktyBudowy: 0
-  punktyBudowyMax: 2
+  punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}
   gradient:
     serializedVersion: 2

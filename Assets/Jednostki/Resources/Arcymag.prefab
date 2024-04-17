@@ -873,6 +873,7 @@ MonoBehaviour:
   spanie: 0
   nr_jednostki: 0
   koniec: 0
+  poczatek: 0
   healthGracza: {fileID: 5058078432872962624}
   gradient:
     serializedVersion: 2
@@ -969,7 +970,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
   - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
   teksty:
-  - "Strzel ognisty pocisk w jednostk\u0119 zadaj\u0105c jej 4 obra\u017Cenia"
+  - "Obra\u017Cenia 4                                    Zasi\u0119g 3                          
+    Wystrzeliwuje kule ognia"
   - "Strzel kule ognia, kt\xF3ra zada obra\u017Cenia na obszarze 3x3"
   - Zamienia dwie jednostki miejscami
   ignis: 0

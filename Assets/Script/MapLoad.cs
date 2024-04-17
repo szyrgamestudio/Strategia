@@ -222,6 +222,10 @@ public class MapLoad : MonoBehaviour
                         StartCoroutine(ludzik(10, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
                     }
                 }
+                else//TUTTAJ KOMBIJNUJE
+                {
+                    StartCoroutine(ludzik(3, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 0));
+                }
             }
             k = 0;
             while (kafelekEnemy[k, 0] != 0)
@@ -257,7 +261,9 @@ public class MapLoad : MonoBehaviour
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
             if (ip == 10 || ip == 9)
+            {
                 Menu.heros[team] = nowy;
+            }
             if (team == 0)
             {
                 Menu.NPC.Add(nowy);
@@ -272,6 +278,7 @@ public class MapLoad : MonoBehaviour
             }
         }
     }
+
     IEnumerator budynek(int ip, float x, float y, int team)
     {
         if (WyburRas.aktywny[team - 1] == true)

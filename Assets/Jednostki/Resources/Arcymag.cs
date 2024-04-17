@@ -141,6 +141,24 @@ public class Arcymag : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    public void teleportMulti(int ip, int id, int team,int id2, int team2)
+    {
+        if(ip != Ip.ip)
+        {
+                    teleportowany1 = Menu.jednostki[team,id];
+                    teleportowany2 = Menu.jednostki[team2,id2];
+
+                    Vector3 tempPosition = teleportowany1.transform.position;
+
+                    teleportowany1.transform.position = teleportowany2.transform.position;
+                    teleportowany2.transform.position = tempPosition;
+
+                    Menu.kafelki[(int)teleportowany1.transform.position.x][(int)teleportowany1.transform.position.y].GetComponent<Pole>().postac = teleportowany2;
+                    Menu.kafelki[(int)teleportowany2.transform.position.x][(int)teleportowany2.transform.position.y].GetComponent<Pole>().postac = teleportowany1;
+        }
+    }
+
      void OnMouseDown()
     {
         if(jednostka == Jednostka.Select)

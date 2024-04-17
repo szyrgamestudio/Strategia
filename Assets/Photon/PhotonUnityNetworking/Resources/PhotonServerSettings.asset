@@ -68,6 +68,14 @@ MonoBehaviour:
   - dmg
   - manaZwieksz
   - ded
+  - poprawkaMulti
+  - remont
+  - bohaer
+  - bohater
+  - heros
+  - dopiszMulti
+  - teleportMulti
+  - odrzutMulti
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -149,13 +149,18 @@ public class Ratusz : MonoBehaviour
             }
             if(Menu.ratuszPoziom[druzyna] < poziom && budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
                 Menu.ratuszPoziom[druzyna] = poziom;
-            if(Przycisk.budynek[5]==true && Menu.drewno[Menu.tura]>=15 + poziom * 5 && Menu.zloto[Menu.tura]>=6 + poziom * 2)
+            if(Przycisk.budynek[5]==true && Menu.drewno[Menu.tura]>=15 + poziom * 5 && Menu.zloto[Menu.tura]>=1 + poziom * 2)
             {
                 Przycisk.budynek[5]=false;
                 Menu.drewno[Menu.tura] -= 15 + poziom * 5;
-                Menu.zloto[Menu.tura] -= 6 + poziom * 2;
+                Menu.zloto[Menu.tura] -= 1 + poziom * 2;
                 budynek.GetComponent<Budynek>().punktyBudowy = 0;
-                budynek.GetComponent<Budynek>().punktyBudowyMax += 3;
+                budynek.GetComponent<Budynek>().punktyBudowyMax += 2;
+                if(MenuGlowne.multi)
+                {     
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("remont", RpcTarget.All, budynek.GetComponent<Budynek>().punktyBudowy,budynek.GetComponent<Budynek>().punktyBudowyMax, Ip.ip);
+                }
                 poziom++;
                 OnMouseDown();
             }
@@ -182,7 +187,17 @@ public class Ratusz : MonoBehaviour
 
         }
     }
-
+    [PunRPC]
+    public void remont(int x, int y, int ip)
+    {
+        if(Ip.ip != ip)
+        {
+            budynek.GetComponent<Budynek>().punktyBudowy = x;
+            budynek.GetComponent<Budynek>().punktyBudowyMax = y;
+            poziom++;
+        }
+        
+    }
     IEnumerator przyporzadkuj()
     {
         yield return new WaitForSeconds(0.2f);
@@ -244,7 +259,7 @@ public class Ratusz : MonoBehaviour
             Guzikk = InterfaceBuild.przyciski[4].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = (4 + 2 * Budowlaniec.punktyBudowyBonus[druzyna]).ToString();
             Guzikk = InterfaceBuild.przyciski[5].GetComponent<PrzyciskInter>();
-            Guzikk.CenaZloto.text = (6+2*poziom).ToString(); Guzikk.CenaDrewno.text = (15+5*poziom).ToString(); 
+            Guzikk.CenaZloto.text = (1+2*poziom).ToString(); Guzikk.CenaDrewno.text = (15+5*poziom).ToString(); 
           
             
             for(int i = 0 ; i < 6 ; i++)

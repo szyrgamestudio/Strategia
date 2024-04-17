@@ -307,7 +307,7 @@ public class Kopalnia : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if(Jednostka.Select.GetComponent<Zbieracz>() != null && Walka.odleglosc(Jednostka.Select,budynek) == 1)
+        if(Jednostka.Select.GetComponent<Zbieracz>() != null && Walka.odleglosc(Jednostka.Select,budynek) == 1 && Jednostka.Select.GetComponent<Jednostka>().druzyna == Menu.tura)
         {
             polePomoc = Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y];
             for(int i=0;i<budynek.GetComponent<Budynek>().zdolnosci;i++)

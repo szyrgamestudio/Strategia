@@ -112,6 +112,11 @@ public class Portal : MonoBehaviour
         if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax && dopisz)
         {
             dopisz = false;
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("dopiszMulti", RpcTarget.All,Ip.ip);
+            }
             for(int i = 0; i<50; i++)
             {
                 if(portal[i]==null)
@@ -120,6 +125,22 @@ public class Portal : MonoBehaviour
                     i=50;
                 }
             }
+        }
+    }
+    [PunRPC]
+    public void dopiszMulti(int ip)
+    {
+        if(ip != Ip.ip)
+        {
+            dopisz = false;
+            for(int i = 0; i<50; i++)
+                {
+                    if(portal[i]==null)
+                    {
+                        portal[i] = budynek;
+                        i=50;
+                    }
+                }
         }
     }
     [PunRPC]

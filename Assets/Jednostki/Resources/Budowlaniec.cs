@@ -93,7 +93,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[0]==true)
                     {
                         Przycisk.jednostka[0]=false;
-                        if(wybieranie == false && Menu.zloto[Menu.tura]>=6 && Menu.drewno[Menu.tura]>=15)
+                        if(wybieranie == false && Menu.zloto[Menu.tura]>=2 && Menu.drewno[Menu.tura]>=15)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
                             if (MenuGlowne.multi)
@@ -265,6 +265,7 @@ public class Budowlaniec : MonoBehaviour
                             {
                                 BudowanyObiekt = Instantiate(wierza, new Vector3(0, 0, -1), Quaternion.identity); // Przechowaj referencję do obiektu
                             }
+                            BudowanyObiekt.GetComponent<Wieza>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             BudowanyObiekt.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
                             wybieranie = true; // Zakończ tryb "przenoszenia"
                             Pole.Clean2();
@@ -276,12 +277,6 @@ public class Budowlaniec : MonoBehaviour
                         Przycisk.jednostka[10]=false;
                         if(Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=2)
                             {
-                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().Zajete);
-                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga);
-                                Debug.Log("sex");
-                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga);
-                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia);
-                                Debug.Log(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().las);
                             if(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga == false && 
                             Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().magia == 0 &&
                             Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Pole>().las == false)
@@ -397,15 +392,27 @@ public class Budowlaniec : MonoBehaviour
             wybieranie = false;
             if (BudowanyObiekt != null) 
             {
+               BudynekRuch ruch = BudowanyObiekt.GetComponent<BudynekRuch>();
+                if(ruch != null && !ruch.wybudowany)
+                {
+                    Apteka apteka2 = BudowanyObiekt.GetComponent<Apteka>();
+                    if(apteka2 != null)
+                        Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna] = false;
+                    BudowanyObiekt.GetComponent<BudynekRuch>().dedMulti();
+                    Destroy(BudowanyObiekt);
+                    wybieranie = false;
+                }
                 Wieza wiezaSkrypt = BudowanyObiekt.GetComponent<Wieza>();
                 if(wiezaSkrypt != null)
                 {
+                    BudowanyObiekt.GetComponent<Wieza>().dedMulti();
                     Destroy(BudowanyObiekt);
                     wybieranie = false;
                 }
                 Kragmagi krag = BudowanyObiekt.GetComponent<Kragmagi>();
                 if(krag != null)
                 {
+                    BudowanyObiekt.GetComponent<Kragmagi>().dedMulti();
                     Destroy(BudowanyObiekt);
                     wybieranie = false;
                 }
@@ -436,7 +443,7 @@ public class Budowlaniec : MonoBehaviour
             InterfaceUnit.Czyszczenie(); 
             
             PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
-            Guzikk.CenaZloto.text = "6"; Guzikk.CenaDrewno.text = "15"; 
+            Guzikk.CenaZloto.text = "2"; Guzikk.CenaDrewno.text = "15"; 
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
             Guzikk.CenaZloto.text = "5"; Guzikk.CenaDrewno.text = "5"; 
             Guzikk = InterfaceUnit.przyciski[2].GetComponent<PrzyciskInter>();

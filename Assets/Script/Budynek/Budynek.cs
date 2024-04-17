@@ -42,6 +42,9 @@ public class Budynek : MonoBehaviour
 
     public float damage; //informacja o dmg dla innych plikow pomocnicza
 
+    public bool poczatek;
+    public bool koniec;
+
     public void Start()
     {
         switch(druzyna)
@@ -208,10 +211,19 @@ public class Budynek : MonoBehaviour
 
     void Update()
     {
-    //      if(MenuGlowne.multi && !update)
-    //     {
-    //         StartCoroutine(AktualizujPołożenie(HP,punktyBudowy));
-    //     }
+        if(Menu.Next)
+        {
+            koniec = true;
+        }
+        if(koniec && !Menu.Next )//&& (druzyna+1)%(Menu.IloscGraczy+1) == Menu.tura)
+        {
+            koniec = false;
+            if(MenuGlowne.multi && !poczatek)
+            {
+                poczatek = true;
+                Aktualizuj();
+            }
+        }
         if(punktyBudowy<punktyBudowyMax)
          //   budynek.GetComponent<SpriteRenderer>().sprite = budowaArt;
             budynek.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
@@ -290,6 +302,7 @@ public class Budynek : MonoBehaviour
         this.drewno = drewno;
         this.punktyBudowy = punktyBudowy;
         this.punktyBudowyMax = punktyBudowyMax;
+        poczatek = true;
 
         this.poZniszczeniu = poZniszczeniu;
         this.update = true;
