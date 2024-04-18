@@ -417,12 +417,13 @@ public class Jednostka : MonoBehaviour
     {
         szybkosc = maxszybkosc;
         akcja = true;
-        switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
-        {
-            case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
-            case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
-            case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
-        }
+        if(druzyna == Menu.tura)
+            switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
+            {
+                case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
+                case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
+                case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
+            }
         if(MenuGlowne.multi && druzyna == Ip.ip)
         {
             Aktualizuj();

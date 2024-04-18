@@ -79,6 +79,11 @@ public class MagOgnia : MonoBehaviour
                 {
                     podpalenie = false;
                     Menu.magia[Menu.tura]-=4;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("podpalenieMulti", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                    }
                     Jednostka.Select2.GetComponent<Jednostka>().szybkosc += 3;
                     Jednostka.Select2.GetComponent<Buff>().buffP(0,2f,0,0,0);
                     Jednostka.Select2.GetComponent<Buff>().buffP(1,2f,0,0,0);
@@ -93,6 +98,18 @@ public class MagOgnia : MonoBehaviour
             }
     }
 
+    [PunRPC]
+    public void podpalenieMulti(int ip, int id, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Oponenet.GetComponent<Jednostka>().szybkosc += 3;
+            Oponenet.GetComponent<Buff>().buffP(0,2f,0,0,0);
+            Oponenet.GetComponent<Buff>().buffP(1,2f,0,0,0);
+            Oponenet.GetComponent<Buff>().buffP(2,2f,0,0,0);
+        }
+    }
     [PunRPC]
     public void dmg(int ip, int id, int dmg, int team)
     {

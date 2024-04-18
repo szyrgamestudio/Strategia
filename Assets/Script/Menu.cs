@@ -79,10 +79,14 @@ public class Menu : MonoBehaviour
             kafelki[i] = new GameObject[BoardSizeY];
         }
          if(!MenuGlowne.multi) 
+         {
              GetComponent<MapLoad>().LoadMapData();
+         }
 
-        if(IloscGraczy==0)
-            IloscGraczy=2;
+        if(Ip.ip == 1)
+            Aktualizuj(tura, IloscGraczy);
+        // if(IloscGraczy==0)
+        //     IloscGraczy=2;
         PanelUnit = PrivPanelUnity;
         PanelBuild = PrivPanelBuild;
         PanelBuild.SetActive(false);
@@ -142,6 +146,12 @@ public class Menu : MonoBehaviour
         Menu.nrTury = nrTury;
     }
 
+    [PunRPC]
+    public void aktualizacjaId(int[] bazy)
+    {
+        bazyIlosc = bazy;
+    }
+
     public static void usunSelect2()
     {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -177,17 +187,27 @@ public class Menu : MonoBehaviour
             {
                 StartCoroutine(Przelocznik());
                 NaPewnoKoniec = 0;
+
+                if (MenuGlowne.multi && tura == Ip.ip)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("aktualizacjaId", RpcTarget.All, bazyIlosc);
+                }
+
                 tura++;
 
                 int zostalo = 0;
+
+                Debug.Log("bazy 1:" + bazyIlosc[1]);
+                Debug.Log("bazy 2:" + bazyIlosc[2]);
                 for(int i = 1; i<5;i++)
                     if(bazyIlosc[i]==0)
                     {
                         WyburRas.aktywny[i-1] = false;
                         zostalo++;
                     }
-                // if(zostalo == 3)
-                //     SceneManager.LoadScene(3);   //KONIEC GRY
+                if(zostalo == 3)
+                    SceneManager.LoadScene(3);   //KONIEC GRY
                     
                 
                 for(int xd = 1; xd<5;xd++)
@@ -243,6 +263,7 @@ public class Menu : MonoBehaviour
     [PunRPC]
     void ZaktualizujNPC()
     {
+        nrTuryText.text = "Tura: " + (nrTury + 1).ToString();
         if(Ip.ip == 1)
         {
             if(Menu.NPC.Count != 0)
@@ -254,10 +275,11 @@ public class Menu : MonoBehaviour
                 else
                 {
                 nrTury++;
-                nrTuryText.text = "Tura: " + nrTury.ToString();
+                
                 tura++;
             }
         }
+        
     }
     public static bool istnieje(int x, int y)
     {
@@ -270,6 +292,18 @@ public class Menu : MonoBehaviour
     {
         Pole.Clean2();
         turaNPC.gameObject.SetActive(true);
+        if(NPC[id] == null)
+        {
+            NPC.RemoveAt(id);
+            if(Menu.NPC.Count - 1 > id)
+            {
+                turaNPC.value = id;
+                turaNPC.maxValue = Menu.NPC.Count - 2;
+                yield return new WaitForSeconds(0.15f);
+                StartCoroutine(NPCtura(id + 1));
+            }
+             yield break;
+        }
         if(NPC[id]== null)
             NPC.RemoveAt(id);
         GameObject postacGracza = przeszukanie(1, NPC[id]);
@@ -283,7 +317,6 @@ public class Menu : MonoBehaviour
                     if(!(MenuGlowne.multi && Menu.tura==0))
                         Interface.przeniesDoSelect();
                     yield return new WaitForSeconds(0.2f);
-                   // Jednostka.Select = NPC[id];
                     Jednostka.CzyJednostka = true;
 
                 if(Walka.odleglosc(postacGracza, NPC[id]) != 1)

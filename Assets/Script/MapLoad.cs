@@ -331,7 +331,7 @@ public class MapLoad : MonoBehaviour
 
         // Zaktualizuj liczbę graczy na danej scenie na swoim graczu
         int playerCountOnScene = CountPlayersOnScene(currentScene);
-        if (playerCountOnScene == 2 && Ip.ip == 1)
+        if (Ip.ip == 1)
             LoadMapData();
     }
 

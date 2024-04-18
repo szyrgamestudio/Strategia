@@ -32,7 +32,6 @@ public class Ratusz : MonoBehaviour
     {
         druzyna = budynek.GetComponent<Budynek>().druzyna;
         budynek.GetComponent<Budynek>().poZniszczeniu = 1;
-        StartCoroutine(przyporzadkuj());
     }
 
     public void jednostkaMulti(string nazwa, ref GameObject nowyZbieracz)
@@ -170,23 +169,29 @@ public class Ratusz : MonoBehaviour
         {
             dodaj = true;
             Menu.maxludnosc[druzyna] += 6;
+            StartCoroutine(przyporzadkuj());
         }
         if(budynek.GetComponent<Budynek>().poZniszczeniu == 2)
         {
-            Menu.maxludnosc[druzyna] -= 6;
+           
             Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
-            while(Menu.bazy[druzyna,nr_jednostki+1] != null)
+            if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
             {
-                Menu.bazy[druzyna,nr_jednostki] = Menu.bazy[druzyna,nr_jednostki+1];
-                Menu.bazy[druzyna,nr_jednostki].GetComponent<Ratusz>().nr_jednostki -= 1;
-                nr_jednostki++;
+                while(Menu.bazy[druzyna,nr_jednostki+1] != null)
+                {
+                    Menu.bazy[druzyna,nr_jednostki] = Menu.bazy[druzyna,nr_jednostki+1];
+                    Menu.bazy[druzyna,nr_jednostki].GetComponent<Ratusz>().nr_jednostki -= 1;
+                    nr_jednostki++;
+                }
+                Menu.maxludnosc[druzyna] -= 6;
+                Menu.bazy[druzyna,nr_jednostki] = null;
+                Menu.bazyIlosc[druzyna]--;
             }
-            Menu.bazy[druzyna,nr_jednostki] = null;
-            Menu.bazyIlosc[druzyna]--;
             Destroy(budynek);
 
         }
     }
+
     [PunRPC]
     public void remont(int x, int y, int ip)
     {
@@ -196,7 +201,6 @@ public class Ratusz : MonoBehaviour
             budynek.GetComponent<Budynek>().punktyBudowyMax = y;
             poziom++;
         }
-        
     }
     IEnumerator przyporzadkuj()
     {
