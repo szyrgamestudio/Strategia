@@ -8,6 +8,7 @@ using Photon.Pun;
 
 public class Menu : MonoBehaviour
 {
+    public static int xd;
     public GameObject kafelek;
     public static int BoardSizeX = 25;
     public static int BoardSizeY = 25;
@@ -55,7 +56,6 @@ public class Menu : MonoBehaviour
     public Slider turaNPC;
     public Text nrTuryText;
 
-    public int NPCCount;
 
     private void Start()
     {
@@ -63,14 +63,14 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-            zloto[1] = 14;
-            drewno[1] = 14;
-            zloto[2] = 15;
-            drewno[2] = 15;
-            zloto[3] = 16;
-            drewno[3] = 16;
-            zloto[4] = 17;
-            drewno[4] = 17;
+            zloto[1] = 140;
+            drewno[1] = 140;
+            zloto[2] = 150;
+            drewno[2] = 150;
+            zloto[3] = 160;
+            drewno[3] = 160;
+            zloto[4] = 170;
+            drewno[4] = 170;
         }
 
         kafelki = new GameObject[BoardSizeX][];
@@ -96,6 +96,10 @@ public class Menu : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
+        {
+
+        }
         if (Input.GetMouseButtonDown(1))
         {
             usunSelect2();
@@ -135,6 +139,7 @@ public class Menu : MonoBehaviour
             photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
         }
     }
+
 
     [PunRPC]
     void ZaktualizujStatystykiRPC(int tura, int BoardSizeX, int BoardSizeY, int IloscGraczy, int nrTury)
@@ -198,8 +203,6 @@ public class Menu : MonoBehaviour
 
                 int zostalo = 0;
 
-                Debug.Log("bazy 1:" + bazyIlosc[1]);
-                Debug.Log("bazy 2:" + bazyIlosc[2]);
                 for(int i = 1; i<5;i++)
                     if(bazyIlosc[i]==0)
                     {
@@ -220,7 +223,6 @@ public class Menu : MonoBehaviour
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
                 }
-
 
                 Jednostka.Select = null;
                 PanelUnit.SetActive(false);
@@ -290,6 +292,7 @@ public class Menu : MonoBehaviour
 
     public IEnumerator NPCtura(int id)
     {
+        Debug.Log((xd++) + "1");
         Pole.Clean2();
         turaNPC.gameObject.SetActive(true);
         if(NPC[id] == null)
@@ -304,6 +307,7 @@ public class Menu : MonoBehaviour
             }
              yield break;
         }
+        Debug.Log(NPC[id].name + " " + id + " " + NPC[id].GetComponent<Jednostka>().nr_jednostki);
         if(NPC[id]== null)
             NPC.RemoveAt(id);
         GameObject postacGracza = przeszukanie(1, NPC[id]);
@@ -395,20 +399,25 @@ public class Menu : MonoBehaviour
                 
             }
             postacGracza = null;
+            Debug.Log((xd++) + "2");
         if(Menu.NPC.Count - 1 > id)
         {
+            Debug.Log((xd++) + "6");
             turaNPC.value = id;
             turaNPC.maxValue = Menu.NPC.Count - 2;
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(NPCtura(id + 1));
+            Debug.Log((xd++) + "3");
         }
         else{
+            Debug.Log((xd++) + "5");
             turaNPC.gameObject.SetActive(false);
             NIERUSZAC = false;
             nrTury++;
             nrTuryText.text = "Tura: " +  nrTury.ToString();
             Jednostka.CzyJednostka = false;
             NextTurn();
+            Debug.Log((xd++) + "4");
         }
     }
 

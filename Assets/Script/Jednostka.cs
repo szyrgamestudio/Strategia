@@ -104,8 +104,8 @@ public class Jednostka : MonoBehaviour
             if(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac == jednostka)
             {
                 Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac = null;
-                Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = jednostka;
             }
+            Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = jednostka;
             Vector3 wekto = new Vector3(x, y, jednostka.transform.position.z);
             jednostka.transform.position = wekto;
 
@@ -417,14 +417,15 @@ public class Jednostka : MonoBehaviour
     {
         szybkosc = maxszybkosc;
         akcja = true;
-        if(druzyna == Menu.tura)
+        Debug.Log(druzyna + " " + (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1));
+        if(druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1))
             switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
             {
                 case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
                 case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
                 case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
             }
-        if(MenuGlowne.multi && druzyna == Ip.ip)
+        if(MenuGlowne.multi && druzyna == Ip.ip || druzyna == 0)
         {
             Aktualizuj();
             PhotonView photonView = GetComponent<PhotonView>();

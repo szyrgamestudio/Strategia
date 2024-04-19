@@ -84,7 +84,7 @@ public class Koszary : MonoBehaviour
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=rycerz.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=rycerz.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                 {
                     Przycisk.budynek[2]=false;
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
@@ -108,7 +108,7 @@ public class Koszary : MonoBehaviour
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[3]==true && Menu.zloto[Menu.tura]>=kusznik.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[3]==true && Menu.zloto[Menu.tura]>=kusznik.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                 {
                     Przycisk.budynek[3]=false;
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
@@ -130,7 +130,7 @@ public class Koszary : MonoBehaviour
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[4]==true && Menu.zloto[Menu.tura]>=kawalerzysta.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=3  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[4]==true && Menu.zloto[Menu.tura]>=kawalerzysta.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                 {
                     Przycisk.budynek[4]=false;
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
@@ -183,11 +183,11 @@ public class Koszary : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }       
 
-            if(Menu.ratuszPoziom[druzyna]<3)
+            if(Menu.ratuszPoziom[druzyna]<2)
             {
                 InterfaceBuild.przyciski[4].GetComponent<Image>().sprite = loock;
             }
-            if(Menu.ratuszPoziom[druzyna]<2)
+            if(Menu.ratuszPoziom[druzyna]<1)
             {
                 InterfaceBuild.przyciski[3].GetComponent<Image>().sprite = loock;
                 InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = loock;

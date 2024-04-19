@@ -85,7 +85,7 @@ public class Plac : MonoBehaviour
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=gryf.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=gryf.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                 {
                     Przycisk.budynek[2]=false;
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
@@ -133,7 +133,7 @@ public class Plac : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }       
 
-            if(Menu.ratuszPoziom[druzyna]<2)
+            if(Menu.ratuszPoziom[druzyna]<1)
             {
                 InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = loock;
             }

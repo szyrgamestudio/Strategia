@@ -60,7 +60,7 @@ public class Gildia : MonoBehaviour
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>=magDruid.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>=magDruid.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                 {
                     Przycisk.budynek[1]=false;
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
@@ -82,7 +82,7 @@ public class Gildia : MonoBehaviour
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=magKaplan.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=magKaplan.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                 {
                     Przycisk.budynek[2]=false;
                     if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
@@ -129,7 +129,7 @@ public class Gildia : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }       
 
-            if(Menu.ratuszPoziom[druzyna]<=2)
+            if(Menu.ratuszPoziom[druzyna]<=1)
             {
                 InterfaceBuild.przyciski[1].GetComponent<Image>().sprite = loock;
                 InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = loock;

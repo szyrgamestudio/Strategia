@@ -837,8 +837,8 @@ MonoBehaviour:
   atak: 1
   obrona: 2
   zasieg: 1
-  maxszybkosc: 8
-  szybkosc: 8
+  maxszybkosc: 108
+  szybkosc: 108
   mindmg: 1
   maxdmg: 3
   zdolnosci: 1

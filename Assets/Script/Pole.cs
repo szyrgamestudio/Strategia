@@ -133,7 +133,9 @@ public class Pole : MonoBehaviour
             if(MenuGlowne.multi && dostane == 1)
             {
                 PhotonView photonView = GetComponent<PhotonView>();
-                if(poruszany != null && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura)
+                Jednostka jednostkaComponent = poruszany.GetComponent<Jednostka>();
+                
+                if(poruszany != null  && jednostkaComponent != null && poruszany.GetComponent<Jednostka>().druzyna == Menu.tura)
                     photonView.RPC("ZaktualizujRuch", RpcTarget.All, poruszany.GetComponent<Jednostka>().nr_jednostki, Ip.ip);
             }
 
