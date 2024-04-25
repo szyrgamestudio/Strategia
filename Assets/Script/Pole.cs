@@ -80,7 +80,7 @@ public class Pole : MonoBehaviour
         }
     }
 
-    void AktualizujPołożenie()
+    public void AktualizujPołożenie()
     {
         PhotonView photonView = GetComponent<PhotonView>();
         photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, Zajete, ZajeteLot, woda, las, poziom, zloto, magia, CzasDrogi, kafelek.name, spriteName);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class InterfaceBuild : MonoBehaviour
 {
@@ -170,6 +171,17 @@ public class InterfaceBuild : MonoBehaviour
     {
         menu.GetComponent<Menu>().InfoKolejnaTura.SetActive(false);
         Budynek staty = budynek.GetComponent<Budynek>();
+        budynek.GetComponent<Budynek>().poZniszczeniu = 0;
+        GameObject kafelek = Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y];
+        kafelek.GetComponent<Pole>().Zajete = false;
+        kafelek.GetComponent<Pole>().postac = null;
+        if(MenuGlowne.multi)
+        {
+            kafelek.GetComponent<Pole>().AktualizujPołożenie();
+            PhotonView photonView = budynek.GetComponent<PhotonView>();
+            photonView.RPC("deadMulti", RpcTarget.All, Ip.ip);
+        }
+            
         Menu.zloto[Menu.tura] += (int)(staty.zloto * 0.5);
         Menu.drewno[Menu.tura] += (int)(staty.drewno*0.5);
         Jednostka.Select = null;

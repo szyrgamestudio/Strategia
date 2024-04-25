@@ -263,6 +263,7 @@ public class Budynek : MonoBehaviour
         if(ip != Ip.ip)
         {
             Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
+            Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().postac = null;
             if(poZniszczeniu==0)
                 Destroy(budynek);
             else{poZniszczeniu=2;}

@@ -972,8 +972,9 @@ MonoBehaviour:
   teksty:
   - "Obra\u017Cenia 4                                    Zasi\u0119g 3                          
     Wystrzeliwuje kule ognia"
-  - "Strzel kule ognia, kt\xF3ra zada obra\u017Cenia na obszarze 3x3"
-  - Zamienia dwie jednostki miejscami
+  - "Obra\u017Cenia 2                                    Zasi\u0119g 3                          
+    Zadaje obra\u017Cenia s\u0105siednim jednostk\u0105 w obszarze 3x3"
+  - " Zasi\u0119g 3                          Zamienia dwie jednostki miejscami"
   ignis: 0
   fireBall: 0
   teleportacja: 0

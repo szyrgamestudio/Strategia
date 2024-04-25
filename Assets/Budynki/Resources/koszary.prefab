@@ -727,9 +727,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b181cb06c8f58654584d885627d814ce, type: 3}
   teksty:
   - Podstawowa jednostka
-  - "\u0141ucznik"
-  - Mega tankowny ziomal
-  - Kusznik
+  - "\u0141ucznik to podstawowa jednostka dystansowa"
+  - "Rycerz to bardzo wytrzyma\u0142a jednostka"
+  - Kusznik to silna jednostka dystansowa
   - "Koszary musz\u0105 s\u0105siadowa\u0107 z placem"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363

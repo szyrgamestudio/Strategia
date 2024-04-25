@@ -66,7 +66,7 @@ public class Apteka : MonoBehaviour
                         
                     }
                 }
-                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>= Menu.heros[druzyna].GetComponent<Heros>().level)
+                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>= Menu.heros[druzyna].GetComponent<Heros>().level && regeneracja < 10)
                 {
                     Menu.zloto[Menu.tura]-=Menu.heros[druzyna].GetComponent<Heros>().level;
                     Przycisk.budynek[1]=false;

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using System;
+
 
 
 public class Menu : MonoBehaviour
@@ -64,13 +66,14 @@ public class Menu : MonoBehaviour
             kamera = camerapriv;
 
             zloto[1] = 140;
+            magia[1] = 14;
             drewno[1] = 140;
             zloto[2] = 150;
             drewno[2] = 150;
-            zloto[3] = 160;
-            drewno[3] = 160;
-            zloto[4] = 170;
-            drewno[4] = 170;
+            zloto[3] = 16;
+            drewno[3] = 16;
+            zloto[4] = 17;
+            drewno[4] = 17;
         }
 
         kafelki = new GameObject[BoardSizeX][];
@@ -292,25 +295,32 @@ public class Menu : MonoBehaviour
 
     public IEnumerator NPCtura(int id)
     {
-        Debug.Log((xd++) + "1");
         Pole.Clean2();
         turaNPC.gameObject.SetActive(true);
-        if(NPC[id] == null)
-        {
-            NPC.RemoveAt(id);
-            if(Menu.NPC.Count - 1 > id)
-            {
-                turaNPC.value = id;
-                turaNPC.maxValue = Menu.NPC.Count - 2;
-                yield return new WaitForSeconds(0.15f);
-                StartCoroutine(NPCtura(id + 1));
-            }
-             yield break;
-        }
-        Debug.Log(NPC[id].name + " " + id + " " + NPC[id].GetComponent<Jednostka>().nr_jednostki);
+        // if(NPC[id] == null)
+        // {
+        //     NPC.RemoveAt(id);
+        //     if(Menu.NPC.Count - 1 > id)
+        //     {
+        //         turaNPC.value = id;
+        //         turaNPC.maxValue = Menu.NPC.Count - 2;
+        //         yield return new WaitForSeconds(0.15f);
+        //         StartCoroutine(NPCtura(id + 1));
+        //     }
+        //      yield break;
+        // }
+        //Debug.Log(NPC[id].name + " " + id + " " + NPC[id].GetComponent<Jednostka>().nr_jednostki);
         if(NPC[id]== null)
             NPC.RemoveAt(id);
-        GameObject postacGracza = przeszukanie(1, NPC[id]);
+        GameObject postacGracza = null;
+        try
+        {
+            postacGracza = przeszukanie(1, NPC[id]);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Exception caught: " + e.Message);
+        }
         yield return new WaitForSeconds(0.15f);
         if(postacGracza != null)
             {
@@ -399,25 +409,22 @@ public class Menu : MonoBehaviour
                 
             }
             postacGracza = null;
-            Debug.Log((xd++) + "2");
         if(Menu.NPC.Count - 1 > id)
         {
-            Debug.Log((xd++) + "6");
             turaNPC.value = id;
             turaNPC.maxValue = Menu.NPC.Count - 2;
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(NPCtura(id + 1));
-            Debug.Log((xd++) + "3");
+            
         }
         else{
-            Debug.Log((xd++) + "5");
             turaNPC.gameObject.SetActive(false);
             NIERUSZAC = false;
             nrTury++;
             nrTuryText.text = "Tura: " +  nrTury.ToString();
             Jednostka.CzyJednostka = false;
             NextTurn();
-            Debug.Log((xd++) + "4");
+            
         }
     }
 
