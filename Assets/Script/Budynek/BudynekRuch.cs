@@ -22,11 +22,11 @@ public class BudynekRuch : MonoBehaviour
     public static bool pomoc = false;
     public bool prekoniec = false;
 
-    //private bool polepomoc = true;
+    private bool polepomoc = false;
 
     void Start()
     {
-
+        polepomoc = true;
     }
     public void startMultiMap()
     {
@@ -74,6 +74,7 @@ public class BudynekRuch : MonoBehaviour
                         Pole.Clean2();
                         Menu.zloto[Menu.tura] -= ObiektRuszany.GetComponent<Budynek>().zloto;
                         Menu.drewno[Menu.tura] -= ObiektRuszany.GetComponent<Budynek>().drewno;
+                        ObiektRuszany.transform.position = new Vector3(targetX, targetY, -2f);
                     }
                 }
             }
@@ -122,6 +123,7 @@ public class BudynekRuch : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q)) // Sprawdza, czy klawisz "Q" został naciśnięty
             {
+                polepomoc = true;
                 if (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z == 360.0f)
                     ObiektRuszany.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 0.0f);
                 else
@@ -129,24 +131,47 @@ public class BudynekRuch : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E)) // Sprawdza, czy klawisz "Q" został naciśnięty
             {
+                polepomoc = true;
                 if (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z == 0)
                     ObiektRuszany.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 270.0f);
                 else
                     ObiektRuszany.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, -90.0f);
             }
         }
-        if (wybudowany && ObiektRuszany.transform.position.x != -10f && (!MenuGlowne.multi || ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip))
+        if (wybudowany && ObiektRuszany.transform.position.x != -10f && (!MenuGlowne.multi || ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip) && polepomoc)
         {
             switch (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z)
             {
-                case 90.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y]; break;
-                case 270.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y]; break;
+                case 90.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 270.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
                 case 0.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1]; break;
-                case 180.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1]; break;
+                case 180.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
+                
             }
-            // polepomoc = false;
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("ZaktualizujPole", RpcTarget.All, Ip.ip, ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z);
+            }
+            polepomoc = false;
         }
 
+    }
+
+    [PunRPC]
+    void ZaktualizujPole(int ip, float stopnie)
+    {
+        if(Ip.ip != ip)
+        {
+            switch (stopnie)
+            {
+                case 90.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 270.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 0.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1];  break;
+                case 180.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
+                
+            }
+        }
     }
     
     [PunRPC]

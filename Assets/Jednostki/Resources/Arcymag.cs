@@ -24,6 +24,7 @@ public class Arcymag : MonoBehaviour
 
     void Update()
     { 
+        
         if(jednostka.GetComponent<Heros>().levelUp)
         {
             jednostka.GetComponent<Heros>().levelUp=false;
@@ -33,6 +34,7 @@ public class Arcymag : MonoBehaviour
             {
                 if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka3();
                         Przycisk.jednostka[0]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -40,6 +42,7 @@ public class Arcymag : MonoBehaviour
                     }
                 if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka3();
                         Przycisk.jednostka[1]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -47,6 +50,7 @@ public class Arcymag : MonoBehaviour
                     }
                 if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka3();
                         Przycisk.jednostka[2]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -109,6 +113,10 @@ public class Arcymag : MonoBehaviour
                                 postka.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
                             }
                     Menu.usunSelect2();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    jednostka.GetComponent<Ramki>().Start();
                 }
             }
             else

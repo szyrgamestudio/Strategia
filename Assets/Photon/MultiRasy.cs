@@ -1,11 +1,13 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MultiRasy : MonoBehaviourPunCallbacks
 {
     
     public GameObject[] graczDostepny;
     public  static int playerCount;
+    public int dd;
     void Start()
     {
         // Sprawdź, czy jesteśmy połączeni z Master Server
@@ -43,8 +45,25 @@ public class MultiRasy : MonoBehaviourPunCallbacks
 
             // Wyświetl informację o liczbie graczy w konsoli
             Debug.Log("Liczba graczy w pokoju: " + playerCount);
+            Debug.Log("ocb");
+
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("checkVersion", RpcTarget.All, Ip.version);
         }
     }
+
+    [PunRPC]
+    public void checkVersion(string version)
+    {
+        Debug.Log(version + " version" + Ip.version + " " + Ip.ip);
+        if(Ip.ip != 1 && version != Ip.version)
+        {
+            Debug.Log("dis");
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene(0); 
+        }
+    }
+
     void Update()
     {
         if (MenuGlowne.multi)

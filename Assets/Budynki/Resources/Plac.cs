@@ -37,77 +37,92 @@ public class Plac : MonoBehaviour
         if(budynek == Jednostka.Select)
             {
                 pole = budynek.GetComponent<BudynekRuch>().pole;
-                if(Przycisk.budynek[0]==true && Menu.zloto[Menu.tura]>= jaskolka.GetComponent<Jednostka>().cena && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[0]==true)
                 {
                     Przycisk.budynek[0]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(jaskolka.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>= jaskolka.GetComponent<Jednostka>().cena && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= jaskolka.GetComponent<Jednostka>().cena;
-                        GameObject nowyLucznik = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("jaskolka",ref nowyLucznik);
+                            Menu.zloto[Menu.tura] -= jaskolka.GetComponent<Jednostka>().cena;
+                            GameObject nowyLucznik = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("jaskolka",ref nowyLucznik);
+                            }
+                            else
+                                nowyLucznik = Instantiate(jaskolka, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyLucznik.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyLucznik.GetComponent<Jednostka>().obrona += Kuznia.update4[druzyna];
+                            nowyLucznik.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
+                            nowyLucznik.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
+                            nowyLucznik.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
+                            nowyLucznik.transform.position = newPosition;
+                            nowyLucznik.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyLucznik;
                         }
-                        else
-                            nowyLucznik = Instantiate(jaskolka, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyLucznik.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyLucznik.GetComponent<Jednostka>().obrona += Kuznia.update4[druzyna];
-                        nowyLucznik.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
-                        nowyLucznik.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
-                        nowyLucznik.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
-                        nowyLucznik.transform.position = newPosition;
-                        nowyLucznik.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyLucznik;
                     }
                 }
-                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>=wilk.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[1]==true)
                 {
                     Przycisk.budynek[1]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(wilk.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>=wilk.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= wilk.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("wilk",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= wilk.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("wilk",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(wilk, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(wilk, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=gryf.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[2]==true)
                 {
                     Przycisk.budynek[2]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(gryf.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=gryf.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= gryf.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("gryf",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= gryf.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("gryf",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(gryf, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(gryf, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
             }
@@ -124,6 +139,7 @@ public class Plac : MonoBehaviour
             Guzikk.CenaMagic.text = wilk.GetComponent<Jednostka>().cena.ToString();
             Guzikk = InterfaceBuild.przyciski[2].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = gryf.GetComponent<Jednostka>().cena.ToString();
+            teksty[2] = "Gryf to potężna jednostka latająca";
 
             for(int i = 0 ; i < 3 ; i++)
             {
@@ -135,6 +151,7 @@ public class Plac : MonoBehaviour
 
             if(Menu.ratuszPoziom[druzyna]<1)
             {
+                teksty[2] = "Wymagany 2 poziom ratusza";
                 InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = loock;
             }
         }

@@ -17,8 +17,8 @@ public class PoleLinie : MonoBehaviour
 
     void Update()
     {
-        // if(!Menu.NIERUSZAC)
-        // {
+        if(!Menu.NIERUSZAC)
+        {
         int kafelekNin = kafelek.GetComponent<Pole>().Nin;
 
         if (kafelekNin != 0)
@@ -136,6 +136,6 @@ public class PoleLinie : MonoBehaviour
         {
             Nout.GetComponent<SpriteRenderer>().sprite = puste;
         }
-       // }
+        }
     }
 }

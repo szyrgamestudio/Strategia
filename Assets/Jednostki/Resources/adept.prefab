@@ -662,7 +662,7 @@ MonoBehaviour:
   maxHP: 5
   atak: 1
   obrona: 1
-  zasieg: 1
+  zasieg: 3
   maxszybkosc: 5
   szybkosc: 5
   mindmg: 1

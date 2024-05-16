@@ -712,6 +712,7 @@ int i=0;
             else{
                 break;
             }
+            ziomek.GetComponent<Jednostka>().odkryj(3);
         }
 
         Clean2(0);
@@ -719,8 +720,8 @@ int i=0;
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().postac = ziomek; 
         idzie = false;
     }
-        IEnumerator LotPowoli(GameObject ziomek)
-     {
+    IEnumerator LotPowoli(GameObject ziomek)
+    {
          int ko=0;
         GameObject blok = null;
         while(droga[ko + 1]!=null)
@@ -757,6 +758,7 @@ int i=0;
             else{
                 break;
             }
+            ziomek.GetComponent<Jednostka>().odkryj(3);
         }
         Clean2(0);
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().ZajeteLot = true;

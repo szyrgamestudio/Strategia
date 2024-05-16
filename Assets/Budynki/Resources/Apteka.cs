@@ -17,6 +17,8 @@ public class Apteka : MonoBehaviour
     public string[] teksty;
     public Sprite loock;
 
+    public Image wykrzyknik;
+
     private bool dodaj=false;
 
     public bool koniec;
@@ -43,30 +45,36 @@ public class Apteka : MonoBehaviour
         if(budynek == Jednostka.Select)
             {
                 pole = budynek.GetComponent<BudynekRuch>().pole;
-                if(Przycisk.budynek[0]==true && Menu.zloto[Menu.tura]>=medyk.GetComponent<Jednostka>().cena && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[0]==true)
                 {
                     Przycisk.budynek[0]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
-                    {
-                        Menu.zloto[Menu.tura] -= medyk.GetComponent<Jednostka>().cena;
-                        GameObject nowyLucznik = null;
-                        if(MenuGlowne.multi)
-                        {
-                            jednostkaMulti("medyk",ref nowyLucznik);
-                        }
-                        else
-                            nowyLucznik = Instantiate(medyk, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyLucznik.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyLucznik.transform.position = newPosition;
-                        nowyLucznik.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyLucznik;
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(medyk.GetComponent<Jednostka>().cena , 0 , 0, true);
 
+                    if(Menu.zloto[Menu.tura]>=medyk.GetComponent<Jednostka>().cena && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                    {
                         
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                        {
+                            Menu.zloto[Menu.tura] -= medyk.GetComponent<Jednostka>().cena;
+                            GameObject nowyLucznik = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("medyk",ref nowyLucznik);
+                            }
+                            else
+                                nowyLucznik = Instantiate(medyk, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyLucznik.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyLucznik.transform.position = newPosition;
+                            nowyLucznik.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyLucznik;
+
+                            
+                        }
                     }
                 }
-                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>= Menu.heros[druzyna].GetComponent<Heros>().level && regeneracja < 10)
+                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>= Menu.heros[druzyna].GetComponent<Heros>().level && regeneracja < 5)
                 {
                     Menu.zloto[Menu.tura]-=Menu.heros[druzyna].GetComponent<Heros>().level;
                     Przycisk.budynek[1]=false;
@@ -84,13 +92,16 @@ public class Apteka : MonoBehaviour
             if(koniec && !Menu.Next && budynek.GetComponent<Budynek>().druzyna == Menu.tura)
             {
                 koniec = false;
-                if(!Menu.heros[druzyna].activeSelf && regeneracja < 10)
+                if(!Menu.heros[druzyna].activeSelf && regeneracja < 5)
                 {
                     regeneracja++;
                 }
             }
-        Debug.Log(Menu.heros[druzyna].name);
-        if(!Menu.heros[druzyna].activeSelf && regeneracja >= 10 && !budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete
+            if(regeneracja >= 5)
+                wykrzyknik.enabled = true;
+            else
+                wykrzyknik.enabled = false;
+        if(!Menu.heros[druzyna].activeSelf && regeneracja >= 5 && !budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete
         && Menu.ludnosc[druzyna] < Menu.maxludnosc[druzyna])
         {
             Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
@@ -103,6 +114,7 @@ public class Apteka : MonoBehaviour
             newPosition.z = -2f;
             Menu.heros[druzyna].transform.position = newPosition;
             Menu.heros[druzyna].SetActive(true);
+            staty.ShowDMG(staty.maxHP, Color.green);
             OnMouseDown();
         }
         if(!dodaj)
@@ -132,7 +144,7 @@ public class Apteka : MonoBehaviour
                 InterfaceBuild.twarzHerosa.enabled = true;
                 InterfaceBuild.zdrowieHerosa.gameObject.SetActive(true);
                 InterfaceBuild.twarzHerosa.sprite = Menu.heros[druzyna].GetComponent<SpriteRenderer>().sprite;
-                InterfaceBuild.zdrowieHerosa.maxValue = 10;
+                InterfaceBuild.zdrowieHerosa.maxValue = 5;
                 budynek.GetComponent<Budynek>().zdolnosci = 2;
                 budynek.GetComponent<Budynek>().OnMouseDown();
             }

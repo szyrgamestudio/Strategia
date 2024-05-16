@@ -71,6 +71,7 @@ public class Jednostka : MonoBehaviour
         healthGracza.value = HP;
         if(!GetComponent<Wieza>())
             StartCoroutine(przyporzadkuj());
+        odkryj(3);
     }
 
     IEnumerator przyporzadkuj()
@@ -234,6 +235,16 @@ public class Jednostka : MonoBehaviour
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
     }
+    public void odkryj(int zasieg)
+    {
+        if(MenuGlowne.multi && druzyna == Ip.ip)
+        for(int p = -zasieg; p<=zasieg;p++)
+            for(int p2 = -zasieg; p2<=zasieg;p2++)
+            {
+                if(Mathf.Abs(p) + Mathf.Abs(p2) <= zasieg &&Menu.istnieje(p+(int)transform.position.x,p2+ (int)transform.position.y) && Menu.kafelki[p+(int)transform.position.x][p2+(int)transform.position.y].GetComponent<PoleOdkryj>().dark != null)
+                    Menu.kafelki[p+(int)transform.position.x][p2+(int)transform.position.y].GetComponent<PoleOdkryj>().remove();
+            }
+    }
     public void animacjaMiecz(GameObject atakowany)
     {
         if (atakowany.transform.position.x > jednostka.transform.position.x)
@@ -278,7 +289,6 @@ public class Jednostka : MonoBehaviour
                 Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = true;
             else
                 Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().ZajeteLot = true;
-            Debug.Log(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].name);
             Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac = jednostka;
         }
     }
@@ -372,7 +382,6 @@ public class Jednostka : MonoBehaviour
     public void heros()
     {
         Menu.heros[druzyna] = jednostka;
-        Debug.Log(jednostka.name);
     }
 
     public void umieranie()
@@ -417,7 +426,6 @@ public class Jednostka : MonoBehaviour
     {
         szybkosc = maxszybkosc;
         akcja = true;
-        Debug.Log(druzyna + " " + (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1));
         if(druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1))
             switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
             {

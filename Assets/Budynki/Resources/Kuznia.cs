@@ -41,60 +41,84 @@ public class Kuznia : MonoBehaviour
         if(budynek == Jednostka.Select)
             {
                 pole = budynek.GetComponent<BudynekRuch>().pole;
-                if(Przycisk.budynek[0]==true && Menu.zloto[Menu.tura]>=4+update1[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update1[druzyna])
+                if(Przycisk.budynek[0]==true)
                 {
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update1[druzyna]* 2 , 0 , 0, false);
                     Przycisk.budynek[0]=false;
-                    Menu.zloto[Menu.tura]-=4 + update1[druzyna];
-                    update1[druzyna]+=1;
-                    ulepszIstniejace("Piechur",1);
-                    ulepszIstniejace("Rycerz",1);
-                    ulepszIstniejace("Kawalerzysta",1);
-                    OnMouseDown();
+                    if(Przycisk.budynek[0]==true && Menu.zloto[Menu.tura]>=4+update1[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update1[druzyna])
+                    {
+                        
+                        Menu.zloto[Menu.tura]-=4 + update1[druzyna];
+                        update1[druzyna]+=1;
+                        ulepszIstniejace("Piechur",1);
+                        ulepszIstniejace("Rycerz",1);
+                        ulepszIstniejace("Kawalerzysta",1);
+                        OnMouseDown();
+                    }
                 }
-                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>=4+update2[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update2[druzyna])
+                if(Przycisk.budynek[1]==true)
                 {
                     Przycisk.budynek[1]=false;
-                    Menu.zloto[Menu.tura]-=4 + update2[druzyna];
-                    update2[druzyna]+=1;
-                    ulepszIstniejace("Piechur",0);
-                    ulepszIstniejace("Rycerz",0);
-                    ulepszIstniejace("Wilk",0);
-                    ulepszIstniejace("Kawalerzysta",0);
-                    OnMouseDown();
-
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update2[druzyna]* 2 , 0 , 0, false);
+                    if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>=4+update2[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update2[druzyna])
+                    {
+                        
+                        Menu.zloto[Menu.tura]-=4 + update2[druzyna];
+                        update2[druzyna]+=1;
+                        ulepszIstniejace("Piechur",0);
+                        ulepszIstniejace("Rycerz",0);
+                        ulepszIstniejace("Wilk",0);
+                        ulepszIstniejace("Kawalerzysta",0);
+                        OnMouseDown();
+                    }
                 }
-                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=4 + update3[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update3[druzyna])
+                if(Przycisk.budynek[2]==true)
                 {
                     Przycisk.budynek[2]=false;
-                    Menu.zloto[Menu.tura]-=4 + update3[druzyna];
-                    update3[druzyna]+=1;
-                    ulepszIstniejace("Jaskółka",2);
-                    ulepszIstniejace("Kawalerzysta",2);
-                    ulepszIstniejace("Gryf",2);
-                    ulepszIstniejace("Wilk",2);
-                    OnMouseDown();
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update3[druzyna]* 2 , 0 , 0, false);
+                    if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=4 + update3[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update3[druzyna])
+                    {
+                        
+                        Menu.zloto[Menu.tura]-=4 + update3[druzyna];
+                        update3[druzyna]+=1;
+                        ulepszIstniejace("Jaskółka",2);
+                        ulepszIstniejace("Kawalerzysta",2);
+                        ulepszIstniejace("Gryf",2);
+                        ulepszIstniejace("Wilk",2);
+                        OnMouseDown();
+                    }
                 }
-                if(Przycisk.budynek[3]==true && Menu.zloto[Menu.tura]>=4 + update4[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update4[druzyna])
+                if(Przycisk.budynek[3]==true)
                 {
                     Przycisk.budynek[3]=false;
-                    Menu.zloto[Menu.tura]-=4 + update4[druzyna];
-                    update4[druzyna]+=1;
-                    ulepszIstniejace("Łucznik",0);
-                    ulepszIstniejace("Kusznik",0);
-                    ulepszIstniejace("Wilk",0);
-                    ulepszIstniejace("Gryf",0);
-                    OnMouseDown();
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update4[druzyna]* 2 , 0 , 0, false);
+                    if(Przycisk.budynek[3]==true && Menu.zloto[Menu.tura]>=4 + update4[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update4[druzyna])
+                    {
+                        
+                        Menu.zloto[Menu.tura]-=4 + update4[druzyna];
+                        update4[druzyna]+=1;
+                        ulepszIstniejace("Łucznik",0);
+                        ulepszIstniejace("Kusznik",0);
+                        ulepszIstniejace("Wilk",0);
+                        ulepszIstniejace("Gryf",0);
+                        OnMouseDown();
+                    }
                 }
-                if(Przycisk.budynek[4]==true && Menu.zloto[Menu.tura]>=4 + update5[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update5[druzyna])
+                if(Przycisk.budynek[4]==true)
                 {
                     Przycisk.budynek[4]=false;
-                    Menu.zloto[Menu.tura]-=4 + update5[druzyna];
-                    update5[druzyna]+=1;
-                    ulepszIstniejace("Piroman",1);
-                    ulepszIstniejace("Druid",1);
-                    ulepszIstniejace("Kapłan",1);
-                    ulepszIstniejace("Gryf",1);
-                    OnMouseDown();
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update5[druzyna]* 2 , 0 , 0, false);
+                    if(Przycisk.budynek[4]==true && Menu.zloto[Menu.tura]>=4 + update5[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update5[druzyna])
+                    {
+                        
+                        Menu.zloto[Menu.tura]-=4 + update5[druzyna];
+                        update5[druzyna]+=1;
+                        ulepszIstniejace("Piroman",1);
+                        ulepszIstniejace("Druid",1);
+                        ulepszIstniejace("Kapłan",1);
+                        ulepszIstniejace("Gryf",1);
+                        OnMouseDown();
+                    }
                 }
             }
     }

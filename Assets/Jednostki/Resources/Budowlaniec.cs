@@ -93,6 +93,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[0]==true)
                     {
                         Przycisk.jednostka[0]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(2 , 15 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=2 && Menu.drewno[Menu.tura]>=15)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -112,6 +113,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[1]==true)
                     {
                         Przycisk.jednostka[1]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(5 , 5 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=5 && Menu.drewno[Menu.tura]>=5)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -130,6 +132,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[2]==true)
                     {
                         Przycisk.jednostka[2]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(6 , 14 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=6 && Menu.drewno[Menu.tura]>=14)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -147,6 +150,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[3]==true)
                     {
                         Przycisk.jednostka[3]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(2 , 5 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=2 && Menu.drewno[Menu.tura]>=5)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -164,6 +168,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[4]==true)
                     {
                         Przycisk.jednostka[4]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(4 , 10 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=4 && Menu.drewno[Menu.tura]>=10)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -181,6 +186,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[5]==true)
                     {
                         Przycisk.jednostka[5]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(4 , 10 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=4 && Menu.drewno[Menu.tura]>=10)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -198,6 +204,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[6]==true)
                     {
                         Przycisk.jednostka[6]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(4 , 10 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=4 && Menu.drewno[Menu.tura]>=10)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -215,6 +222,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[7]==true)
                     {
                         Przycisk.jednostka[7]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(4 , 4 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=5 && Menu.drewno[Menu.tura]>=5)
                             {
                             Kragmagi.budowlaniec = jednostka; 
@@ -231,6 +239,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[8]==true)
                     {
                         Przycisk.jednostka[8]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(5 , 19 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=5 && Menu.drewno[Menu.tura]>=9 && !Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna])
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -248,6 +257,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[9]==true)
                     {
                         Przycisk.jednostka[9]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(3 , 7 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=3 && Menu.drewno[Menu.tura]>=7)
                             {
                             Wieza.budowlaniec = jednostka; 
@@ -273,8 +283,8 @@ public class Budowlaniec : MonoBehaviour
                     }
                 if(Przycisk.jednostka[10]==true)
                     {
-                        Debug.Log("czas");
                         Przycisk.jednostka[10]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(0 , 2 , 0, false);
                         if(Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=2)
                             {
                             if(Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().droga == false && 
@@ -291,15 +301,14 @@ public class Budowlaniec : MonoBehaviour
                                 Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y].GetComponent<Droga>().updateDroga(1);
                                 Menu.zloto[Menu.tura]-=0;
                                 Menu.drewno[Menu.tura]-=2;
-                                
                             }
-
                             Pole.Clean2();
                             }
                     }
                 if(Przycisk.jednostka[11]==true)
                     {
                         Przycisk.jednostka[11]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(8 , 8 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=8 && Menu.drewno[Menu.tura]>=8 && Menu.ratuszPoziom[jednostka.GetComponent<Jednostka>().druzyna] != 0)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -317,6 +326,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[12]==true)
                     {
                         Przycisk.jednostka[12]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(0 , 3 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=0 && Menu.drewno[Menu.tura]>=3)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -334,6 +344,7 @@ public class Budowlaniec : MonoBehaviour
                 if(Przycisk.jednostka[13]==true)
                     {
                         Przycisk.jednostka[13]=false;
+                        Interface.interfaceStatic.GetComponent<Interface>().Brak(3 , 12 , 0, false);
                         if(wybieranie == false && Menu.zloto[Menu.tura]>=3 && Menu.drewno[Menu.tura]>=12)
                             {
                             BudynekRuch.budowlaniec = jednostka; 
@@ -348,40 +359,14 @@ public class Budowlaniec : MonoBehaviour
                             Pole.Clean2();
                             }
                     }
-                // if(Przycisk.jednostka[14]==true && jednostka.GetComponent<Jednostka>().akcja)
-                //     {
-                //         Przycisk.jednostka[14]=false;
-                //         Jednostka.wybieranie = true;
-                //         budowanie = true;
-                //         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
-                //     }
+
             }
         if(BudynekRuch.pomoc)
         {
             BudynekRuch.pomoc=false;
             wybieranie = false;
         }
-        // if(Jednostka.Select2 != null && budowanie&& Walka.odleglosc(Jednostka.Select2,jednostka) <= jednostka.GetComponent<Jednostka>().zasieg)
-        // {
-        //     Budynek budynekSkrypt = Jednostka.Select2.GetComponent<Budynek>();
-        //     Wieza wiezaSkrypt = Jednostka.Select2.GetComponent<Wieza>();
 
-        //     if(budynekSkrypt != null && Jednostka.Select2.GetComponent<Budynek>().punktyBudowy < Jednostka.Select2.GetComponent<Budynek>().punktyBudowyMax)
-        //     {
-        //         budynekSkrypt.punktyBudowy += punktyBudowy + punktyBudowyBonus[Menu.tura];
-        //         if(budynekSkrypt.nazwa != "Droga")
-        //             jednostka.GetComponent<Jednostka>().akcja = false;
-        //         budynekSkrypt.ShowDMG(punktyBudowy + punktyBudowyBonus[Menu.tura], new Color(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 0.0f));
-        //         budowanieVoid();
-        //     }
-        //     if(wiezaSkrypt != null && wiezaSkrypt.punktyBudowy < wiezaSkrypt.punktyBudowyMax)
-        //     {
-        //         wiezaSkrypt.punktyBudowy += punktyBudowy + punktyBudowyBonus[Menu.tura];
-        //         jednostka.GetComponent<Jednostka>().akcja = false;
-        //         wiezaSkrypt.ShowDMG(punktyBudowy + punktyBudowyBonus[Menu.tura], new Color(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 0.0f));    
-        //         budowanieVoid();
-        //     }        
-        // }
         if(Menu.preNext)
         {
             prekoniec = true;
@@ -457,7 +442,7 @@ public class Budowlaniec : MonoBehaviour
             Guzikk = InterfaceUnit.przyciski[6].GetComponent<PrzyciskInter>();
             Guzikk.CenaZloto.text = "4"; Guzikk.CenaDrewno.text = "10"; 
             Guzikk = InterfaceUnit.przyciski[7].GetComponent<PrzyciskInter>();
-            Guzikk.CenaZloto.text = "5"; Guzikk.CenaDrewno.text = "5"; 
+            Guzikk.CenaZloto.text = "4"; Guzikk.CenaDrewno.text = "4"; 
             Guzikk = InterfaceUnit.przyciski[8].GetComponent<PrzyciskInter>();
             Guzikk.CenaZloto.text = "5"; Guzikk.CenaDrewno.text = "9"; 
             Guzikk = InterfaceUnit.przyciski[9].GetComponent<PrzyciskInter>();

@@ -65,11 +65,10 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-            zloto[1] = 140;
-            magia[1] = 14;
-            drewno[1] = 140;
-            zloto[2] = 150;
-            drewno[2] = 150;
+            zloto[1] = 14;
+            drewno[1] = 14;
+            zloto[2] = 15;
+            drewno[2] = 15;
             zloto[3] = 16;
             drewno[3] = 16;
             zloto[4] = 17;
@@ -256,7 +255,7 @@ public class Menu : MonoBehaviour
                         else
                         {
                             nrTury++;
-                            nrTuryText.text = "Tura: " + nrTury.ToString();
+                            nrTuryText.text = nrTury.ToString();
                             tura++;
                         }
                     }
@@ -268,7 +267,7 @@ public class Menu : MonoBehaviour
     [PunRPC]
     void ZaktualizujNPC()
     {
-        nrTuryText.text = "Tura: " + (nrTury + 1).ToString();
+        nrTuryText.text = (nrTury + 1).ToString();
         if(Ip.ip == 1)
         {
             if(Menu.NPC.Count != 0)
@@ -421,7 +420,7 @@ public class Menu : MonoBehaviour
             turaNPC.gameObject.SetActive(false);
             NIERUSZAC = false;
             nrTury++;
-            nrTuryText.text = "Tura: " +  nrTury.ToString();
+            nrTuryText.text = nrTury.ToString();
             Jednostka.CzyJednostka = false;
             NextTurn();
             

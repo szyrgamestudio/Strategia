@@ -17,7 +17,15 @@ public class Interface : MonoBehaviour
 
     public static bool ruch;
 
+    public static GameObject interfaceStatic;
+
     //public GameObject camera;
+
+    void Start()
+    {
+        interfaceStatic = this.gameObject;
+
+    }
 
     void Update()
     {
@@ -44,6 +52,62 @@ public class Interface : MonoBehaviour
             StartCoroutine(ruchPlynnyCamery());
         }
     }
+
+    public void Brak(int zloro, int drewno,  int magia, bool jednostka)
+    {
+        if(zloro > Menu.zloto[Menu.tura])
+        {
+            zlotoText.color = Color.red;
+            StartCoroutine(PowiekszTekst(0));
+            OdtworzDzwiekAnulowania();
+        }
+        if(drewno > Menu.drewno[Menu.tura])
+        {
+            drewnoText.color = Color.red;
+            StartCoroutine(PowiekszTekst(1));
+            OdtworzDzwiekAnulowania();
+        }
+        if(magia > Menu.magia[Menu.tura])
+        {
+            magiaText.color = Color.red;
+            StartCoroutine(PowiekszTekst(2));
+            OdtworzDzwiekAnulowania();
+        }
+        if(Menu.ludnosc[Menu.tura] >= Menu.maxludnosc[Menu.tura] && jednostka)
+        {
+            ludnoscText.color = Color.red;
+            StartCoroutine(PowiekszTekst(3));
+            OdtworzDzwiekAnulowania();
+        }
+    }
+
+
+    IEnumerator PowiekszTekst(int i)
+    {
+        Text tekst = null;
+        switch(i)
+        {
+            case 0: tekst = zlotoText; break;
+            case 1: tekst = drewnoText; break;
+            case 2: tekst = magiaText; break;
+            case 3: tekst = ludnoscText; break;
+        }
+        
+        tekst.transform.localScale *= 1.3f; // Powiększenie tekstu o 10%
+        yield return new WaitForSeconds(0.3f); // Poczekaj 0.5 sekundy
+        tekst.transform.localScale /= 1.3f; // Przywróć pierwotny rozmiar tekstu
+        tekst.color = Color.black;
+    }
+
+    public AudioSource src;
+    public AudioClip anulowanie;
+
+    void OdtworzDzwiekAnulowania()
+    {
+        src.clip = anulowanie;
+        src.Play();
+    }
+
     public void usun()
     {
         if(!Menu.NIERUSZAC)

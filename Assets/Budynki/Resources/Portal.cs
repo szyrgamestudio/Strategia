@@ -23,6 +23,8 @@ public class Portal : MonoBehaviour
     public bool dostepny;
     public int id;
 
+    public bool koniec;
+
     void Start()
     {
       druzyna = budynek.GetComponent<Budynek>().druzyna;
@@ -71,9 +73,10 @@ public class Portal : MonoBehaviour
                             j++;
                         }
                     }
+                    Debug.Log("j " + j);
                     if(j>0)
                     {
-                        int n = Random.Range(0, j);
+                    int n = Random.Range(0, j);
                     teleport(portal[nr_portal[n]],pole.GetComponent<Pole>().postac);
                     if(MenuGlowne.multi)
                     {
@@ -111,6 +114,7 @@ public class Portal : MonoBehaviour
         }
         if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax && dopisz)
         {
+            Debug.Log("dopisyuwanie");
             dopisz = false;
             if(MenuGlowne.multi)
             {
@@ -126,12 +130,31 @@ public class Portal : MonoBehaviour
                 }
             }
         }
+        if(koniec && !Menu.Next )
+        {
+            koniec = false;
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("koniecTury", RpcTarget.All, Ip.ip);
+            }
+        }
     }
+    [PunRPC]
+    public void koniecTury(int ip)
+    {
+        if(ip != Ip.ip)
+        {
+            pole = budynek.GetComponent<BudynekRuch>().pole;
+        }
+    }
+
     [PunRPC]
     public void dopiszMulti(int ip)
     {
         if(ip != Ip.ip)
         {
+            Debug.Log("dopisyuwanieMulti");
             dopisz = false;
             for(int i = 0; i<50; i++)
                 {
@@ -197,6 +220,8 @@ public class Portal : MonoBehaviour
 
         Jednostka.Select = jednostka;
         jednostka.GetComponent<Jednostka>().OnMouseDown();
+
+        jednostka.GetComponent<Jednostka>().odkryj(3); 
     }
         void OnMouseDown()
     {

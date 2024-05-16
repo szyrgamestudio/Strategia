@@ -39,120 +39,145 @@ public class Koszary : MonoBehaviour
         if(budynek == Jednostka.Select)
             {
                 pole = budynek.GetComponent<BudynekRuch>().pole;
-                if(Przycisk.budynek[0]==true && Menu.zloto[Menu.tura]>= piechur.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[0]==true)
                 {
                     Przycisk.budynek[0]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(piechur.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>= piechur.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= piechur.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("piechur",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= piechur.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("piechur",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(piechur, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(piechur, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>= lucznik.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[1]==true)
                 {
                     Przycisk.budynek[1]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(lucznik.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>= lucznik.GetComponent<Jednostka>().cena  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= lucznik.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("lucznik",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= lucznik.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("lucznik",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(lucznik, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(lucznik, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=rycerz.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[2]==true)
                 {
                     Przycisk.budynek[2]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(rycerz.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>=rycerz.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= rycerz.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("rycerz",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= rycerz.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("rycerz",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(rycerz, pole.transform.position, Quaternion.identity); 
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(rycerz, pole.transform.position, Quaternion.identity); 
-                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[3]==true && Menu.zloto[Menu.tura]>=kusznik.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[3]==true)
                 {
                     Przycisk.budynek[3]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(kusznik.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>=kusznik.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= kusznik.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("kusznik",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= kusznik.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("kusznik",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(kusznik, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(kusznik, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update4[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
-                if(Przycisk.budynek[4]==true && Menu.zloto[Menu.tura]>=kawalerzysta.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                if(Przycisk.budynek[4]==true)
                 {
                     Przycisk.budynek[4]=false;
-                    if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
+                    Interface.interfaceStatic.GetComponent<Interface>().Brak(kawalerzysta.GetComponent<Jednostka>().cena , 0 , 0, true);
+                    if(Menu.zloto[Menu.tura]>=kawalerzysta.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=2  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
-                        Menu.zloto[Menu.tura] -= kawalerzysta.GetComponent<Jednostka>().cena;
-                        GameObject nowyZbieracz = null;
-                        if(MenuGlowne.multi)
+                        
+                        if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
                         {
-                            jednostkaMulti("kawalerzysta",ref nowyZbieracz);
+                            Menu.zloto[Menu.tura] -= kawalerzysta.GetComponent<Jednostka>().cena;
+                            GameObject nowyZbieracz = null;
+                            if(MenuGlowne.multi)
+                            {
+                                jednostkaMulti("kawalerzysta",ref nowyZbieracz);
+                            }
+                            else
+                                nowyZbieracz = Instantiate(kawalerzysta, pole.transform.position, Quaternion.identity); 
+                            Vector3 newPosition = nowyZbieracz.transform.position;
+                            newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
+                            nowyZbieracz.transform.position = newPosition;
+                            nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
+                            pole.GetComponent<Pole>().Zajete=true;
+                            pole.GetComponent<Pole>().postac=nowyZbieracz;
                         }
-                        else
-                            nowyZbieracz = Instantiate(kawalerzysta, pole.transform.position, Quaternion.identity); 
-                        Vector3 newPosition = nowyZbieracz.transform.position;
-                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update1[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update2[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().szybkosc += Kuznia.update3[druzyna];
-                        nowyZbieracz.GetComponent<Jednostka>().maxszybkosc += Kuznia.update3[druzyna];
-                        nowyZbieracz.transform.position = newPosition;
-                        nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
-                        pole.GetComponent<Pole>().Zajete=true;
-                        pole.GetComponent<Pole>().postac=nowyZbieracz;
                     }
                 }
             }
@@ -173,6 +198,10 @@ public class Koszary : MonoBehaviour
             Guzikk.CenaMagic.text = kusznik.GetComponent<Jednostka>().cena.ToString();
             Guzikk = InterfaceBuild.przyciski[4].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = kawalerzysta.GetComponent<Jednostka>().cena.ToString();
+
+            teksty[2] = "Rycerz to bardzo wytrzymała jednostka";
+            teksty[3] = "Kusznik potrafi ustawić się do strzału by później zadać spore obrażenia";
+            teksty[4] = "Kawalerzysta to potężna oraz bardzo mobilna jednostka";
           
             
             for(int i = 0 ; i < 5 ; i++)
@@ -186,11 +215,15 @@ public class Koszary : MonoBehaviour
             if(Menu.ratuszPoziom[druzyna]<2)
             {
                 InterfaceBuild.przyciski[4].GetComponent<Image>().sprite = loock;
+                teksty[4] = "Wymagany 3 poziom ratusza";
+
             }
             if(Menu.ratuszPoziom[druzyna]<1)
             {
                 InterfaceBuild.przyciski[3].GetComponent<Image>().sprite = loock;
                 InterfaceBuild.przyciski[2].GetComponent<Image>().sprite = loock;
+                teksty[2] = "Wymagany 2 poziom ratusza";
+                teksty[3] = "Wymagany 2 poziom ratusza";
             }
         }
     }

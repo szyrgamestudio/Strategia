@@ -23,7 +23,6 @@ public class MapLoad : MonoBehaviour
     [PunRPC]
     public void manaZwieksz(int ip, int i)
     {
-        Debug.Log("i: " + i);
         if(Ip.ip != ip)
             Menu.magia[1 + (i)] += 6;
     }
@@ -210,11 +209,9 @@ public class MapLoad : MonoBehaviour
                     }
                     if (WyburRas.heros[i] == 1)
                     {
-                        Debug.Log("cipa");
                         Menu.magia[1 + (i)] += 6;
                         if(MenuGlowne.multi)
                         {
-                            Debug.Log("chuj");
                             PhotonView photonView = GetComponent<PhotonView>();
                             photonView.RPC("manaZwieksz", RpcTarget.All,Ip.ip, i);
                         }

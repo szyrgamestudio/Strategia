@@ -649,7 +649,7 @@ MonoBehaviour:
   maxHP: 3
   obrona: 2
   zdolnosci: 0
-  zloto: 2
+  zloto: 0
   drewno: 3
   nazwa: sciana
   punktyBudowy: 0

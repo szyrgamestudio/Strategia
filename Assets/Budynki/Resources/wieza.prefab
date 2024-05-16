@@ -860,6 +860,7 @@ MonoBehaviour:
   spanie: 0
   nr_jednostki: 0
   koniec: 1
+  poczatek: 0
   healthGracza: {fileID: 5187642738514994369}
   gradient:
     serializedVersion: 2

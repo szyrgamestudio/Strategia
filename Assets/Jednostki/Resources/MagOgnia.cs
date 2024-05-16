@@ -23,6 +23,7 @@ public class MagOgnia : MonoBehaviour
             {
                 if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[0]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -30,6 +31,7 @@ public class MagOgnia : MonoBehaviour
                     }
                 if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[1]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -37,6 +39,7 @@ public class MagOgnia : MonoBehaviour
                     }
                 if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[2]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -47,6 +50,7 @@ public class MagOgnia : MonoBehaviour
                 {
                     ignis = false;
                     Menu.magia[Menu.tura]-=4;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 4;
                     if(MenuGlowne.multi)
                     {
@@ -60,6 +64,7 @@ public class MagOgnia : MonoBehaviour
                 {
                     fireBall = false;
                     Menu.magia[Menu.tura]-=7;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     for(int i = -1; i < 2 ; i++)
                         for(int j = -1; j < 2 ; j++)
                             if(Menu.kafelki[(int)Jednostka.Select2.transform.position.x + i][(int)Jednostka.Select2.transform.position.y + j].GetComponent<Pole>().postac != null)
@@ -79,6 +84,7 @@ public class MagOgnia : MonoBehaviour
                 {
                     podpalenie = false;
                     Menu.magia[Menu.tura]-=4;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     if(MenuGlowne.multi)
                     {
                         PhotonView photonView = GetComponent<PhotonView>();
@@ -89,6 +95,10 @@ public class MagOgnia : MonoBehaviour
                     Jednostka.Select2.GetComponent<Buff>().buffP(1,2f,0,0,0);
                     Jednostka.Select2.GetComponent<Buff>().buffP(2,2f,0,0,0);
                     Menu.usunSelect2();
+                }
+                    if (Input.GetMouseButtonDown(1))
+                {
+                    jednostka.GetComponent<Ramki>().Start();
                 }
             }
             else

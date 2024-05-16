@@ -78,6 +78,9 @@ MonoBehaviour:
   - odrzutMulti
   - aktualizacjaId
   - podpalenieMulti
+  - koniecTury
+  - ZaktualizujPole
+  - checkVersion
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

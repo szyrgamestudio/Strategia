@@ -828,6 +828,7 @@ MonoBehaviour:
   druzyna: 0
   dostepny: 0
   id: 0
+  koniec: 0
 --- !u!61 &8956365773136594117
 BoxCollider2D:
   m_ObjectHideFlags: 0

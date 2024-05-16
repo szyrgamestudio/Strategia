@@ -18,14 +18,23 @@ public class DodawanieStat : MonoBehaviour
 
     void Update()
     {
-        if(zloto != 0)
-            StartCoroutine(zlotoLoad());
-        if(drewno != 0)
-            StartCoroutine(drewnoLoad());
-        if(diament != 0)
-            StartCoroutine(diamentLoad());
-        if(magia != 0)
-            StartCoroutine(magiaLoad());
+        if(!MenuGlowne.multi || Menu.tura == Ip.ip)
+        {
+            if(zloto != 0)
+                StartCoroutine(zlotoLoad());
+            if(drewno != 0)
+                StartCoroutine(drewnoLoad());
+            if(diament != 0)
+                StartCoroutine(diamentLoad());
+            if(magia != 0)
+                StartCoroutine(magiaLoad());
+        }
+        else
+        {
+            zloto = 0;
+            drewno = 0;
+            magia = 0;
+        }
         
     }
 
@@ -34,7 +43,7 @@ public class DodawanieStat : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if(zloto!=0)
         {
-            ShowDMG(zlotoText,zloto,new Color(0f, 0f, 0f, 1.0f), -84f);
+            ShowDMG(zlotoText,zloto,new Color(0f, 0f, 0f, 1.0f), -565.5f);
             zloto = 0;
         }
     }
@@ -43,7 +52,7 @@ public class DodawanieStat : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if(drewno!=0)
         {
-            ShowDMG(drewnoText,drewno,new Color(1.0f, 1.0f, 1.0f, 1.0f), 92.3f);
+            ShowDMG(drewnoText,drewno,new Color(0f, 0f, 0f, 1.0f), -265f);
             drewno = 0;
         }
     }
@@ -52,7 +61,7 @@ public class DodawanieStat : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if(diament!=0)
         {
-            ShowDMG(diamentText,diament,new Color(1.0f, 1.0f, 1.0f, 1.0f), 235.91f);
+            ShowDMG(diamentText,diament,new Color(0f, 0f, 0f, 1.0f), 235.91f);
             diament = 0;
         }
     }
@@ -61,7 +70,7 @@ public class DodawanieStat : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if(magia!=0)
         {
-            ShowDMG(magiaText,magia,new Color(1.0f, 1.0f, 1.0f, 1.0f), 381.3f);
+            ShowDMG(magiaText,magia,new Color(0f, 0f, 0f, 1.0f), 29.8f);
             magia = 0;
         }
     }

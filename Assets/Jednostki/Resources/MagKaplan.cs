@@ -23,6 +23,7 @@ public class MagKaplan : MonoBehaviour
             {
                 if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=6)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[0]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -30,6 +31,7 @@ public class MagKaplan : MonoBehaviour
                     }
                 if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[1]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -37,6 +39,7 @@ public class MagKaplan : MonoBehaviour
                     }
                 if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=8)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[2]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -46,6 +49,7 @@ public class MagKaplan : MonoBehaviour
                 if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && ignis)
                 {
                     Menu.magia[Menu.tura]-=6;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     ignis = false;
                     Jednostka.Select2.GetComponent<Buff>().buffP(1,0,0,0,3);
                     Jednostka.Select2.GetComponent<Jednostka>().obrona += 3;   
@@ -54,6 +58,7 @@ public class MagKaplan : MonoBehaviour
                 if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && fireBall)
                 {
                     Menu.magia[Menu.tura]-=4;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     fireBall = false;
                     float zwienksz = Jednostka.Select2.GetComponent<Jednostka>().maxdmg - Jednostka.Select2.GetComponent<Jednostka>().mindmg;
                     Jednostka.Select2.GetComponent<Jednostka>().mindmg += zwienksz;
@@ -63,6 +68,7 @@ public class MagKaplan : MonoBehaviour
                  if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && podpalenie)
                 {
                     Menu.magia[Menu.tura]-=8;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     podpalenie = false;
                     float pomocMulti = Jednostka.Select2.GetComponent<Jednostka>().HP - Jednostka.Select2.GetComponent<Jednostka>().maxHP * (float)1.1;
                     Jednostka.Select2.GetComponent<Jednostka>().HP = Jednostka.Select2.GetComponent<Jednostka>().maxHP * (float)1.1;
@@ -72,6 +78,10 @@ public class MagKaplan : MonoBehaviour
                         photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, pomocMulti,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
                     }
                     Menu.usunSelect2();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    jednostka.GetComponent<Ramki>().Start();
                 }
             }
             else

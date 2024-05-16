@@ -37,15 +37,14 @@ public class Kragmagi : MonoBehaviour
                         {
                             Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia = 2;
                             Menu.kafelki[(int)targetX][(int)targetY].GetComponent<SpriteRenderer>().sprite = zolte;
-                            Debug.Log("Cipa");
                             if(MenuGlowne.multi)
                             {
                                 PhotonView photonView = GetComponent<PhotonView>();
                                 photonView.RPC("multi", RpcTarget.All, Ip.ip, (int)targetX, (int)targetY);
                             }
                             Pole.Clean2();
-                            Menu.zloto[Menu.tura]-=5;
-                            Menu.drewno[Menu.tura]-=5;
+                            Menu.zloto[Menu.tura]-=4;
+                            Menu.drewno[Menu.tura]-=4;
                             Budowlaniec.wybieranie = false;
                             if(MenuGlowne.multi)
                             {

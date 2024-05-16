@@ -62,6 +62,7 @@ public class MagDruid : MonoBehaviour
                     }
                 if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
                     {
+                        jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[1]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
@@ -72,6 +73,7 @@ public class MagDruid : MonoBehaviour
                 if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && leczenie)
                 {
                     Menu.magia[Menu.tura]-=5;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
                     leczenie = false;  
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 3;
                     if(MenuGlowne.multi)
@@ -82,6 +84,10 @@ public class MagDruid : MonoBehaviour
                     Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
                     piorun(2,Jednostka.Select2);
                     Menu.usunSelect2();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    jednostka.GetComponent<Ramki>().Start();
                 }
             }
             else
