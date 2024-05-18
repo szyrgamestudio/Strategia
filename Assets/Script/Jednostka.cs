@@ -51,6 +51,7 @@ public class Jednostka : MonoBehaviour
     public GameObject pocisk;
 
     private bool wybrany;
+    public AudioSource src;
 
 
     public void Start()
@@ -80,6 +81,12 @@ public class Jednostka : MonoBehaviour
         Menu.jednostki[druzyna , Menu.ludnosc[druzyna]] = jednostka;
         nr_jednostki = Menu.ludnosc[druzyna];
         Menu.ludnosc[druzyna]++;
+    }
+
+    public void walkSound()
+    {
+        src.clip = Sound.sound.GetComponent<Sound>().walk;
+        src.Play();
     }
 
     public void rozlozenie()

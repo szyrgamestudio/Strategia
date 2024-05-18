@@ -39698,6 +39698,7 @@ GameObject:
   - component: {fileID: 2082262133}
   - component: {fileID: 2082262132}
   - component: {fileID: 2082262131}
+  - component: {fileID: 2082262144}
   - component: {fileID: 2082262134}
   - component: {fileID: 2082262137}
   - component: {fileID: 2082262138}
@@ -39992,6 +39993,24 @@ MonoBehaviour:
   tworcy: {fileID: 1893735178}
   pierwszyRaz: 0
   glos: {fileID: 1741324655}
+--- !u!114 &2082262144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082262130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22b82116977af5439ca82a44ba0aa4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk: {fileID: 8300000, guid: aed1e06e16549704f97eca37e7ee52ec, type: 3}
+  sword: {fileID: 0}
+  magic: {fileID: 0}
+  damage: {fileID: 0}
+  build: {fileID: 0}
+  dead: {fileID: 0}
 --- !u!1 &2099706736
 GameObject:
   m_ObjectHideFlags: 0

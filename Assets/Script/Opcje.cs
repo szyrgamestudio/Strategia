@@ -20,6 +20,7 @@ public class Opcje : MonoBehaviour
     public bool pierwszyRaz;
 
     public Slider glos;
+    public Slider glosSFX;
 
 
     void Start()
@@ -41,8 +42,12 @@ public class Opcje : MonoBehaviour
         //resolutionDropdown.value = currentResolutionIndex; // Ustawianie wartości dropdown na aktualną rozdzielczość
         //resolutionDropdown.RefreshShownValue();
         float volume;
-        audioMixer.GetFloat("volume", out volume);
+        audioMixer.GetFloat("musicVolume", out volume);
         glos.value = (float)-Math.Log(-volume, 2);
+
+        float sfxVolume;
+        audioMixer.GetFloat("sfxVolume", out sfxVolume);
+        glosSFX.value = (float)-Math.Log(-sfxVolume, 2);
     }
 
     void Update()
@@ -72,7 +77,11 @@ public class Opcje : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", (float)(-Math.Pow(2,-volume)+1));
+        audioMixer.SetFloat("musicVolume", (float)(-Math.Pow(2,-volume)+1));
+    }
+    public void SetSFX(float volume)
+    {
+        audioMixer.SetFloat("SFXVolume", (float)(-Math.Pow(2,-volume)+1));
     }
 
 
@@ -93,7 +102,8 @@ public class Opcje : MonoBehaviour
         else
             opcje.SetActive(true);
     }
-        public void tworcyOn()
+
+    public void tworcyOn()
     {
         if(tworcy.activeSelf)
             tworcy.SetActive(false);

@@ -99,7 +99,7 @@ public class Plac : MonoBehaviour
                 {
                     Przycisk.budynek[2]=false;
                     Interface.interfaceStatic.GetComponent<Interface>().Brak(gryf.GetComponent<Jednostka>().cena , 0 , 0, true);
-                    if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=gryf.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
+                    if(Menu.zloto[Menu.tura]>=gryf.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=1  && Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna])
                     {
                         
                         if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)

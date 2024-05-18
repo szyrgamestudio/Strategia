@@ -65,8 +65,8 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-            zloto[1] = 14;
-            drewno[1] = 14;
+            zloto[1] = 140;
+            drewno[1] = 140;
             zloto[2] = 15;
             drewno[2] = 15;
             zloto[3] = 16;

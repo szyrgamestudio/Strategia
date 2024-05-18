@@ -45,7 +45,7 @@ public class Kuznia : MonoBehaviour
                 {
                     Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update1[druzyna]* 2 , 0 , 0, false);
                     Przycisk.budynek[0]=false;
-                    if(Przycisk.budynek[0]==true && Menu.zloto[Menu.tura]>=4+update1[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update1[druzyna])
+                    if(Menu.zloto[Menu.tura]>=4+update1[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update1[druzyna])
                     {
                         
                         Menu.zloto[Menu.tura]-=4 + update1[druzyna];
@@ -60,7 +60,7 @@ public class Kuznia : MonoBehaviour
                 {
                     Przycisk.budynek[1]=false;
                     Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update2[druzyna]* 2 , 0 , 0, false);
-                    if(Przycisk.budynek[1]==true && Menu.zloto[Menu.tura]>=4+update2[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update2[druzyna])
+                    if(Menu.zloto[Menu.tura]>=4+update2[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update2[druzyna])
                     {
                         
                         Menu.zloto[Menu.tura]-=4 + update2[druzyna];
@@ -76,7 +76,7 @@ public class Kuznia : MonoBehaviour
                 {
                     Przycisk.budynek[2]=false;
                     Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update3[druzyna]* 2 , 0 , 0, false);
-                    if(Przycisk.budynek[2]==true && Menu.zloto[Menu.tura]>=4 + update3[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update3[druzyna])
+                    if(Menu.zloto[Menu.tura]>=4 + update3[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update3[druzyna])
                     {
                         
                         Menu.zloto[Menu.tura]-=4 + update3[druzyna];
@@ -92,7 +92,7 @@ public class Kuznia : MonoBehaviour
                 {
                     Przycisk.budynek[3]=false;
                     Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update4[druzyna]* 2 , 0 , 0, false);
-                    if(Przycisk.budynek[3]==true && Menu.zloto[Menu.tura]>=4 + update4[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update4[druzyna])
+                    if(Menu.zloto[Menu.tura]>=4 + update4[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update4[druzyna])
                     {
                         
                         Menu.zloto[Menu.tura]-=4 + update4[druzyna];
@@ -108,7 +108,7 @@ public class Kuznia : MonoBehaviour
                 {
                     Przycisk.budynek[4]=false;
                     Interface.interfaceStatic.GetComponent<Interface>().Brak(4+update5[druzyna]* 2 , 0 , 0, false);
-                    if(Przycisk.budynek[4]==true && Menu.zloto[Menu.tura]>=4 + update5[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update5[druzyna])
+                    if(Menu.zloto[Menu.tura]>=4 + update5[druzyna]* 2 && Menu.ratuszPoziom[druzyna] >= update5[druzyna])
                     {
                         
                         Menu.zloto[Menu.tura]-=4 + update5[druzyna];

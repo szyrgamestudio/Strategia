@@ -47,12 +47,6 @@ public class Pole : MonoBehaviour
     }
     void Update()
     {
-        // if(MenuGlowne.multi)
-        // {
-        //     StartCoroutine(Aktualizuj(Zajete));
-        // }
-        // if(Menu.Next)
-        //     Clean2();
         if(Menu.Next)
         {
             koniec = true;
@@ -62,11 +56,6 @@ public class Pole : MonoBehaviour
             koniec = false;
             Clean2();
         }
-        // if(koniec && !Menu.Next && Ip.ip==1)
-        // {
-        //     koniec = false;
-        //     AktualizujPołożenie();
-        // }
     }
 
     IEnumerator Aktualizuj(bool Zajete)
@@ -695,8 +684,11 @@ int i=0;
         int k = 0;
         while(droga[k+1]!=null && droga[k + 1] != blok)
         {
+            
             if(ziomek.GetComponent<Jednostka>().szybkosc >= droga[k].GetComponent<Pole>().trudnosc + (droga[k].GetComponent<Pole>().Nout % 2))
             {
+                if(kafelek.GetComponent<PoleOdkryj>().dark == null)
+                    ziomek.GetComponent<Jednostka>().walkSound();
                 ziomek.GetComponent<Jednostka>().szybkosc -= droga[k].GetComponent<Pole>().trudnosc + (droga[k].GetComponent<Pole>().Nout % 2);
                 Vector3 start = droga[k].transform.position;
                 Vector3 cel = droga[k+1].transform.position;
@@ -713,6 +705,7 @@ int i=0;
                 break;
             }
             ziomek.GetComponent<Jednostka>().odkryj(3);
+            
         }
 
         Clean2(0);

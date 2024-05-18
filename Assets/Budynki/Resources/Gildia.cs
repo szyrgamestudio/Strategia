@@ -146,7 +146,7 @@ public class Gildia : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }       
 
-            if(Menu.ratuszPoziom[druzyna]<=1)
+            if(Menu.ratuszPoziom[druzyna]<1)
             {
                 teksty[2] = "Wymagany 2 poziom ratusza";
                 teksty[1] = "Wymagany 2 poziom ratusza";
