@@ -200,7 +200,12 @@ public class Jednostka : MonoBehaviour
     public void zaatakowanieMulti(int ip, float hp)
     {
         if(ip != Ip.ip)
+        {
+            src.clip = Sound.sound.GetComponent<Sound>().damage;
+            if(Menu.kafelki[(int)transform.position.x][(int)transform.position.y].GetComponent<PoleOdkryj>().dark == null)
+                src.Play();
             HP -= hp;
+        }
     }
 
     public void zaatakowanie(GameObject atakujacy)
@@ -235,6 +240,9 @@ public class Jednostka : MonoBehaviour
                         PhotonView photonView = GetComponent<PhotonView>();
                         photonView.RPC("zaatakowanieMulti", RpcTarget.All,Ip.ip, roundedResult);
                     }
+            src.clip = Sound.sound.GetComponent<Sound>().damage;
+            if(Menu.kafelki[(int)transform.position.x][(int)transform.position.y].GetComponent<PoleOdkryj>().dark == null)
+                src.Play();
             HP -= roundedResult;
 
             ShowDMG(roundedResult, new Color(1.0f, 0.0f, 0.0f, 1.0f));
@@ -264,11 +272,18 @@ public class Jednostka : MonoBehaviour
             canvasAnimacji.transform.rotation = Quaternion.Euler(0, 0, 270f);
 
         animator.SetBool("MeleeAttack", true);
+        src.clip = Sound.sound.GetComponent<Sound>().sword;
+        if(Menu.kafelki[(int)transform.position.x][(int)transform.position.y].GetComponent<PoleOdkryj>().dark == null)
+            src.Play();
     }
     public void animacjaPocisk(GameObject cel)
     {
         GameObject strzal = Instantiate(pocisk, jednostka.transform.position, Quaternion.identity); 
         strzal.GetComponent<Pocisk>().cel = cel;
+        src.clip = Sound.sound.GetComponent<Sound>().magic;
+        if(Menu.kafelki[(int)transform.position.x][(int)transform.position.y].GetComponent<PoleOdkryj>().dark == null)
+            src.Play();
+
     }
 
     public void Aktualizuj()
