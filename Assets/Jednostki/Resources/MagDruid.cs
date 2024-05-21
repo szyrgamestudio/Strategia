@@ -26,39 +26,12 @@ public class MagDruid : MonoBehaviour
                     {
                         Przycisk.jednostka[0]=false;
                         Menu.magia[Menu.tura]-=5;
-                        if(niedzwiedz)
+                        przemiana();
+                        if(MenuGlowne.multi)
                         {
-                            niedzwiedz = false;
-                            Jednostka staty = jednostka.GetComponent<Jednostka>();
-                            staty.atak = 2;
-                            staty.obrona = 1 + Kuznia.update5[Menu.tura];
-                            staty.mindmg = 1;
-                            staty.maxdmg = 2;
-                            staty.zasieg = 3;
-                            staty.zdolnosci = 2;
-                            jednostka.GetComponent<SpriteRenderer>().sprite = druidArt;
-                            budynki[0] = niedzwiedzArt;
-                            teksty[0] = "Udeżenie piorunek wywołuje łańcuch błyskawic raniących dwie jednostki w pobliżu";
-                            staty.OnMouseDown();
-                            OnMouseDown();
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("przemianaMulti", RpcTarget.All,Ip.ip);
                         }
-                        else
-                        {
-                            niedzwiedz = true;
-                            Jednostka staty = jednostka.GetComponent<Jednostka>();
-                            staty.atak = 4;
-                            staty.obrona = 4;
-                            staty.mindmg = 3;
-                            staty.maxdmg = 4;
-                            staty.zasieg = 1;
-                            staty.zdolnosci = 1;
-                            jednostka.GetComponent<SpriteRenderer>().sprite = niedzwiedzArt;
-                            budynki[0] = druidArt;
-                            teksty[0] = "Przemień się z powrotem w postać druida";
-                            staty.OnMouseDown();
-                            OnMouseDown();
-                        }
-
                     }
                 if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
                     {
@@ -94,7 +67,51 @@ public class MagDruid : MonoBehaviour
             {
                 leczenie = false;
             }
+    }
 
+    [PunRPC]
+    public void przemianaMulti(int ip)
+    {
+        if(Ip.ip != ip)
+        {
+            przemiana();
+        }
+    }
+
+    public void przemiana()
+    {
+        if(niedzwiedz)
+        {
+            niedzwiedz = false;
+            Jednostka staty = jednostka.GetComponent<Jednostka>();
+            staty.atak = 2;
+            staty.obrona = 1 + Kuznia.update5[Menu.tura];
+            staty.mindmg = 1;
+            staty.maxdmg = 2;
+            staty.zasieg = 3;
+            staty.zdolnosci = 2;
+            jednostka.GetComponent<SpriteRenderer>().sprite = druidArt;
+            budynki[0] = niedzwiedzArt;
+            teksty[0] = "Udeżenie piorunek wywołuje łańcuch błyskawic raniących dwie jednostki w pobliżu";
+            staty.OnMouseDown();
+            OnMouseDown();
+        }
+        else
+        {
+            niedzwiedz = true;
+            Jednostka staty = jednostka.GetComponent<Jednostka>();
+            staty.atak = 4;
+            staty.obrona = 4;
+            staty.mindmg = 3;
+            staty.maxdmg = 4;
+            staty.zasieg = 1;
+            staty.zdolnosci = 1;
+            jednostka.GetComponent<SpriteRenderer>().sprite = niedzwiedzArt;
+            budynki[0] = druidArt;
+            teksty[0] = "Przemień się z powrotem w postać druida";
+            staty.OnMouseDown();
+            OnMouseDown();
+        }
     }
 
     [PunRPC]

@@ -65,8 +65,8 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-            zloto[1] = 14;
-            drewno[1] = 14;
+            zloto[1] = 140;
+            drewno[1] = 140;
             zloto[2] = 15;
             drewno[2] = 15;
             zloto[3] = 16;
@@ -206,11 +206,14 @@ public class Menu : MonoBehaviour
                 int zostalo = 0;
 
                 for(int i = 1; i<5;i++)
+                {
+                    Debug.Log(i + " " + bazyIlosc[i]);
                     if(bazyIlosc[i]==0)
                     {
                         WyburRas.aktywny[i-1] = false;
                         zostalo++;
                     }
+                }
                 if(zostalo == 3)
                     SceneManager.LoadScene(3);   //KONIEC GRY
                     

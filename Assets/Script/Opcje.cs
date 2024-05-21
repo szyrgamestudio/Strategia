@@ -108,5 +108,26 @@ public class Opcje : MonoBehaviour
         else
             tworcy.SetActive(true);
     }
+
+    public string youtubeURL = "https://www.youtube.com/channel/UCYDV1Kf1ocIWTZGMO_MYy-g"; 
+
+    public void OpenLink()
+    {
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            // Otwórz link w domyślnej przeglądarce na urządzeniach mobilnych
+            Application.OpenURL(youtubeURL);
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
+        {
+            // Otwórz link w domyślnej przeglądarce na komputerze
+            System.Diagnostics.Process.Start(youtubeURL);
+        }
+        else
+        {
+            // Wyświetl komunikat, jeśli platforma nie jest obsługiwana
+            Debug.Log("Platforma nie jest obsługiwana");
+        }
+    }
 }
 

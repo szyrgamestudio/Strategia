@@ -199,7 +199,7 @@ public class Ratusz : MonoBehaviour
         }
         if(budynek.GetComponent<Budynek>().poZniszczeniu == 2)
         {
-           
+           Debug.Log("dzoa;a");
             Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().Zajete = false;
             if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
             {

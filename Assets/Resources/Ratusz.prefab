@@ -700,6 +700,7 @@ MonoBehaviour:
   damage: 0
   poczatek: 0
   koniec: 0
+  src: {fileID: 0}
 --- !u!114 &9006436447893580569
 MonoBehaviour:
   m_ObjectHideFlags: 0
