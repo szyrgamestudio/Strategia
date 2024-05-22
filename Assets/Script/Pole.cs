@@ -117,7 +117,7 @@ public class Pole : MonoBehaviour
 
     public void OnMouse(GameObject poruszany, int dostane)
     {
-        if(!idzie)
+        if(!idzie && poruszany != null)
         {
             if(MenuGlowne.multi && dostane == 1)
             {

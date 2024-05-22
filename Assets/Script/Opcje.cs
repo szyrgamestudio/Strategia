@@ -39,15 +39,13 @@ public class Opcje : MonoBehaviour
             }
         }
         resolutionDropdown.AddOptions(options);
-        //resolutionDropdown.value = currentResolutionIndex; // Ustawianie wartości dropdown na aktualną rozdzielczość
-        //resolutionDropdown.RefreshShownValue();
+
         float volume;
-        audioMixer.GetFloat("musicVolume", out volume);
+        audioMixer.GetFloat("music", out volume);
         glos.value = (float)-Math.Log(-volume, 2);
 
-        float sfxVolume;
-        audioMixer.GetFloat("sfxVolume", out sfxVolume);
-        glosSFX.value = (float)-Math.Log(-sfxVolume, 2);
+        audioMixer.GetFloat("SFX", out volume);
+        glosSFX.value = (float)-Math.Log(-volume, 2);
     }
 
     void Update()
@@ -75,13 +73,13 @@ public class Opcje : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void SetVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("musicVolume", (float)(-Math.Pow(2,-volume)+1));
+        audioMixer.SetFloat("music", (float)(-Math.Pow(2,-volume)+1));
     }
-    public void SetSFX(float volume)
+    public void SetSFXVolume(float volume)
     {
-        audioMixer.SetFloat("SFXVolume", (float)(-Math.Pow(2,-volume)+1));
+        audioMixer.SetFloat("SFX", (float)(-Math.Pow(2,-volume)+1));;
     }
 
 
@@ -109,6 +107,27 @@ public class Opcje : MonoBehaviour
             tworcy.SetActive(false);
         else
             tworcy.SetActive(true);
+    }
+
+    public string youtubeURL = "https://www.youtube.com/channel/UCYDV1Kf1ocIWTZGMO_MYy-g"; 
+
+    public void OpenLink()
+    {
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            // Otwórz link w domyślnej przeglądarce na urządzeniach mobilnych
+            Application.OpenURL(youtubeURL);
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
+        {
+            // Otwórz link w domyślnej przeglądarce na komputerze
+            System.Diagnostics.Process.Start(youtubeURL);
+        }
+        else
+        {
+            // Wyświetl komunikat, jeśli platforma nie jest obsługiwana
+            Debug.Log("Platforma nie jest obsługiwana");
+        }
     }
 }
 

@@ -96,7 +96,6 @@ public class WyburRas : MonoBehaviour
     [PunRPC]
     public void SynchronizeTransform(Vector3 nowePołożenieA,Vector3 nowePołożenieB,Vector3 nowePołożenieC)
     {
-        Debug.Log("dziwka");
         lewy.transform.position = nowePołożenieA;
         prawy.transform.position = nowePołożenieB;
         main.transform.position = nowePołożenieC;

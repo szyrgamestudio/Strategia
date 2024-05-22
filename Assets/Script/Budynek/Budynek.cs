@@ -45,6 +45,8 @@ public class Budynek : MonoBehaviour
     public bool poczatek;
     public bool koniec;
 
+    public AudioSource src;
+
     public void Start()
     {
         switch(druzyna)
@@ -68,6 +70,9 @@ public class Budynek : MonoBehaviour
     {
         if (moznaBudowac)
         {
+            src.clip = Sound.sound.GetComponent<Sound>().build;
+            if(Menu.kafelki[(int)transform.position.x][(int)transform.position.y].GetComponent<PoleOdkryj>().dark == null)
+                src.Play();
             punktyBudowy += Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura];
             if(MenuGlowne.multi)
             {
