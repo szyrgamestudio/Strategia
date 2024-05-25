@@ -21,7 +21,7 @@ public class MagOgnia : MonoBehaviour
     { 
         if(jednostka == Jednostka.Select)
             {
-                if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
+                if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
                     {
                         jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[0]=false;
@@ -49,7 +49,7 @@ public class MagOgnia : MonoBehaviour
                 if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && ignis)
                 {
                     ignis = false;
-                    Menu.magia[Menu.tura]-=4;
+                    Menu.magia[Menu.tura]-=3;
                     jednostka.GetComponent<Jednostka>().akcja = false;
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 4;
                     if(MenuGlowne.multi)
@@ -137,7 +137,7 @@ public class MagOgnia : MonoBehaviour
         {
             InterfaceUnit.Czyszczenie(); 
             PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "4"; 
+            Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = "7"; 
             Guzikk = InterfaceUnit.przyciski[2].GetComponent<PrzyciskInter>();

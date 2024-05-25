@@ -171,7 +171,7 @@ public class InterfaceBuild : MonoBehaviour
     {
         menu.GetComponent<Menu>().InfoKolejnaTura.SetActive(false);
         Budynek staty = budynek.GetComponent<Budynek>();
-        budynek.GetComponent<Budynek>().poZniszczeniu = 0;
+        //budynek.GetComponent<Budynek>().poZniszczeniu = 0;
         GameObject kafelek = Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y];
         kafelek.GetComponent<Pole>().Zajete = false;
         kafelek.GetComponent<Pole>().postac = null;
@@ -188,6 +188,8 @@ public class InterfaceBuild : MonoBehaviour
         Menu.PanelUnit.SetActive(false);
         Menu.PanelBuild.SetActive(false);
         Pole.Clean2();
+        Debug.Log(budynek.name);
+        Debug.Log(staty.poZniszczeniu); 
         if(staty.poZniszczeniu==0)
             Destroy(budynek);
         else{staty.poZniszczeniu=2;}

@@ -57,6 +57,7 @@ public class Menu : MonoBehaviour
 
     public Slider turaNPC;
     public Text nrTuryText;
+    public Image kolejnaTuraImage;
 
 
     private void Start()
@@ -65,8 +66,8 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-            zloto[1] = 140;
-            drewno[1] = 140;
+            zloto[1] = 14;
+            drewno[1] = 14;
             zloto[2] = 15;
             drewno[2] = 15;
             zloto[3] = 16;
@@ -159,6 +160,13 @@ public class Menu : MonoBehaviour
         bazyIlosc = bazy;
     }
 
+    [PunRPC]
+    public void koniecMulti(int wygrany)
+    {
+        End.wygrany = wygrany;
+        SceneManager.LoadScene(3); 
+    }
+
     public static void usunSelect2()
     {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -166,10 +174,57 @@ public class Menu : MonoBehaviour
             Jednostka.wybieranie = false;
     }
 
+    [PunRPC]
+     IEnumerator nowaTuraPrzypomnienie(int tura)
+    {
+        if(tura+1 == Ip.ip)
+        {
+
+            // Przenieś obraz na początkową pozycję
+            kolejnaTuraImage.transform.localPosition = new Vector3(0, kolejnaTuraImage.transform.localPosition.y, kolejnaTuraImage.transform.localPosition.z);
+            
+            // Stopniowo zwiększ przezroczystość
+            Color color = kolejnaTuraImage.color;
+            float alpha = color.a;
+            float duration = 1f;
+            color.a = 0f;
+
+            // Fade in
+            for (float t = 0.01f; t < duration; t += 0.01f)
+            {
+                color.a += 0.01f / duration;
+                kolejnaTuraImage.color = color;
+                yield return 0.01f;
+            }
+            for (float t = 0.01f; t < duration; t += 0.01f)
+            {
+                color.a -= 0.01f / duration;
+                kolejnaTuraImage.color = color;
+                yield return 0.01f;
+            }
+            color.a = 1;
+            kolejnaTuraImage.color = color;
+
+            // Zmień pozycję
+            kolejnaTuraImage.transform.localPosition = new Vector3(1300, kolejnaTuraImage.transform.localPosition.y, kolejnaTuraImage.transform.localPosition.z);
+
+            // // Stopniowo zmniejsz przezroczystość
+            // alpha = color.a;
+            // for (float t = 0.01f; t < duration; t += Time.deltaTime)
+            // {
+            //     color.a = Mathf.Lerp(alpha, 0, Mathf.Min(1, t / duration));
+            //     kolejnaTuraImage.color = color;
+            //     yield return null;
+            // }
+            // color.a = 0;
+            // kolejnaTuraImage.color = color;
+        }
+    }
+
     public void NextTurn()
     {
         if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
-            {
+        {
             NaPewnoKoniec++;
             StartCoroutine(PrzedKoniec());
             for (int i = 0; i < 50; i++)
@@ -199,24 +254,45 @@ public class Menu : MonoBehaviour
                 {
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("aktualizacjaId", RpcTarget.All, bazyIlosc);
+
+                }
+
+
+                Debug.Log(tura+1 + " " + (Ip.ip ));
+                if (MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("nowaTuraPrzypomnienie", RpcTarget.All, tura);
+                  //  StartCoroutine(nowaTuraPrzypomnienie(tura));
                 }
 
                 tura++;
 
                 int zostalo = 0;
+                int wygrany = 0;
 
                 for(int i = 1; i<5;i++)
                 {
-                    Debug.Log(i + " " + bazyIlosc[i]);
                     if(bazyIlosc[i]==0)
                     {
+                        
                         WyburRas.aktywny[i-1] = false;
                         zostalo++;
                     }
+                    else
+                        wygrany = i;
                 }
+                
                 if(zostalo == 3)
+                {
+                    End.wygrany = wygrany;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("koniecMulti", RpcTarget.All, wygrany);
+                    }
                     SceneManager.LoadScene(3);   //KONIEC GRY
-                    
+                }
                 
                 for(int xd = 1; xd<5;xd++)
                     if (tura == xd && !WyburRas.aktywny[xd-1])

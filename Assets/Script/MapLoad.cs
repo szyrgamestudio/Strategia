@@ -12,6 +12,7 @@ public class MapLoad : MonoBehaviour
     public static Sprite[] obrazStatic = new Sprite[66];
     public string nazwa;// = "mmap1.txt";
     public GameObject kafelek;
+    public GameObject kafelekFake;
     public bool wysokoscStart;
     public bool zlotoStart;
     public bool jednostkiStart;
@@ -157,19 +158,28 @@ public class MapLoad : MonoBehaviour
                     {
                         staty.las = true;
                         if (Random.Range(0, 2) == 0)
+                        {
                             newUnit.GetComponent<SpriteRenderer>().sprite = obraz[31];
+                            newUnit.GetComponent<Pole>().spriteName = 31;
+                        }
                     }
                     if (kafelekObraz[x, y] == 5)
                     {
                         if (Random.Range(0, 7) == 0)
+                        {
                             newUnit.GetComponent<SpriteRenderer>().sprite = obraz[35];
+                            newUnit.GetComponent<Pole>().spriteName = 35;
+                        }
                     }
                     if (kafelekObraz[x, y] == 32)
                     {
                         staty.las = true;
                         staty.Zajete = true;
                         if (Random.Range(0, 2) == 0)
+                        {
                             newUnit.GetComponent<SpriteRenderer>().sprite = obraz[52];
+                            newUnit.GetComponent<Pole>().spriteName = 52;
+                        }
                     }
                     if (kafelekObraz[x, y] == 10)
                         staty.magia = 1;
@@ -181,7 +191,10 @@ public class MapLoad : MonoBehaviour
                     {
                         staty.las = true;
                         if (Random.Range(0, 2) == 0)
+                        {
                             newUnit.GetComponent<SpriteRenderer>().sprite = obraz[kafelekObraz[x, y] + 9];
+                            newUnit.GetComponent<Pole>().spriteName += 9;
+                        }
                     }
 
 
@@ -232,6 +245,48 @@ public class MapLoad : MonoBehaviour
                 if (kafelekEnemy[k, 0] == 2)
                     StartCoroutine(budynek(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
                 k++;
+            }
+            for(int i = -1; i < Menu.BoardSizeX; i++)
+            {
+                GameObject newUnit = null;
+                
+                
+                Vector3 TilePosition = new Vector3(i, -1, 3);
+                if (MenuGlowne.multi)
+                    newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
+                else
+                    newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
+                newUnit.name = i.ToString() + "  -1";
+                TilePosition = new Vector3(i, Menu.BoardSizeY+1, 3);
+                if (MenuGlowne.multi)
+                    newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
+                else
+                    newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
+                newUnit.name = Menu.BoardSizeY+1.ToString() + "  " + Menu.BoardSizeX+1.ToString();
+                TilePosition = new Vector3(i, Menu.BoardSizeY, 3);
+                if (MenuGlowne.multi)
+                    newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
+                else
+                    newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
+                newUnit.name = Menu.BoardSizeY.ToString() + "  " + Menu.BoardSizeX.ToString();
+            }
+            for(int i = -1; i < Menu.BoardSizeY+2; i++)
+            {
+                GameObject newUnit = null;
+                
+                
+                Vector3 TilePosition = new Vector3(-1, i, 3);
+                if (MenuGlowne.multi)
+                    newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
+                else
+                    newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
+                newUnit.name = "-1 " + i.ToString();
+                TilePosition = new Vector3(Menu.BoardSizeY, i,  3);
+                if (MenuGlowne.multi)
+                    newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
+                else
+                    newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
+                newUnit.name =  Menu.BoardSizeX.ToString() + " " + Menu.BoardSizeY.ToString();
             }
             // Przykład użycia wczytanych danych (możesz dostosować do swoich potrzeb)
             Debug.Log($"Wczytano dane z pliku. BoardSizeX: {Menu.BoardSizeX}, BoardSizeY: {Menu.BoardSizeY}");

@@ -46,11 +46,16 @@ public class Palladyn : MonoBehaviour
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                         buff = true;
                     }
-                if(Przycisk.jednostka[2]==true && Menu.magia[Menu.tura]>=15)
+                if(Przycisk.jednostka[2]==true && Menu.magia[Menu.tura]>=10 && cooldown == 0)
                     {
                         Przycisk.jednostka[2]=false;
-                        Menu.magia[Menu.tura]-=15;
+                        Menu.magia[Menu.tura]-=10;
                         cooldown2 = 2;
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("cooldownUpdate", RpcTarget.All,Ip.ip, 2);
+                        }
                     }
             
                 if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) == 1 && leczenie && 
@@ -124,6 +129,14 @@ public class Palladyn : MonoBehaviour
             Oponenet.GetComponent<Jednostka>().HP -= dmg;
         }
     }
+    [PunRPC]
+    public void cooldownUpdate(int ip, int cooldown3)
+    {
+        if(ip != Ip.ip)
+        {
+            cooldown2 = cooldown3;
+        }
+    }
 
      void OnMouseDown()
     {
@@ -133,16 +146,19 @@ public class Palladyn : MonoBehaviour
             PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
             Guzikk.IconMagic.enabled = true;
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
+
             if(cooldown>0)
             {
-             Guzikk.CenaMagic.text = cooldown.ToString(); 
-             Guzikk.IconMagic.enabled = true;
+                Guzikk.CenaMagic.text = cooldown.ToString(); 
+                Guzikk.IconMagic.enabled = true;
             }
-             else
-             {
-                Guzikk.CenaMagic.text = "";
-                Guzikk.IconMagic.enabled = false;
-             }
+            else
+            {
+               Guzikk.CenaMagic.text = "";
+               Guzikk.IconMagic.enabled = false;
+            }
+            Guzikk = InterfaceUnit.przyciski[2].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "10"; 
             
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
             {

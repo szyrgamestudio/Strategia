@@ -9,7 +9,7 @@ public class PoleOdkryj : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // if(!MenuGlowne.multi)
+        if(!MenuGlowne.multi)
             Destroy(dark);
     }
 

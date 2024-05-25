@@ -34,7 +34,21 @@ public class WyburRas : MonoBehaviour
 
     private PhotonView photonView;
 
+    // private int maxGraczy = 0;
 
+    // void Update()
+    // {
+    //     if (MenuGlowne.multi && Ip.ip == 1)
+    //     {
+    //         if(PhotonNetwork.CurrentRoom.PlayerCount > maxGraczy)
+    //         {
+    //             Debug.Log(maxGraczy + " " + PhotonNetwork.CurrentRoom.PlayerCount);
+    //             maxGraczy = PhotonNetwork.CurrentRoom.PlayerCount;
+    //             photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
+    //             Debug.Log("dd");
+    //         }
+    //     }
+    // }
 
     public void Start()
     {
@@ -69,7 +83,6 @@ public class WyburRas : MonoBehaviour
     [PunRPC]
     public void SynchronizeChoice(int selected, int value)
     {
-        Debug.Log($"SynchronizeChoice RPC called with selected: {selected}, value: {value}");
         switch (selected)
         {
             case 1:
@@ -89,9 +102,10 @@ public class WyburRas : MonoBehaviour
 
 
     [PunRPC]
-    public void SynchronizeMovement(Image A, Image B, Image C)
+    public void SynchronizeMovement(Image A, Image B, Image C, int IP)
     {
-        StartCoroutine(PrzeniesObiekty(A, B, C));
+        if(Ip.ip != IP)
+            StartCoroutine(PrzeniesObiekty(A, B, C));
     }
     [PunRPC]
     public void SynchronizeTransform(Vector3 nowePołożenieA,Vector3 nowePołożenieB,Vector3 nowePołożenieC)
@@ -174,7 +188,7 @@ public class WyburRas : MonoBehaviour
                 wybierany = 2;
                 break;
         }
-        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy);
+        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy, Ip.ip);
 
     }
     public void prawyGora()
@@ -191,7 +205,7 @@ public class WyburRas : MonoBehaviour
                 wybierany = 3;
                 break;
         }
-        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy);
+        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy, Ip.ip);
     }
     public void mainGora()
     {
@@ -208,7 +222,7 @@ public class WyburRas : MonoBehaviour
                 break;
         }
 
-        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, lewy, main);
+        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, lewy, main, Ip.ip);
     }
     IEnumerator PrzeniesObiekty(Image A, Image B, Image C)
     {
@@ -238,7 +252,7 @@ public class WyburRas : MonoBehaviour
         A.rectTransform.position = nowaPozycjaMain;
         B.rectTransform.position = nowaPozycjaLewy;
         C.rectTransform.position = nowaPozycjaPrawy;
-        photonView.RPC("SynchronizeTransform", RpcTarget.All, lewy.transform.position, prawy.transform.position, main.transform.position);
+       // photonView.RPC("SynchronizeTransform", RpcTarget.All, lewy.transform.position, prawy.transform.position, main.transform.position);
     }
     public void loock()
     {
@@ -281,8 +295,6 @@ public class WyburRas : MonoBehaviour
             if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount >= 1 && Ip.ip==1) //zmienic na 2
             {
                 Menu.IloscGraczy = PhotonNetwork.CurrentRoom.PlayerCount;
-                Debug.Log(Menu.IloscGraczy);
-                Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
                 for(int i = 0 ; i<4;i++)
                     aktywny[i] = false;
                 for(int i = 0 ; i<Menu.IloscGraczy;i++)

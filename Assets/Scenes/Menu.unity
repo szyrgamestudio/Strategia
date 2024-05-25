@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wersja 0.2.2
+  m_text: Wersja 0.2.3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2937,7 +2937,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 669, y: -446}
+  m_AnchoredPosition: {x: -627, y: -412.25}
   m_SizeDelta: {x: 442.938, y: 106.2508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1111833235
@@ -3071,7 +3071,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -627, y: -446}
+  m_AnchoredPosition: {x: 665, y: -412.25}
   m_SizeDelta: {x: 442.938, y: 106.2508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116116825
@@ -4358,7 +4358,7 @@ MonoBehaviour:
   pierwszyRaz: 0
   glos: {fileID: 1080040248}
   glosSFX: {fileID: 840985063}
-  youtubeURL: https://www.youtube.com/channel/UCYDV1Kf1ocIWTZGMO_MYy-g
+  youtubeURL: https://youtu.be/VfR1Mfr6JBM
 --- !u!1 &1561513032
 GameObject:
   m_ObjectHideFlags: 0
@@ -4808,7 +4808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -675.0488, y: 447.7307}
+  m_AnchoredPosition: {x: 621, y: 411}
   m_SizeDelta: {x: 1928.5657, y: 1078.0214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1705718582
@@ -5747,7 +5747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 669, y: -277}
+  m_AnchoredPosition: {x: -627, y: -273}
   m_SizeDelta: {x: 442.938, y: 106.2508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2102197180

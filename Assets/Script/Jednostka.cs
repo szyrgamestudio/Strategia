@@ -444,8 +444,32 @@ public class Jednostka : MonoBehaviour
                 }
     }
 
+    [PunRPC]
+    public void zdradaMulti(int ip)
+    {
+        if(Ip.ip != ip)
+            zdrada();
+    }
+
+    public void zdrada()
+    {
+        if(MenuGlowne.multi)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("zdradaMulti", RpcTarget.All, Ip.ip);
+        }
+        Menu.NPC.Add(jednostka);
+        spanie = true;
+        druzyna = 0;
+        Start();
+    }
+
     private void koniecTury()
     {
+        if(druzyna != 0 && WyburRas.aktywny[druzyna-1] == false)
+        {
+            zdrada();
+        }
         szybkosc = maxszybkosc;
         akcja = true;
         if(druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1))

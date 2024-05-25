@@ -782,7 +782,7 @@ MonoBehaviour:
   zdolnosci: 1
   zloto: 5
   drewno: 9
-  nazwa: Medyk
+  nazwa: Dom Leczenia
   punktyBudowy: 0
   punktyBudowyMax: 5
   healthGracza: {fileID: 8826697438269049201}
