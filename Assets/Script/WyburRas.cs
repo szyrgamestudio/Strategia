@@ -14,7 +14,7 @@ public class WyburRas : MonoBehaviour
     static public int[] team = new int[4];
 
     public Sprite[] rasaArt = new Sprite[2];
-    public Sprite[] herosArt = new Sprite[2];
+    public Sprite[] herosArt = new Sprite[4];
     public Sprite[] teamArt = new Sprite[4];
 
     public int id;
@@ -91,13 +91,14 @@ public class WyburRas : MonoBehaviour
                 break;
             case 3:
                 heros[id] = value;
-                prawy.sprite = herosArt[heros[id]];
+                prawy.sprite = herosArt[heros[id]+rasa[id]*2];
                 break;
             case 2:
                 team[id] = value;
                 lewy.sprite = teamArt[team[id]];
                 break;
         }
+        prawy.sprite = herosArt[heros[id]+rasa[id]*2];
     }
 
 
@@ -119,35 +120,38 @@ public class WyburRas : MonoBehaviour
     public void prawo()
     {
         if(id+1 == Ip.ip || !MenuGlowne.multi)
-        switch (wybierany)
         {
-            case 1:
-                rasa[id]++;
-                if (rasa[id] == 2)
-                    rasa[id] = 0;
-                main.sprite = rasaArt[rasa[id]];
-                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
-                break;
-            case 3:
-                heros[id]++;
-                if (heros[id] == 2)
-                    heros[id] = 0;
-                prawy.sprite = herosArt[heros[id]];
-                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
-                break;
-            case 2:
-                team[id]++;
-                if (team[id] == 4)
-                    team[id] = 0;
-                lewy.sprite = teamArt[team[id]];
-                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
-                break;
-
+            switch (wybierany)
+            {
+                case 1:
+                    rasa[id]++;
+                    if (rasa[id] == 2)
+                        rasa[id] = 0;
+                    main.sprite = rasaArt[rasa[id]];
+                    photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
+                    break;
+                case 3:
+                    heros[id]++;
+                    if (heros[id] == 2)
+                        heros[id] = 0;
+                   // prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+                    photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
+                    break;
+                case 2:
+                    team[id]++;
+                    if (team[id] == 4)
+                        team[id] = 0;
+                    lewy.sprite = teamArt[team[id]];
+                    photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
+                    break;
+            }
+            prawy.sprite = herosArt[heros[id]+rasa[id]*2];
         }
     }
     public void lewo()
     {
         if(id+1 == Ip.ip || !MenuGlowne.multi)
+        {
         switch (wybierany)
         {
             case 1:
@@ -161,7 +165,7 @@ public class WyburRas : MonoBehaviour
                 heros[id]--;
                 if (heros[id] == -1)
                     heros[id] = 1;
-                prawy.sprite = herosArt[heros[id]];
+                //prawy.sprite = herosArt[heros[id]+rasa[id]*2];
                 photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
                 break;
             case 2:
@@ -171,6 +175,8 @@ public class WyburRas : MonoBehaviour
                 lewy.sprite = teamArt[team[id]];
                 photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
                 break;
+        }
+            prawy.sprite = herosArt[heros[id]+rasa[id]*2];
         }
 
     }
@@ -292,7 +298,7 @@ public class WyburRas : MonoBehaviour
         }
         else
         {
-            if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount >= 1 && Ip.ip==1) //zmienic na 2
+            if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount >= 2 && Ip.ip==1) //zmienic na 2
             {
                 Menu.IloscGraczy = PhotonNetwork.CurrentRoom.PlayerCount;
                 for(int i = 0 ; i<4;i++)

@@ -29,7 +29,7 @@ public class Interface : MonoBehaviour
 
     void Update()
     {
-        tura.text = "KOLENJA TURA";//\nTura gracza " + Menu.tura.ToString();
+        tura.text = "KOLEJNA TURA";//\nTura gracza " + Menu.tura.ToString();
         //if (Jednostka.Select != null)
         //    twarz.sprite = Jednostka.Select.GetComponent<SpriteRenderer>().sprite;
         //else

@@ -76,7 +76,7 @@ public class InterfaceUnit : MonoBehaviour
             if(heros == null)
                 TNazwa.text = Wybrany.nazwa;
             else
-                TNazwa.text = Wybrany.nazwa + " " + heros.level.ToString() + "lev";
+                TNazwa.text = Wybrany.nazwa + " " + heros.level.ToString() + "Lv";
             if(Wybrany.akcja)
                 akcja.sprite = dostepna;
             else   

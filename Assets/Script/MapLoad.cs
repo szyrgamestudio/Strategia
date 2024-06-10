@@ -212,13 +212,13 @@ public class MapLoad : MonoBehaviour
             {
                 if (WyburRas.aktywny[i] == true)
                 {
-                    StartCoroutine(ludzik(0, kafelekUnit[0 + (i * 5), 0], kafelekUnit[0 + (i * 5), 1], 1 + i));
-                    StartCoroutine(ludzik(0, kafelekUnit[1 + (i * 5), 0], kafelekUnit[1 + (i * 5), 1], 1 + i));
-                    StartCoroutine(ludzik(7, kafelekUnit[2 + (i * 5), 0], kafelekUnit[2 + (i * 5), 1], 1 + i));
+                    StartCoroutine(ludzik(0+11*WyburRas.rasa[i], kafelekUnit[0 + (i * 5), 0], kafelekUnit[0 + (i * 5), 1], 1 + i));
+                    StartCoroutine(ludzik(0+11*WyburRas.rasa[i], kafelekUnit[1 + (i * 5), 0], kafelekUnit[1 + (i * 5), 1], 1 + i));
+                    StartCoroutine(ludzik(7+11*WyburRas.rasa[i], kafelekUnit[2 + (i * 5), 0], kafelekUnit[2 + (i * 5), 1], 1 + i));
                     if (WyburRas.heros[i] == 0)
                     {
-                        StartCoroutine(ludzik(1, kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
-                        StartCoroutine(ludzik(9, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(1+11*WyburRas.rasa[i], kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(9+11*WyburRas.rasa[i], kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
                     }
                     if (WyburRas.heros[i] == 1)
                     {
@@ -228,8 +228,8 @@ public class MapLoad : MonoBehaviour
                             PhotonView photonView = GetComponent<PhotonView>();
                             photonView.RPC("manaZwieksz", RpcTarget.All,Ip.ip, i);
                         }
-                        StartCoroutine(ludzik(8, kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
-                        StartCoroutine(ludzik(10, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(8+11*WyburRas.rasa[i], kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(10+11*WyburRas.rasa[i], kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
                     }
                 }
                 else//TUTTAJ KOMBIJNUJE
@@ -339,10 +339,10 @@ public class MapLoad : MonoBehaviour
             GameObject nowy = null;
             if (MenuGlowne.multi)
             {
-                nowy = PhotonNetwork.Instantiate(budyneki[ip].name, new Vector3(x, y, -2f), Quaternion.identity);
+                nowy = PhotonNetwork.Instantiate(budyneki[ip+11*WyburRas.rasa[team-1]].name, new Vector3(x, y, -2f), Quaternion.identity);
             }
             else
-                nowy = Instantiate(budyneki[ip], new Vector3(x, y, -2f), Quaternion.identity);
+                nowy = Instantiate(budyneki[ip+11*WyburRas.rasa[team-1]], new Vector3(x, y, -2f), Quaternion.identity);
             nowy.GetComponent<Budynek>().druzyna = team;
             nowy.GetComponent<Budynek>().punktyBudowy = nowy.GetComponent<Budynek>().punktyBudowyMax;
             nowy.GetComponent<BudynekRuch>().wybudowany = true;

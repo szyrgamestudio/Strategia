@@ -66,8 +66,9 @@ public class Menu : MonoBehaviour
         {
             kamera = camerapriv;
 
-            zloto[1] = 14;
-            drewno[1] = 14;
+            zloto[1] = 140;
+            drewno[1] = 140;
+            magia[1] = 140;
             zloto[2] = 15;
             drewno[2] = 15;
             zloto[3] = 16;
@@ -258,7 +259,6 @@ public class Menu : MonoBehaviour
                 }
 
 
-                Debug.Log(tura+1 + " " + (Ip.ip ));
                 if (MenuGlowne.multi)
                 {
                     PhotonView photonView = GetComponent<PhotonView>();
@@ -411,62 +411,91 @@ public class Menu : MonoBehaviour
                     yield return new WaitForSeconds(0.2f);
                     Jednostka.CzyJednostka = true;
 
-                if(Walka.odleglosc(postacGracza, NPC[id]) != 1)
+                if(Walka.odleglosc(postacGracza, NPC[id]) > NPC[id].GetComponent<Jednostka>().zasieg)
                 {
-                    MenuGlowne.nieCelanMulti = true;
-                    int x = (int)postacGracza.transform.position.x + 1; int y = (int)postacGracza.transform.position.y;
-                    if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
+                    if(NPC[id].GetComponent<Jednostka>().zasieg == 3)
                     {
-                        Pole.Clean2();
-                        yield return new WaitForSeconds(0.209f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
-                        //yield return new WaitForSeconds(0.09f);
+                        Debug.Log("zdetu");
+                        int x = (int)postacGracza.transform.position.x; int y = (int)postacGracza.transform.position.y;
+                        Debug.Log(x + " " + y + " " + NPC[id].transform.position.x + " " + NPC[id].transform.position.y);
+                        if(y < NPC[id].transform.position.y)
+                            if(istnieje(x,y-1) &&  !kafelki[x][y-1].GetComponent<Pole>().Zajete && !kafelki[x][y-1].GetComponent<Pole>().ZajeteLot)
+                                pole = kafelki[(int)NPC[id].transform.position.x][(int)NPC[id].transform.position.y-1];
+                        else
+                            if(istnieje(x,y+1) &&  !kafelki[x][y+1].GetComponent<Pole>().Zajete && !kafelki[x][y+1].GetComponent<Pole>().ZajeteLot)
+                                pole = kafelki[(int)NPC[id].transform.position.x][(int)NPC[id].transform.position.y+1]; 
+                        if(pole == null)
+                        {
+                        if(x < NPC[id].transform.position.x)
+                            if(istnieje(x-1,y) &&  !kafelki[x-1][y].GetComponent<Pole>().Zajete && !kafelki[x-1][y].GetComponent<Pole>().ZajeteLot)
+                                pole = kafelki[(int)NPC[id].transform.position.x-1][(int)NPC[id].transform.position.y];
+                        else
+                            if(istnieje(x+1,y) &&  !kafelki[x+1][y].GetComponent<Pole>().Zajete && !kafelki[x+1][y].GetComponent<Pole>().ZajeteLot)
+                                pole = kafelki[(int)NPC[id].transform.position.x+1][(int)NPC[id].transform.position.y];
+                        }
+                        if(pole != null)
+                            Debug.Log(pole.name);
+                    }
+                    else
+                    {
+                        MenuGlowne.nieCelanMulti = true;
+                        int x = (int)postacGracza.transform.position.x + 1; int y = (int)postacGracza.transform.position.y;
+                        if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
+                        {
+                            Pole.Clean2();
+                            yield return new WaitForSeconds(0.209f);
+                            kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                            //yield return new WaitForSeconds(0.09f);
 
-                        if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
-                            close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
-                            pole = kafelki[x][y];}
+                            if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
+                                close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
+                                pole = kafelki[x][y];}
+                        }
+                        x = (int)postacGracza.transform.position.x - 1; y = (int)postacGracza.transform.position.y;
+                        if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
+                        {
+                            Pole.Clean2();
+                            yield return new WaitForSeconds(0.209f);
+                            kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                            //yield return new WaitForSeconds(0.09f);
+                            if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
+                                close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
+                                pole = kafelki[x][y];}
+                        }
+                        x = (int)postacGracza.transform.position.x; y = (int)postacGracza.transform.position.y + 1;
+                        if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
+                        {
+                            Pole.Clean2();
+                            yield return new WaitForSeconds(0.209f);
+                            kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                            //yield return new WaitForSeconds(0.09f);
+                            if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
+                                close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
+                                pole = kafelki[x][y];}
+                        }
+                        x = (int)postacGracza.transform.position.x; y = (int)postacGracza.transform.position.y - 1;
+                        if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
+                        {
+                            Pole.Clean2();
+                            yield return new WaitForSeconds(0.22f);
+                            kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
+                            //yield return new WaitForSeconds(0.2f);
+                            if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
+                                close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
+                                pole = kafelki[x][y];}
+                        }
                     }
-                    x = (int)postacGracza.transform.position.x - 1; y = (int)postacGracza.transform.position.y;
-                    if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
-                    {
                         Pole.Clean2();
-                        yield return new WaitForSeconds(0.209f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
-                        //yield return new WaitForSeconds(0.09f);
-                        if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
-                            close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
-                            pole = kafelki[x][y];}
-                    }
-                    x = (int)postacGracza.transform.position.x; y = (int)postacGracza.transform.position.y + 1;
-                    if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
-                    {
-                        Pole.Clean2();
-                        yield return new WaitForSeconds(0.209f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
-                        //yield return new WaitForSeconds(0.09f);
-                        if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
-                            close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
-                            pole = kafelki[x][y];}
-                    }
-                    x = (int)postacGracza.transform.position.x; y = (int)postacGracza.transform.position.y - 1;
-                    if(istnieje(x,y) && !kafelki[x][y].GetComponent<Pole>().Zajete && !kafelki[x][y].GetComponent<Pole>().ZajeteLot)
-                    {
-                        Pole.Clean2();
-                        yield return new WaitForSeconds(0.22f);
-                        kafelki[x][y].GetComponent<Pole>().OnMouse(NPC[id],0);
-                        //yield return new WaitForSeconds(0.2f);
-                        if(close > kafelki[x][y].GetComponent<Pole>().CzasDrogi && kafelki[x][y].GetComponent<Pole>().CzasDrogi!=0) {
-                            close = kafelki[x][y].GetComponent<Pole>().CzasDrogi;
-                            pole = kafelki[x][y];}
-                    }
-                    Pole.Clean2();
-                    if(pole != null) {
-                        pole.GetComponent<Pole>().OnMouse(NPC[id],1,true);
-                        // yield return new WaitForSeconds(0.15f);
-                        // pole.GetComponent<Pole>().OnMouse(NPC[id],1);
-                        yield return new WaitForSeconds(0.3f * close);
-                    }
-                    usunSelect2();
+                        if(pole != null) {
+                            pole.GetComponent<Pole>().OnMouse(NPC[id],1,true);
+                            // yield return new WaitForSeconds(0.15f);
+                            // pole.GetComponent<Pole>().OnMouse(NPC[id],1);
+                            if(close > 50)
+                                close = 2;
+                            yield return new WaitForSeconds(0.3f * close);
+                        }
+                        usunSelect2();
+                    
                     
                 } 
                 else

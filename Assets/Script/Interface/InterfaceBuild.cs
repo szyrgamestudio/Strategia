@@ -95,20 +95,21 @@ public class InterfaceBuild : MonoBehaviour
                 healthGracza.value = Wybrany.HP;
                 healthGracza.maxValue = Wybrany.maxHP;
             }
-
-            if(Wybrany.punktyBudowy < Wybrany.punktyBudowyMax)
+            
+            if(Wybrany.punktyBudowy < Wybrany.punktyBudowyMax && ((!Jednostka.Select.GetComponent<Ratusz>() &&  !Jednostka.Select.GetComponent<nRatusz>()) || (Wybrany.punktyBudowyMax < 7) ) )
             {
-                CzasBudowy.text = Wybrany.punktyBudowy.ToString() + "/" + Wybrany.punktyBudowyMax.ToString();
                 for(int i=0;i<=Wybrany.zdolnosci;i++)
                     {
                         InterfaceBuild.przyciski[i].SetActive(false);
                     }
             } 
-            else
+            if(Wybrany.punktyBudowy >= Wybrany.punktyBudowyMax)
             {  
                 CzasBudowy.text = Wybrany.HP.ToString() + "/" + Wybrany.maxHP.ToString();
                 TObrona.text = Wybrany.obrona.ToString();
             }
+            else
+                CzasBudowy.text = Wybrany.punktyBudowy.ToString() + "/" + Wybrany.punktyBudowyMax.ToString();
             nazwa.text = Wybrany.nazwa;
         }
     }

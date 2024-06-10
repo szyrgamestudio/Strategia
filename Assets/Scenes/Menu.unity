@@ -4379,7 +4379,7 @@ MonoBehaviour:
   pierwszyRaz: 0
   glos: {fileID: 1080040248}
   glosSFX: {fileID: 840985063}
-  youtubeURL: https://youtu.be/VfR1Mfr6JBM
+  youtubeURL: https://www.youtube.com/watch?v=50HR3NsY47w
 --- !u!1 &1561513032
 GameObject:
   m_ObjectHideFlags: 0

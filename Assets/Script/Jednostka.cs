@@ -243,6 +243,11 @@ public class Jednostka : MonoBehaviour
             src.clip = Sound.sound.GetComponent<Sound>().damage;
             if(Menu.kafelki[(int)transform.position.x][(int)transform.position.y].GetComponent<PoleOdkryj>().dark == null)
                 src.Play();
+            if(atakujacy.GetComponent<Wampir>())
+            {
+                atakujacy.GetComponent<Jednostka>().HP += atakujacy.GetComponent<Wampir>().lifeSteal * roundedResult;
+                Jednostka.Select.GetComponent<Jednostka>().ShowDMG((atakujacy.GetComponent<Wampir>().lifeSteal * roundedResult),new Color(0.0f, 1.0f, 0.0f, 1.0f));
+            }
             HP -= roundedResult;
 
             ShowDMG(roundedResult, new Color(1.0f, 0.0f, 0.0f, 1.0f));
@@ -369,7 +374,8 @@ public class Jednostka : MonoBehaviour
         UpdateHealthBarColor();
         healthGracza.value = HP;
         healthGracza.maxValue = maxHP;
-
+        if(HP > maxHP)
+            HP = maxHP;
         if(Menu.Next)
         {
             koniec = true;
@@ -406,7 +412,7 @@ public class Jednostka : MonoBehaviour
         Menu.heros[druzyna] = jednostka;
     }
 
-    public void umieranie()
+    public virtual void umieranie()
     {
             Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = false;
             while(Menu.jednostki[druzyna,nr_jednostki+1] != null)
@@ -479,7 +485,7 @@ public class Jednostka : MonoBehaviour
                 case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
                 case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
             }
-        if(MenuGlowne.multi && druzyna == Ip.ip || druzyna == 0)
+        if(MenuGlowne.multi && (druzyna == Ip.ip || druzyna == 0))
         {
             Aktualizuj();
             PhotonView photonView = GetComponent<PhotonView>();
@@ -498,15 +504,18 @@ public class Jednostka : MonoBehaviour
         Image fillImage = healthGracza.fillRect.GetComponent<Image>();
         fillImage.color = healthColor;
     }
-        void OnMouseEnter()
+    void OnMouseEnter()
     {
-        if(druzyna!=Menu.tura && Select!=null && CzyJednostka && Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Select, jednostka) && Select.GetComponent<Jednostka>().akcja && !Jednostka.wybieranie && Select.GetComponent<Jednostka>().druzyna != druzyna)
-        Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
+        if(druzyna!=Menu.tura && Select!=null && CzyJednostka && Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Select, jednostka) && (Select.GetComponent<Jednostka>().akcja) && !Jednostka.wybieranie && Select.GetComponent<Jednostka>().druzyna != druzyna)
+        {
+            Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
+            Debug.Log("dziwne");
+        }    
     }
 
     void OnMouseExit()
     {
         if(!Jednostka.wybieranie)
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }

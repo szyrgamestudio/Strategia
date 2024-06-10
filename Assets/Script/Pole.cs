@@ -234,7 +234,11 @@ public class Pole : MonoBehaviour
                     }
                     if(droga[n] != null && n-1>0 && droga[n].GetComponent<Pole>().Nin != 0 && droga[n].GetComponent<Pole>().Nout != 0 && droga[n-1].GetComponent<Pole>().Nin != 0
                     && droga[n-1].GetComponent<Pole>().Nout != 0)
+                    {
+                        Debug.Log(droga[n-1].name);
+                        Debug.Log(droga[n].name);
                         dzinaPoprawkoa(n-1,n);
+                    }
                     x = (int)droga[n].transform.position.x;
                     y = (int)droga[n].transform.position.y; 
                     while(droga[n]!=lista2[0])
@@ -263,6 +267,7 @@ public class Pole : MonoBehaviour
                         }
                         droga[n].GetComponent<Pole>().Nout = (droga[n+1].GetComponent<Pole>().Nin + 3 )% 8 + 1;
                         n++;
+                       // Debug.Log("zgery" + droga[n].name);
                         
                     }
                     //n++;
@@ -270,6 +275,7 @@ public class Pole : MonoBehaviour
                     {
                         droga[n].GetComponent<Pole>().Nin = (droga[n-1].GetComponent<Pole>().Nout + 3 )% 8 + 1;
                         droga[n].GetComponent<Pole>().CzasDrogi = droga[n-1].GetComponent<Pole>().CzasDrogi + droga[n].GetComponent<Pole>().trudnosc + (droga[n].GetComponent<Pole>().Nin % 2);
+                       // Debug.Log("pala" + droga[n].name);
                         n++;
                     }
                     droga[0].GetComponent<Pole>().Nin=0;
@@ -289,9 +295,9 @@ public class Pole : MonoBehaviour
             {droga[jeden].GetComponent<Pole>().Nout = 2; droga[jeden].GetComponent<Pole>().Nin = 6;}
         if(roznica.x == -1 && roznica.y == 0)
             {droga[jeden].GetComponent<Pole>().Nout = 6; droga[jeden].GetComponent<Pole>().Nin = 2;}
-        if(roznica.x == 0 && roznica.y == 1)
-            {droga[jeden].GetComponent<Pole>().Nout = 4; droga[jeden].GetComponent<Pole>().Nin = 8;}
         if(roznica.x == 0 && roznica.y == -1)
+            {droga[jeden].GetComponent<Pole>().Nout = 4; droga[jeden].GetComponent<Pole>().Nin = 8;}
+        if(roznica.x == 0 && roznica.y == 1)
             {droga[jeden].GetComponent<Pole>().Nout = 8; droga[jeden].GetComponent<Pole>().Nin = 4;}
         
     }

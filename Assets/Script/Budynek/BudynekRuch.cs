@@ -7,7 +7,7 @@ using Photon.Pun;
 
 public class BudynekRuch : MonoBehaviour
 {
-    public float targetZ = -1.0f; // Pożądana pozycja 'z'
+   // public float targetZ = -1.0f; // Pożądana pozycja 'z'
     public bool wybudowany;
     public float targetX; // Przesuń te deklaracje zmiennych na poziom klasy, nie w funkcji Update
     public float targetY;
@@ -58,7 +58,7 @@ public class BudynekRuch : MonoBehaviour
 
             targetX = Mathf.Round(mousePosition.x);
             targetY = Mathf.Round(mousePosition.y);
-            transform.position = new Vector3(targetX, targetY, targetZ);
+            transform.position = new Vector3(targetX, targetY, -3f);
             if (Input.GetMouseButtonDown(0))
             {
                 if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)

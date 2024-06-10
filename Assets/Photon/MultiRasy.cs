@@ -45,7 +45,6 @@ public class MultiRasy : MonoBehaviourPunCallbacks
 
             // Wyświetl informację o liczbie graczy w konsoli
             Debug.Log("Liczba graczy w pokoju: " + playerCount);
-            Debug.Log("ocb");
 
             PhotonView photonView = GetComponent<PhotonView>();
             photonView.RPC("checkVersion", RpcTarget.All, Ip.version);
