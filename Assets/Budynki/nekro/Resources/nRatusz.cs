@@ -65,7 +65,7 @@ public class nRatusz : MonoBehaviour
                         GameObject nowyZbieracz = null;
                         if(MenuGlowne.multi)
                         {
-                            jednostkaMulti("zbieracz",ref nowyZbieracz);
+                            jednostkaMulti("nzbieracz",ref nowyZbieracz);
                         }
                         else
                             nowyZbieracz = Instantiate(zbieracz, pole.transform.position, Quaternion.identity); 
@@ -75,6 +75,8 @@ public class nRatusz : MonoBehaviour
                         nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
                         pole.GetComponent<Pole>().Zajete=true;
                         pole.GetComponent<Pole>().postac=nowyZbieracz;
+                        nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update3[druzyna];
+                        nowyZbieracz.GetComponent<Jednostka>().atak += Kuznia.update3[druzyna];
                     }
                 }
             }

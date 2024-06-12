@@ -997,7 +997,7 @@ MonoBehaviour:
   obrona: 2
   zasieg: 1
   maxszybkosc: 9
-  szybkosc: 9
+  szybkosc: 19
   mindmg: 2
   maxdmg: 3
   zdolnosci: 1
@@ -1067,6 +1067,7 @@ MonoBehaviour:
   - "Wampir podczas ataku wysysa kwrew z przeciwnika lecz\u0105c si\u0119 o 50% zadanych
     obra\u017Ce\u0144"
   jednostka: {fileID: 6268565104842363223}
+  ignoruj: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

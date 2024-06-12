@@ -13,6 +13,12 @@ public class Heros : MonoBehaviour
 
     public bool levelUp;
 
+    void Start()
+    {
+        Menu.heros[jednostka.GetComponent<Jednostka>().druzyna] = jednostka;
+    }
+
+
        void Update()
     {
         healthGracza.value = exp;

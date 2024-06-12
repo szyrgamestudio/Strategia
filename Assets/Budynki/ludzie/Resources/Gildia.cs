@@ -58,7 +58,7 @@ public class Gildia : MonoBehaviour
                                 nowyZbieracz = Instantiate(magOgnia, pole.transform.position, Quaternion.identity); 
                             Vector3 newPosition = nowyZbieracz.transform.position;
                             newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna] * 2;
                             nowyZbieracz.transform.position = newPosition;
                             nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
                             pole.GetComponent<Pole>().Zajete=true;
@@ -85,7 +85,7 @@ public class Gildia : MonoBehaviour
                                 nowyZbieracz = Instantiate(magDruid, pole.transform.position, Quaternion.identity); 
                             Vector3 newPosition = nowyZbieracz.transform.position;
                             newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna] * 2;
                             nowyZbieracz.transform.position = newPosition;
                             nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
                             pole.GetComponent<Pole>().Zajete=true;
@@ -112,7 +112,7 @@ public class Gildia : MonoBehaviour
                                 nowyZbieracz = Instantiate(magKaplan, pole.transform.position, Quaternion.identity); 
                             Vector3 newPosition = nowyZbieracz.transform.position;
                             newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
-                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna];
+                            nowyZbieracz.GetComponent<Jednostka>().obrona += Kuznia.update5[druzyna] * 2;
                             nowyZbieracz.transform.position = newPosition;
                             nowyZbieracz.GetComponent<Jednostka>().druzyna = druzyna;
                             pole.GetComponent<Pole>().Zajete=true;

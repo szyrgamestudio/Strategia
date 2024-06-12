@@ -102,7 +102,7 @@ public class Menu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
-
+            Debug.Log(heros[tura].name);
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -616,18 +616,18 @@ public class Menu : MonoBehaviour
             NextTurn();
     }
 
-    private void PushBoard()
-    {
-        for (int x = 0; x < BoardSizeX; x++)
-            for (int y = 0; y < BoardSizeY; y++)
-            {
-                Vector3 TilePosition = new Vector3(x, y, 3);
-                GameObject newUnit = Instantiate(kafelek, TilePosition, Quaternion.identity);
-                newUnit.transform.SetParent(transform);
-                newUnit.name = x.ToString() + " " + y.ToString();
-                kafelki[x][y] = kafelek;
-            }
-    }
+    // private void PushBoard()
+    // {
+    //     for (int x = 0; x < BoardSizeX; x++)
+    //         for (int y = 0; y < BoardSizeY; y++)
+    //         {
+    //             Vector3 TilePosition = new Vector3(x, y, 3);
+    //             GameObject newUnit = Instantiate(kafelek, TilePosition, Quaternion.identity);
+    //             newUnit.transform.SetParent(transform);
+    //             newUnit.name = x.ToString() + " " + y.ToString();
+    //             kafelki[x][y] = kafelek;
+    //         }
+    // }
 
     IEnumerator Przelocznik()
     {

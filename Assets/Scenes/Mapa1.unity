@@ -13750,8 +13750,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 794.73, y: -275}
-  m_SizeDelta: {x: 65104.125, y: 5009.3535}
+  m_AnchoredPosition: {x: 798.6, y: -273.7}
+  m_SizeDelta: {x: 55448.37, y: 4146.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &637407479
 MonoBehaviour:
@@ -13839,7 +13839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 698.6002, y: 0}
+  m_AnchoredPosition: {x: 710.1, y: -124.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &638747981
@@ -18806,8 +18806,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 796, y: -327}
-  m_SizeDelta: {x: 65104.125, y: 5009.3535}
+  m_AnchoredPosition: {x: 803.9, y: -323.7}
+  m_SizeDelta: {x: 53513.56, y: 3879.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &879876386
 GameObject:
@@ -39838,8 +39838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 786, y: -89}
-  m_SizeDelta: {x: 65104.125, y: 5009.3535}
+  m_AnchoredPosition: {x: 847.4, y: -94.2}
+  m_SizeDelta: {x: 33058.93, y: 2922}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050702664
 MonoBehaviour:
@@ -40598,7 +40598,7 @@ MonoBehaviour:
   - {fileID: 6268565104842363223, guid: 77fc794aa0a43144daa381163dcdebd7, type: 3}
   - {fileID: 6268565104842363223, guid: 2f0697c123126794fb8bd5f92533ce37, type: 3}
   - {fileID: 6268565104842363223, guid: f0899207f9fb93649ac5b3553a7c424c, type: 3}
-  - {fileID: 6268565104842363223, guid: 8797dbb7b5c782f4588517b27a46d0a0, type: 3}
+  - {fileID: 6268565104842363223, guid: e90f8d76df2a7b34196a532d69b722d5, type: 3}
   - {fileID: 6268565104842363223, guid: 2f0697c123126794fb8bd5f92533ce37, type: 3}
   - {fileID: 6268565104842363223, guid: 2f0697c123126794fb8bd5f92533ce37, type: 3}
   - {fileID: 6268565104842363223, guid: 2f0697c123126794fb8bd5f92533ce37, type: 3}

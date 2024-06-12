@@ -107,7 +107,7 @@ public class Budynek : MonoBehaviour
                     Jednostka.CzyJednostka = false;
                     Jednostka.Select = budynek;
                     Pole.Clean2();
-                    if(rodzaj==0 || rodzaj==2 || rodzaj==3)
+                    if(rodzaj==0 || rodzaj==2 || rodzaj==3 || rodzaj==4)
                     {
                         for(int i=0;i<16;i++)
                         {

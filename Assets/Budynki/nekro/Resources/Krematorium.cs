@@ -89,6 +89,24 @@ public class Krematorium : MonoBehaviour
                 else
                     pole.GetComponent<Pole>().Zajete=true;
                 pole.GetComponent<Pole>().postac=nowyZbieracz;
+
+                /////////////ZWIĘKSZANIE STATYSTYK////////////////////////////////
+
+                Jednostka staty = nowyZbieracz.GetComponent<Jednostka>();
+                Debug.Log("jeden " + staty.nazwa);
+                switch(staty.nazwa)
+                {
+                    case "Szczur" : staty.maxdmg += Biblioteka.update1[druzyna]; break;
+                    case "Zoombie" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Mumia" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Wampir" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Marty Łucznik" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; break;
+                    case "Lisz" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Martwy Wojak" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; break;
+                    case "Wielki Pająk" : staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Gargulec" : staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Żniwiarz" : staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                }
             }
         }
     }

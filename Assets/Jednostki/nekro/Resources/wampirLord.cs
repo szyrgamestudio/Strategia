@@ -11,7 +11,6 @@ public class wampirLord : MonoBehaviour
     public Sprite[] budynki;
     public string[] teksty;
 
-    public bool buff;
     public int cooldown;
     public bool koniec;
 
@@ -45,8 +44,6 @@ public class wampirLord : MonoBehaviour
                         bat = true;
                         jednostka.GetComponent<SpriteRenderer>().sprite = batArt;
                     }
-
-                    Menu.usunSelect2();
             }
 
 

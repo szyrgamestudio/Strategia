@@ -312,10 +312,10 @@ public class MapLoad : MonoBehaviour
             nowy.GetComponent<Jednostka>().druzyna = team;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
-            if (ip == 10 || ip == 9)
-            {
-                Menu.heros[team] = nowy;
-            }
+            // if (ip == 10 || ip == 9)
+            // {
+            //     Menu.heros[team] = nowy;
+            // }
             if (team == 0)
             {
                 Menu.NPC.Add(nowy);

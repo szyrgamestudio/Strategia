@@ -83,6 +83,16 @@ public class InterfaceBuild : MonoBehaviour
                 }
                 break;
                 case(3): przyciskischowaj.SetActive(true); kopalniaschowaj.SetActive(true); medykschowaj.SetActive(false); break;
+                case(4): 
+                if(Wybrany.punktyBudowy>=Wybrany.punktyBudowyMax) 
+                {
+                    medykschowaj.SetActive(true);
+                }
+                else
+                {
+                    medykschowaj.SetActive(false);
+                }
+                przyciskischowaj.SetActive(true); kopalniaschowaj.SetActive(true); break;
             }
 
             UpdateHealthBarColor();

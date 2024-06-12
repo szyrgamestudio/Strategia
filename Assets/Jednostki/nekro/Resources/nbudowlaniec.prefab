@@ -920,7 +920,7 @@ MonoBehaviour:
   zbieracz: 0
   lata: 0
   cena: 8
-  nazwa: Budowlaniec
+  nazwa: Martwy Budowlaniec
   akcja: 1
   spanie: 0
   nr_jednostki: 10
@@ -986,11 +986,11 @@ MonoBehaviour:
   gildia: {fileID: 5580749336134018094, guid: 6a030349ee928564682a4c2dc04f49e6, type: 3}
   kragmagi: {fileID: 5580749336134018094, guid: c0d313fc53e774c45a668786385f6f1f, type: 3}
   medyk: {fileID: 5580749336134018094, guid: 4a1efccb16248304789ee2e3ce1137ed, type: 3}
-  wierza: {fileID: 5580749336134018094, guid: c10d389c5c6255a4f9439722252201b9, type: 3}
+  wierza: {fileID: 5580749336134018094, guid: 9a985e666b0b25440b568ce7ca8b80e8, type: 3}
   droga: {fileID: 1975809215, guid: 511d4834cad983445b2d91b773b0c496, type: 3}
   portal: {fileID: 5580749336134018094, guid: 70f8ca7e581420a44a966382761b067a, type: 3}
   sciana: {fileID: 5580749336134018094, guid: 9e8935561f24c5b4b93c3377a5ec99aa, type: 3}
-  kuznia: {fileID: 5580749336134018094, guid: 3cad89be6d2cf23428a17b3d87805956, type: 3}
+  kuznia: {fileID: 5580749336134018094, guid: f522c88c93e40be4b8d8a7b4d31dda70, type: 3}
   BudowanyObiekt: {fileID: 0}
   customCursorBudowa: {fileID: 2800000, guid: 4620117877300a14aa1ae4ce3d398a5f, type: 3}
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}

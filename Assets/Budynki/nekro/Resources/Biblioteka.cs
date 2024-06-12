@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Kuznia : MonoBehaviour
+public class Biblioteka : MonoBehaviour
 {
     public GameObject budynek;
     public GameObject pole;
     public int druzyna;
 
-    public GameObject lucznik;
-    public GameObject piechur;
-    public GameObject rycerz;
-    public GameObject kusznik;
-    public GameObject kawalerzysta;
-    public GameObject jaskolka;
-    public GameObject wilk;
-    public GameObject gryf;
-    public GameObject magOgnia;
-    public GameObject magDruid;
-    public GameObject magKaplan;
+    // public GameObject lucznik;
+    // public GameObject piechur;
+    // public GameObject rycerz;
+    // public GameObject kusznik;
+    // public GameObject kawalerzysta;
+    // public GameObject jaskolka;
+    // public GameObject wilk;
+    // public GameObject gryf;
+    // public GameObject magOgnia;
+    // public GameObject magDruid;
+    // public GameObject magKaplan;
 
     public static int[] update1 = new int[5];
     public static int[] update2 = new int[5];
@@ -50,9 +50,7 @@ public class Kuznia : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update1[druzyna];
                         update1[druzyna]+=1;
-                        ulepszIstniejace("Bojownik",1);
-                        ulepszIstniejace("Rycerz",1);
-                        ulepszIstniejace("Kawalerzysta",1);
+                        ulepszIstniejace("Szczur",3);
                         OnMouseDown();
                     }
                 }
@@ -65,10 +63,9 @@ public class Kuznia : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update2[druzyna];
                         update2[druzyna]+=1;
-                        ulepszIstniejace("Bojownik",0);
-                        ulepszIstniejace("Rycerz",0);
-                        ulepszIstniejace("Wilk",0);
-                        ulepszIstniejace("Kawalerzysta",0);
+                        ulepszIstniejace("Mumia",5);
+                        ulepszIstniejace("Zoombie",5);
+                        ulepszIstniejace("Wampir",5);
                         OnMouseDown();
                     }
                 }
@@ -81,10 +78,10 @@ public class Kuznia : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update3[druzyna];
                         update3[druzyna]+=1;
-                        ulepszIstniejace("Jaskółka",2);
-                        ulepszIstniejace("Kawalerzysta",2);
-                        ulepszIstniejace("Gryf",2);
-                        ulepszIstniejace("Wilk",2);
+                        ulepszIstniejace("Marty Łucznik",4);
+                        ulepszIstniejace("Lisz",4);
+                        ulepszIstniejace("Martwy Wojak",4);
+                        ulepszIstniejace("Sługa",4);
                         OnMouseDown();
                     }
                 }
@@ -97,10 +94,9 @@ public class Kuznia : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update4[druzyna];
                         update4[druzyna]+=1;
-                        ulepszIstniejace("Łucznik",0);
-                        ulepszIstniejace("Kusznik",0);
-                        ulepszIstniejace("Wilk",0);
-                        ulepszIstniejace("Gryf",0);
+                        ulepszIstniejace("Wielki Pająk",0);
+                        ulepszIstniejace("Gargulec",0);
+                        ulepszIstniejace("Wampir",0);
                         OnMouseDown();
                     }
                 }
@@ -113,10 +109,10 @@ public class Kuznia : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update5[druzyna];
                         update5[druzyna]+=1;
-                        ulepszIstniejace("Piroman",1);
-                        ulepszIstniejace("Druid",1);
-                        ulepszIstniejace("Kapłan",1);
-                        ulepszIstniejace("Gryf",1);
+                        ulepszIstniejace("Lisz",1);
+                        ulepszIstniejace("Mumia",1);
+                        ulepszIstniejace("Zoombie",1);
+                        ulepszIstniejace("Żniwiarz",1);
                         OnMouseDown();
                     }
                 }
@@ -135,6 +131,11 @@ public class Kuznia : MonoBehaviour
                         case 1: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().obrona += 2; break;
                         case 2: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().szybkosc += 2;
                         Menu.jednostki[druzyna,i].GetComponent<Jednostka>().maxszybkosc += 2; break;
+                        case 3: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().maxdmg += 1; break;
+                        case 4:Menu.jednostki[druzyna,i].GetComponent<Jednostka>().atak += 1; 
+                        Menu.jednostki[druzyna,i].GetComponent<Jednostka>().obrona += 1;break;
+                        case 5: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().HP += 2;
+                        Menu.jednostki[druzyna,i].GetComponent<Jednostka>().maxHP += 2; break;
                     }
                 }
                 i++;

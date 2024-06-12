@@ -819,7 +819,7 @@ MonoBehaviour:
   zbieracz: 1
   lata: 0
   cena: 4
-  nazwa: Zbieracz
+  nazwa: "S\u0142uga"
   akcja: 1
   spanie: 0
   nr_jednostki: 0
