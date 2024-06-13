@@ -10,18 +10,27 @@ public class Gargulec : MonoBehaviour
     public Sprite[] budynki;
     public string[] teksty;
 
+    public bool update;
+
     void Update()
     {
         Jednostka staty = jednostka.GetComponent<Jednostka>();
-        if(Menu.zloto[staty.druzyna] <= 3)
+        if(Menu.zloto[staty.druzyna] <= 3 && update == false)
         {
+            update = true;
+            jednostka.GetComponent<Jednostka>().Aktualizuj();
             staty.maxdmg = 3;
             staty.mindmg = 3;
         }
         else
         {
-            staty.maxdmg = 2;
-            staty.mindmg = 1;  
+            if(update == true)
+            {
+                update = false;
+                jednostka.GetComponent<Jednostka>().Aktualizuj();
+                staty.maxdmg = 2;
+                staty.mindmg = 1;  
+            }
         }
     }
     void OnMouseDown()

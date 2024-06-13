@@ -343,7 +343,7 @@ public class Kopalnia : MonoBehaviour
     {
         if(Ip.ip != ip)
         {
-            slot[i] = Menu.jednostki[Menu.tura,id];
+            slot[i] = Menu.jednostki[ip,id];
             slot[i].SetActive(false);
             polePomoc = Menu.kafelki[(int)slot[i].transform.position.x][(int)slot[i].transform.position.y];
             polePomoc.GetComponent<Pole>().Zajete=false;

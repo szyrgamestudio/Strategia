@@ -59,16 +59,18 @@ public class Menu : MonoBehaviour
     public Text nrTuryText;
     public Image kolejnaTuraImage;
 
+    public static Menu menu;
+
 
     private void Start()
     {
+        menu = GetComponent<Menu>();
         if(!MenuGlowne.wczytka)
         {
             kamera = camerapriv;
 
-            zloto[1] = 140;
-            drewno[1] = 140;
-            magia[1] = 140;
+            zloto[1] = 14;
+            drewno[1] = 14;
             zloto[2] = 15;
             drewno[2] = 15;
             zloto[3] = 16;
@@ -102,17 +104,19 @@ public class Menu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
-            Debug.Log(heros[tura].name);
+        //    Debug.Log(heros[tura].name);
         }
         if (Input.GetMouseButtonDown(1))
         {
             usunSelect2();
         }
-        if(MenuGlowne.multi)
+        if(MenuGlowne.multi && !SimultanTurns.simultanTurns)
             if((Ip.ip == tura))
                 NIERUSZAC = false;
             else
+            {
                 NIERUSZAC = true;
+            }
         if(tura > IloscGraczy && Ip.ip == 1)
         {
             tura=0;
@@ -209,22 +213,12 @@ public class Menu : MonoBehaviour
             // Zmień pozycję
             kolejnaTuraImage.transform.localPosition = new Vector3(1300, kolejnaTuraImage.transform.localPosition.y, kolejnaTuraImage.transform.localPosition.z);
 
-            // // Stopniowo zmniejsz przezroczystość
-            // alpha = color.a;
-            // for (float t = 0.01f; t < duration; t += Time.deltaTime)
-            // {
-            //     color.a = Mathf.Lerp(alpha, 0, Mathf.Min(1, t / duration));
-            //     kolejnaTuraImage.color = color;
-            //     yield return null;
-            // }
-            // color.a = 0;
-            // kolejnaTuraImage.color = color;
         }
     }
 
     public void NextTurn()
     {
-        if(!NIERUSZAC && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
+        if((!NIERUSZAC || (SimultanTurns.ready && SimultanTurns.readyCount == 0)) && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
         {
             NaPewnoKoniec++;
             StartCoroutine(PrzedKoniec());
@@ -258,15 +252,21 @@ public class Menu : MonoBehaviour
 
                 }
 
-
-                if (MenuGlowne.multi)
+                if(SimultanTurns.simultanTurns)
                 {
+                    NIERUSZAC = true;
+                    SimultanTurns.EndTurn();
+                }
+                else
+                {
+                    if (MenuGlowne.multi)
+                    {
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("nowaTuraPrzypomnienie", RpcTarget.All, tura);
                   //  StartCoroutine(nowaTuraPrzypomnienie(tura));
+                    }
+                    tura++;
                 }
-
-                tura++;
 
                 int zostalo = 0;
                 int wygrany = 0;
@@ -294,17 +294,19 @@ public class Menu : MonoBehaviour
                     SceneManager.LoadScene(3);   //KONIEC GRY
                 }
                 
-                for(int xd = 1; xd<5;xd++)
-                    if (tura == xd && !WyburRas.aktywny[xd-1])
-                        tura++;
-                if (tura > IloscGraczy)
-                    tura = 0;
-                if(MenuGlowne.multi)
+                if(!SimultanTurns.simultanTurns)
                 {
-                    PhotonView photonView = GetComponent<PhotonView>();
-                    photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
+                    for(int xd = 1; xd<5;xd++)
+                        if (tura == xd && !WyburRas.aktywny[xd-1])
+                            tura++;
+                    if (tura > IloscGraczy)
+                        tura = 0;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
+                    }
                 }
-
                 Jednostka.Select = null;
                 PanelUnit.SetActive(false);
                 PanelBuild.SetActive(false);
@@ -322,6 +324,7 @@ public class Menu : MonoBehaviour
                     {
                         PhotonView photonView = GetComponent<PhotonView>();
                         photonView.RPC("ZaktualizujNPC", RpcTarget.All);
+                        
                     }
                     else
                     {
@@ -530,7 +533,10 @@ public class Menu : MonoBehaviour
             nrTury++;
             nrTuryText.text = nrTury.ToString();
             Jednostka.CzyJednostka = false;
-            NextTurn();
+            if(SimultanTurns.simultanTurns)
+                SimultanTurns.playerTurn();
+            else
+                NextTurn();
             
         }
     }

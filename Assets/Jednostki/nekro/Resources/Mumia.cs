@@ -16,6 +16,7 @@ public class Mumia : MonoBehaviour
         {
             koniec = false;
             jednostka.GetComponent<Jednostka>().HP = jednostka.GetComponent<Jednostka>().maxHP;
+            jednostka.GetComponent<Jednostka>().Aktualizuj();
         }
     }
     

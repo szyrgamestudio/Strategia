@@ -44,6 +44,7 @@ public class Lisz : MonoBehaviour
                                             staty.maxdmg++;
                                             szkielet.GetComponent<Buff>().buffP(0,0,0,1f,1f);
                                             szkielet.GetComponent<Buff>().buffZ(0, 0, 1,1, 1, 1);
+                                            staty.Aktualizuj();
                                         }
                                     }
                                 }

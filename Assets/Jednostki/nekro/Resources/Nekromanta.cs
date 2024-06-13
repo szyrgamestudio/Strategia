@@ -50,6 +50,7 @@ public class Nekromanta : MonoBehaviour
 
     }
 
+
     private void spawn(int skill)
     {
         List<GameObject> pola = new List<GameObject>();
@@ -88,6 +89,11 @@ public class Nekromanta : MonoBehaviour
             nowa.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
             nowa.GetComponent<Jednostka>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;
             Vector3 newPosition = new Vector3(wylosowanePole.transform.position.x, wylosowanePole.transform.position.y, -2);
+            if(MenuGlowne.multi)
+            {
+                 nowa = PhotonNetwork.Instantiate(nowa.name, newPosition, Quaternion.identity);
+            }
+                else
             Instantiate(nowa, newPosition, Quaternion.identity);
 
             wylosowanePole.GetComponent<Pole>().postac = nowa;

@@ -247,6 +247,11 @@ public class Jednostka : MonoBehaviour
             {
                 atakujacy.GetComponent<Jednostka>().HP += atakujacy.GetComponent<Wampir>().lifeSteal * roundedResult;
                 Jednostka.Select.GetComponent<Jednostka>().ShowDMG((atakujacy.GetComponent<Wampir>().lifeSteal * roundedResult),new Color(0.0f, 1.0f, 0.0f, 1.0f));
+                if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = atakujacy.GetComponent<PhotonView>();
+                        photonView.RPC("zaatakowanieMulti", RpcTarget.All, Ip.ip, -atakujacy.GetComponent<Wampir>().lifeSteal * roundedResult);
+                    }
             }
             HP -= roundedResult;
 

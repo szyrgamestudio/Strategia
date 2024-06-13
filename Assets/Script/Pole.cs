@@ -119,7 +119,7 @@ public class Pole : MonoBehaviour
     {
         if(!idzie && poruszany != null)
         {
-            if(MenuGlowne.multi && dostane == 1)
+            if(MenuGlowne.multi && dostane == 1 && !SimultanTurns.simultanTurns)
             {
                 PhotonView photonView = GetComponent<PhotonView>();
                 Jednostka jednostkaComponent = poruszany.GetComponent<Jednostka>();
@@ -711,6 +711,8 @@ int i=0;
                 break;
             }
             ziomek.GetComponent<Jednostka>().odkryj(3);
+            if(SimultanTurns.simultanTurns && MenuGlowne.multi)
+                ziomek.GetComponent<Jednostka>().AktualizujPol();
             
         }
 
@@ -758,6 +760,8 @@ int i=0;
                 break;
             }
             ziomek.GetComponent<Jednostka>().odkryj(3);
+            if(SimultanTurns.simultanTurns && MenuGlowne.multi)
+                ziomek.GetComponent<Jednostka>().AktualizujPol();
         }
         Clean2(0);
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().ZajeteLot = true;

@@ -87,6 +87,9 @@ MonoBehaviour:
   - nowaTuraPrzypomnienie
   - zdradaMulti
   - przeniesNaStarcie
+  - NextTurn
+  - UpdateCount
+  - playerUpdate
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
