@@ -110,8 +110,10 @@ public class Interface : MonoBehaviour
 
     public void usun()
     {
+        Debug.Log("jeden");
         if(!Menu.NIERUSZAC)
         {
+            Debug.Log("dwa");
             Jednostka.Select = null;
             Menu.PanelUnit.SetActive(false);
             Menu.PanelBuild.SetActive(false);

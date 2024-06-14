@@ -6,6 +6,9 @@ public class Mumia : MonoBehaviour
 {
     public GameObject jednostka;
     public bool koniec;
+
+
+
     void Update()
     {
         if(Menu.Next)

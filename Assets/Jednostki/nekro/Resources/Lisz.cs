@@ -53,7 +53,7 @@ public class Lisz : MonoBehaviour
             }
 
     }
-     void OnMouseDown()
+    void OnMouseDown()
     {
         if(jednostka == Jednostka.Select)
         {

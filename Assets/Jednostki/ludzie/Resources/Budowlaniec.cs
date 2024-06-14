@@ -194,7 +194,9 @@ public class Budowlaniec : MonoBehaviour
                     }
                 if(Przycisk.jednostka[11]==true)
                     {
-                        wybudowanie(portal, 11);
+                        Przycisk.jednostka[11]=false;
+                        if(Menu.ratuszPoziom[jednostka.GetComponent<Jednostka>().druzyna] != 0)
+                            wybudowanie(portal, 11);
                     }
                 if(Przycisk.jednostka[12]==true)
                     {

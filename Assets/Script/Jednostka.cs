@@ -483,7 +483,7 @@ public class Jednostka : MonoBehaviour
         }
         szybkosc = maxszybkosc;
         akcja = true;
-        if(druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1))
+        if((druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1)) || (SimultanTurns.simultanTurns && SimultanTurns.ready))
             switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
             {
                 case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
@@ -511,10 +511,9 @@ public class Jednostka : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        if(druzyna!=Menu.tura && Select!=null && CzyJednostka && Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Select, jednostka) && (Select.GetComponent<Jednostka>().akcja) && !Jednostka.wybieranie && Select.GetComponent<Jednostka>().druzyna != druzyna)
+        if(druzyna!=Menu.tura && Select!=null && CzyJednostka && Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Select, jednostka) && (Select.GetComponent<Jednostka>().akcja) && !Jednostka.wybieranie && Select.GetComponent<Jednostka>().druzyna != druzyna && (!MenuGlowne.multi || (Select.GetComponent<Jednostka>().druzyna == Ip.ip)))
         {
             Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
-            Debug.Log("dziwne");
         }    
     }
 

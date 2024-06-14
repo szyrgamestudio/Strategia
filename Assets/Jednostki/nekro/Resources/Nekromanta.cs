@@ -50,6 +50,16 @@ public class Nekromanta : MonoBehaviour
 
     }
 
+    public void jednostkaMulti(string nazwa, ref GameObject nowyZbieracz, Vector3 vektor)
+    {
+        nowyZbieracz = PhotonNetwork.Instantiate(nazwa, new Vector3(0, 0, 1), Quaternion.identity);
+        nowyZbieracz.transform.position = vektor;
+        nowyZbieracz.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+        nowyZbieracz.GetComponent<Jednostka>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;
+        nowyZbieracz.transform.position = new Vector3(nowyZbieracz.transform.position.x, nowyZbieracz.transform.position.y, -2f);
+        nowyZbieracz.GetComponent<Jednostka>().Aktualizuj();
+        nowyZbieracz.GetComponent<Jednostka>().AktualizujPol();    
+    }
 
     private void spawn(int skill)
     {
@@ -86,18 +96,21 @@ public class Nekromanta : MonoBehaviour
                 case 1: nowa = szkielety[Random.Range(0, szkielety.Count)]; break;
                 case 2: nowa = mumie[Random.Range(0, mumie.Count)]; break;
             }
-            nowa.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
-            nowa.GetComponent<Jednostka>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;
-            Vector3 newPosition = new Vector3(wylosowanePole.transform.position.x, wylosowanePole.transform.position.y, -2);
-            if(MenuGlowne.multi)
-            {
-                 nowa = PhotonNetwork.Instantiate(nowa.name, newPosition, Quaternion.identity);
-            }
-                else
-            Instantiate(nowa, newPosition, Quaternion.identity);
-
-            wylosowanePole.GetComponent<Pole>().postac = nowa;
-            wylosowanePole.GetComponent<Pole>().Zajete = true;
+            /////
+                        GameObject nowyZbieracz = nowa;
+                        if(MenuGlowne.multi)
+                        {
+                            jednostkaMulti(nowa.name,ref nowyZbieracz, wylosowanePole.transform.position);
+                        }
+                        else
+                        nowyZbieracz = Instantiate(nowa, wylosowanePole.transform.position, Quaternion.identity); 
+                        Vector3 newPosition = wylosowanePole.transform.position;
+                        newPosition.z = -2f; // Zmiana pozycji w trzecim wymiarze (Z)
+                        nowyZbieracz.transform.position = newPosition;
+                        nowyZbieracz.GetComponent<Jednostka>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
+                        wylosowanePole.GetComponent<Pole>().Zajete=true;
+                        wylosowanePole.GetComponent<Pole>().postac=nowyZbieracz;
+                        /////
             switch(skill)
             {
                 case 0: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 2; break;
@@ -106,7 +119,6 @@ public class Nekromanta : MonoBehaviour
             }
         }
     }
-
 
      void OnMouseDown()
     {
@@ -132,6 +144,7 @@ public class Nekromanta : MonoBehaviour
             }       
         }
     }
+
     private void levelUp(int level)
     {
         Jednostka staty = jednostka.GetComponent<Jednostka>();

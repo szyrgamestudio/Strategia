@@ -8638,7 +8638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 665.8, y: 500.4}
+  m_AnchoredPosition: {x: 916.8, y: 355.3}
   m_SizeDelta: {x: 40.27, y: 36.6935}
   m_Pivot: {x: 0.50000024, y: 0.5000017}
 --- !u!114 &427230569
@@ -25401,7 +25401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 917.3, y: 354}
+  m_AnchoredPosition: {x: 665.6, y: 506.85}
   m_SizeDelta: {x: 31.6905, y: 31.6905}
   m_Pivot: {x: 0.5000024, y: 0.49999997}
 --- !u!114 &1293742417
@@ -40737,7 +40737,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 773b9a44719b27e4283a24e7a0c679bd, type: 3}
   - {fileID: 21300000, guid: 1b777de4a0d70944890194b10a571b49, type: 3}
   - {fileID: 21300000, guid: d96ea1bc57291de4f9501bc8554594ae, type: 3}
-  nazwa: map1.txt
+  nazwa: map2.txt
   kafelek: {fileID: 3520108190265880061, guid: b8a6a992ba8e8e843b7cb65307a29113, type: 3}
   kafelekFake: {fileID: 3520108190265880061, guid: 07c5c9669732a884b8b1f7e1663789c7, type: 3}
   wysokoscStart: 0

@@ -1004,11 +1004,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1a5e0c1bc793c014390a4d6c1ce3dbeb, type: 3}
   - {fileID: 21300000, guid: ddec1e240822dee498903ec71ff336bd, type: 3}
   - {fileID: 21300000, guid: cc15b42f42ec088488eb2d849f87b583, type: 3}
-  - {fileID: 21300000, guid: 6b18c61de5efecf459b2bde4a1118988, type: 3}
+  - {fileID: 21300000, guid: b3c6301f19ef212469c5fcc15474df29, type: 3}
   - {fileID: 21300000, guid: 0e6d2abba4c25174e9f1a14556db2e33, type: 3}
   - {fileID: 21300000, guid: 6fa492d471fbeec42a6be091063affb4, type: 3}
   - {fileID: 21300000, guid: 337f98df400c10c4383057fdda63850c, type: 3}
-  - {fileID: 21300000, guid: 6673ce9d290be1a49abc5b4f69102f95, type: 3}
+  - {fileID: 21300000, guid: cc1df0a4cf23f0d4291d584ecfb0752f, type: 3}
   - {fileID: 21300000, guid: 0a805af34384709449fb6066b8e8c45a, type: 3}
   - {fileID: 21300000, guid: f7388a9c0d51fb04b95fd79b11aeb07b, type: 3}
   teksty:
@@ -1018,20 +1018,18 @@ MonoBehaviour:
   - "W kopalni jest zbierane z\u0142oto"
   - "Tartak pozwala zbiera\u0107 drewno z lasu w zasi\u0119gu tartaku, jednoczesnie
     zwi\u0119ksza wydobycie drewna o 1"
-  - "Chatka Zwi\u0119ksza maksymaln\u0105 populacje o 3"
-  - "Koszary pozwalaj\u0105 rekrutowa\u0107 rycerzy, strzelc\xF3w oraz kawalerzyst\xF3w"
-  - "Plac dzikich zwierz\u0105t pozwala rekrutowa\u0107 wilki, jask\xF3\u0142ki oraz
-    gryfy"
-  - "Gilidia mag\xF3w pozwala rekrutowa\u0107 adept\xF3w magii, mag\xF3w ognia, druid\xF3w
-    i kap\u0142an\xF3w"
+  - "Cmentarz Zwi\u0119ksza maksymaln\u0105 populacje o 3"
+  - "Krematorium pozwala rekrutowa\u0107 szczury, szkielety i liszeyst\xF3w"
+  - "Piramida pozwala rekrutowa\u0107 mumie, zoombie i wampiry"
+  - "Jaskinia pozwala rekrutowa\u0107 olbrzymie paj\u0105ki, gargulce i \u017Cniwiarzy"
   - Przemienia nierozkwite drzewo na magiczne drzewo
-  - "Dom leczenia pozwala rekrutowa\u0107 medyk\xF3w oraz przy\u015Bpiesza proces
-    regenereacji bohatera"
+  - "Rze\u017Ania pozwala po\u015Bwi\u0119ca\u0107 jednostki w zamian za z\u0142oto
+    oraz przy\u015Bpiesza proces regenereacji bohatera"
   - "Wie\u017Ca atakuje wrogie jednostki w okolicy"
   - "Droga zmniejsza zu\u017Cycie punkt\xF3w ruchu za przej\u015Bcie po drodze"
   - "Portal pozwala przemieszcza\u0107 si\u0119 mi\u0119dzy portalami"
   - "Mur blokuje przej\u015Bcie"
-  - "Ku\u017Ania pozwala kupowa\u0107 ulepszenia dla jednostek"
+  - "Biblioteka pozwala kupowa\u0107 ulepszenia dla jednostek"
   - "Buduje rozpocz\u0119t\u0105 budowle w promieniu 1 pola"
   - 
   budowanie: 0

@@ -851,11 +851,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b7e5d02c443889146952341d1fd8f52b, type: 3}
   - {fileID: 21300000, guid: 3ccb6d0ac6b987b42b502e13e6c65cb5, type: 3}
   teksty:
-  - 
-  - 
-  - 
-  - 
-  - 
+  - "Zwi\u0119ksza maksymalne obra\u017Cenia szczur\u0105"
+  - "Zwi\u0119ksza zdrowie jednostk\u0105 z piramidy (Mumia, zoombie, wampir)"
+  - "Zwi\u0119ksza atak i obrone wszystkim szkielet\u0105 (Martwy Wojownik, Martwy
+    \u0141ucznik, Lisz, S\u0142uga)"
+  - "Zwi\u0119ksza atak agresywnym jednostk\u0105 (Olb\u017Cymi paj\u0105k, wampi,
+    gargulec))"
+  - "Zwi\u0119ksza obron\u0119 magicznym jednostk\u0105(Zoombie, Lisz, \u017Bniwairz,
+    mumia)"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:

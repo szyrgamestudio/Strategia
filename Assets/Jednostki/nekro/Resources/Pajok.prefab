@@ -895,6 +895,7 @@ GameObject:
   - component: {fileID: 7254608854548605690}
   - component: {fileID: 36873823500742661}
   - component: {fileID: -6953214780619608280}
+  - component: {fileID: 2124943728199005843}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 4080598057547060474}
@@ -1000,7 +1001,7 @@ MonoBehaviour:
   szybkosc: 8
   mindmg: 1
   maxdmg: 3
-  zdolnosci: 0
+  zdolnosci: 1
   zbieracz: 0
   lata: 0
   cena: 3
@@ -1061,6 +1062,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jednostka: {fileID: 6268565104842363223}
+--- !u!114 &2124943728199005843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac213e004aedacb4f91eb7c91133536b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 21300000, guid: cd7456cb5047ecc4ea6d6d56a854685a, type: 3}
+  teksty:
+  - "Po zakupie tracisz 4 z\u0142ota"
+  jednostka: {fileID: 6268565104842363223}
+  nieStandardowy: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

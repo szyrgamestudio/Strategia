@@ -6,10 +6,12 @@ public class PoleOdkryj : MonoBehaviour
 {
     public GameObject kafelek;
     public GameObject dark;
+
+    public static bool mgla;
     // Start is called before the first frame update
     void Start()
     {
-       // if(!MenuGlowne.multi)
+        if(!MenuGlowne.multi || !mgla)
             Destroy(dark);
     }
 

@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 4080598057547060474}
   - component: {fileID: 7166372193401913388}
+  - component: {fileID: 7308404348899044334}
   - component: {fileID: 975902216986315311}
   m_Layer: 0
   m_Name: Szczur
@@ -1072,6 +1073,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936831247201e5645acb0ada7234d17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7308404348899044334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac213e004aedacb4f91eb7c91133536b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 21300000, guid: 5f0fe1234abca5943b2027aaa581172b, type: 3}
+  teksty:
+  - "Szczury mog\u0105 przekracza\u0107 maksymaln\u0105 populacje"
+  jednostka: {fileID: 6268565104842363223}
+  nieStandardowy: 0
 --- !u!114 &975902216986315311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,8 +1104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jednostka: {fileID: 6268565104842363223}
-  druzyna: 1
-  sojusz: 1
+  druzyna: 2
+  sojusz: 2
   HP: 1
   maxHP: 1
   atak: 1
@@ -1096,7 +1115,7 @@ MonoBehaviour:
   szybkosc: 6
   mindmg: 1
   maxdmg: 2
-  zdolnosci: 0
+  zdolnosci: 1
   zbieracz: 0
   lata: 0
   cena: 3

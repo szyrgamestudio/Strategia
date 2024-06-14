@@ -104,7 +104,8 @@ public class Menu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
-        //    Debug.Log(heros[tura].name);
+            Debug.Log(PoleOdkryj.mgla);
+            Debug.Log(SimultanTurns.simultanTurns);
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -242,7 +243,16 @@ public class Menu : MonoBehaviour
             }
             if (NaPewnoKoniec > 0)
             {
-                StartCoroutine(Przelocznik());
+                if(!SimultanTurns.simultanTurns || SimultanTurns.ready)
+                {
+                    if(SimultanTurns.simultanTurns)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("przelocznikMulti", RpcTarget.All);
+                    }
+                    else
+                        StartCoroutine(Przelocznik());
+                }
                 NaPewnoKoniec = 0;
 
                 if (MenuGlowne.multi && tura == Ip.ip)
@@ -360,7 +370,8 @@ public class Menu : MonoBehaviour
                 }
                 else
                 {
-                nrTury++;
+                if(!SimultanTurns.simultanTurns)
+                    nrTury++;
                 
                 tura++;
             }
@@ -530,7 +541,8 @@ public class Menu : MonoBehaviour
         else{
             turaNPC.gameObject.SetActive(false);
             NIERUSZAC = false;
-            nrTury++;
+            if(!SimultanTurns.simultanTurns)
+                nrTury++;
             nrTuryText.text = nrTury.ToString();
             Jednostka.CzyJednostka = false;
             if(SimultanTurns.simultanTurns)
@@ -634,11 +646,17 @@ public class Menu : MonoBehaviour
     //             kafelki[x][y] = kafelek;
     //         }
     // }
+    [PunRPC]
+    void przelocznikMulti()
+    {
+        StartCoroutine(Przelocznik());
+    }
 
     IEnumerator Przelocznik()
     {
         Next = true;
         yield return new WaitForSeconds(0.15f);
+        nrTury++;
         Next = false;
     }
 }

@@ -65,7 +65,7 @@ public class nRatusz : MonoBehaviour
                         GameObject nowyZbieracz = null;
                         if(MenuGlowne.multi)
                         {
-                            jednostkaMulti("nzbieracz",ref nowyZbieracz);
+                            jednostkaMulti(zbieracz.name,ref nowyZbieracz);
                         }
                         else
                             nowyZbieracz = Instantiate(zbieracz, pole.transform.position, Quaternion.identity); 
@@ -92,7 +92,7 @@ public class nRatusz : MonoBehaviour
                         GameObject nowyZbieracz = null;
                         if(MenuGlowne.multi)
                         {
-                            jednostkaMulti("poszukiwacz",ref nowyZbieracz);
+                            jednostkaMulti(poszukiwacz.name,ref nowyZbieracz);
                         }
                         else
                         nowyZbieracz = Instantiate(poszukiwacz, pole.transform.position, Quaternion.identity); 
@@ -117,7 +117,7 @@ public class nRatusz : MonoBehaviour
                         GameObject nowyZbieracz = null;
                         if(MenuGlowne.multi)
                         {
-                            jednostkaMulti("budowlaniec",ref nowyZbieracz);
+                            jednostkaMulti(budowlaniec.name,ref nowyZbieracz);
                         }
                         else
                         nowyZbieracz = Instantiate(budowlaniec, pole.transform.position, Quaternion.identity); 
@@ -142,7 +142,7 @@ public class nRatusz : MonoBehaviour
                         GameObject nowyZbieracz = null;
                         if(MenuGlowne.multi)
                         {
-                            jednostkaMulti("adept",ref nowyZbieracz);
+                            jednostkaMulti(adept.name,ref nowyZbieracz);
                         }
                         else
                         nowyZbieracz = Instantiate(adept, pole.transform.position, Quaternion.identity); 
@@ -261,8 +261,8 @@ public class nRatusz : MonoBehaviour
 
     static public IEnumerator ruchPlynnyCamery(int druzynaBaza)
         {
-            float x=Menu.bazy[druzynaBaza,0].transform.position.x + 1f;
-            float y=Menu.bazy[druzynaBaza,0].transform.position.y;
+            float x = Menu.bazy[druzynaBaza,0].transform.position.x + 1f;
+            float y = Menu.bazy[druzynaBaza,0].transform.position.y;
             if(y < Menu.kamera.GetComponent<Camera>().orthographicSize * 1.0f - 0.5f)
             {
                 y = Menu.kamera.GetComponent<Camera>().orthographicSize * 1.0f - 0.5f;
@@ -298,6 +298,12 @@ public class nRatusz : MonoBehaviour
     {
         if(budynek == Jednostka.Select)
         {
+            if(!ulepsza)
+            {
+                budynek.GetComponent<Budynek>().zdolnosci = 5;
+            }
+            else
+                budynek.GetComponent<Budynek>().zdolnosci = 6;
             InterfaceBuild.Czyszczenie(); 
             
             PrzyciskInter Guzikk = InterfaceBuild.przyciski[0].GetComponent<PrzyciskInter>();

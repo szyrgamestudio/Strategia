@@ -49,8 +49,13 @@ public class InterfaceUnit : MonoBehaviour
         if(Jednostka.Select!=null && Jednostka.CzyJednostka)
         {
             Jednostka Wybrany = Jednostka.Select.GetComponent<Jednostka>();
+            try{
             healthGracza.maxValue = Wybrany.maxHP;
             healthGracza.value = Wybrany.HP;
+            }catch(Exception ex)
+            {
+
+            }
             
             Heros heros = Jednostka.Select.GetComponent<Heros>();
             if(heros != null)

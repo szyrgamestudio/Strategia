@@ -741,12 +741,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   teksty:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - "S\u0142uga to podstawowa jednostka zbieraj\u0105ca z\u0142oto i drewno"
+  - "Poszukiwacz zarazy mo\u017Ce sprawdzi\u0107 czy pole na kt\xF3rym stoi zawiera
+    z\u0142oto. Idealna jednostka by wybra\u0107 miejsce na now\u0105 baze"
+  - Martwy Budowlaniec buduje budynki
+  - "Adept zbiera magi\u0119 z magicznych kr\u0119g\xF3w"
+  - "Przy\u015Bpiesza proces budowy budowla\u0144c\xF3w"
+  - "Ulepszony ratusz otwiera nowe mo\u017Cliwo\u015Bci"
   - 
   - 
   - 

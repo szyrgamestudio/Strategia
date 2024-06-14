@@ -54,6 +54,12 @@ public class Pole : MonoBehaviour
         if(!Menu.Next && koniec)
         {
             koniec = false;
+            if(postac == null)
+            {
+                if(!las)
+                    Zajete = false;
+                ZajeteLot = false;
+            }
             Clean2();
         }
     }
@@ -357,8 +363,8 @@ public class Pole : MonoBehaviour
     }
     public void wywolajCealn()
     {
-        PhotonView photonView = GetComponent<PhotonView>();
-        photonView.RPC("CleanMulti", RpcTarget.All, Ip.ip);
+        // PhotonView photonView = GetComponent<PhotonView>();
+        // photonView.RPC("CleanMulti", RpcTarget.All, Ip.ip);
     }
 
     [PunRPC]
@@ -712,7 +718,10 @@ int i=0;
             }
             ziomek.GetComponent<Jednostka>().odkryj(3);
             if(SimultanTurns.simultanTurns && MenuGlowne.multi)
-                ziomek.GetComponent<Jednostka>().AktualizujPol();
+                {
+                PhotonView photonView = ziomek.GetComponent<PhotonView>();
+                photonView.RPC("poprawkaMulti", RpcTarget.All, ziomek.transform.position.x, ziomek.transform.position.y);
+                }
             
         }
 
@@ -761,7 +770,10 @@ int i=0;
             }
             ziomek.GetComponent<Jednostka>().odkryj(3);
             if(SimultanTurns.simultanTurns && MenuGlowne.multi)
-                ziomek.GetComponent<Jednostka>().AktualizujPol();
+                {
+                PhotonView photonView = ziomek.GetComponent<PhotonView>();
+                photonView.RPC("poprawkaMulti", RpcTarget.All, ziomek.transform.position.x, ziomek.transform.position.y);
+                }
         }
         Clean2(0);
         Menu.kafelki[(int)ziomek.transform.position.x][(int)ziomek.transform.position.y].GetComponent<Pole>().ZajeteLot = true;

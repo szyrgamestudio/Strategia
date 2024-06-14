@@ -36,10 +36,10 @@ public class SimultanTurns : MonoBehaviourPun
         if(MenuGlowne.multi && simultanTurns){
             photonView = GetComponent<PhotonView>(); // Get component after the instance is created
             Menu.tura = Ip.ip;
-            Menu.zloto[1] = 15;
-            Menu.drewno[1] = 15;
-            Menu.zloto[2] = 15;
-            Menu.drewno[2] = 15;
+            Menu.zloto[1] = 150;
+            Menu.drewno[1] = 150;
+            Menu.zloto[2] = 150;
+            Menu.drewno[2] = 105;
             Menu.zloto[3] = 15;
             Menu.drewno[3] = 15;
             Menu.zloto[4] = 15;

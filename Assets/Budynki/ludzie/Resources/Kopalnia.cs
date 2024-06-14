@@ -289,9 +289,12 @@ public class Kopalnia : MonoBehaviour
 
         }
         if(Menu.Next)
+        {
             kolejnatura = 2;
+        }
         if(!Menu.Next && kolejnatura == 2 && Menu.tura == budynek.GetComponent<Budynek>().druzyna)
         {
+            kolejnatura = 2;
             int sumaGolda = 0;
             for(int i=0;i<budynek.GetComponent<Budynek>().zdolnosci;i++)
             {

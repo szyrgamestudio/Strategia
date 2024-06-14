@@ -83,6 +83,8 @@ public class Budynek : MonoBehaviour
             ShowDMG(Jednostka.Select.GetComponent<Budowlaniec>().punktyBudowy + Budowlaniec.punktyBudowyBonus[Menu.tura], new Color(255 / 255.0f, 165 / 255.0f, 0 / 255.0f, 0.0f));
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             moznaBudowac = false;
+            if(punktyBudowy == punktyBudowyMax)
+                Jednostka.Select = budynek;
         }
         else
         {
@@ -354,10 +356,10 @@ public class Budynek : MonoBehaviour
 
         void OnMouseEnter()
     {
-        if(sojusz!=Menu.tura && Jednostka.Select!=null && Jednostka.CzyJednostka && Jednostka.Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Jednostka.Select, budynek) && Jednostka.Select.GetComponent<Jednostka>().akcja && !Jednostka.wybieranie && Jednostka.Select.GetComponent<Jednostka>().sojusz != sojusz)
+        if(sojusz!=Menu.tura && Jednostka.Select!=null && Jednostka.CzyJednostka && Jednostka.Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Jednostka.Select, budynek) && Jednostka.Select.GetComponent<Jednostka>().akcja && !Jednostka.wybieranie && Jednostka.Select.GetComponent<Jednostka>().sojusz != sojusz && (!MenuGlowne.multi || (druzyna == Ip.ip)))
             Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
         if(Jednostka.Select != null && Jednostka.CzyJednostka && budynek.GetComponent<Budynek>().sojusz == Jednostka.Select.GetComponent<Jednostka>().sojusz  && Jednostka.Select.GetComponent<Budowlaniec>() != null  && Walka.odleglosc(Jednostka.Select,budynek)==1) 
-        if((punktyBudowy < punktyBudowyMax) && Jednostka.Select.GetComponent<Jednostka>().akcja && budynek.GetComponent<BudynekRuch>().wybudowany)
+        if((punktyBudowy < punktyBudowyMax) && Jednostka.Select.GetComponent<Jednostka>().akcja && budynek.GetComponent<BudynekRuch>().wybudowany && (!MenuGlowne.multi || (druzyna == Ip.ip)))
         {
             Cursor.SetCursor(buildCursor, Vector2.zero, CursorMode.Auto);
             moznaBudowac = true;
