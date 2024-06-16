@@ -3263,6 +3263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mgla: {fileID: 1530702434}
   tury: {fileID: 130522350}
+  Settings: {fileID: 786535572}
 --- !u!114 &786535577
 MonoBehaviour:
   m_ObjectHideFlags: 0

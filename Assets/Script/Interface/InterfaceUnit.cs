@@ -54,7 +54,7 @@ public class InterfaceUnit : MonoBehaviour
             healthGracza.value = Wybrany.HP;
             }catch(Exception ex)
             {
-
+                Debug.Log(ex.ToString());
             }
             
             Heros heros = Jednostka.Select.GetComponent<Heros>();

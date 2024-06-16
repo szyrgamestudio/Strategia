@@ -10,11 +10,16 @@ public class MultiOptions : MonoBehaviour
     public Toggle tury;
 
     private bool isUpdating = false;
+    public GameObject Settings;
 
     void Start()
     {
         mgla.onValueChanged.AddListener(delegate { OnMglaValueChanged(); });
         tury.onValueChanged.AddListener(delegate { OnTuryValueChanged(); });
+        if(MenuGlowne.multi == false)
+        {
+            Settings.SetActive(false);
+        }
     }
 
     void Update()

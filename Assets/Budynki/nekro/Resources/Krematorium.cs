@@ -97,9 +97,9 @@ public class Krematorium : MonoBehaviour
                 switch(staty.nazwa)
                 {
                     case "Szczur" : staty.maxdmg += Biblioteka.update1[druzyna]; break;
-                    case "Zoombie" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
-                    case "Mumia" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
-                    case "Wampir" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Zoombie" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Mumia" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Wampir" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.atak += Biblioteka.update4[druzyna] * 2; break;
                     case "Marty Łucznik" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; break;
                     case "Lisz" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
                     case "Martwy Wojak" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; break;

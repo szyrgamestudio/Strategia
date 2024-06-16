@@ -89,8 +89,8 @@ public class Menu : MonoBehaviour
              GetComponent<MapLoad>().LoadMapData();
          }
 
-        if(Ip.ip == 1)
-            Aktualizuj(tura, IloscGraczy);
+        // if(Ip.ip == 1)
+        //     Aktualizuj(tura, IloscGraczy);
         // if(IloscGraczy==0)
         //     IloscGraczy=2;
         PanelUnit = PrivPanelUnity;
@@ -292,7 +292,12 @@ public class Menu : MonoBehaviour
                     else
                         wygrany = i;
                 }
-                
+                IloscGraczy = 4 - zostalo;
+                if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("IloscUpdate", RpcTarget.All, IloscGraczy);
+                }
                 if(zostalo == 3)
                 {
                     End.wygrany = wygrany;
@@ -332,8 +337,10 @@ public class Menu : MonoBehaviour
                 {
                     if(MenuGlowne.multi)
                     {
+                        try{
                         PhotonView photonView = GetComponent<PhotonView>();
                         photonView.RPC("ZaktualizujNPC", RpcTarget.All);
+                        } catch(Exception ex){Debug.Log(ex.ToString());}
                         
                     }
                     else
@@ -355,7 +362,11 @@ public class Menu : MonoBehaviour
             }
         }
     }
-
+    [PunRPC]
+    void IloscUpdate(int x)
+    {
+        IloscGraczy = x;
+    }
     [PunRPC]
     void ZaktualizujNPC()
     {

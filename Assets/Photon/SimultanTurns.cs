@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class SimultanTurns : MonoBehaviourPun
 {
-    public static bool simultanTurns = true;
+    public static bool simultanTurns = false;
     public static bool ready;
     public static int readyCount = 0;
     private static PhotonView photonView;
@@ -39,7 +39,7 @@ public class SimultanTurns : MonoBehaviourPun
             Menu.zloto[1] = 150;
             Menu.drewno[1] = 150;
             Menu.zloto[2] = 150;
-            Menu.drewno[2] = 105;
+            Menu.drewno[2] = 150;
             Menu.zloto[3] = 15;
             Menu.drewno[3] = 15;
             Menu.zloto[4] = 15;
@@ -49,7 +49,6 @@ public class SimultanTurns : MonoBehaviourPun
 
     public static void EndTurn()
     {
-        Debug.Log("dwa");
         ready = true;
         photonView.RPC("UpdateCount", RpcTarget.All);
        
@@ -62,24 +61,27 @@ public class SimultanTurns : MonoBehaviourPun
     [PunRPC]
     void UpdateCount()
     {
-        Debug.Log("trzy");
         readyCount++;
     }
 
     [PunRPC]
     void NextTurn()
     {
-        Debug.Log("zgery");
         // Assuming Menu.tura is static or accessible from here
         Menu.tura = 0;
     }
     [PunRPC]
     void playerUpdate()
     {
+        if(WyburRas.aktywny[Ip.ip])
+        {
         Menu.tura = Ip.ip;
         readyCount = 0;
         ready = false;
         Menu.NIERUSZAC = false;
+        }
+        else
+        Menu.NIERUSZAC = true;
     }
 }
 

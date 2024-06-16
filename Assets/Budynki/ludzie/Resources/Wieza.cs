@@ -92,7 +92,7 @@ public class Wieza : MonoBehaviour
     }
     void LateUpdate()
     {
-        if (wybudowany == false && (!MenuGlowne.multi || Menu.tura == Ip.ip)) // Użyj '==' do porównywania, a nie '='
+        if (wybudowany == false && (!MenuGlowne.multi || (Menu.tura == Ip.ip && (!SimultanTurns.simultanTurns || budowlaniec.GetComponent<Jednostka>().druzyna == Ip.ip)))) // Użyj '==' do porównywania, a nie '='
         {
             Vector3 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);

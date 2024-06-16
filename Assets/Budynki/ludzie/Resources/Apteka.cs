@@ -85,6 +85,7 @@ public class Apteka : MonoBehaviour
                     InterfaceBuild.zdrowieHerosa.value = regeneracja;
                 }
             }
+            
             if(Menu.Next)
             {
                 koniec = true;
@@ -104,6 +105,13 @@ public class Apteka : MonoBehaviour
         if(!Menu.heros[druzyna].activeSelf && regeneracja >= 5 && !budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete
         && Menu.ludnosc[druzyna] < Menu.maxludnosc[druzyna])
         {
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("wskrzeszenieMulti", RpcTarget.All, (int)budynek.GetComponent<BudynekRuch>().pole.transform.position.x ,  (int)budynek.GetComponent<BudynekRuch>().pole.transform.position.y);
+            }
+            else
+            {
             Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
             regeneracja = 0;
             Menu.ludnosc[druzyna]++;
@@ -116,6 +124,7 @@ public class Apteka : MonoBehaviour
             Menu.heros[druzyna].SetActive(true);
             staty.ShowDMG(staty.maxHP, Color.green);
             OnMouseDown();
+            }
         }
         if(!dodaj)
         {
@@ -127,6 +136,23 @@ public class Apteka : MonoBehaviour
             apteka[druzyna] = false;
             Destroy(budynek);
         }
+    }
+    [PunRPC]
+    public void wskrzeszenieMulti(int x, int y)
+    {
+        Debug.Log("zaczynamy");
+        Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
+            regeneracja = 0;
+            Menu.ludnosc[druzyna]++;
+            staty.HP = staty.maxHP;
+            Menu.kafelki[x][y].GetComponent<Pole>().Zajete = true;
+            Menu.kafelki[x][y].GetComponent<Pole>().postac = Menu.heros[druzyna];
+            Vector3 newPosition = Menu.kafelki[x][y].transform.position;
+            newPosition.z = -2f;
+            Menu.heros[druzyna].transform.position = newPosition;
+            Menu.heros[druzyna].SetActive(true);
+            staty.ShowDMG(staty.maxHP, Color.green);
+            Debug.Log("kończymy");
     }
     public void OnMouseDown()
     {

@@ -22,7 +22,8 @@ public class Chatka : MonoBehaviour
         }
         if(budynek.GetComponent<Budynek>().poZniszczeniu == 2)
         {
-            Menu.maxludnosc[budynek.GetComponent<Budynek>().druzyna] -= 3;
+            if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
+                Menu.maxludnosc[budynek.GetComponent<Budynek>().druzyna] -= 3;
             Destroy(budynek);
         }
     }
