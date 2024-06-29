@@ -10,22 +10,54 @@ public class MapLoad : MonoBehaviour
 {
     public Sprite[] obraz = new Sprite[66];
     public static Sprite[] obrazStatic = new Sprite[66];
-    public string nazwa;// = "mmap1.txt";
+    public static string nazwa;// = "mmap1.txt";
     public GameObject kafelek;
+    public GameObject[][] enemyList;
     public GameObject kafelekFake;
     public bool wysokoscStart;
     public bool zlotoStart;
     public bool jednostkiStart;
     public bool enemyStart;
 
+    public bool itemStart;
+
     public GameObject[] jednostki;
     public GameObject[] budyneki;
+
+    public List<GameObject> enemyLatwy;
+    public List<GameObject> enemySredni;
+    public List<GameObject> enemyTrudny;
+    public List<GameObject> enemyLata;
+    public List<GameObject> enemyStrzela;
+    public List<GameObject> enemyStrzelaTrudny;
+    
 
     [PunRPC]
     public void manaZwieksz(int ip, int i)
     {
         if(Ip.ip != ip)
             Menu.magia[1 + (i)] += 6;
+    }
+
+     public GameObject RandomEnemy(int poziom)
+    {
+        switch (poziom)
+        {
+            case 1:
+                return enemyLatwy[Random.Range(0, enemyLatwy.Count)];
+            case 2:
+                return enemySredni[Random.Range(0, enemySredni.Count)];
+            case 3:
+                return enemyTrudny[Random.Range(0, enemyTrudny.Count)];
+            case 4:
+                return enemyLata[Random.Range(0, enemyLata.Count)];
+            case 5:
+                return enemyStrzela[Random.Range(0, enemyStrzela.Count)];
+            case 6:
+                return enemyStrzelaTrudny[Random.Range(0, enemyStrzelaTrudny.Count)];
+            default:
+                return null;
+        }
     }
 
     public void LoadMapData()
@@ -39,6 +71,7 @@ public class MapLoad : MonoBehaviour
         List<List<int>> tempMapGold = new List<List<int>>();
         List<List<int>> tempMapUnit = new List<List<int>>();
         List<List<int>> tempMapEnemy = new List<List<int>>();
+        List<List<int>> tempMapItem  = new List<List<int>>();
 
         // Sprawdzenie, czy plik istnieje
         if (File.Exists(filePath))
@@ -70,11 +103,13 @@ public class MapLoad : MonoBehaviour
                     }
 
                     // Wstawienie listy z danymi wiersza na początek listy mapy
-                    // if(wysokoscStart && zlotoStart)
-                    //     tempMapGold.Insert(0, row);
                     if (line == "7777")
                         break;
-                    if (enemyStart)
+                    if(itemStart)
+                        tempMapItem.Add(row);
+                    if (line == "01111011")
+                        itemStart = true;
+                    if (enemyStart && !itemStart)
                         tempMapEnemy.Add(row);
                     if (line == "01100101")
                         enemyStart = true;
@@ -107,6 +142,7 @@ public class MapLoad : MonoBehaviour
             int[,] kafelekGold = new int[5000, 5];
             int[,] kafelekUnit = new int[20, 2];
             int[,] kafelekEnemy = new int[5000, 5];
+            int[,] kafelekItem = new int[5000, 5];
 
             for (int i = 0; i < Menu.BoardSizeX - 1; i++)
             {
@@ -137,6 +173,13 @@ public class MapLoad : MonoBehaviour
                 {
                     kafelekEnemy[l, j] = tempMapEnemy[l][j];
                 }
+            for (int l = 0; l < tempMapItem.Count; l++)
+                for (int j = 0; j < 3; j++)
+                {
+                    Debug.Log(l + " " + j);
+                    kafelekItem[l, j] = tempMapItem[l][j];
+                }
+                
             for (int x = 0; x < Menu.BoardSizeX; x++)
                 for (int y = 0; y < Menu.BoardSizeY; y++)
                 {
@@ -241,9 +284,24 @@ public class MapLoad : MonoBehaviour
             while (kafelekEnemy[k, 0] != 0)
             {
                 if (kafelekEnemy[k, 0] == 1)
-                    StartCoroutine(ludzik(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                    StartCoroutine(ludzik(RandomEnemy(kafelekEnemy[k,1]), kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
                 if (kafelekEnemy[k, 0] == 2)
                     StartCoroutine(budynek(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                k++;
+            }
+            k = 0;
+            while (kafelekItem[k, 0] != 0)
+            {
+                PoleFind pole = Menu.kafelki[kafelekItem[k, 1]][kafelekItem[k, 2]].GetComponent<PoleFind>(); 
+                if(MenuGlowne.multi)
+                {
+                    pole.updateMultiWywolaj(kafelekItem[k, 0]);
+                }
+                else
+                {
+                    pole.rodzaj = kafelekItem[k, 0];
+                    pole.Start();
+                }
                 k++;
             }
             for(int i = -1; i < Menu.BoardSizeX; i++)
@@ -296,7 +354,7 @@ public class MapLoad : MonoBehaviour
             Debug.LogError($"Plik {nazwa} w folderze Maps nie istnieje.");
         }
     }
-    IEnumerator ludzik(int ip, float x, float y, int team)
+    IEnumerator ludzik(GameObject id, float x, float y, int team)
     {
         if (team == 0 || WyburRas.aktywny[team - 1] == true)
         {
@@ -304,10 +362,10 @@ public class MapLoad : MonoBehaviour
             GameObject nowy = null;
             if (MenuGlowne.multi)
             {
-                nowy = PhotonNetwork.Instantiate(jednostki[ip].name, new Vector3(x, y, -2f), Quaternion.identity);
+                nowy = PhotonNetwork.Instantiate(id.name, new Vector3(x, y, -2f), Quaternion.identity);
             }
             else
-                nowy = Instantiate(jednostki[ip], new Vector3(x, y, -2f), Quaternion.identity);
+                nowy = Instantiate(id, new Vector3(x, y, -2f), Quaternion.identity);
             //PhotonView photonView = nowy.AddComponent<PhotonView>();
             nowy.GetComponent<Jednostka>().druzyna = team;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
@@ -329,6 +387,11 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Jednostka>().rozlozenie();
             }
         }
+    }
+    IEnumerator ludzik(int ip, float x, float y, int team)
+    {
+        StartCoroutine(ludzik(jednostki[ip],x,y,team));
+        yield return null;
     }
 
     IEnumerator budynek(int ip, float x, float y, int team)
@@ -372,7 +435,9 @@ public class MapLoad : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
 
         // Wyślij informacje o scenie do innych graczy
-        GetComponent<PhotonView>().RPC("UpdateSceneInfo", RpcTarget.OthersBuffered, currentScene);
+
+        if(MenuGlowne.multi)
+            GetComponent<PhotonView>().RPC("UpdateSceneInfo", RpcTarget.OthersBuffered, currentScene);
     }
 
     [PunRPC]

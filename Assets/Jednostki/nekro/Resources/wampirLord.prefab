@@ -872,8 +872,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 31668eaf9765f5743a88678faf915ed3, type: 3}
   - {fileID: 21300000, guid: f164d32a9583900458792bd7fc9032d1, type: 3}
   teksty:
-  - "Wampir podczas ataku wysysa kwrew z przeciwnika lecz\u0105c si\u0119 o (50%
-    + 10% * poziom) zadanych obra\u017Ce\u0144"
+  - "Wampir podczas ataku wysysa krew z przeciwnika lecz\u0105c si\u0119 o (50% +
+    10% * poziom) zadanych obra\u017Ce\u0144"
   - "Wampir przemienai si\u0119 w nietoperza do ko\u0144ca tury."
   cooldown: 0
   koniec: 0

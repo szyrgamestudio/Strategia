@@ -19,6 +19,7 @@ public class Opis : MonoBehaviour
             
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
             {
+                Debug.Log("check");
                 InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];
                 PrzyciskInter Guzik = InterfaceUnit.przyciski[i].GetComponent<PrzyciskInter>();
                 Guzik.IconZloto.enabled = false;

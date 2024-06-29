@@ -113,9 +113,9 @@ public class Nekromanta : MonoBehaviour
                         /////
             switch(skill)
             {
-                case 0: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 2; break;
-                case 1: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 3; break;
-                case 2: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 4; break;
+                case 0: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 3; break;
+                case 1: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 5; break;
+                case 2: Menu.magia[jednostka.GetComponent<Jednostka>().druzyna] -= 8; break;
             }
         }
     }

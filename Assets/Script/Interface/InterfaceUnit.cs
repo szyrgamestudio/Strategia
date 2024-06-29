@@ -13,6 +13,7 @@ public class InterfaceUnit : MonoBehaviour
     public Text TSzybkosc;
     public Text TZasieg;
     public Text TNazwa;
+    public Text level;
 
     public Slider healthGracza;
     public Gradient gradient;
@@ -54,7 +55,7 @@ public class InterfaceUnit : MonoBehaviour
             healthGracza.value = Wybrany.HP;
             }catch(Exception ex)
             {
-
+                Debug.Log(ex.ToString());
             }
             
             Heros heros = Jednostka.Select.GetComponent<Heros>();
@@ -78,10 +79,11 @@ public class InterfaceUnit : MonoBehaviour
             TSzybkosc.text = ((float)(Wybrany.szybkosc) / 2).ToString() + "/" + ((float)(Jednostka.Select.GetComponent<Jednostka>().maxszybkosc) / 2).ToString();
             THP.text = Math.Round(Wybrany.HP, 1).ToString("N1") + "/" + Jednostka.Select.GetComponent<Jednostka>().maxHP.ToString("N1");
             TZasieg.text = Wybrany.zasieg.ToString();
-            if(heros == null)
-                TNazwa.text = Wybrany.nazwa;
+            TNazwa.text = Wybrany.nazwa;
+            if(heros != null)
+                level.text = "Lv " + heros.level.ToString();
             else
-                TNazwa.text = Wybrany.nazwa + " " + heros.level.ToString() + "Lv";
+                level.text =  " ";
             if(Wybrany.akcja)
                 akcja.sprite = dostepna;
             else   

@@ -86,7 +86,6 @@ public class Kragmagi : MonoBehaviour
     [PunRPC]
     public void multi(int ip, int x, int y)
     {
-        Debug.Log("Cipa");
         if(Ip.ip != ip)
         {
             Menu.kafelki[x][y].GetComponent<Pole>().magia = 2;

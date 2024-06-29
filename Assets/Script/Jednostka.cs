@@ -50,7 +50,7 @@ public class Jednostka : MonoBehaviour
     public Animator animator;
     public GameObject pocisk;
 
-    private bool wybrany;
+    //private bool wybrany;
     public AudioSource src;
 
 
@@ -78,9 +78,11 @@ public class Jednostka : MonoBehaviour
     IEnumerator przyporzadkuj()
     {
         yield return new WaitForSeconds(0.2f);
+        
         Menu.jednostki[druzyna , Menu.ludnosc[druzyna]] = jednostka;
         nr_jednostki = Menu.ludnosc[druzyna];
         Menu.ludnosc[druzyna]++;
+        
     }
 
     public void walkSound()
@@ -368,10 +370,10 @@ public class Jednostka : MonoBehaviour
     
     void Update()
     {
-        if(jednostka == Select)
-            wybrany = true;
-        else
-            wybrany = false;
+        // if(jednostka == Select)
+        //     wybrany = true;
+        // else
+        //     wybrany = false;
         if(jednostka==Select)
             wybrane.enabled = true;
         else    
@@ -456,30 +458,31 @@ public class Jednostka : MonoBehaviour
     }
 
     [PunRPC]
-    public void zdradaMulti(int ip)
+    public void zdradaMulti(int ip, int poziom)
     {
         if(Ip.ip != ip)
-            zdrada();
+            zdrada(poziom);
     }
 
-    public void zdrada()
+    public void zdrada(int poziom)
     {
-        if(MenuGlowne.multi)
+        if(MenuGlowne.multi && poziom == 0)
         {
             PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("zdradaMulti", RpcTarget.All, Ip.ip);
+            photonView.RPC("zdradaMulti", RpcTarget.All, Ip.ip, 1);
         }
+        nr_jednostki = Menu.NPC.Count;
         Menu.NPC.Add(jednostka);
         spanie = true;
         druzyna = 0;
-        Start();
+        obramowka.color = new Color(0.0f, 0.0f, 0.0f);
     }
 
     private void koniecTury()
     {
         if(druzyna != 0 && WyburRas.aktywny[druzyna-1] == false)
         {
-            zdrada();
+            zdrada(0);
         }
         szybkosc = maxszybkosc;
         akcja = true;
@@ -500,7 +503,7 @@ public class Jednostka : MonoBehaviour
     }
 
 
-        void UpdateHealthBarColor()
+    void UpdateHealthBarColor()
     {
         float normalizedHP = HP / maxHP;
         Color healthColor = gradient.Evaluate(normalizedHP); // Pobierz kolor z Gradientu

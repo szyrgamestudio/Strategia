@@ -39,6 +39,7 @@ public class Menu : MonoBehaviour
     public static int[] bazyIlosc = new int[5];
 
     public static int IloscGraczy;
+    public static int IloscGraczyStart;
     public static int tura;
     public static int nrTury = 1;
     public GameObject PrivPanelUnity;
@@ -88,24 +89,30 @@ public class Menu : MonoBehaviour
          {
              GetComponent<MapLoad>().LoadMapData();
          }
+         else
+         {
+            if(Ip.ip == 1)
+                StartCoroutine(Aktualizuj(10,IloscGraczy, IloscGraczyStart));
+         }
 
-        if(Ip.ip == 1)
-            Aktualizuj(tura, IloscGraczy);
-        // if(IloscGraczy==0)
-        //     IloscGraczy=2;
         PanelUnit = PrivPanelUnity;
         PanelBuild = PrivPanelBuild;
         PanelBuild.SetActive(false);
         PanelUnit.SetActive(false);
         tura = 1;
         turaNPC.gameObject.SetActive(false);
+        IloscGraczyStart = IloscGraczy;
     }
     void Update()
     {
+        if(MenuGlowne.multi && !WyburRas.aktywny[Ip.ip-1])
+        {
+            Menu.zloto[Ip.ip] = 0;
+            NIERUSZAC = true;
+        }
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
-            Debug.Log(PoleOdkryj.mgla);
-            Debug.Log(SimultanTurns.simultanTurns);
+            Debug.Log(IloscGraczy);
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -118,16 +125,14 @@ public class Menu : MonoBehaviour
             {
                 NIERUSZAC = true;
             }
-        if(tura > IloscGraczy && Ip.ip == 1)
+        if(((SimultanTurns.simultanTurns && tura > IloscGraczy )|| (!SimultanTurns.simultanTurns && tura > IloscGraczyStart )) && Ip.ip == 1)
         {
+            Debug.Log(IloscGraczy + " - " + tura);
             tura=0;
             turaNPC.value = 0;
             StartCoroutine(NPCtura(0));
         }
-        // if(MenuGlowne.multi)
-        // {
-        //     StartCoroutine(Aktualizuj(tura, IloscGraczy));
-        // }
+
         switch (tura)
         {
             case 0: KolejnaTuraButton.color = new Color(0.0f, 0.0f, 0.0f); break;
@@ -138,26 +143,32 @@ public class Menu : MonoBehaviour
         }
     }
 
-    IEnumerator Aktualizuj(int tura, int IloscGraczy)
+    IEnumerator Aktualizuj(int tura, int IloscGraczy, int IloscGraczyStart)
     {
         yield return new WaitForSeconds(0.2f);
+        if(tura == 10 && !SimultanTurns.simultanTurns)
+            tura = Menu.tura;
 
         if (tura != Menu.tura || IloscGraczy != Menu.IloscGraczy)
         {
             PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
+            photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury, IloscGraczyStart);
         }
     }
 
+    
+
 
     [PunRPC]
-    void ZaktualizujStatystykiRPC(int tura, int BoardSizeX, int BoardSizeY, int IloscGraczy, int nrTury)
+    void ZaktualizujStatystykiRPC(int tura, int BoardSizeX, int BoardSizeY, int IloscGraczy, int nrTury, int IloscGraczyStart)
     {
-        Menu.tura = tura;
+        if(!SimultanTurns.simultanTurns || tura == 0)
+            Menu.tura = tura;
         Menu.BoardSizeX = BoardSizeX;
         Menu.BoardSizeY = BoardSizeY;
         Menu.IloscGraczy = IloscGraczy;
         Menu.nrTury = nrTury;
+        Menu.IloscGraczyStart = IloscGraczyStart;
     }
 
     [PunRPC]
@@ -237,7 +248,8 @@ public class Menu : MonoBehaviour
                     idInfo = 0;
                     for(int k = 0; k<=2;k++)
                         infoText[k].text = infoString[k];
-                    InfoKolejnaTura.SetActive(true);
+                    if(!SimultanTurns.simultanTurns || !SimultanTurns.ready)
+                        InfoKolejnaTura.SetActive(true);
                     NaPewnoKoniec = 0;
                 }
             }
@@ -285,14 +297,30 @@ public class Menu : MonoBehaviour
                 {
                     if(bazyIlosc[i]==0)
                     {
-                        
-                        WyburRas.aktywny[i-1] = false;
+                       
+                        //if(!SimultanTurns.simultanTurns)
+                            WyburRas.aktywny[i-1] = false;
+                        // else
+                        //     if(SimultanTurns.ready && tura == 0)
+                        //         WyburRas.aktywny[i-1] = false;
                         zostalo++;
+                        // Debug.Log("ludzi:" + IloscGraczy + "tura" + tura);
+                        // Debug.Log(i + " " + WyburRas.aktywny[i-1] + " " + SimultanTurns.ready);
                     }
                     else
                         wygrany = i;
                 }
-                
+                if(!SimultanTurns.simultanTurns)
+                    IloscGraczy = 4 - zostalo;
+                else
+                    if(SimultanTurns.ready && tura == 0)
+                        IloscGraczy = 4 - zostalo;
+                if(MenuGlowne.multi)
+                {
+                    //Debug.Log("ludzi: " + IloscGraczy + " zostalo " + zostalo);
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("IloscUpdate", RpcTarget.All, IloscGraczy);
+                }
                 if(zostalo == 3)
                 {
                     End.wygrany = wygrany;
@@ -309,12 +337,12 @@ public class Menu : MonoBehaviour
                     for(int xd = 1; xd<5;xd++)
                         if (tura == xd && !WyburRas.aktywny[xd-1])
                             tura++;
-                    if (tura > IloscGraczy)
+                    if (tura > IloscGraczyStart)
                         tura = 0;
                     if(MenuGlowne.multi)
                     {
                         PhotonView photonView = GetComponent<PhotonView>();
-                        photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury);
+                        photonView.RPC("ZaktualizujStatystykiRPC", RpcTarget.All, tura, BoardSizeX, BoardSizeY, IloscGraczy, nrTury, IloscGraczyStart);
                     }
                 }
                 Jednostka.Select = null;
@@ -332,8 +360,11 @@ public class Menu : MonoBehaviour
                 {
                     if(MenuGlowne.multi)
                     {
+                        try{
+                        //Debug.Log("Enemy Od ziemi");
                         PhotonView photonView = GetComponent<PhotonView>();
                         photonView.RPC("ZaktualizujNPC", RpcTarget.All);
+                        } catch(Exception ex){Debug.Log(ex.ToString());}
                         
                     }
                     else
@@ -347,7 +378,8 @@ public class Menu : MonoBehaviour
                         else
                         {
                             nrTury++;
-                            nrTuryText.text = nrTury.ToString();
+                            Debug.Log("Jeden");
+                            nrTuryText.text = (nrTury).ToString();
                             tura++;
                         }
                     }
@@ -355,7 +387,11 @@ public class Menu : MonoBehaviour
             }
         }
     }
-
+    [PunRPC]
+    void IloscUpdate(int x)
+    {
+        IloscGraczy = x;
+    }
     [PunRPC]
     void ZaktualizujNPC()
     {
@@ -389,19 +425,7 @@ public class Menu : MonoBehaviour
     {
         Pole.Clean2();
         turaNPC.gameObject.SetActive(true);
-        // if(NPC[id] == null)
-        // {
-        //     NPC.RemoveAt(id);
-        //     if(Menu.NPC.Count - 1 > id)
-        //     {
-        //         turaNPC.value = id;
-        //         turaNPC.maxValue = Menu.NPC.Count - 2;
-        //         yield return new WaitForSeconds(0.15f);
-        //         StartCoroutine(NPCtura(id + 1));
-        //     }
-        //      yield break;
-        // }
-        //Debug.Log(NPC[id].name + " " + id + " " + NPC[id].GetComponent<Jednostka>().nr_jednostki);
+
         if(NPC[id]== null)
             NPC.RemoveAt(id);
         GameObject postacGracza = null;
@@ -429,9 +453,8 @@ public class Menu : MonoBehaviour
                 {
                     if(NPC[id].GetComponent<Jednostka>().zasieg == 3)
                     {
-                        Debug.Log("zdetu");
                         int x = (int)postacGracza.transform.position.x; int y = (int)postacGracza.transform.position.y;
-                        Debug.Log(x + " " + y + " " + NPC[id].transform.position.x + " " + NPC[id].transform.position.y);
+                
                         if(y < NPC[id].transform.position.y)
                             if(istnieje(x,y-1) &&  !kafelki[x][y-1].GetComponent<Pole>().Zajete && !kafelki[x][y-1].GetComponent<Pole>().ZajeteLot)
                                 pole = kafelki[(int)NPC[id].transform.position.x][(int)NPC[id].transform.position.y-1];
@@ -447,8 +470,6 @@ public class Menu : MonoBehaviour
                             if(istnieje(x+1,y) &&  !kafelki[x+1][y].GetComponent<Pole>().Zajete && !kafelki[x+1][y].GetComponent<Pole>().ZajeteLot)
                                 pole = kafelki[(int)NPC[id].transform.position.x+1][(int)NPC[id].transform.position.y];
                         }
-                        if(pole != null)
-                            Debug.Log(pole.name);
                     }
                     else
                     {
@@ -542,13 +563,22 @@ public class Menu : MonoBehaviour
             turaNPC.gameObject.SetActive(false);
             NIERUSZAC = false;
             if(!SimultanTurns.simultanTurns)
+            {
                 nrTury++;
-            nrTuryText.text = nrTury.ToString();
+                Debug.Log("dwa");
+            }
+            if(MenuGlowne.multi)
+                nrTuryText.text = nrTury.ToString();    //ZMIENIC KONIECZNIE XDDD ZMIANA
+            else
+                nrTuryText.text = (1+(nrTury/(IloscGraczy+2))).ToString();
             Jednostka.CzyJednostka = false;
             if(SimultanTurns.simultanTurns)
                 SimultanTurns.playerTurn();
             else
+            {
+                //Debug.Log("przetem");
                 NextTurn();
+            }
             
         }
     }

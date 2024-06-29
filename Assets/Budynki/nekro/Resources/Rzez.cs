@@ -15,7 +15,7 @@ public class Rzez : MonoBehaviour
     public Sprite puste;
 
     private int dhelp;
-    private bool dopisz = true;
+    //private bool dopisz = true;
 
     public int druzyna;
     public bool dostepny;
@@ -106,18 +106,26 @@ public class Rzez : MonoBehaviour
         !budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete
         && Menu.ludnosc[druzyna] < Menu.maxludnosc[druzyna])
         {
-            Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
-            regeneracja = 0;
-            Menu.ludnosc[druzyna]++;
-            staty.HP = staty.maxHP;
-            budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete = true;
-            budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().postac = Menu.heros[druzyna];
-            Vector3 newPosition = budynek.GetComponent<BudynekRuch>().pole.transform.position;
-            newPosition.z = -2f;
-            Menu.heros[druzyna].transform.position = newPosition;
-            Menu.heros[druzyna].SetActive(true);
-            staty.ShowDMG(staty.maxHP, Color.green);
-            OnMouseDown();
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("wskrzeszenieMulti", RpcTarget.All, (int)budynek.GetComponent<BudynekRuch>().pole.transform.position.x ,  (int)budynek.GetComponent<BudynekRuch>().pole.transform.position.y);
+            }
+            else
+            {
+                Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
+                regeneracja = 0;
+                Menu.ludnosc[druzyna]++;
+                staty.HP = staty.maxHP;
+                budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().Zajete = true;
+                budynek.GetComponent<BudynekRuch>().pole.GetComponent<Pole>().postac = Menu.heros[druzyna];
+                Vector3 newPosition = budynek.GetComponent<BudynekRuch>().pole.transform.position;
+                newPosition.z = -2f;
+                Menu.heros[druzyna].transform.position = newPosition;
+                Menu.heros[druzyna].SetActive(true);
+                staty.ShowDMG(staty.maxHP, Color.green);
+                OnMouseDown();
+            }
         }
         if(!dodaj)
         {
@@ -130,7 +138,23 @@ public class Rzez : MonoBehaviour
             Destroy(budynek);
         }
     }
-    
+        [PunRPC]
+    public void wskrzeszenieMulti(int x, int y)
+    {
+        Debug.Log("zaczynamy");
+        Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
+            regeneracja = 0;
+            Menu.ludnosc[druzyna]++;
+            staty.HP = staty.maxHP;
+            Menu.kafelki[x][y].GetComponent<Pole>().Zajete = true;
+            Menu.kafelki[x][y].GetComponent<Pole>().postac = Menu.heros[druzyna];
+            Vector3 newPosition = Menu.kafelki[x][y].transform.position;
+            newPosition.z = -2f;
+            Menu.heros[druzyna].transform.position = newPosition;
+            Menu.heros[druzyna].SetActive(true);
+            staty.ShowDMG(staty.maxHP, Color.green);
+            Debug.Log("kończymy");
+    }
 
     void OnMouseDown()
     {

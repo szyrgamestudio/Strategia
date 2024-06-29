@@ -1069,6 +1069,7 @@ MonoBehaviour:
     by\u0107 celem ataku jednostki z zasi\u0119giem 1"
   - "Pasywnie: Zwi\u0119ksza obra\u017Cenia gdy gracz posiada 3 b\u0105d\u017A mniej
     z\u0142ota"
+  update: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

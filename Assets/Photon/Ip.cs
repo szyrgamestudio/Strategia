@@ -5,5 +5,5 @@ using UnityEngine;
 public class Ip : MonoBehaviour
 {
     public static int ip;
-    public static string version = "0.2.3";
+    public static string version = "0.3.3";
 }

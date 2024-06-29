@@ -163,14 +163,15 @@ public class BudynekRuch : MonoBehaviour
     {
         if(Ip.ip != ip)
         {
+            try{
             switch (stopnie)
             {
                 case 90.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
                 case 270.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
                 case 0.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1];  break;
                 case 180.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
-                
             }
+            }catch(Exception ex){Debug.Log(ex.ToString());}
         }
     }
     

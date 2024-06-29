@@ -893,13 +893,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8287434606867666639}
   - component: {fileID: 7254608854548605690}
-  - component: {fileID: -2614173315313739598}
+  - component: {fileID: 975902216986315311}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 4080598057547060474}
   - component: {fileID: 7166372193401913388}
   - component: {fileID: 7308404348899044334}
-  - component: {fileID: 975902216986315311}
   m_Layer: 0
   m_Name: Szczur
   m_TagString: Untagged
@@ -978,7 +977,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2614173315313739598
+--- !u!114 &975902216986315311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -987,9 +986,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936831247201e5645acb0ada7234d17f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dfdbe346eb130343ba1e35fbd22ccd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jednostka: {fileID: 6268565104842363223}
+  druzyna: 2
+  sojusz: 2
+  HP: 1
+  maxHP: 1
+  atak: 1
+  obrona: 1
+  zasieg: 1
+  maxszybkosc: 6
+  szybkosc: 6
+  mindmg: 1
+  maxdmg: 2
+  zdolnosci: 1
+  zbieracz: 0
+  lata: 0
+  cena: 3
+  nazwa: Szczur
+  akcja: 1
+  spanie: 0
+  nr_jednostki: 0
+  koniec: 0
+  poczatek: 0
+  healthGracza: {fileID: 5058078432872962624}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.13044383, b: 0, a: 1}
+    key1: {r: 1, g: 0.8011478, b: 0, a: 1}
+    key2: {r: 0.16614974, g: 1, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 7132
+    ctime1: 19275
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  obramowka: {fileID: 7335484290295685484}
+  wybrane: {fileID: 273768963667658763}
+  TextShowDMG: {fileID: 3085055548398272947}
+  customCursor: {fileID: 2800000, guid: d8b84ba12197b584ca231e0cd97ae1f9, type: 3}
+  canvasAnimacji: {fileID: 581539714620223394}
+  animator: {fileID: 2166833886159355322}
+  pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
+  src: {fileID: 3193222365307502974}
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,78 +1150,6 @@ MonoBehaviour:
   - "Szczury mog\u0105 przekracza\u0107 maksymaln\u0105 populacje"
   jednostka: {fileID: 6268565104842363223}
   nieStandardowy: 0
---- !u!114 &975902216986315311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6268565104842363223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dfdbe346eb130343ba1e35fbd22ccd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jednostka: {fileID: 6268565104842363223}
-  druzyna: 2
-  sojusz: 2
-  HP: 1
-  maxHP: 1
-  atak: 1
-  obrona: 1
-  zasieg: 1
-  maxszybkosc: 6
-  szybkosc: 6
-  mindmg: 1
-  maxdmg: 2
-  zdolnosci: 1
-  zbieracz: 0
-  lata: 0
-  cena: 3
-  nazwa: Szczur
-  akcja: 1
-  spanie: 0
-  nr_jednostki: 0
-  koniec: 0
-  poczatek: 0
-  healthGracza: {fileID: 5058078432872962624}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0.13044383, b: 0, a: 1}
-    key1: {r: 1, g: 0.8011478, b: 0, a: 1}
-    key2: {r: 0.16614974, g: 1, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 7132
-    ctime1: 19275
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  obramowka: {fileID: 7335484290295685484}
-  wybrane: {fileID: 273768963667658763}
-  TextShowDMG: {fileID: 3085055548398272947}
-  customCursor: {fileID: 2800000, guid: d8b84ba12197b584ca231e0cd97ae1f9, type: 3}
-  canvasAnimacji: {fileID: 581539714620223394}
-  animator: {fileID: 2166833886159355322}
-  pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
-  src: {fileID: 3193222365307502974}
 --- !u!1 &7463416832612274143
 GameObject:
   m_ObjectHideFlags: 0

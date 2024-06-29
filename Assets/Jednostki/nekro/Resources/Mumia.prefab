@@ -1000,7 +1000,7 @@ MonoBehaviour:
   maxszybkosc: 8
   szybkosc: 8
   mindmg: 1
-  maxdmg: 3
+  maxdmg: 2
   zdolnosci: 1
   zbieracz: 0
   lata: 0

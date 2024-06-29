@@ -138,7 +138,9 @@ public class Budowlaniec : MonoBehaviour
                     }
                 if(Przycisk.jednostka[8]==true)
                     {
-                        wybudowanie(medyk, 8);
+                        Przycisk.jednostka[8]=false;
+                        if(!Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna])
+                            wybudowanie(medyk, 8);  
                     }
                 if(Przycisk.jednostka[9]==true)
                     {

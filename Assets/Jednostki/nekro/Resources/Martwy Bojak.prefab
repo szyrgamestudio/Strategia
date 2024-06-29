@@ -991,13 +991,13 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 4
-  maxHP: 4
+  HP: 5
+  maxHP: 5
   atak: 1
-  obrona: 2
+  obrona: 3
   zasieg: 1
-  maxszybkosc: 6
-  szybkosc: 6
+  maxszybkosc: 8
+  szybkosc: 8
   mindmg: 1
   maxdmg: 2
   zdolnosci: 1
