@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapDropdown: {fileID: 548498183}
-  mapsFolderPath: Assets/Maps
   mapNameText: {fileID: 598922608}
 --- !u!1 &16471542
 GameObject:
@@ -2615,19 +2614,7 @@ MonoBehaviour:
     m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 15638733}
-        m_TargetAssemblyTypeName: Opcje, Assembly-CSharp
-        m_MethodName: SetResolution
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!224 &548498184
 RectTransform:
