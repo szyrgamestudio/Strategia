@@ -833,7 +833,7 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 6
+  HP: 1
   maxHP: 6
   atak: 1
   obrona: 2
