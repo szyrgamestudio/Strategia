@@ -180,7 +180,7 @@ public class Menu : MonoBehaviour
     [PunRPC]
     public void koniecMulti(int wygrany)
     {
-        End.wygrany = wygrany;
+        Ending.wygrany = wygrany;
         SceneManager.LoadScene(3); 
     }
 
@@ -321,13 +321,13 @@ public class Menu : MonoBehaviour
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("IloscUpdate", RpcTarget.All, IloscGraczy);
                 }
-                if(zostalo == 3)
+                if(End.czyWygrana())
                 {
-                    End.wygrany = wygrany;
+                    //Ending.wygrany = wygrany;
                     if(MenuGlowne.multi)
                     {
                         PhotonView photonView = GetComponent<PhotonView>();
-                        photonView.RPC("koniecMulti", RpcTarget.All, wygrany);
+                        photonView.RPC("koniecMulti", RpcTarget.All, Ending.wygrany);
                     }
                     SceneManager.LoadScene(3);   //KONIEC GRY
                 }
@@ -585,32 +585,50 @@ public class Menu : MonoBehaviour
 
     private GameObject przeszukanie(int odleglosc, GameObject NPC)
     {
+        List<GameObject> lista = new List<GameObject>();
         GameObject zwrot = null;
         GameObject help;
-        for(int j = -odleglosc; j<=odleglosc;j++)
-            for(int i = -odleglosc; i<=odleglosc;i++)
+
+        for (int j = -odleglosc; j <= odleglosc; j++)
+        {
+            for (int i = -odleglosc; i <= odleglosc; i++)
             {
-                if(Mathf.Abs(i) + Mathf.Abs(j) < odleglosc && (int)(NPC.transform.position.x + i) >= 0 && (int)(NPC.transform.position.x + i) <= (Menu.BoardSizeX -1) 
-                && (int)(NPC.transform.position.y + j) >= 0 && (int)(NPC.transform.position.y + j) <= (Menu.BoardSizeY -1))
+                int newX = (int)(NPC.transform.position.x + i);
+                int newY = (int)(NPC.transform.position.y + j);
+
+                if (Mathf.Abs(i) + Mathf.Abs(j) < odleglosc &&
+                    newX >= 0 && newX <= (Menu.BoardSizeX - 1) &&
+                    newY >= 0 && newY <= (Menu.BoardSizeY - 1))
                 {
-                    if(kafelki[(int)NPC.transform.position.x + i][(int)NPC.transform.position.y + j].GetComponent<Pole>().postac != null)
+                    var pole = kafelki[newX][newY].GetComponent<Pole>();
+
+                    if (pole.postac != null)
                     {
-                        help = kafelki[(int)NPC.transform.position.x + i][(int)NPC.transform.position.y + j].GetComponent<Pole>().postac;
+                        help = pole.postac;
                         Jednostka czek = help.GetComponent<Jednostka>();
-                        if(czek!=null && help.GetComponent<Jednostka>().druzyna != 0 && czek.HP>0.1 && !czek.lata)
+
+                        if (czek != null && czek.druzyna != 0 && czek.HP > 0.1 && !czek.lata)
                         {
-                            zwrot = help;
+                            lista.Add(help);
                         }
                     }
                 }
             }
-        if(zwrot == null && odleglosc <= 4)
+        }
+
+        if (lista.Count != 0)
         {
-            zwrot = przeszukanie(odleglosc + 1,NPC);
+            zwrot = lista[UnityEngine.Random.Range(0, lista.Count)];
+        }
+
+        if (zwrot == null && odleglosc <= 4)
+        {
+            zwrot = przeszukanie(odleglosc + 1, NPC);
         }
 
         return zwrot;
     }
+
 
     public static bool preNext;
 

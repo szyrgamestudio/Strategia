@@ -60,6 +60,17 @@ public class SimultanTurns : MonoBehaviourPun
         photonView.RPC("playerUpdate", RpcTarget.All);
     }
 
+    public static void kod()
+    {
+        photonView.RPC("playerUpdate", RpcTarget.All);
+    }
+
+    // [PunRPC]
+    // void kodMulti()
+    // {
+
+    // }
+
     [PunRPC]
     void UpdateCount(int x)
     {

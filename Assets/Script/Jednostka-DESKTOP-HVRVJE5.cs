@@ -53,6 +53,7 @@ public class Jednostka : MonoBehaviour
     //private bool wybrany;
     public AudioSource src;
 
+    public bool boss = false;
 
     public void Start()
     {
@@ -214,6 +215,11 @@ public class Jednostka : MonoBehaviour
     {
         if(atakujacy.GetComponent<Jednostka>().nazwa == "Wilk")
             atakujacy.GetComponent<Jednostka>().atak += atakujacy.GetComponent<Wilk>().dodatkowyAtak();
+        if(End.boss && boss)
+        {
+            Debug.Log("Pyklo");
+            Ending.wygrany = atakujacy.GetComponent<Jednostka>().sojusz;
+        }
         Jednostka Atakujacy = atakujacy.GetComponent<Jednostka>();
         if(Atakujacy.zasieg>=Walka.odleglosc(jednostka, atakujacy) && Atakujacy.akcja && (Atakujacy.zasieg > 1 || Atakujacy.lata || !jednostka.GetComponent<Jednostka>().lata))
          {
@@ -421,6 +427,10 @@ public class Jednostka : MonoBehaviour
 
     public virtual void umieranie()
     {
+            if(End.boss && boss)
+            {
+                End.bossPokonany = true;
+            }
             Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = false;
             while(Menu.jednostki[druzyna,nr_jednostki+1] != null)
             {
@@ -489,9 +499,9 @@ public class Jednostka : MonoBehaviour
         if((druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1)) || (SimultanTurns.simultanTurns && SimultanTurns.ready))
             switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
             {
-                case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(); break;
+                case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(false); break;
                 case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
-                case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; break; 
+                case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(false); break; 
             }
         if(MenuGlowne.multi && (druzyna == Ip.ip || druzyna == 0))
         {
@@ -502,9 +512,16 @@ public class Jednostka : MonoBehaviour
 
     }
 
-    void rozdajPunktyKontroli()
+    void rozdajPunktyKontroli(bool powtorz)
     {
-        if(End.control)
+        Debug.Log("siemano");
+        if(MenuGlowne.multi && !powtorz  && (!SimultanTurns.simultanTurns))
+        {
+            Debug.Log("c-word");
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("rozdajMulti", RpcTarget.All, Ip.ip);
+        }
+        if(End.control )
         {
             if(End.druzynaKontroli == sojusz)
             {
@@ -522,7 +539,16 @@ public class Jednostka : MonoBehaviour
             }
         }
     }
-
+    [PunRPC]
+    void rozdajMulti(int ip)
+    {
+        Debug.Log("patelnia");
+        if(ip != Ip.ip)
+        {
+            Debug.Log("mordzia");
+            rozdajPunktyKontroli(true);
+        }
+    }
 
     void UpdateHealthBarColor()
     {

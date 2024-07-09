@@ -30,6 +30,7 @@ public class MapLoad : MonoBehaviour
     public List<GameObject> enemyLata;
     public List<GameObject> enemyStrzela;
     public List<GameObject> enemyStrzelaTrudny;
+    public GameObject boss;
     
 
     [PunRPC]
@@ -59,11 +60,62 @@ public class MapLoad : MonoBehaviour
                 return null;
         }
     }
+    public static void rozdziel(string nazwa)
+    {
+        if (nazwa.EndsWith(";"))
+        {
+            nazwa = nazwa.TrimEnd(';');
+        }
+        
+        string[] tablica = nazwa.Split(';');
+
+        if (tablica[0] == "0")
+        {
+            End.pvp = false;
+        }
+        else
+        {
+            End.pvp = true;
+        }
+
+        if (int.TryParse(tablica[1], out int tureKontroli) && tureKontroli != 0)
+        {
+            End.control = true;
+            End.tureKontroli = tureKontroli;
+        }
+        else
+        {
+            End.control = false;
+        }
+        if (int.TryParse(tablica[2], out int poziomRatusza) && poziomRatusza != 0)
+        {
+            End.economy = true;
+            End.poziomRatusza = poziomRatusza;
+        }
+        else
+        {
+            End.economy = false;
+        }
+        if(tablica[3] != "0")
+        {
+            End.boss = true;
+             string[] dane = tablica[3].Split(',');
+             int.TryParse(dane[0], out int x);
+             int.TryParse(dane[1], out int y);
+             int.TryParse(dane[2], out int z);
+             End.bossPosition = new Vector3((float)x, (float)y, 0);
+             End.tureDoKonca = z;
+        }
+        else
+        {
+            End.boss = false;
+        }
+    }
 
     public void LoadMapData()
     {
         // Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
-        string filePath = Path.Combine(Application.dataPath, "Maps", nazwa);
+        string filePath = Path.Combine(Application.dataPath, "StreamingAssets/Maps", nazwa);
 
         // Lista przechowująca dane mapy (listy liczb całkowitych)
         List<List<int>> tempMapData = new List<List<int>>();
@@ -79,6 +131,8 @@ public class MapLoad : MonoBehaviour
             // Utworzenie obiektu do odczytu danych z pliku
             using (StreamReader reader = new StreamReader(filePath))
             {
+                string firstLine = reader.ReadLine();
+                //rozdziel(firstLine);
                 // Odczytanie i przypisanie szerokości planszy z pierwszej linii pliku
                 Menu.BoardSizeX = int.Parse(reader.ReadLine().Trim());
 
@@ -86,12 +140,21 @@ public class MapLoad : MonoBehaviour
                 Menu.BoardSizeY = int.Parse(reader.ReadLine().Trim());
 
                 // Odczytywanie kolejnych linii pliku
+                char piatyOdKoncaZnak = nazwa[nazwa.Length - 6];
+                int.TryParse(piatyOdKoncaZnak.ToString(), out int maxGraczy);
+                End.maxGraczy = maxGraczy;
+                if(Menu.IloscGraczy > End.maxGraczy)
+                    Menu.IloscGraczy = End.maxGraczy;
+                for(int i = 0; i < 4; i++) 
+                {
+                    if(i >= End.maxGraczy)
+                        WyburRas.aktywny[i] = false;
+                }               
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     // Inicjalizacja listy na przechowywanie danych jednego wiersza
                     List<int> row = new List<int>();
-
                     // Podział odczytanej linii na poszczególne liczby
                     string[] values = line.Trim().Split(' ');
 
@@ -136,24 +199,24 @@ public class MapLoad : MonoBehaviour
             } // Zakończenie bloku 'using', automatycznie zamyka obiekt StreamReader
 
 
-            // Pozostała część kodu dla przypisania odwrotnie
-            int[,] kafelekObraz = new int[tempMapData.Count, tempMapData[0].Count];
-            int[,] kafelekWysokosc = new int[tempMapHigh.Count, tempMapHigh[0].Count];
+            
+            int[,] kafelekObraz = new int[tempMapData[0].Count, tempMapData.Count];
+            int[,] kafelekWysokosc = new int[tempMapHigh[0].Count, tempMapHigh.Count];
             int[,] kafelekGold = new int[5000, 5];
             int[,] kafelekUnit = new int[20, 2];
             int[,] kafelekEnemy = new int[5000, 5];
             int[,] kafelekItem = new int[5000, 5];
 
-            for (int i = 0; i < Menu.BoardSizeX - 1; i++)
+            for (int i = 0; i < Menu.BoardSizeY; i++)
             {
-                for (int j = 0; j < Menu.BoardSizeY - 1; j++)
+                for (int j = 0; j < Menu.BoardSizeX; j++)
                 {
                     kafelekObraz[j, i] = tempMapData[i][j];
                 }
             }
-            for (int i = 0; i < Menu.BoardSizeX - 1; i++)
+            for (int i = 0; i < Menu.BoardSizeY; i++)
             {
-                for (int j = 0; j < Menu.BoardSizeY - 1; j++)
+                for (int j = 0; j < Menu.BoardSizeX; j++)
                 {
                     kafelekWysokosc[j, i] = tempMapHigh[i][j];
                 }
@@ -176,7 +239,6 @@ public class MapLoad : MonoBehaviour
             for (int l = 0; l < tempMapItem.Count; l++)
                 for (int j = 0; j < 3; j++)
                 {
-                    Debug.Log(l + " " + j);
                     kafelekItem[l, j] = tempMapItem[l][j];
                 }
                 
@@ -251,7 +313,7 @@ public class MapLoad : MonoBehaviour
                 Menu.kafelki[x][y].GetComponent<Pole>().zloto = kafelekGold[k, 0];
                 k++;
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < End.maxGraczy; i++)
             {
                 if (WyburRas.aktywny[i] == true)
                 {
@@ -277,6 +339,7 @@ public class MapLoad : MonoBehaviour
                 }
                 else//TUTTAJ KOMBIJNUJE
                 {
+                    if(End.maxGraczy >= i+1)
                     StartCoroutine(ludzik(3, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 0));
                 }
             }
@@ -339,12 +402,17 @@ public class MapLoad : MonoBehaviour
                 else
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
                 newUnit.name = "-1 " + i.ToString();
-                TilePosition = new Vector3(Menu.BoardSizeY, i,  3);
+                TilePosition = new Vector3(Menu.BoardSizeX, i,  3);
                 if (MenuGlowne.multi)
                     newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
                 else
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
                 newUnit.name =  Menu.BoardSizeX.ToString() + " " + Menu.BoardSizeY.ToString();
+            }
+            if(End.boss)
+            {
+                Debug.Log(End.bossPosition);
+                StartCoroutine(ludzik(boss, End.bossPosition.x , End.bossPosition.y, 0));
             }
             // Przykład użycia wczytanych danych (możesz dostosować do swoich potrzeb)
             Debug.Log($"Wczytano dane z pliku. BoardSizeX: {Menu.BoardSizeX}, BoardSizeY: {Menu.BoardSizeY}");

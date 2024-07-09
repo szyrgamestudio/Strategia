@@ -862,6 +862,7 @@ MonoBehaviour:
   animator: {fileID: 5475075748417277261}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 8575592721979644502}
+  boss: 0
 --- !u!114 &4831904122305438739
 MonoBehaviour:
   m_ObjectHideFlags: 0

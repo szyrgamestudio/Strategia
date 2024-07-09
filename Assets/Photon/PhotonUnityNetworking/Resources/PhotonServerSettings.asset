@@ -96,6 +96,12 @@ MonoBehaviour:
   - wskrzeszenieMulti
   - IloscUpdate
   - updateMulti
+  - updateStatsMulti
+  - updateTogler
+  - usunMulti
+  - rozdajMulti
+  - SendStart
+  - UpdateStart
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

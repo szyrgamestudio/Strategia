@@ -13,6 +13,7 @@ public class WyburRas : MonoBehaviour
     static public int[] heros = new int[4];
     static public int[] team = new int[4];
 
+
     public Sprite[] rasaArt = new Sprite[2];
     public Sprite[] herosArt = new Sprite[4];
     public Sprite[] teamArt = new Sprite[4];
@@ -72,6 +73,26 @@ public class WyburRas : MonoBehaviour
             unlockArt.enabled = false;
             loockArt.enabled = false;
         }
+        if(Ip.ip != 1 && MenuGlowne.multi && id == 1)
+        {
+            photonView.RPC("UpdateStart", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    public void UpdateStart()
+    {
+        // if(Ip.ip == 1)
+        //     photonView.RPC("SendStart", RpcTarget.All, string MapCheck.opis, string MapLoad.nazwa);
+    }
+
+    
+    [PunRPC]
+    public void SendStart(string opis, string nazwa)
+    {
+         MapCheck.opis = opis;
+         MapLoad.nazwa = nazwa;
+        Debug.Log("essa");
     }
 
     [PunRPC]
@@ -284,6 +305,7 @@ public class WyburRas : MonoBehaviour
     }
     public void zacznij()
     {
+        
         if (!MenuGlowne.multi)
         {
             Menu.IloscGraczy = 2;
@@ -294,6 +316,7 @@ public class WyburRas : MonoBehaviour
                     Menu.IloscGraczy++;
                 }
             }
+            
             SceneManager.LoadScene(2);
         }
         else
@@ -313,14 +336,17 @@ public class WyburRas : MonoBehaviour
                 {
                     photonView = gameObject.AddComponent<PhotonView>();
                 }
-                photonView.RPC("LoadSceneRPC", RpcTarget.All);
+                photonView.RPC("LoadSceneRPC", RpcTarget.All, End.tureKontroli, End.poziomRatusza, End.tureDoKonca);
             }
         }
     }
 
     [PunRPC]
-    void LoadSceneRPC()
+    void LoadSceneRPC(int tureKontroli, int poziomRatusza, int tureDoKonca)
     {
+        End.tureKontroli = tureKontroli;
+        End.poziomRatusza = poziomRatusza;
+        End.tureDoKonca = tureDoKonca;
         SceneManager.LoadScene(2);
     }
 

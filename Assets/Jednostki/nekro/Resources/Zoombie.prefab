@@ -1047,6 +1047,7 @@ MonoBehaviour:
   animator: {fileID: 2166833886159355322}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
+  boss: 0
   budynki:
   - {fileID: 21300000, guid: 4827125098f7d8c4fa53d6d6a22a9100, type: 3}
   teksty:

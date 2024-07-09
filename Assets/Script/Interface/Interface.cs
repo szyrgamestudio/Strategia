@@ -19,11 +19,16 @@ public class Interface : MonoBehaviour
 
     public static GameObject interfaceStatic;
 
+    public GameObject controlTur;
+    public Text controlText;
+
     //public GameObject camera;
 
     void Start()
     {
         interfaceStatic = this.gameObject;
+        if(!End.control)
+            controlTur.SetActive(false);
 
     }
 
@@ -45,6 +50,18 @@ public class Interface : MonoBehaviour
         diamentText.text = Menu.diament[wyswietlanaWartosc].ToString();
         magiaText.text = Menu.magia[wyswietlanaWartosc].ToString();
         ludnoscText.text = Menu.ludnosc[wyswietlanaWartosc].ToString() + "/" + Menu.maxludnosc[wyswietlanaWartosc].ToString();
+        if(End.control)
+        {
+            controlText.text = End.punktyKontroli.ToString() + "/" + End.tureKontroli;
+            switch(End.druzynaKontroli)
+            {
+            case 0: controlText.color = new Color(0.0f, 0.0f, 0.0f); break;
+            case 1: controlText.color = new Color(1.0f, 0.0f, 0.0f); break;
+            case 2: controlText.color = new Color(0.0f, 1.0f, 0.0f); break;
+            case 3: controlText.color = new Color(0.0f, 0.0f, 1.0f); break;
+            case 4: controlText.color = new Color(1.0f, 1.0f, 0.0f); break;
+            }
+        }
 
         if (ruch)
         {
