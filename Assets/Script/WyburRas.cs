@@ -73,7 +73,7 @@ public class WyburRas : MonoBehaviour
             unlockArt.enabled = false;
             loockArt.enabled = false;
         }
-        if(Ip.ip != 1 && MenuGlowne.multi && id == 1)
+        if(Ip.ip != 1 && MenuGlowne.multi)// && id == 0)
         {
             photonView.RPC("UpdateStart", RpcTarget.All);
         }
@@ -82,17 +82,38 @@ public class WyburRas : MonoBehaviour
     [PunRPC]
     public void UpdateStart()
     {
-        // if(Ip.ip == 1)
-        //     photonView.RPC("SendStart", RpcTarget.All, string MapCheck.opis, string MapLoad.nazwa);
+        Debug.Log(rasa[0]);
+        if(Ip.ip == 1)
+            photonView.RPC("SendStart", RpcTarget.All,  MapCheck.opis, MapLoad.nazwa, End.pvp, End.control, End.economy, End.boss, SimultanTurns.simultanTurns, PoleOdkryj.mgla,
+            rasa, heros, team);
     }
 
     
     [PunRPC]
-    public void SendStart(string opis, string nazwa)
+    public void SendStart(string opis, string nazwa, bool pvp, bool control, bool economy, bool boss, bool symulatn, bool mgla, int[] a, int[] b, int[] c)
     {
          MapCheck.opis = opis;
          MapLoad.nazwa = nazwa;
+         Debug.Log(MapLoad.nazwa);
+         End.pvp = pvp;
+         End.control = control;
+         End.economy = economy;
+         End.boss = boss;
+         SimultanTurns.simultanTurns = symulatn;
+         PoleOdkryj.mgla = mgla;
         Debug.Log("essa");
+        rasa = a;
+        heros = b;
+        team = c;
+        Debug.Log(id);
+        Debug.Log(rasa[id]);
+        main.sprite = rasaArt[rasa[id]];
+        prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+        lewy.sprite = teamArt[team[id]];
+    // main.sprite[] rasaArt = new Sprite[2];
+    // herosArt = new Sprite[4];
+    // teamArt
+
     }
 
     [PunRPC]
@@ -316,7 +337,7 @@ public class WyburRas : MonoBehaviour
                     Menu.IloscGraczy++;
                 }
             }
-            
+            // Debug.Log(Menu.IloscGraczyStart);
             SceneManager.LoadScene(2);
         }
         else

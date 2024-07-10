@@ -23,7 +23,8 @@ public class MapCheck : MonoBehaviour
         mapsFolderPath = Path.Combine(Application.streamingAssetsPath, "Maps");
         LoadMapFiles();
         PopulateDropdown();
-        SelectFirstItem();
+        if(!MenuGlowne.multi || Ip.ip == 1)
+            SelectFirstItem();
         mapDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(mapDropdown); });
     }
 
@@ -39,10 +40,12 @@ public class MapCheck : MonoBehaviour
             {
                 przyciskiControl();
                 mapDropdown.gameObject.SetActive(false);
-                if (MapLoad.nazwa.Length > 0)
-                {
+                
+                if(MapLoad.nazwa != null)
                     mapNameText.text = "Mapa: " + (MapLoad.nazwa.Substring(0, MapLoad.nazwa.Length - 4));
-                }
+                if(opis != null)
+                    opisText.text = "Opis:\n" + opis;
+                
             }
         }
         else

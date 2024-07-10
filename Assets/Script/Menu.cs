@@ -109,6 +109,7 @@ public class Menu : MonoBehaviour
         {
             Menu.zloto[Ip.ip] = 0;
             NIERUSZAC = true;
+            Debug.Log("wiedzialem");
         }
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
