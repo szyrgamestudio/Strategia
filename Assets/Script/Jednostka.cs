@@ -499,7 +499,7 @@ public class Jednostka : MonoBehaviour
         if((druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1)) || (SimultanTurns.simultanTurns && SimultanTurns.ready))
             switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
             {
-                case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(false); break;
+                case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
                 case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
                 case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(false); break; 
             }
