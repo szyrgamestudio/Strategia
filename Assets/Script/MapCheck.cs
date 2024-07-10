@@ -14,7 +14,7 @@ public class MapCheck : MonoBehaviour
     public Text mapNameText;
     public GameObject[] przyciski;
     public Text opisText;
-    static string opis;
+    public static string opis;
     PhotonView photonView;
 
     void Start()
