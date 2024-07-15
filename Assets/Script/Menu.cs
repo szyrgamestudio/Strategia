@@ -12,8 +12,8 @@ public class Menu : MonoBehaviour
 {
     public static int xd;
     public GameObject kafelek;
-    public static int BoardSizeX = 50;
-    public static int BoardSizeY = 50;
+    public static int BoardSizeX;
+    public static int BoardSizeY;
     public static GameObject[][] kafelki;
     public GameObject obiekt1;
     public static bool NIERUSZAC;
@@ -144,7 +144,7 @@ public class Menu : MonoBehaviour
 
     IEnumerator Aktualizuj(int tura, int IloscGraczy, int IloscGraczyStart)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.002f * BoardSizeX * BoardSizeY);
         if(tura == 10 && !SimultanTurns.simultanTurns)
             tura = Menu.tura;
 

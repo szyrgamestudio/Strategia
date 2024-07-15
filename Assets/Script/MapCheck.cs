@@ -129,6 +129,12 @@ public class MapCheck : MonoBehaviour
         string filePath = Path.Combine(Application.streamingAssetsPath, "Maps", MapLoad.nazwa);
         string firstLine = LoadFirstLine(filePath);
         opis = LoadUntil7777(filePath);
+
+        //niech wczyta drugą linie i przypisze ją do wartości Menu.BoardSizeX
+        string secondLine = LoadSecondLine(filePath);
+        string trzeciaLine = LoadSecondLine(filePath);
+        Menu.BoardSizeX = int.Parse(secondLine);
+        Menu.BoardSizeY = int.Parse(trzeciaLine);
         opisText.text = "Opis:\n" + opis;
         MapLoad.rozdziel(firstLine);
         przyciskiControl();
@@ -137,7 +143,7 @@ public class MapCheck : MonoBehaviour
         {
             if(End.end != null)
                 End.end.updateStats();
-            photonView.RPC("updateMulti", RpcTarget.All, selectedMap, opis);
+            photonView.RPC("updateMulti", RpcTarget.All, selectedMap, opis, Menu.BoardSizeX, Menu.BoardSizeY);
         }
     }
 
@@ -156,6 +162,24 @@ public class MapCheck : MonoBehaviour
             return null;
         }
     }
+
+    private string LoadSecondLine(string filePath)
+    {
+        try
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                reader.ReadLine(); // Skip the first line
+                return reader.ReadLine(); // Read the second line
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error loading second line: " + ex.Message);
+            return string.Empty;
+        }
+    }
+
     public void pvp()
     {
         if(!MenuGlowne.multi || Ip.ip == 1)
@@ -251,11 +275,14 @@ public class MapCheck : MonoBehaviour
     }
 
     [PunRPC]
-    void updateMulti(string name, string opisOld)
+    void updateMulti(string name, string opisOld, int BoardSizeX, int BoardSizeY)
     {
         opis = opisOld;
         opisText.text = "Opis:\n" + opis;
         MapLoad.nazwa = name + ".txt";
+        Menu.BoardSizeX = BoardSizeX;
+        Menu.BoardSizeY = BoardSizeY;
+        Debug.Log(Menu.BoardSizeX + " " + Menu.BoardSizeY);
         przyciskiControl();
     }
 }
