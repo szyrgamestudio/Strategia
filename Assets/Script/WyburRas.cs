@@ -66,34 +66,31 @@ public class WyburRas : MonoBehaviour
     [PunRPC]
     public void UpdateStart()
     {
-        Debug.Log(rasa[0]);
         if(Ip.ip == 1)
             photonView.RPC("SendStart", RpcTarget.All,  MapCheck.opis, MapLoad.nazwa, End.pvp, End.control, End.economy, End.boss, SimultanTurns.simultanTurns, PoleOdkryj.mgla,
-            rasa, heros, team);
+            rasa, heros, team, Menu.BoardSizeX, Menu.BoardSizeY);
     }
 
     
     [PunRPC]
-    public void SendStart(string opis, string nazwa, bool pvp, bool control, bool economy, bool boss, bool symulatn, bool mgla, int[] a, int[] b, int[] c)
+    public void SendStart(string opis, string nazwa, bool pvp, bool control, bool economy, bool boss, bool symulatn, bool mgla, int[] a, int[] b, int[] c, int BoardSizeX, int BoardSizeY)
     {
          MapCheck.opis = opis;
          MapLoad.nazwa = nazwa;
-         Debug.Log(MapLoad.nazwa);
          End.pvp = pvp;
          End.control = control;
          End.economy = economy;
          End.boss = boss;
          SimultanTurns.simultanTurns = symulatn;
          PoleOdkryj.mgla = mgla;
-        Debug.Log("essa");
         rasa = a;
         heros = b;
         team = c;
-        Debug.Log(id);
-        Debug.Log(rasa[id]);
         main.sprite = rasaArt[rasa[id]];
         prawy.sprite = herosArt[heros[id]+rasa[id]*3];
         lewy.sprite = teamArt[team[id]];
+        Menu.BoardSizeX = BoardSizeX;
+        Menu.BoardSizeY = BoardSizeY;
     // main.sprite[] rasaArt = new Sprite[2];
     // herosArt = new Sprite[4];
     // teamArt
@@ -338,7 +335,6 @@ public class WyburRas : MonoBehaviour
                 if(heros[i] == 2)
                     heros[i] = UnityEngine.Random.Range(0, 2);
             }
-            // Debug.Log(Menu.IloscGraczyStart);
             SceneManager.LoadScene(2);
         }
         else
