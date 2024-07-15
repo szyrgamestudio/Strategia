@@ -53,6 +53,8 @@ public class Jednostka : MonoBehaviour
     //private bool wybrany;
     public AudioSource src;
 
+    public int drewno;
+
     public bool boss = false;
 
     public void Start()
@@ -177,7 +179,10 @@ public class Jednostka : MonoBehaviour
             if(Select != null && CzyJednostka && Select.GetComponent<Jednostka>().druzyna == Menu.tura && sojusz != Select.GetComponent<Jednostka>().sojusz && 
             (Select.GetComponent<Jednostka>().zasieg>=Walka.odleglosc(jednostka, Select) && Select.GetComponent<Jednostka>().akcja && (Select.GetComponent<Jednostka>().zasieg > 1 || Select.GetComponent<Jednostka>().lata || !jednostka.GetComponent<Jednostka>().lata)))
             {
+                
+                
                 zaatakowanie(Jednostka.Select);
+                
 
             }
             else
@@ -198,6 +203,31 @@ public class Jednostka : MonoBehaviour
         }
     }
 
+    public Jednostka tarczownik()
+    {
+        int x = (int)jednostka.transform.position.x;
+        int y = (int)jednostka.transform.position.y;
+        if(tarczownik2(x+1,y) != null)
+            return tarczownik2(x+1,y);
+        if(tarczownik2(x-1,y) != null)
+            return tarczownik2(x-1,y);
+        if(tarczownik2(x,y+1) != null)
+            return tarczownik2(x,y+1);
+        if(tarczownik2(x,y-1) != null)
+            return tarczownik2(x,y-1);
+        return null;
+        
+    }
+    private Jednostka tarczownik2(int x, int y)
+    {
+        if(Menu.istnieje(x,y) && Menu.kafelki[x][y].GetComponent<Pole>().postac != null && Menu.kafelki[x][y].GetComponent<Pole>().postac.GetComponent<Tarczownik>() && 
+        Menu.kafelki[x][y].GetComponent<Pole>().postac.GetComponent<Jednostka>().sojusz == sojusz)
+        {
+            return Menu.kafelki[x][y].GetComponent<Pole>().postac.GetComponent<Jednostka>();
+        }
+        return null;
+    }
+
     
     [PunRPC]
     public void zaatakowanieMulti(int ip, float hp)
@@ -213,16 +243,33 @@ public class Jednostka : MonoBehaviour
 
     public void zaatakowanie(GameObject atakujacy)
     {
+        if(tarczownik() != null && !jednostka.GetComponent<Tarczownik>())
+            tarczownik().zaatakowanie(Jednostka.Select);
+        else
+        {
         if(atakujacy.GetComponent<Jednostka>().nazwa == "Wilk")
             atakujacy.GetComponent<Jednostka>().atak += atakujacy.GetComponent<Wilk>().dodatkowyAtak();
         if(End.boss && boss)
         {
-            Debug.Log("Pyklo");
             Ending.wygrany = atakujacy.GetComponent<Jednostka>().sojusz;
         }
         Jednostka Atakujacy = atakujacy.GetComponent<Jednostka>();
         if(Atakujacy.zasieg>=Walka.odleglosc(jednostka, atakujacy) && Atakujacy.akcja && (Atakujacy.zasieg > 1 || Atakujacy.lata || !jednostka.GetComponent<Jednostka>().lata))
          {
+            if(druzyna != 0 && Atakujacy.druzyna != 0)
+            {
+                Muzyka.muzyka.progresja[Atakujacy.druzyna - 1] = 2;
+                Muzyka.muzyka.progresja[druzyna - 1] = 2;
+                Muzyka.muzyka.tury2[Atakujacy.druzyna - 1] = Menu.nrTury;
+                Muzyka.muzyka.tury2[druzyna - 1] = Menu.nrTury;
+                if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("updateMusic", RpcTarget.All, Atakujacy.druzyna, druzyna);
+                }
+            }
+            if(jednostka.GetComponent<Golem>())
+                jednostka.GetComponent<Golem>().zadaj(atakujacy);
             float result;
             if(atakujacy.GetComponent<Jednostka>().lata || jednostka.GetComponent<Jednostka>().lata)
                 result = UnityEngine.Random.Range(Atakujacy.mindmg, Atakujacy.maxdmg) * (float)(1 + 0.1 * (Atakujacy.atak - obrona));
@@ -261,13 +308,48 @@ public class Jednostka : MonoBehaviour
                         photonView.RPC("zaatakowanieMulti", RpcTarget.All, Ip.ip, -atakujacy.GetComponent<Wampir>().lifeSteal * roundedResult);
                     }
             }
+
+            if(HP - roundedResult < 0.1)
+            {
+                if(druzyna == 0 || Atakujacy.druzyna == 0)
+                {
+                    if(druzyna == 0)
+                    {
+                        Muzyka.muzyka.progresja[Atakujacy.druzyna - 1] = 1;
+                        Muzyka.muzyka.tury1[Atakujacy.druzyna - 1] = Menu.nrTury;
+
+                    }
+                    else
+                    {
+                        Muzyka.muzyka.progresja[druzyna - 1] = 1;
+                        Muzyka.muzyka.tury1[druzyna - 1] = Menu.nrTury;
+                    }
+                }
+            }
             HP -= roundedResult;
 
             ShowDMG(roundedResult, new Color(1.0f, 0.0f, 0.0f, 1.0f));
+
+            if(atakujacy.GetComponent<Kamikaze>())
+            {
+                Atakujacy.HP = 0;
+                Atakujacy.Aktualizuj();
+            }
             Atakujacy.akcja = false;
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
+        }
     }
+
+    [PunRPC]
+    public void updateMusic(int a, int b)
+    {
+        Muzyka.muzyka.progresja[a - 1] = 2;
+        Muzyka.muzyka.progresja[b - 1] = 2;
+        Muzyka.muzyka.tury2[a - 1] = Menu.nrTury;
+        Muzyka.muzyka.tury2[b - 1] = Menu.nrTury;
+    }
+
     public void odkryj(int zasieg)
     {
         if(MenuGlowne.multi && druzyna == Ip.ip)
@@ -514,10 +596,8 @@ public class Jednostka : MonoBehaviour
 
     void rozdajPunktyKontroli(bool powtorz)
     {
-        Debug.Log("siemano");
         if(MenuGlowne.multi && !powtorz  && (!SimultanTurns.simultanTurns))
         {
-            Debug.Log("c-word");
             PhotonView photonView = GetComponent<PhotonView>();
             photonView.RPC("rozdajMulti", RpcTarget.All, Ip.ip);
         }
@@ -542,10 +622,8 @@ public class Jednostka : MonoBehaviour
     [PunRPC]
     void rozdajMulti(int ip)
     {
-        Debug.Log("patelnia");
         if(ip != Ip.ip)
         {
-            Debug.Log("mordzia");
             rozdajPunktyKontroli(true);
         }
     }

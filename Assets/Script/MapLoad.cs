@@ -112,6 +112,12 @@ public class MapLoad : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    public void updateAktywny(bool[] aktywne)
+    {
+        WyburRas.aktywny = aktywne;
+    }
+
     public void LoadMapData()
     {
         // Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
@@ -149,7 +155,13 @@ public class MapLoad : MonoBehaviour
                 {
                     if(i >= End.maxGraczy)
                         WyburRas.aktywny[i] = false;
-                }               
+
+                }         
+                if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("updateAktywny", RpcTarget.All, WyburRas.aktywny);
+                }
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -199,9 +211,9 @@ public class MapLoad : MonoBehaviour
             } // Zakończenie bloku 'using', automatycznie zamyka obiekt StreamReader
 
 
-            
-            int[,] kafelekObraz = new int[tempMapData[0].Count, tempMapData.Count];
-            int[,] kafelekWysokosc = new int[tempMapHigh[0].Count, tempMapHigh.Count];
+            Debug.Log(tempMapData[0].Count);
+            int[,] kafelekObraz = new int[100, 100];
+            int[,] kafelekWysokosc = new int[100, 100];
             int[,] kafelekGold = new int[5000, 5];
             int[,] kafelekUnit = new int[20, 2];
             int[,] kafelekEnemy = new int[5000, 5];
@@ -411,7 +423,6 @@ public class MapLoad : MonoBehaviour
             }
             if(End.boss)
             {
-                Debug.Log(End.bossPosition);
                 StartCoroutine(ludzik(boss, End.bossPosition.x , End.bossPosition.y, 0));
             }
             // Przykład użycia wczytanych danych (możesz dostosować do swoich potrzeb)

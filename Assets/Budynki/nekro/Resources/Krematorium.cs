@@ -67,8 +67,8 @@ public class Krematorium : MonoBehaviour
     public void respJednostki(GameObject obj, int i)
     {
         Przycisk.budynek[i]=false;
-        Interface.interfaceStatic.GetComponent<Interface>().Brak(obj.GetComponent<Jednostka>().cena , 0 , 0, true);
-        if(Menu.zloto[Menu.tura]>=obj.GetComponent<Jednostka>().cena && Menu.ratuszPoziom[druzyna]>=wymagany[i]  && (Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna] || obj.GetComponent<Szczur>()))
+        Interface.interfaceStatic.GetComponent<Interface>().Brak(obj.GetComponent<Jednostka>().cena , obj.GetComponent<Jednostka>().drewno , 0, true);
+        if(Menu.zloto[Menu.tura]>=obj.GetComponent<Jednostka>().cena && Menu.drewno[Menu.tura]>=obj.GetComponent<Jednostka>().drewno && Menu.ratuszPoziom[druzyna]>=wymagany[i]  && (Menu.maxludnosc[druzyna] > Menu.ludnosc[druzyna] || obj.GetComponent<Szczur>()))
         {  
             if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
             {
@@ -117,25 +117,27 @@ public class Krematorium : MonoBehaviour
         {
             InterfaceBuild.Czyszczenie(); 
             
-            PrzyciskInter Guzikk = InterfaceBuild.przyciski[0].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = jednostki[0].GetComponent<Jednostka>().cena.ToString();
-            Guzikk = InterfaceBuild.przyciski[1].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = jednostki[1].GetComponent<Jednostka>().cena.ToString();
-            Guzikk = InterfaceBuild.przyciski[2].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = jednostki[2].GetComponent<Jednostka>().cena.ToString();
-            Guzikk = InterfaceBuild.przyciski[3].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = jednostki[3].GetComponent<Jednostka>().cena.ToString();
-            Guzikk = InterfaceBuild.przyciski[4].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = jednostki[4].GetComponent<Jednostka>().cena.ToString();
-          
-            
             for(int i = 0 ; i < 5 ; i++)
             {
-                InterfaceBuild.przyciski[i].GetComponent<Image>().sprite = budynki[i];
                 PrzyciskInter Guzik = InterfaceBuild.przyciski[i].GetComponent<PrzyciskInter>();
-                Guzik.IconMagic.enabled = true;
+                if(jednostki[i].GetComponent<Jednostka>().drewno == 0)
+                {
+                    Guzik.CenaMagic.text = jednostki[i].GetComponent<Jednostka>().cena.ToString();
+                    Guzik.IconMagic.enabled = true;
+                }
+                else
+                {
+                    Guzik.CenaZloto.text = jednostki[i].GetComponent<Jednostka>().cena.ToString();
+                    Guzik.CenaDrewno.text = jednostki[i].GetComponent<Jednostka>().drewno.ToString();
+                    Guzik.IconZloto.enabled = true;
+                    Guzik.IconDrewno.enabled = true;
+                }
+                InterfaceBuild.przyciski[i].GetComponent<Image>().sprite = budynki[i];
+                
+                
                 Guzik.Opis.text = teksty[i];  
-            }       
+            }
+            
 
             for(int i = 0 ; i < 5 ; i++)
             {
@@ -146,6 +148,7 @@ public class Krematorium : MonoBehaviour
                     {
                         case 1:  teksty[i] = "Wymagany 2 poziom ratusza"; break;
                         case 2:  teksty[i] = "Wymagany 3 poziom ratusza"; break;
+                        case 3:  teksty[i] = "Wymagany 4 poziom ratusza"; break;
                     }
                 }
             }

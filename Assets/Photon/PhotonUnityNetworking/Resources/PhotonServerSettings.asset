@@ -102,6 +102,8 @@ MonoBehaviour:
   - rozdajMulti
   - SendStart
   - UpdateStart
+  - updateAktywny
+  - updateMusic
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

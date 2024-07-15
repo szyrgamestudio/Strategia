@@ -25,7 +25,6 @@ public class SimultanTurns : MonoBehaviourPun
             }
             if (readyCount == Menu.IloscGraczy && readyCount != 0)
             {
-                Debug.Log(readyCount + " + " + Menu.IloscGraczy + " " + ready);
                 readyCount = 0;
                 photonView.RPC("NextTurn", RpcTarget.All);
                 Menu.menu.NextTurn();
@@ -82,6 +81,7 @@ public class SimultanTurns : MonoBehaviourPun
     void NextTurn()
     {
         // Assuming Menu.tura is static or accessible from here
+        GetComponent<Muzyka>().Start();
         Menu.tura = 0;
     }
     [PunRPC]
@@ -89,13 +89,14 @@ public class SimultanTurns : MonoBehaviourPun
     {
         if(WyburRas.aktywny[Ip.ip-1])
         {
-        Menu.tura = Ip.ip;
-        readyCount = 0;
-        ready = false;
-        Menu.NIERUSZAC = false;
+            Menu.tura = Ip.ip;
+            GetComponent<Muzyka>().Start();
+            readyCount = 0;
+            ready = false;
+            Menu.NIERUSZAC = false;
         }
         else
-        Menu.NIERUSZAC = true;
+            Menu.NIERUSZAC = true;
     }
 }
 

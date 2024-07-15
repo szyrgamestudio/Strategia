@@ -18,6 +18,8 @@ public class Kopalnia : MonoBehaviour
     private int kolejnatura;
 
     private int dhelp;
+
+    public int krasnolud;
     //private bool isZbieraczVisible = false;
 
     void Start()
@@ -30,7 +32,7 @@ public class Kopalnia : MonoBehaviour
     void Update()
     {
         if(budynek.GetComponent<BudynekRuch>().wybudowany)
-            budynek.GetComponent<Budynek>().zdolnosci = Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().zloto;
+            budynek.GetComponent<Budynek>().zdolnosci = Menu.kafelki[(int)budynek.transform.position.x][(int)budynek.transform.position.y].GetComponent<Pole>().zloto + krasnolud;
         if(budynek == Jednostka.Select)
         {
             pole = budynek.GetComponent<BudynekRuch>().pole;
@@ -310,7 +312,7 @@ public class Kopalnia : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if(Jednostka.Select.GetComponent<Zbieracz>() != null && Walka.odleglosc(Jednostka.Select,budynek) == 1 && Jednostka.Select.GetComponent<Jednostka>().druzyna == Menu.tura)
+        if(Jednostka.Select != null && Jednostka.Select.GetComponent<Zbieracz>() != null && Walka.odleglosc(Jednostka.Select,budynek) == 1 && Jednostka.Select.GetComponent<Jednostka>().druzyna == Menu.tura)
         {
             polePomoc = Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y];
             for(int i=0;i<budynek.GetComponent<Budynek>().zdolnosci;i++)

@@ -1048,6 +1048,7 @@ MonoBehaviour:
   - {fileID: 3940130052222301537}
   - {fileID: 2104277702833715315}
   puste: {fileID: 21300000, guid: 9f9dd9f6d1fdf2c43a364c1513ad5343, type: 3}
+  krasnolud: 0
 --- !u!114 &1198703769388397205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,7 +1327,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4827125098f7d8c4fa53d6d6a22a9100, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d2cde45650217b458f59f301015a865, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

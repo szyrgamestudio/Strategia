@@ -12,8 +12,8 @@ public class Menu : MonoBehaviour
 {
     public static int xd;
     public GameObject kafelek;
-    public static int BoardSizeX = 25;
-    public static int BoardSizeY = 25;
+    public static int BoardSizeX = 50;
+    public static int BoardSizeY = 50;
     public static GameObject[][] kafelki;
     public GameObject obiekt1;
     public static bool NIERUSZAC;
@@ -79,7 +79,7 @@ public class Menu : MonoBehaviour
             zloto[4] = 17;
             drewno[4] = 17;
         }
-
+        Debug.Log(BoardSizeX + " skibii");
         kafelki = new GameObject[BoardSizeX][];
         for (int i = 0; i < BoardSizeX; i++)
         {
@@ -109,7 +109,6 @@ public class Menu : MonoBehaviour
         {
             Menu.zloto[Ip.ip] = 0;
             NIERUSZAC = true;
-            Debug.Log("wiedzialem");
         }
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
@@ -128,7 +127,6 @@ public class Menu : MonoBehaviour
             }
         if(((SimultanTurns.simultanTurns && tura > IloscGraczy )|| (!SimultanTurns.simultanTurns && tura > IloscGraczyStart )) && Ip.ip == 1)
         {
-            Debug.Log(IloscGraczy + " - " + tura);
             tura=0;
             turaNPC.value = 0;
             StartCoroutine(NPCtura(0));
@@ -256,6 +254,7 @@ public class Menu : MonoBehaviour
             }
             if (NaPewnoKoniec > 0)
             {
+                
                 if(!SimultanTurns.simultanTurns || SimultanTurns.ready)
                 {
                     if(SimultanTurns.simultanTurns)
@@ -350,7 +349,7 @@ public class Menu : MonoBehaviour
                 PanelUnit.SetActive(false);
                 PanelBuild.SetActive(false);
                 przyciskiClear();
-
+                
                 usunSelect2();
                 if(!MenuGlowne.multi)
                     if(tura != 0)
@@ -379,12 +378,14 @@ public class Menu : MonoBehaviour
                         else
                         {
                             nrTury++;
-                            Debug.Log("Jeden");
                             nrTuryText.text = (nrTury).ToString();
                             tura++;
                         }
                     }
                 }
+
+                if(!SimultanTurns.simultanTurns)
+                    GetComponent<Muzyka>().Start();
             }
         }
     }
@@ -566,7 +567,6 @@ public class Menu : MonoBehaviour
             if(!SimultanTurns.simultanTurns)
             {
                 nrTury++;
-                Debug.Log("dwa");
             }
             if(MenuGlowne.multi)
                 nrTuryText.text = nrTury.ToString();    //ZMIENIC KONIECZNIE XDDD ZMIANA

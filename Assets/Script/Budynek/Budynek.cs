@@ -158,7 +158,10 @@ public class Budynek : MonoBehaviour
                         {
                             float result = UnityEngine.Random.Range(Atakujacy.mindmg, Atakujacy.maxdmg) * (float)(1 + 0.1 * (Atakujacy.atak - obrona));
                             float roundedResult = (float)Math.Round(result, 1);
-
+                            if(Jednostka.Select.GetComponent<AntyBudynek>())
+                            {
+                                roundedResult *= 2;
+                            }
                             if(roundedResult<1)
                             {
                                 roundedResult = 1;
@@ -210,6 +213,11 @@ public class Budynek : MonoBehaviour
                                 punktyBudowy = 0;
                             }
                         }
+                    if(Jednostka.Select.GetComponent<Kamikaze>())
+                    {
+                        Atakujacy.HP = 0;
+                        Atakujacy.Aktualizuj();
+                    }
                     Atakujacy.akcja = false;
                     }
     }

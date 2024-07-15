@@ -90,7 +90,11 @@ public class End : MonoBehaviour
     {
         if(bossPokonany)
             return true;
-        if(tureDoKonca * 4 < Menu.nrTury - 1 && tureDoKonca != 0)
+        int j = 4;
+        if(SimultanTurns.simultanTurns)
+            j /= 4;
+        Debug.Log((tureDoKonca * j) + " " + (Menu.nrTury - 1));
+        if(tureDoKonca * j < Menu.nrTury - 1 && tureDoKonca != 0)
         {
             Ending.wygrany = 0;
             return true;

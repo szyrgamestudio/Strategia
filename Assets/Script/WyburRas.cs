@@ -14,8 +14,8 @@ public class WyburRas : MonoBehaviour
     static public int[] team = new int[4];
 
 
-    public Sprite[] rasaArt = new Sprite[2];
-    public Sprite[] herosArt = new Sprite[4];
+    public Sprite[] rasaArt = new Sprite[5];
+    public Sprite[] herosArt = new Sprite[15];
     public Sprite[] teamArt = new Sprite[4];
 
     public int id;
@@ -34,22 +34,6 @@ public class WyburRas : MonoBehaviour
     public GameObject updaterZiom;
 
     private PhotonView photonView;
-
-    // private int maxGraczy = 0;
-
-    // void Update()
-    // {
-    //     if (MenuGlowne.multi && Ip.ip == 1)
-    //     {
-    //         if(PhotonNetwork.CurrentRoom.PlayerCount > maxGraczy)
-    //         {
-    //             Debug.Log(maxGraczy + " " + PhotonNetwork.CurrentRoom.PlayerCount);
-    //             maxGraczy = PhotonNetwork.CurrentRoom.PlayerCount;
-    //             photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
-    //             Debug.Log("dd");
-    //         }
-    //     }
-    // }
 
     public void Start()
     {
@@ -108,7 +92,7 @@ public class WyburRas : MonoBehaviour
         Debug.Log(id);
         Debug.Log(rasa[id]);
         main.sprite = rasaArt[rasa[id]];
-        prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+        prawy.sprite = herosArt[heros[id]+rasa[id]*3];
         lewy.sprite = teamArt[team[id]];
     // main.sprite[] rasaArt = new Sprite[2];
     // herosArt = new Sprite[4];
@@ -133,14 +117,14 @@ public class WyburRas : MonoBehaviour
                 break;
             case 3:
                 heros[id] = value;
-                prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+                prawy.sprite = herosArt[heros[id]+rasa[id]*3];
                 break;
             case 2:
                 team[id] = value;
                 lewy.sprite = teamArt[team[id]];
                 break;
         }
-        prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+        prawy.sprite = herosArt[heros[id]+rasa[id]*3];
     }
 
 
@@ -167,27 +151,31 @@ public class WyburRas : MonoBehaviour
             {
                 case 1:
                     rasa[id]++;
-                    if (rasa[id] == 2)
+                    if (rasa[id] == 5)
                         rasa[id] = 0;
                     main.sprite = rasaArt[rasa[id]];
-                    photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
+                    if(MenuGlowne.multi)
+                        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
                     break;
                 case 3:
                     heros[id]++;
-                    if (heros[id] == 2)
+                    if (heros[id] == 3)
                         heros[id] = 0;
                    // prawy.sprite = herosArt[heros[id]+rasa[id]*2];
-                    photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
+                   
+                    if(MenuGlowne.multi)
+                        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
                     break;
                 case 2:
                     team[id]++;
                     if (team[id] == 4)
                         team[id] = 0;
                     lewy.sprite = teamArt[team[id]];
-                    photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
+                    if(MenuGlowne.multi)
+                        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
                     break;
             }
-            prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+            prawy.sprite = herosArt[heros[id]+rasa[id]*3];
         }
     }
     public void lewo()
@@ -199,26 +187,28 @@ public class WyburRas : MonoBehaviour
             case 1:
                 rasa[id]--;
                 if (rasa[id] == -1)
-                    rasa[id] = 1;
+                    rasa[id] = 4;
                 main.sprite = rasaArt[rasa[id]];
-                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
+                if(MenuGlowne.multi)
+                        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, rasa[id]);
                 break;
             case 3:
                 heros[id]--;
                 if (heros[id] == -1)
-                    heros[id] = 1;
-                //prawy.sprite = herosArt[heros[id]+rasa[id]*2];
-                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
+                    heros[id] = 2;
+                if(MenuGlowne.multi)
+                        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, heros[id]);
                 break;
             case 2:
                 team[id]--;
                 if (team[id] == -1)
                     team[id] = 3;
                 lewy.sprite = teamArt[team[id]];
-                photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
+                if(MenuGlowne.multi)
+                        photonView.RPC("SynchronizeChoice", RpcTarget.All, wybierany, team[id]);
                 break;
         }
-            prawy.sprite = herosArt[heros[id]+rasa[id]*2];
+            prawy.sprite = herosArt[heros[id]+rasa[id]*3];
         }
 
     }
@@ -236,7 +226,8 @@ public class WyburRas : MonoBehaviour
                 wybierany = 2;
                 break;
         }
-        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy, Ip.ip);
+        if(MenuGlowne.multi)
+            photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy, Ip.ip);
 
     }
     public void prawyGora()
@@ -253,7 +244,8 @@ public class WyburRas : MonoBehaviour
                 wybierany = 3;
                 break;
         }
-        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy, Ip.ip);
+        if(MenuGlowne.multi)
+            photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, main, lewy, Ip.ip);
     }
     public void mainGora()
     {
@@ -270,7 +262,8 @@ public class WyburRas : MonoBehaviour
                 break;
         }
 
-        photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, lewy, main, Ip.ip);
+        if(MenuGlowne.multi)
+            photonView.RPC("SynchronizeMovement", RpcTarget.All, prawy, lewy, main, Ip.ip);
     }
     IEnumerator PrzeniesObiekty(Image A, Image B, Image C)
     {
@@ -337,6 +330,14 @@ public class WyburRas : MonoBehaviour
                     Menu.IloscGraczy++;
                 }
             }
+
+            for(int i = 0; i < 4; i++)
+            {
+                if(rasa[i] == 4)
+                    rasa[i] = UnityEngine.Random.Range(0, 4);
+                if(heros[i] == 2)
+                    heros[i] = UnityEngine.Random.Range(0, 2);
+            }
             // Debug.Log(Menu.IloscGraczyStart);
             SceneManager.LoadScene(2);
         }
@@ -344,6 +345,16 @@ public class WyburRas : MonoBehaviour
         {
             if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.PlayerCount >= 2 && Ip.ip==1) //zmienic na 2
             {
+                for(int i = 0; i < 4; i++)
+            {
+                if(rasa[i] == 4)
+                {
+                    rasa[i] = UnityEngine.Random.Range(0, 4);
+                    heros[i] = UnityEngine.Random.Range(0, 2);
+                }
+                if(heros[i] == 2)
+                    heros[i] = UnityEngine.Random.Range(0, 2);
+            }
                 Menu.IloscGraczy = PhotonNetwork.CurrentRoom.PlayerCount;
                 for(int i = 0 ; i<4;i++)
                     aktywny[i] = false;
@@ -357,7 +368,8 @@ public class WyburRas : MonoBehaviour
                 {
                     photonView = gameObject.AddComponent<PhotonView>();
                 }
-                photonView.RPC("LoadSceneRPC", RpcTarget.All, End.tureKontroli, End.poziomRatusza, End.tureDoKonca);
+                if(MenuGlowne.multi)
+                    photonView.RPC("LoadSceneRPC", RpcTarget.All, End.tureKontroli, End.poziomRatusza, End.tureDoKonca);
             }
         }
     }
