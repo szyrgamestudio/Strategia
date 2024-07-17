@@ -51,9 +51,10 @@ public class Kbiblioteka : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update2[druzyna];
                         update2[druzyna]+=1;
-                        ulepszIstniejace("Mumia",0);
-                        ulepszIstniejace("Zoombie",0);
-                        ulepszIstniejace("Wampir",0);
+                        ulepszIstniejace("Kamikaze",0);
+                        ulepszIstniejace("Żongler dynamitu",0);
+                        ulepszIstniejace("Anty-Budynkowa-Maszyna",0);
+                        ulepszIstniejace("Kwatermistrz",0);
                         OnMouseDown();
                     }
                 }
@@ -66,10 +67,8 @@ public class Kbiblioteka : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update3[druzyna];
                         update3[druzyna]+=1;
-                        ulepszIstniejace("Marty Łucznik",4);
-                        ulepszIstniejace("Lisz",4);
-                        ulepszIstniejace("Martwy Wojak",4);
-                        ulepszIstniejace("Sługa",4);
+                        ulepszIstniejace("Golem",5);
+                        ulepszIstniejace("Wielki Golem",5);
                         OnMouseDown();
                     }
                 }
@@ -82,9 +81,7 @@ public class Kbiblioteka : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update4[druzyna];
                         update4[druzyna]+=1;
-                        ulepszIstniejace("Wielki Pająk",0);
-                        ulepszIstniejace("Gargulec",0);
-                        ulepszIstniejace("Wampir",0);
+                        ulepszIstniejace("Wielki Golem",6);
                         OnMouseDown();
                     }
                 }
@@ -97,10 +94,10 @@ public class Kbiblioteka : MonoBehaviour
                         
                         Menu.zloto[Menu.tura]-=4 + update5[druzyna];
                         update5[druzyna]+=1;
-                        ulepszIstniejace("Lisz",1);
-                        ulepszIstniejace("Mumia",1);
-                        ulepszIstniejace("Zoombie",1);
-                        ulepszIstniejace("Żniwiarz",1);
+                        ulepszIstniejace("Strzelec",0);
+                        ulepszIstniejace("Charpunnik",0);
+                        ulepszIstniejace("Tarczownik",0);
+                        ulepszIstniejace("Cierpliwy",0);
                         OnMouseDown();
                     }
                 }
@@ -123,6 +120,7 @@ public class Kbiblioteka : MonoBehaviour
                         Menu.jednostki[druzyna,i].GetComponent<Jednostka>().obrona += 1;break;
                         case 5: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().HP += 2;
                         Menu.jednostki[druzyna,i].GetComponent<Jednostka>().maxHP += 2; break;
+                        case 6: Menu.jednostki[druzyna,i].GetComponent<Golem>().DMG += 1; break;
                     }
                 }
                 i++;

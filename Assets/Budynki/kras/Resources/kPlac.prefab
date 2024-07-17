@@ -838,7 +838,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64882f9dc2268404a93749b910d88b18, type: 3}
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
@@ -848,15 +848,15 @@ MonoBehaviour:
   - {fileID: 6268565104842363223, guid: 5b97edbfe12a9a342b4ae034aac6a524, type: 3}
   - {fileID: 6268565104842363223, guid: 6634aa338e11b404998d9c7ed3c8ee81, type: 3}
   - {fileID: 6268565104842363223, guid: 66ecd328cda84084b86a7c1c606858e5, type: 3}
-  wymagany: 010000000200000002000000
+  wymagany: 010000000100000002000000
   budynki:
-  - {fileID: 21300000, guid: 1f3fefb45c4f4f449838e018345e43d1, type: 3}
-  - {fileID: 21300000, guid: 862752e784388ba46ba19042c24e1a36, type: 3}
-  - {fileID: 21300000, guid: d9cb2f43de6188641baad4d26fef29f0, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   teksty:
-  - 
-  - 
-  - 
+  - Kamikaze umiera po zaatakowaniu
+  - "\u017Bongler mo\u017Ce rzuca\u0107 dynamitami zadaj\u0105cymi obszarowe obra\u017Cenia"
+  - "Maszyny zadaj\u0105 wi\u0119ksze obra\u017Cenia budynk\u0105"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:

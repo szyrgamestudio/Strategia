@@ -15,9 +15,10 @@ public class MagWiatru : MonoBehaviour
     { 
         if(jednostka == Jednostka.Select)
         {
-            if(Przycisk.jednostka[0] == true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[0] == true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
             {
                 Przycisk.jednostka[0] = false;
+                Menu.magia[Menu.tura]-=4;
                 List<GameObject> lista = new List<GameObject>();
                 przeszukanie(0,jednostka,lista);
                 foreach(GameObject ludek in lista)

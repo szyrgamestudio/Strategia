@@ -23,16 +23,17 @@ public class Szaman : MonoBehaviour
         
         if(jednostka == Jednostka.Select)
         {
-            if(Przycisk.jednostka[0] == true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[0] == true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[0] = false;
                 Jednostka.wybieranie = true;
                 Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                 odrzut = true;
             }
-            if(Przycisk.jednostka[1] == true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[1] == true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
             {
                 Przycisk.jednostka[1] = false;
+                Menu.magia[Menu.tura]-=4;
                 List<GameObject> lista = new List<GameObject>();
                 przeszukanie(0,jednostka,lista);
                 foreach(GameObject ludek in lista)
@@ -130,6 +131,7 @@ public class Szaman : MonoBehaviour
                             photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, 2f ,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
                         }
                         Menu.usunSelect2();
+                        Menu.magia[Menu.tura]-=3;
             }
         }
         else

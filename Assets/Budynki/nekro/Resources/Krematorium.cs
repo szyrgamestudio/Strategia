@@ -73,6 +73,7 @@ public class Krematorium : MonoBehaviour
             if(!pole.GetComponent<Pole>().Zajete && !pole.GetComponent<Pole>().ZajeteLot)
             {
                 Menu.zloto[Menu.tura] -= obj.GetComponent<Jednostka>().cena;
+                Menu.drewno[Menu.tura] -= obj.GetComponent<Jednostka>().drewno;
                 GameObject nowyZbieracz = null;
                 if(MenuGlowne.multi)
                 {
@@ -93,6 +94,7 @@ public class Krematorium : MonoBehaviour
                 /////////////ZWIĘKSZANIE STATYSTYK////////////////////////////////
 
                 Jednostka staty = nowyZbieracz.GetComponent<Jednostka>();
+                staty.obrona += Kbiblioteka.update1[druzyna] * 2;
                 Debug.Log("jeden " + staty.nazwa);
                 switch(staty.nazwa)
                 {
@@ -106,6 +108,17 @@ public class Krematorium : MonoBehaviour
                     case "Wielki Pająk" : staty.atak += Biblioteka.update4[druzyna] * 2; break;
                     case "Gargulec" : staty.atak += Biblioteka.update4[druzyna] * 2; break;
                     case "Żniwiarz" : staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    ///////////////////////////////
+                    case "Kamikaze" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Żongler dynamitu" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Anty-Budynkowa-Maszyna" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Kwatermistrz" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Golem" : staty.HP += Kbiblioteka.update3[druzyna] * 2; staty.maxHP += Kbiblioteka.update3[druzyna] * 2; break;
+                    case "Wielki Golem" : staty.HP += Kbiblioteka.update3[druzyna] * 2; staty.maxHP += Kbiblioteka.update3[druzyna] * 2; nowyZbieracz.GetComponent<Golem>().DMG += Kbiblioteka.update4[druzyna];break;
+                    case "Strzelec" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    case "Charpunnik" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    case "Tarczownik" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    case "Cierpliwy" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
                 }
             }
         }

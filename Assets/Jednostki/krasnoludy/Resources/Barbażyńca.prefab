@@ -1043,6 +1043,7 @@ GameObject:
   - component: {fileID: 7254608854548605690}
   - component: {fileID: 36873823500742661}
   - component: {fileID: 5883602230984839372}
+  - component: {fileID: 6825490491671358265}
   - component: {fileID: 1426903713264440560}
   - component: {fileID: 4077524004233977690}
   - component: {fileID: 7022607786726823304}
@@ -1221,6 +1222,26 @@ MonoBehaviour:
   mindmg: []
   maxdmg: []
   koniec: 0
+--- !u!114 &6825490491671358265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67b094ee7a796d43b066d97ae039871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 21300000, guid: 96c1c62d9290296478efacdf6de72565, type: 3}
+  - {fileID: 21300000, guid: 96c1c62d9290296478efacdf6de72565, type: 3}
+  teksty:
+  - Dodatkowa Akcja
+  - Dodatkowa Akcja
+  jednostka: {fileID: 6268565104842363223}
+  nieStandardowy: 0
 --- !u!114 &1426903713264440560
 MonoBehaviour:
   m_ObjectHideFlags: 0

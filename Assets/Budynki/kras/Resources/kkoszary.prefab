@@ -710,7 +710,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64882f9dc2268404a93749b910d88b18, type: 3}
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
@@ -720,21 +720,21 @@ MonoBehaviour:
   - {fileID: 6268565104842363223, guid: 72bbbef7c47a37e44af98f6c0ce2358a, type: 3}
   - {fileID: 6268565104842363223, guid: cea6b35d8545ea342b729b15c3349266, type: 3}
   - {fileID: 6268565104842363223, guid: 76a420812b1e31c429f3725437c70893, type: 3}
-  - {fileID: 6268565104842363223, guid: 7e482c00cad4ca3438217adedf1a454b, type: 3}
   - {fileID: 6268565104842363223, guid: 043ca4b428fd01b499e9c79b74617be4, type: 3}
+  - {fileID: 6268565104842363223, guid: 7e482c00cad4ca3438217adedf1a454b, type: 3}
   wymagany: 0000000000000000000000000000000000000000
   budynki:
   - {fileID: 21300000, guid: e267c686dea8c384095ff5080087b423, type: 3}
   - {fileID: 21300000, guid: 5dd5486762467444db488e59d74d718b, type: 3}
   - {fileID: 21300000, guid: 8aa5427f5bf293745b968c5dc17be0c8, type: 3}
-  - {fileID: 21300000, guid: 38979b0010e55734ab864b3b09510624, type: 3}
   - {fileID: 21300000, guid: 2dd10051287cc154cbd867b4cad66eb7, type: 3}
+  - {fileID: 21300000, guid: 38979b0010e55734ab864b3b09510624, type: 3}
   teksty:
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Kwatermistrz to podstawowa jednostka
+  - "Tarczownik przyjmuje obra\u017Cenia zamiast s\u0105siad\xF3w"
+  - "Cierpliwy dostarcza got\xF3wke co 3 tury"
+  - "Charpunnik mo\u017Ce przyci\u0105ga\u0107 do siebie przeciwnik\xF3w"
+  - "Strzelec ma ogromny zasi\u0119g strza\u0142u"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:

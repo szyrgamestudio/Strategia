@@ -894,6 +894,7 @@ GameObject:
   - component: {fileID: 8287434606867666639}
   - component: {fileID: 7254608854548605690}
   - component: {fileID: 36873823500742661}
+  - component: {fileID: 4822303979480782750}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 1930448036938840588}
   - component: {fileID: 7022607786726823304}
@@ -1050,6 +1051,24 @@ MonoBehaviour:
   src: {fileID: 3193222365307502974}
   drewno: 0
   boss: 0
+--- !u!114 &4822303979480782750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67b094ee7a796d43b066d97ae039871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 21300000, guid: 17d05789251683447b96b8e02103e918, type: 3}
+  teksty:
+  - "Przyci\u0105ga wybranego przeciwnika do siebie"
+  jednostka: {fileID: 6268565104842363223}
+  nieStandardowy: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

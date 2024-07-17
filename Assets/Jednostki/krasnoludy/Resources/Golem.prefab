@@ -894,6 +894,7 @@ GameObject:
   - component: {fileID: 8287434606867666639}
   - component: {fileID: 7254608854548605690}
   - component: {fileID: 36873823500742661}
+  - component: {fileID: 2121661246226132063}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 5255073564792496256}
   - component: {fileID: 7022607786726823304}
@@ -1048,8 +1049,26 @@ MonoBehaviour:
   animator: {fileID: 2166833886159355322}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
-  drewno: 0
+  drewno: 5
   boss: 0
+--- !u!114 &2121661246226132063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67b094ee7a796d43b066d97ae039871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 0}
+  teksty:
+  - "Pasynie: Po zaatakowaniu, przeciwnicy dostaj\u0105 obra\u017Cenia"
+  jednostka: {fileID: 6268565104842363223}
+  nieStandardowy: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

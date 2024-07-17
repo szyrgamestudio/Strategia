@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 139710692242994832}
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 4080598057547060474}
+  - component: {fileID: 9064576762985244419}
   m_Layer: 0
   m_Name: Wielki Golem
   m_TagString: Untagged
@@ -1003,7 +1004,7 @@ MonoBehaviour:
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 5
+  cena: 12
   nazwa: Wielki Golem
   akcja: 1
   spanie: 0
@@ -1048,7 +1049,7 @@ MonoBehaviour:
   animator: {fileID: 2166833886159355322}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
-  drewno: 0
+  drewno: 15
   boss: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
@@ -1085,7 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1112c7f6dfb32148bbf2ec6e54e0ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DMG: 3
+  DMG: 1
 --- !u!61 &7022607786726823304
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1134,6 +1135,24 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &9064576762985244419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67b094ee7a796d43b066d97ae039871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
+  teksty:
+  - "Pasynie: Po zaatakowaniu, przeciwnicy dostaj\u0105 obra\u017Cenia"
+  jednostka: {fileID: 6268565104842363223}
+  nieStandardowy: 0
 --- !u!1 &7463416832612274143
 GameObject:
   m_ObjectHideFlags: 0
