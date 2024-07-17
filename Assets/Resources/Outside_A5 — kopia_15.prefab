@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3520108190265880061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 808dd8a04ae0fbf4fbdc8e8a26a9a2ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 21216c108fcaf1f42a1c3718bebe046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   postac: {fileID: 0}
@@ -206,7 +206,7 @@ MonoBehaviour:
   CzasDrogi: 0
   Nout: 0
   spriteName: 0
-  nazwa: 3
+  nazwa: 
 --- !u!114 &7813135031417569079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3520108190265880061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3770f145565c824f873d82b2ee7f5d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 03f4333f091e8ac49b9911ac097b126c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poleObj: {fileID: 3520108190265880061}
@@ -321,7 +321,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8b20045f73c4c814d94ebe90616cdbe5, type: 3}
   - {fileID: 21300000, guid: 605bdadff4960214b892e691aaef69ba, type: 3}
   - {fileID: 21300000, guid: 9f4f55fead026c04793731b36734bd2d, type: 3}
-  pole: {fileID: 3520108190265880060}
+  - {fileID: 21300000, guid: dfda37bc8c4d4a041a00053805124b5a, type: 3}
+  pole: {fileID: 0}
   rodzaj: 0
 --- !u!114 &2400305906543381605
 MonoBehaviour:
