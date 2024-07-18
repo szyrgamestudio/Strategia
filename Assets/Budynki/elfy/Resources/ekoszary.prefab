@@ -628,8 +628,8 @@ GameObject:
   - component: {fileID: 300910691063939994}
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
+  - component: {fileID: 2746008293349552823}
   - component: {fileID: 337435299929857363}
-  - component: {fileID: 6492503989883455850}
   - component: {fileID: 8956365773136594117}
   - component: {fileID: -1410300284619503351}
   m_Layer: 0
@@ -729,9 +729,9 @@ MonoBehaviour:
   zdolnosci: 2
   zloto: 2
   drewno: 3
-  nazwa: "Rze\u017Ania"
+  nazwa: "Le\u015Bna Akademia"
   punktyBudowy: 0
-  punktyBudowyMax: 3
+  punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}
   gradient:
     serializedVersion: 2
@@ -777,6 +777,38 @@ MonoBehaviour:
   poczatek: 0
   koniec: 0
   src: {fileID: 4531493563383735403}
+--- !u!114 &2746008293349552823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580749336134018094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynek: {fileID: 0}
+  pole: {fileID: 0}
+  druzyna: 0
+  jednostki:
+  - {fileID: 6268565104842363223, guid: ced5056e7b6ab9d4986bff0d472cdf65, type: 3}
+  - {fileID: 6268565104842363223, guid: 70edf072cac601e4885988b76e249374, type: 3}
+  - {fileID: 6268565104842363223, guid: 3ca1b456cebd24748b0afa17d55f1b7a, type: 3}
+  - {fileID: 6268565104842363223, guid: 808c3b36a0feba54ebc93c06c3af4a86, type: 3}
+  wymagany: 00000000000000000000000001000000
+  budynki:
+  - {fileID: 21300000, guid: 0045fdb39576dbd4c947c4f666702d1d, type: 3}
+  - {fileID: 21300000, guid: 1918a13e331a3094e95b3e386d16d3e0, type: 3}
+  - {fileID: 21300000, guid: bc9127a5ac08a2843a8d1fccabd21c39, type: 3}
+  - {fileID: 21300000, guid: 42ec6d91b7856914084faefb98c6b930, type: 3}
+  teksty:
+  - Zwiadowca to bardzo moblilna jednostka
+  - "Elfi \u0141ucznik to podstawowa elfia jednostka"
+  - "Saper mo\u017Ce podk\u0142ada\u0107 pu\u0142paki dla przeciwnik\xF3w"
+  - Tancerz Ostrzy ma dwa ataki
+  loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,38 +828,6 @@ MonoBehaviour:
   canvasRuch: {fileID: 630609693175150352}
   pole: {fileID: 0}
   prekoniec: 0
---- !u!114 &6492503989883455850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5580749336134018094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64882f9dc2268404a93749b910d88b18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  budynek: {fileID: 5580749336134018094}
-  pole: {fileID: 0}
-  druzyna: 0
-  jednostki:
-  - {fileID: 6268565104842363223, guid: 808c3b36a0feba54ebc93c06c3af4a86, type: 3}
-  - {fileID: 6268565104842363223, guid: ced5056e7b6ab9d4986bff0d472cdf65, type: 3}
-  - {fileID: 6268565104842363223, guid: 3ca1b456cebd24748b0afa17d55f1b7a, type: 3}
-  - {fileID: 6268565104842363223, guid: 70edf072cac601e4885988b76e249374, type: 3}
-  wymagany: 00000000000000000000000000000000
-  budynki:
-  - {fileID: 21300000, guid: 42ec6d91b7856914084faefb98c6b930, type: 3}
-  - {fileID: 21300000, guid: 0045fdb39576dbd4c947c4f666702d1d, type: 3}
-  - {fileID: 21300000, guid: bc9127a5ac08a2843a8d1fccabd21c39, type: 3}
-  - {fileID: 21300000, guid: 1918a13e331a3094e95b3e386d16d3e0, type: 3}
-  teksty:
-  - 
-  - 
-  - 
-  - 
-  loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!61 &8956365773136594117
 BoxCollider2D:
   m_ObjectHideFlags: 0

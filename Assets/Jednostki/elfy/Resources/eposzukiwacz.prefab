@@ -911,11 +911,11 @@ MonoBehaviour:
   atak: 1
   obrona: 1
   zasieg: 1
-  maxszybkosc: 7
-  szybkosc: 7
+  maxszybkosc: 9
+  szybkosc: 9
   mindmg: 1
   maxdmg: 2
-  zdolnosci: 3
+  zdolnosci: 2
   zbieracz: 0
   lata: 0
   cena: 4

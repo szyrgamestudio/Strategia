@@ -781,7 +781,7 @@ MonoBehaviour:
   zdolnosci: 0
   zloto: 2
   drewno: 5
-  nazwa: Cmentarz
+  nazwa: Chatka
   punktyBudowy: 0
   punktyBudowyMax: 4
   healthGracza: {fileID: 8826697438269049201}

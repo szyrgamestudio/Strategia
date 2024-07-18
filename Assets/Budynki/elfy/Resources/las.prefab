@@ -552,8 +552,8 @@ GameObject:
   - component: {fileID: 300910691063939994}
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
-  - component: {fileID: -3205343677014333666}
   - component: {fileID: 337435299929857363}
+  - component: {fileID: 6601917215660781428}
   - component: {fileID: 8956365773136594117}
   - component: {fileID: -4973122075543335545}
   m_Layer: 0
@@ -653,7 +653,7 @@ MonoBehaviour:
   zdolnosci: 3
   zloto: 4
   drewno: 10
-  nazwa: Jaskinia
+  nazwa: Pradawny Las
   punktyBudowy: 0
   punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}
@@ -701,33 +701,6 @@ MonoBehaviour:
   poczatek: 0
   koniec: 0
   src: {fileID: 7498262364317139749}
---- !u!114 &-3205343677014333666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5580749336134018094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64882f9dc2268404a93749b910d88b18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  budynek: {fileID: 5580749336134018094}
-  pole: {fileID: 0}
-  druzyna: 0
-  jednostki:
-  - {fileID: 6268565104842363223, guid: 8efb89511bb24b541b23568667b5ec0b, type: 3}
-  - {fileID: 6268565104842363223, guid: d47ea613ad026f844ba18907f7c82754, type: 3}
-  wymagany: 0100000002000000
-  budynki:
-  - {fileID: 21300000, guid: b37d0f834dd8c584f87aca862eded8fa, type: 3}
-  - {fileID: 21300000, guid: efd59b124adefc340845edd01fb3e0ba, type: 3}
-  teksty:
-  - "Pajk\u0105 po zakupie zabiera 3 z\u0142ota"
-  - "Gagulec otrzymuje zwi\u0119kszone statystyki gdy gracz posiada mniej ni\u017C
-    5 z\u0142ota"
-  loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +720,33 @@ MonoBehaviour:
   canvasRuch: {fileID: 630609693175150352}
   pole: {fileID: 0}
   prekoniec: 0
+--- !u!114 &6601917215660781428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580749336134018094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budynek: {fileID: 5580749336134018094}
+  pole: {fileID: 0}
+  druzyna: 0
+  jednostki:
+  - {fileID: 6268565104842363223, guid: 8efb89511bb24b541b23568667b5ec0b, type: 3}
+  - {fileID: 6268565104842363223, guid: d47ea613ad026f844ba18907f7c82754, type: 3}
+  wymagany: 0000000002000000
+  budynki:
+  - {fileID: 21300000, guid: b37d0f834dd8c584f87aca862eded8fa, type: 3}
+  - {fileID: 21300000, guid: efd59b124adefc340845edd01fb3e0ba, type: 3}
+  teksty:
+  - "Ent po zaatakowaniu spl\u0105tuje przeciwnika, blokuj\u0105c mu ruch w kolejnej
+    turze"
+  - "Drzewiec to wielka i wytrzyma\u0142a jednostka"
+  loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!61 &8956365773136594117
 BoxCollider2D:
   m_ObjectHideFlags: 0

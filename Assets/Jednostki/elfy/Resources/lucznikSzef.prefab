@@ -1141,18 +1141,18 @@ MonoBehaviour:
   sojusz: 1
   HP: 6
   maxHP: 6
-  atak: 1
+  atak: 2
   obrona: 2
   zasieg: 3
-  maxszybkosc: 6
-  szybkosc: 6
+  maxszybkosc: 8
+  szybkosc: 8
   mindmg: 1
-  maxdmg: 2
+  maxdmg: 3
   zdolnosci: 1
   zbieracz: 0
   lata: 0
   cena: 20
-  nazwa: Nekromanta
+  nazwa: "Le\u015Bny Dow\xF3dca"
   akcja: 1
   spanie: 0
   nr_jednostki: 0

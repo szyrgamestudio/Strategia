@@ -990,8 +990,8 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 6
-  maxHP: 6
+  HP: 7
+  maxHP: 7
   atak: 2
   obrona: 2
   zasieg: 1
@@ -1002,8 +1002,8 @@ MonoBehaviour:
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 3
-  nazwa: "Wielki Paj\u0105k"
+  cena: 5
+  nazwa: Ent
   akcja: 1
   spanie: 0
   nr_jednostki: 0
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   animator: {fileID: 2166833886159355322}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
-  drewno: 0
+  drewno: 8
   boss: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:

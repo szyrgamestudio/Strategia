@@ -113,21 +113,7 @@ public class Opcje : MonoBehaviour
 
     public void OpenLink()
     {
-        // if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        // {
-        //     // Otwórz link w domyślnej przeglądarce na urządzeniach mobilnych
-        //     Application.OpenURL(youtubeURL);
-        // }
-        // else if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
-        // {
-        //     // Otwórz link w domyślnej przeglądarce na komputerze
             System.Diagnostics.Process.Start(youtubeURL);
-        // }
-        // else
-        // {
-        //     // Wyświetl komunikat, jeśli platforma nie jest obsługiwana
-        //     Debug.Log("Platforma nie jest obsługiwana");
-        // }
     }
 }
 

@@ -811,15 +811,15 @@ MonoBehaviour:
   atak: 1
   obrona: 1
   zasieg: 1
-  maxszybkosc: 6
-  szybkosc: 6
+  maxszybkosc: 7
+  szybkosc: 7
   mindmg: 1
   maxdmg: 2
   zdolnosci: 1
   zbieracz: 1
   lata: 0
   cena: 4
-  nazwa: "S\u0142uga"
+  nazwa: "Stra\u017Cniczka Sad\xF3w"
   akcja: 1
   spanie: 0
   nr_jednostki: 0

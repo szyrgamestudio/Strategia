@@ -991,9 +991,9 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 6
-  maxHP: 6
-  atak: 2
+  HP: 4
+  maxHP: 4
+  atak: 1
   obrona: 2
   zasieg: 1
   maxszybkosc: 8
@@ -1003,8 +1003,8 @@ MonoBehaviour:
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 3
-  nazwa: "Wielki Paj\u0105k"
+  cena: 9
+  nazwa: Tancerz Ostrzy
   akcja: 1
   spanie: 0
   nr_jednostki: 0

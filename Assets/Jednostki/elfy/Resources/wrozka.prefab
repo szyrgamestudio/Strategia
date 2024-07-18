@@ -792,15 +792,15 @@ MonoBehaviour:
   atak: 1
   obrona: 1
   zasieg: 3
-  maxszybkosc: 6
-  szybkosc: 6
+  maxszybkosc: 8
+  szybkosc: 8
   mindmg: 1
   maxdmg: 2
   zdolnosci: 1
   zbieracz: 1
-  lata: 0
-  cena: 4
-  nazwa: Adept magii
+  lata: 1
+  cena: 8
+  nazwa: Magiczna NImfa
   akcja: 1
   spanie: 0
   nr_jednostki: 0

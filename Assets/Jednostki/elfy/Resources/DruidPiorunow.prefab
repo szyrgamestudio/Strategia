@@ -991,20 +991,20 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 6
-  maxHP: 6
-  atak: 2
+  HP: 7
+  maxHP: 7
+  atak: 1
   obrona: 2
   zasieg: 1
-  maxszybkosc: 8
-  szybkosc: 8
+  maxszybkosc: 7
+  szybkosc: 7
   mindmg: 1
-  maxdmg: 3
-  zdolnosci: 1
+  maxdmg: 2
+  zdolnosci: 3
   zbieracz: 0
   lata: 0
   cena: 3
-  nazwa: "Wielki Paj\u0105k"
+  nazwa: "Druid Piorun\xF3w "
   akcja: 1
   spanie: 0
   nr_jednostki: 0

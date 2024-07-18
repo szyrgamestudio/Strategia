@@ -993,18 +993,18 @@ MonoBehaviour:
   sojusz: 1
   HP: 6
   maxHP: 6
-  atak: 2
+  atak: 3
   obrona: 2
   zasieg: 1
-  maxszybkosc: 8
-  szybkosc: 8
+  maxszybkosc: 10
+  szybkosc: 10
   mindmg: 1
-  maxdmg: 3
+  maxdmg: 2
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 3
-  nazwa: "Wielki Paj\u0105k"
+  cena: 6
+  nazwa: Zwiadowca
   akcja: 1
   spanie: 0
   nr_jednostki: 0

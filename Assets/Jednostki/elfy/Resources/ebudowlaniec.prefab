@@ -912,15 +912,15 @@ MonoBehaviour:
   atak: 1
   obrona: 1
   zasieg: 1
-  maxszybkosc: 5
-  szybkosc: 5
+  maxszybkosc: 6
+  szybkosc: 6
   mindmg: 1
   maxdmg: 1
   zdolnosci: 14
   zbieracz: 0
   lata: 0
   cena: 8
-  nazwa: Martwy Budowlaniec
+  nazwa: "Le\u015Bny Architekt"
   akcja: 1
   spanie: 0
   nr_jednostki: 10
