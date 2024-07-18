@@ -710,7 +710,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64882f9dc2268404a93749b910d88b18, type: 3}
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
@@ -720,23 +720,17 @@ MonoBehaviour:
   - {fileID: 6268565104842363223, guid: b39543f006b0dd4428e4049fabd69b5c, type: 3}
   - {fileID: 6268565104842363223, guid: cd461909afc44204caaa9b21691c7a9e, type: 3}
   - {fileID: 6268565104842363223, guid: d1ca6332900103946b0413a8248b665a, type: 3}
-  - {fileID: 6268565104842363223, guid: 8797dbb7b5c782f4588517b27a46d0a0, type: 3}
-  - {fileID: 6268565104842363223, guid: 73dd7405e403c5249a38bfcd65ba15d4, type: 3}
-  wymagany: 0000000001000000020000000100000001000000
+  wymagany: 000000000100000002000000
   budynki:
   - {fileID: 21300000, guid: b7e5d02c443889146952341d1fd8f52b, type: 3}
   - {fileID: 21300000, guid: a47c41ca4c4e6254bb2e466b072bedd0, type: 3}
   - {fileID: 21300000, guid: 7b25183f1ee86ac47be61e63a8d32c89, type: 3}
-  - {fileID: 21300000, guid: 00b5159b05dc78d4c8bb1c683c23e2c2, type: 3}
-  - {fileID: 21300000, guid: be399072b38d0ca4e86d40457361cca0, type: 3}
   teksty:
-  - "Pajk\u0105 po zakupie zabiera 3 z\u0142ota"
-  - "Gagulec otrzymuje zwi\u0119kszone statystyki gdy gracz posiada mniej ni\u017C
-    5 z\u0142ota"
-  - "\u017Bniwiarz po zakupie otrzymuje tyle obra\u017Ce\u0144 ile gracz posiada
+  - "Paj\u0105k po przyzwaniu zabiera 4 z\u0142ota (Z\u0142oto nie mo\u017Ce spa\u0107
+    poni\u017Cej 0)"
+  - "Gargulec otrzymuje zwi\u0119kszone statystyki gdy gracz ma mniej ni\u017C 3
     z\u0142ota"
-  - 
-  - 
+  - "\u017Bniwiarz co ture otrzymuje obra\u017Cenia r\xF3wne ilo\u015Bci z\u0142ota"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:

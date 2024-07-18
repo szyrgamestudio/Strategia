@@ -203,7 +203,7 @@ public class eRatusz : MonoBehaviour
         if(budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax && !dodaj)
         {
             dodaj = true;
-            Menu.maxludnosc[druzyna] += 6;
+            Menu.maxludnosc[druzyna] += 7;
             poziom++;
             StartCoroutine(przyporzadkuj());
         }
@@ -218,7 +218,7 @@ public class eRatusz : MonoBehaviour
                     Menu.bazy[druzyna,nr_jednostki].GetComponent<Ratusz>().nr_jednostki -= 1;
                     nr_jednostki++;
                 }
-                Menu.maxludnosc[druzyna] -= 6;
+                Menu.maxludnosc[druzyna] -= 7;
                 Menu.bazy[druzyna,nr_jednostki] = null;
                 Menu.bazyIlosc[druzyna]--;
             }

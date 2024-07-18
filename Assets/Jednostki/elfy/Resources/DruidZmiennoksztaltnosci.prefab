@@ -1004,7 +1004,7 @@ MonoBehaviour:
   zbieracz: 0
   lata: 0
   cena: 3
-  nazwa: "Wielki Paj\u0105k"
+  nazwa: "Druid Zmiennokszta\u0142tny"
   akcja: 1
   spanie: 0
   nr_jednostki: 0
@@ -1059,15 +1059,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac213e004aedacb4f91eb7c91133536b, type: 3}
+  m_Script: {fileID: 11500000, guid: baed5681980cdb943848190aaadfb5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budynki:
-  - {fileID: 21300000, guid: cd7456cb5047ecc4ea6d6d56a854685a, type: 3}
-  teksty:
-  - "Po zakupie tracisz 4 z\u0142ota"
   jednostka: {fileID: 6268565104842363223}
-  nieStandardowy: 0
+  ciala:
+  - {fileID: 21300000, guid: 2b3f893200886a94fbb0d7ba169f3e23, type: 3}
+  - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}
+  - {fileID: 21300000, guid: 60b1c6c0fa356d44eaaaff0125465328, type: 3}
+  - {fileID: 21300000, guid: 494a9ec87d8b1b14491773bdf6d98a0d, type: 3}
+  zmieniony: 0
+  budynki:
+  - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}
+  - {fileID: 21300000, guid: 60b1c6c0fa356d44eaaaff0125465328, type: 3}
+  - {fileID: 21300000, guid: 494a9ec87d8b1b14491773bdf6d98a0d, type: 3}
+  - {fileID: 0}
+  teksty:
+  - Przemiana w Wilka
+  - "Przemiana w Jask\xF3\u0142ke"
+  - "Przemiana w NIed\u017Awiedzia"
+  cooldown: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

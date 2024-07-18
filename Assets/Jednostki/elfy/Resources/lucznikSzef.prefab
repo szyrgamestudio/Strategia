@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 36873823500742661}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 4077524004233977690}
-  - component: {fileID: 8925756602434241032}
+  - component: {fileID: 273590452085277249}
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 641337051438856885}
   m_Layer: 0
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   expToNext: 20
   healthGracza: {fileID: 1096679491188151695}
   levelUp: 0
---- !u!114 &8925756602434241032
+--- !u!114 &273590452085277249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1248,27 +1248,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b18ae88312905b8499e02fbce54bc6b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 794c3c2c108c59f41a70c8fc1a45289d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jednostka: {fileID: 6268565104842363223}
   budynki:
-  - {fileID: 21300000, guid: b5a081bdd8b0cde4e8f3a75813e51ffb, type: 3}
-  - {fileID: 21300000, guid: a22ef8114eadca548a38da47d5ee7586, type: 3}
-  - {fileID: 21300000, guid: 3ccb6d0ac6b987b42b502e13e6c65cb5, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 9dacb569239658446ad525cc4bac2035, type: 3}
+  - {fileID: 21300000, guid: 96c1c62d9290296478efacdf6de72565, type: 3}
   teksty:
-  - "Nekromanta przywo\u0142uje szczura"
-  - "Nekromanta przywo\u0142uje losowego szkieleta"
-  - "Nekromanta przywo\u0142uje losow\u0105 pot\u0119\u017Cn\u0105 jednostk\u0119"
-  szczur: {fileID: 6268565104842363223, guid: d4eb6e1993ce6b7438f93f101b69978c, type: 3}
-  szkielety:
-  - {fileID: 6268565104842363223, guid: f0899207f9fb93649ac5b3553a7c424c, type: 3}
-  - {fileID: 6268565104842363223, guid: 09d6a57c766b27b41b42d1572ace0ef3, type: 3}
-  - {fileID: 6268565104842363223, guid: 917c225297b6e3c4f9a894a76a2fc25d, type: 3}
-  mumie:
-  - {fileID: 6268565104842363223, guid: 4e71a89fbaeb3624dbcaf5932459d47c, type: 3}
-  - {fileID: 6268565104842363223, guid: e90f8d76df2a7b34196a532d69b722d5, type: 3}
-  - {fileID: 6268565104842363223, guid: d566cb00756ec4f45b6bf303172cdba6, type: 3}
+  - "Zwi\u0119ksz obra\u017Cenia wybranemu strzelcowi na 2 tury"
+  - "Zwi\u0119ksz zasi\u0119g wybranej jednostki o 2"
+  - Dodatkowa akcja
+  customCursorBudowa: {fileID: 2800000, guid: 1a32552cae4247a4389da6bf6b93058c, type: 3}
 --- !u!61 &7022607786726823304
 BoxCollider2D:
   m_ObjectHideFlags: 0

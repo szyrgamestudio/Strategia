@@ -1059,15 +1059,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac213e004aedacb4f91eb7c91133536b, type: 3}
+  m_Script: {fileID: 11500000, guid: a3b13968181ddf24b9fa0a57bf70642c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budynki:
-  - {fileID: 21300000, guid: cd7456cb5047ecc4ea6d6d56a854685a, type: 3}
-  teksty:
-  - "Po zakupie tracisz 4 z\u0142ota"
   jednostka: {fileID: 6268565104842363223}
-  nieStandardowy: 0
+  budynki:
+  - {fileID: 21300000, guid: 3ffd6709e2323854a9d317ffbf9ca475, type: 3}
+  - {fileID: 21300000, guid: 3ffd6709e2323854a9d317ffbf9ca475, type: 3}
+  teksty:
+  - "Druid przywo\u0142uje b\u0142yskawice uderzaj\u0105c\u0105 w przeciwnika"
+  - "Druid tworzy b\u0142ysk po zaatakowaniu przechodz\u0105cy na sasiaduj\u0105ce
+    jednostki"
+  ignis: 0
+  leczenie: 0
+  customCursorBudowa: {fileID: 2800000, guid: 1a32552cae4247a4389da6bf6b93058c, type: 3}
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

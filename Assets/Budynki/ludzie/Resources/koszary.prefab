@@ -718,8 +718,8 @@ MonoBehaviour:
   druzyna: 0
   lucznik: {fileID: 6268565104842363223, guid: e97f082e89f9f314b9bd8e4992a76018, type: 3}
   piechur: {fileID: 6268565104842363223, guid: 4ab54183f021f3346a9703124ba3f78d, type: 3}
-  rycerz: {fileID: 6268565104842363223, guid: 1392be7e02a22914abfb16af6fefc5c7, type: 3}
-  kusznik: {fileID: 6268565104842363223, guid: 358950ccade2e86449aca3289ee7b750, type: 3}
+  rycerz: {fileID: 6268565104842363223, guid: eb9f63eccde1f3f468251ac44e4ed9dd, type: 3}
+  kusznik: {fileID: 6268565104842363223, guid: b265b3ff704db3742891b5b71f3bc7db, type: 3}
   kawalerzysta: {fileID: 6268565104842363223, guid: 1cc552c4875d844458fb2dda6e438c41, type: 3}
   budynki:
   - {fileID: 21300000, guid: e8fb6ded53ba5354bb5fdc676e9ec680, type: 3}

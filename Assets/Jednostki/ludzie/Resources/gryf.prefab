@@ -778,19 +778,19 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 1
-  maxHP: 1
-  atak: 1
-  obrona: 1
+  HP: 6
+  maxHP: 6
+  atak: 3
+  obrona: 3
   zasieg: 1
-  maxszybkosc: 6
-  szybkosc: 6
+  maxszybkosc: 8
+  szybkosc: 8
   mindmg: 2
   maxdmg: 3
   zdolnosci: 2
   zbieracz: 0
   lata: 1
-  cena: 8
+  cena: 9
   nazwa: Gryf
   akcja: 1
   spanie: 0
@@ -835,6 +835,8 @@ MonoBehaviour:
   animator: {fileID: 870134775246839569}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3164757473994684061}
+  drewno: 0
+  boss: 0
 --- !u!114 &607348896450442640
 MonoBehaviour:
   m_ObjectHideFlags: 0

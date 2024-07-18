@@ -1,0 +1,139 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Photon.Pun;
+
+public class DruidPiorunow : MonoBehaviour
+{
+    public GameObject jednostka;
+
+    public Sprite[] budynki;
+    public string[] teksty;
+
+    public bool ignis;
+
+    public bool leczenie;
+
+    public Texture2D customCursorBudowa;
+
+    void Update()
+    {
+        if(jednostka == Jednostka.Select)
+            {
+                if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
+                    {
+                        jednostka.GetComponent<Ramki>().showRamka2();
+                        Przycisk.jednostka[0]=false;
+                        Jednostka.wybieranie = true;
+                        Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
+                        ignis = true;
+                    }
+            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
+                    {
+                        jednostka.GetComponent<Ramki>().showRamka2();
+                        Przycisk.jednostka[1]=false;
+                        Jednostka.wybieranie = true;
+                        Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
+                        leczenie = true;
+                    }
+                if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && ignis)
+                {
+                    ignis = false;
+                    Menu.magia[Menu.tura]-=3;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
+                    Jednostka.Select2.GetComponent<Jednostka>().HP -= 4;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, 4,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                    }
+                    Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(4f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
+                    Menu.usunSelect2();
+                }
+            
+                if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && leczenie)
+                {
+                    Menu.magia[Menu.tura]-=5;
+                    jednostka.GetComponent<Jednostka>().akcja = false;
+                    leczenie = false;  
+                    Jednostka.Select2.GetComponent<Jednostka>().HP -= 3;
+                    if(MenuGlowne.multi)
+                    {
+                        PhotonView photonView = GetComponent<PhotonView>();
+                        photonView.RPC("dmg", RpcTarget.All,Ip.ip, Jednostka.Select2.GetComponent<Jednostka>().nr_jednostki, 3,Jednostka.Select2.GetComponent<Jednostka>().druzyna);
+                    }
+                    Jednostka.Select2.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
+                    piorun(2,Jednostka.Select2);
+                    Menu.usunSelect2();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    jednostka.GetComponent<Ramki>().Start();
+                }
+            }
+            else
+            {
+                ignis = false;
+                leczenie = false;
+            }
+    }
+    [PunRPC]
+    public void dmg(int ip, int id, int dmg, int team)
+    {
+        if(ip != Ip.ip)
+        {
+            GameObject Oponenet = Menu.jednostki[team,id];
+            Debug.Log(Oponenet.name);
+            Oponenet.GetComponent<Jednostka>().HP -= dmg;
+        }
+    }
+
+    private void piorun(int x, GameObject y)
+    {
+    if(x>0)
+    {
+        for(int i = -1; i < 2 ; i++)
+            for(int j = -1; j < 2 ; j++)
+                if(!(i==0 && j == 0))
+                {
+                    if(Menu.kafelki[(int)y.transform.position.x + i][(int)y.transform.position.y + j].GetComponent<Pole>().postac != null)
+                    {
+                        GameObject postka = Menu.kafelki[(int)y.transform.position.x + i][(int)y.transform.position.y + j].GetComponent<Pole>().postac;
+                        postka.GetComponent<Jednostka>().HP -= 3;
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("dmg", RpcTarget.All,Ip.ip, postka.GetComponent<Jednostka>().nr_jednostki, 3,postka.GetComponent<Jednostka>().druzyna);
+                        }
+                        postka.GetComponent<Jednostka>().ShowDMG(3f,new Color(1.0f, 0.0f, 0.0f, 1.0f));
+                        piorun(x-1,postka);
+                        i = 3;
+                        j = 3;
+                    }
+                }
+    }
+    }
+     void OnMouseDown()
+    {
+        if(jednostka == Jednostka.Select)
+        {
+            InterfaceUnit.Czyszczenie(); 
+            PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "3"; 
+            Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "7"; 
+            
+            
+            for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
+            {
+                InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];
+                PrzyciskInter Guzik = InterfaceUnit.przyciski[i].GetComponent<PrzyciskInter>();
+                Guzik.IconZloto.enabled = false;
+                Guzik.IconDrewno.enabled = false;
+                Guzik.IconMagic.enabled = true;
+                Guzik.Opis.text = teksty[i];  
+            }       
+        }
+    }
+}

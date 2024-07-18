@@ -710,31 +710,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64882f9dc2268404a93749b910d88b18, type: 3}
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
   pole: {fileID: 0}
   druzyna: 0
   jednostki:
-  - {fileID: 6268565104842363223, guid: 4e71a89fbaeb3624dbcaf5932459d47c, type: 3}
   - {fileID: 6268565104842363223, guid: d566cb00756ec4f45b6bf303172cdba6, type: 3}
+  - {fileID: 6268565104842363223, guid: 18d8d925dbf0ad04aad1d7e33047b4e9, type: 3}
   - {fileID: 6268565104842363223, guid: e90f8d76df2a7b34196a532d69b722d5, type: 3}
-  - {fileID: 6268565104842363223, guid: 8797dbb7b5c782f4588517b27a46d0a0, type: 3}
-  - {fileID: 6268565104842363223, guid: 73dd7405e403c5249a38bfcd65ba15d4, type: 3}
-  wymagany: 0000000000000000010000000100000001000000
+  wymagany: 000000000000000001000000
   budynki:
-  - {fileID: 21300000, guid: 3ccb6d0ac6b987b42b502e13e6c65cb5, type: 3}
   - {fileID: 21300000, guid: af1ba802519369c47890828f31ef22a2, type: 3}
+  - {fileID: 21300000, guid: 3ccb6d0ac6b987b42b502e13e6c65cb5, type: 3}
   - {fileID: 21300000, guid: 31668eaf9765f5743a88678faf915ed3, type: 3}
-  - {fileID: 21300000, guid: 00b5159b05dc78d4c8bb1c683c23e2c2, type: 3}
-  - {fileID: 21300000, guid: be399072b38d0ca4e86d40457361cca0, type: 3}
   teksty:
-  - "Mumia z pocz\u0105tkiem nowej tury odnawia ca\u0142e zdrowie"
-  - "Zoombie po \u015Bmierci powraca do \u017Cywych z 1 HP"
-  - "Wampir regeneruje si\u0119 o ilo\u015B\u0107 zadanych obra\u017Ce\u0144"
-  - 
-  - 
+  - "Zoombi po \u015Bmierci przywraca si\u0119 do \u017Cycia z 1 HP"
+  - "Mumia na ko\u0144cu tury przywraca sobie zdrowie"
+  - "Wampir przy ataku wysysa zdrowie z przeciwnika, przy czym si\u0119 lecz\u0105c"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:

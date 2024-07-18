@@ -893,7 +893,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8287434606867666639}
   - component: {fileID: 7254608854548605690}
-  - component: {fileID: 36873823500742661}
   - component: {fileID: 2124943728199005843}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 7022607786726823304}
@@ -976,7 +975,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &36873823500742661
+--- !u!114 &2124943728199005843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -985,7 +984,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dfdbe346eb130343ba1e35fbd22ccd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fc0ab987792b2942ae626c4028171ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jednostka: {fileID: 6268565104842363223}
@@ -1004,8 +1003,8 @@ MonoBehaviour:
   zbieracz: 0
   lata: 0
   cena: 3
-  nazwa: "Wielki Paj\u0105k"
-  akcja: 1
+  nazwa: Duch Lasu
+  akcja: 0
   spanie: 0
   nr_jednostki: 0
   koniec: 0
@@ -1050,24 +1049,11 @@ MonoBehaviour:
   src: {fileID: 3193222365307502974}
   drewno: 0
   boss: 0
---- !u!114 &2124943728199005843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6268565104842363223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac213e004aedacb4f91eb7c91133536b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   budynki:
-  - {fileID: 21300000, guid: cd7456cb5047ecc4ea6d6d56a854685a, type: 3}
+  - {fileID: 21300000, guid: 41419be002fda9d4bb6b424f2ed7bb98, type: 3}
   teksty:
-  - "Po zakupie tracisz 4 z\u0142ota"
-  jednostka: {fileID: 6268565104842363223}
-  nieStandardowy: 0
+  - "Duch Lasu mo\u017Ce by\u0107 jednocze\u015Bnie tylko jeden. Ka\u017Cdy kolejny
+    jest dwukrotnie dro\u017Cszy"
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1059,15 +1059,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac213e004aedacb4f91eb7c91133536b, type: 3}
+  m_Script: {fileID: 11500000, guid: 50e4d3674ad3c484b80c0ca2ccaa9aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budynki:
-  - {fileID: 21300000, guid: cd7456cb5047ecc4ea6d6d56a854685a, type: 3}
-  teksty:
-  - "Po zakupie tracisz 4 z\u0142ota"
   jednostka: {fileID: 6268565104842363223}
-  nieStandardowy: 0
+  cooldown: 0
+  klepsydra: {fileID: 21300000, guid: be071d1fd14b21e459da6e383f84ef48, type: 3}
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

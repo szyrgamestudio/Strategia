@@ -15,7 +15,7 @@ public class Gargulec : MonoBehaviour
     void Update()
     {
         Jednostka staty = jednostka.GetComponent<Jednostka>();
-        if(Menu.zloto[staty.druzyna] <= 3 && update == false)
+        if(Menu.zloto[staty.druzyna] <= 3 && update == false && jednostka.GetComponent<Jednostka>().druzyna != 0)
         {
             update = true;
             jednostka.GetComponent<Jednostka>().Aktualizuj();

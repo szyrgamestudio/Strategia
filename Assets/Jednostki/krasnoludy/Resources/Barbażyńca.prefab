@@ -1142,8 +1142,8 @@ MonoBehaviour:
   sojusz: 1
   HP: 6
   maxHP: 6
-  atak: 3
-  obrona: 2
+  atak: 1
+  obrona: 1
   zasieg: 1
   maxszybkosc: 6
   szybkosc: 6

@@ -322,7 +322,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 605bdadff4960214b892e691aaef69ba, type: 3}
   - {fileID: 21300000, guid: 9f4f55fead026c04793731b36734bd2d, type: 3}
   - {fileID: 21300000, guid: dfda37bc8c4d4a041a00053805124b5a, type: 3}
-  pole: {fileID: 0}
+  pole: {fileID: 3520108190265880060}
   rodzaj: 0
 --- !u!114 &2400305906543381605
 MonoBehaviour:

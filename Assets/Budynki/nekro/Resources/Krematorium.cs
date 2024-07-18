@@ -130,7 +130,7 @@ public class Krematorium : MonoBehaviour
         {
             InterfaceBuild.Czyszczenie(); 
             
-            for(int i = 0 ; i < 5 ; i++)
+            for(int i = 0 ; i < budynek.GetComponent<Budynek>().zdolnosci ; i++)
             {
                 PrzyciskInter Guzik = InterfaceBuild.przyciski[i].GetComponent<PrzyciskInter>();
                 if(jednostki[i].GetComponent<Jednostka>().drewno == 0)
@@ -152,7 +152,7 @@ public class Krematorium : MonoBehaviour
             }
             
 
-            for(int i = 0 ; i < 5 ; i++)
+            for(int i = 0 ; i < budynek.GetComponent<Budynek>().zdolnosci ; i++)
             {
                 if(wymagany[i] > Menu.ratuszPoziom[druzyna])
                 {
