@@ -717,7 +717,7 @@ MonoBehaviour:
   budynek: {fileID: 5580749336134018094}
   nr_jednostki: 0
   druzyna: 0
-  poziom: 0
+  poziom: -1
   pole: {fileID: 0}
   zbieracz: {fileID: 6268565104842363223, guid: 074e0d596a72e044586cd3d4dfc1605d, type: 3}
   poszukiwacz: {fileID: 6268565104842363223, guid: 0b4b5a9c68191424aabce06c8ed805a5, type: 3}

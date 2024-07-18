@@ -650,7 +650,7 @@ MonoBehaviour:
   HP: 20
   maxHP: 20
   obrona: 2
-  zdolnosci: 3
+  zdolnosci: 2
   zloto: 4
   drewno: 10
   nazwa: Druidzi gaj

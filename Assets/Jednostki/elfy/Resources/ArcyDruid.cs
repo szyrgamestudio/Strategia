@@ -151,8 +151,9 @@ public class ArcyDruid : MonoBehaviour
         staty.akcja = false;
         staty.obrona = 1;
         staty.mindmg = 1;
-        staty.maxdmg = 3;
+        staty.maxdmg = 1;
         staty.zasieg = 1;
+        staty.zdolnosci = 1;
         
         staty.maxszybkosc = 6;
         staty.szybkosc = 6;

@@ -727,7 +727,7 @@ MonoBehaviour:
   HP: 20
   maxHP: 20
   obrona: 2
-  zdolnosci: 2
+  zdolnosci: 1
   zloto: 4
   drewno: 9
   nazwa: "Rze\u017Ania"
