@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jednostka: {fileID: 6268565104842363223}
   budynki:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9dacb569239658446ad525cc4bac2035, type: 3}
   - {fileID: 21300000, guid: 9dacb569239658446ad525cc4bac2035, type: 3}
   - {fileID: 21300000, guid: 96c1c62d9290296478efacdf6de72565, type: 3}
   teksty:
