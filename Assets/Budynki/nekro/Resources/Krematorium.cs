@@ -95,6 +95,10 @@ public class Krematorium : MonoBehaviour
 
                 Jednostka staty = nowyZbieracz.GetComponent<Jednostka>();
                 staty.obrona += Kbiblioteka.update1[druzyna] * 2;
+                staty.atak += Ebiblioteka.update1[druzyna] * 2;
+                staty.obrona += Ebiblioteka.update2[druzyna] * 2;
+                staty.maxszybkosc += Ebiblioteka.update3[druzyna]; staty.szybkosc += Ebiblioteka.update3[druzyna]; 
+
                 Debug.Log("jeden " + staty.nazwa);
                 switch(staty.nazwa)
                 {
@@ -119,6 +123,9 @@ public class Krematorium : MonoBehaviour
                     case "Charpunnik" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
                     case "Tarczownik" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
                     case "Cierpliwy" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    ///////////////////////////////
+                    case "Ent" : staty.HP += Ebiblioteka.update4[druzyna] * 2; staty.maxHP += Ebiblioteka.update4[druzyna] * 2; break;
+                    case "Drzewiec" : staty.HP += Ebiblioteka.update4[druzyna] * 2; staty.maxHP += Ebiblioteka.update4[druzyna] * 2; break;
                 }
             }
         }

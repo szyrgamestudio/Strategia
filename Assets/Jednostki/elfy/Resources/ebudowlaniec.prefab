@@ -1018,15 +1018,14 @@ MonoBehaviour:
     zbiera\u0107 surowce na obszarze 3 p\xF3l od ratuszu. Zwi\u0119ksza maksymaln\u0105
     populacje o 6"
   - "W kopalni jest zbierane z\u0142oto"
-  - "Tartak pozwala zbiera\u0107 drewno z lasu w zasi\u0119gu tartaku, jednoczesnie
-    zwi\u0119ksza wydobycie drewna o 1"
-  - "Cmentarz Zwi\u0119ksza maksymaln\u0105 populacje o 3"
-  - "Krematorium pozwala rekrutowa\u0107 szczury, szkielety i liszeyst\xF3w"
-  - "Piramida pozwala rekrutowa\u0107 mumie, zoombie i wampiry"
-  - "Jaskinia pozwala rekrutowa\u0107 olbrzymie paj\u0105ki, gargulce i \u017Cniwiarzy"
+  - "O\u0142tarz pozwala przywo\u0142a\u0107 ducha lasu. Duch lasu mo\u017Ce wyst\u0119powa\u0107
+    tylko jeden jednocze\u015Bnie."
+  - "Chatka Zwi\u0119ksza maksymaln\u0105 populacje o 3"
+  - "Le\u015Bna Akademia pozwala rekrutowa\u0107 elfy"
+  - "Prastary Las pozwala rekrutowa\u0107 Entu oraz drzewce"
+  - "Druidzki Gaj pozwala rekrutowa\u0107 Druid\xF3w"
   - Przemienia nierozkwite drzewo na magiczne drzewo
-  - "Rze\u017Ania pozwala po\u015Bwi\u0119ca\u0107 jednostki w zamian za z\u0142oto
-    oraz przy\u015Bpiesza proces regenereacji bohatera"
+  - "Monolit przy\u015Bpiesza proces regenereacji bohatera"
   - "Wie\u017Ca atakuje wrogie jednostki w okolicy"
   - "Droga zmniejsza zu\u017Cycie punkt\xF3w ruchu za przej\u015Bcie po drodze"
   - "Portal pozwala przemieszcza\u0107 si\u0119 mi\u0119dzy portalami"

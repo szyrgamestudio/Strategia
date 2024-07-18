@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 300910691063939994}
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
-  - component: {fileID: -5344131834272329415}
+  - component: {fileID: -1663643644596031893}
   - component: {fileID: 337435299929857363}
   - component: {fileID: 8956365773136594117}
   - component: {fileID: 3923137394028398030}
@@ -778,7 +778,7 @@ MonoBehaviour:
   HP: 20
   maxHP: 20
   obrona: 2
-  zdolnosci: 5
+  zdolnosci: 4
   zloto: 3
   drewno: 12
   nazwa: Biblioteka
@@ -829,7 +829,7 @@ MonoBehaviour:
   poczatek: 0
   koniec: 0
   src: {fileID: 1289896399446901742}
---- !u!114 &-5344131834272329415
+--- !u!114 &-1663643644596031893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -838,27 +838,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1840499b3731e404785b0c3b771b4692, type: 3}
+  m_Script: {fileID: 11500000, guid: aa703d19a211dba40b583a6fa1fef1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
   pole: {fileID: 0}
   druzyna: 0
   budynki:
-  - {fileID: 21300000, guid: b5a081bdd8b0cde4e8f3a75813e51ffb, type: 3}
-  - {fileID: 21300000, guid: af1ba802519369c47890828f31ef22a2, type: 3}
-  - {fileID: 21300000, guid: 8f0696ae372f2794e9622da62e438eb6, type: 3}
-  - {fileID: 21300000, guid: b7e5d02c443889146952341d1fd8f52b, type: 3}
-  - {fileID: 21300000, guid: 3ccb6d0ac6b987b42b502e13e6c65cb5, type: 3}
+  - {fileID: 21300000, guid: a2e5f8a0673c00148a85242e06ff8d70, type: 3}
+  - {fileID: 21300000, guid: 18c5a8b639eea0a4aa8b3d057cb366ea, type: 3}
+  - {fileID: 21300000, guid: abd82f30aecacc4448c60cf3fe4a8f48, type: 3}
+  - {fileID: 21300000, guid: b37d0f834dd8c584f87aca862eded8fa, type: 3}
   teksty:
-  - "Zwi\u0119ksza maksymalne obra\u017Cenia szczur\u0105"
-  - "Zwi\u0119ksza zdrowie jednostk\u0105 z piramidy (Mumia, zoombie, wampir)"
-  - "Zwi\u0119ksza atak i obrone wszystkim szkielet\u0105 (Martwy Wojownik, Martwy
-    \u0141ucznik, Lisz, S\u0142uga)"
-  - "Zwi\u0119ksza atak agresywnym jednostk\u0105 (Olb\u017Cymi paj\u0105k, wampi,
-    gargulec))"
-  - "Zwi\u0119ksza obron\u0119 magicznym jednostk\u0105(Zoombie, Lisz, \u017Bniwairz,
-    mumia)"
+  - "Zwi\u0119ksza atak wszystkim jednostk\u0105"
+  - "Zwi\u0119ksza obron\u0119 wszystkim jednostk\u0105"
+  - "Zwi\u0119ksza szybko\u015B\u0107 wszystkim jednostk\u0105"
+  - "Zwi\u0119ksza HP drzewc\u0105 i Ent\u0105"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
 --- !u!114 &337435299929857363
 MonoBehaviour:

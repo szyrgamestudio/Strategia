@@ -1148,7 +1148,7 @@ MonoBehaviour:
   szybkosc: 6
   mindmg: 1
   maxdmg: 2
-  zdolnosci: 1
+  zdolnosci: 3
   zbieracz: 0
   lata: 0
   cena: 20
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e1e92085d7ea342854944eb0ff3684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jednostka: {fileID: 0}
+  jednostka: {fileID: 6268565104842363223}
   ciala:
   - {fileID: 21300000, guid: affca177623ffcc45a0b958c7890fe8f, type: 3}
   - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}
@@ -1261,7 +1261,8 @@ MonoBehaviour:
   - "Przemiana w nied\u017Awiedzia"
   - Przemiana w Gryfa
   - Przemiana w Ducha Lasu
-  zdolnosci: 0
+  photonView: {fileID: 641337051438856885}
+  zdolnosci: 3
 --- !u!114 &4077524004233977690
 MonoBehaviour:
   m_ObjectHideFlags: 0

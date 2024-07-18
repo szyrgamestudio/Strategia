@@ -728,9 +728,9 @@ MonoBehaviour:
   maxHP: 20
   obrona: 2
   zdolnosci: 4
-  zloto: 4
-  drewno: 10
-  nazwa: Krematorium
+  zloto: 3
+  drewno: 6
+  nazwa: Monolit
   punktyBudowy: 0
   punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}

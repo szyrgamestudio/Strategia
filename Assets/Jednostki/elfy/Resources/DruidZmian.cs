@@ -15,32 +15,44 @@ public class DruidZmian : MonoBehaviour
 
     public int cooldown;
     float HPdruida;
+    public PhotonView photonView;
     
     void Update()
     {
         if(jednostka == Jednostka.Select)
         {
-            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && zmieniony)
+            if(Przycisk.jednostka[0]==true  &&  zmieniony )
             {
                 Przycisk.jednostka[0]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 0 , Ip.ip);
                 zmianaCofka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && !zmieniony)
+            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && !zmieniony && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[0]=false;
+                Menu.magia[Menu.tura] -= 3;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 1 , Ip.ip);
                 wilk();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[1]=false;
+                Menu.magia[Menu.tura] -= 3;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 2 , Ip.ip);
                 jaskolka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=6)
             {
                 Przycisk.jednostka[2]=false;
+                Menu.magia[Menu.tura] -= 6;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 3 , Ip.ip);
                 niedzwiedz();
                 OnMouseDown();
             }
@@ -118,7 +130,6 @@ public class DruidZmian : MonoBehaviour
         staty.HP = HPdruida;
         staty.maxHP = 5;
         staty.atak = 2;
-        staty.akcja = false;
         staty.obrona = 2;
         staty.mindmg = 2;
         staty.maxdmg = 2;
@@ -136,11 +147,14 @@ public class DruidZmian : MonoBehaviour
         {
             InterfaceUnit.Czyszczenie(); 
             PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5"; 
+            if(zmieniony)
+                Guzikk.CenaMagic.text = "0"; 
+            else
+                Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5"; 
+            Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[2].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5"; 
+            Guzikk.CenaMagic.text = "6"; 
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
             {
                 InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];
@@ -151,6 +165,19 @@ public class DruidZmian : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }       
         }
+    }
+
+        [PunRPC]
+    public void multiPrzemiana(int nr, int ip)
+    {
+        if(Ip.ip != ip)
+            switch(nr)
+            {
+                case 0: zmianaCofka(); break;
+                case 1: wilk(); break;
+                case 2: jaskolka(); break;
+                case 3: niedzwiedz(); break;
+            }
     }
 
 

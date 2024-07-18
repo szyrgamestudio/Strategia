@@ -270,6 +270,12 @@ public class Jednostka : MonoBehaviour
             }
             if(jednostka.GetComponent<Golem>())
                 jednostka.GetComponent<Golem>().zadaj(atakujacy);
+            if(Atakujacy.GetComponent<Ent>())
+            {
+                szybkosc = 0;
+                jednostka.GetComponent<Buff>().buffZ(0,0,-maxszybkosc,0,0,0);
+                maxszybkosc = 0;
+            }
             float result;
             if(atakujacy.GetComponent<Jednostka>().lata || jednostka.GetComponent<Jednostka>().lata)
                 result = UnityEngine.Random.Range(Atakujacy.mindmg, Atakujacy.maxdmg) * (float)(1 + 0.1 * (Atakujacy.atak - obrona));

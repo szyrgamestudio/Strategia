@@ -12,10 +12,11 @@ public class ArcyDruid : MonoBehaviour
 
     public Sprite[] budynki;
     public string[] teksty;
+    public PhotonView photonView;
 
     float HPdruida;
 
-    public int zdolnosci;
+    public int zdolnosci = 3;
     
     void Update()
     {
@@ -26,56 +27,97 @@ public class ArcyDruid : MonoBehaviour
         }
         if(jednostka == Jednostka.Select)
         {
-            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && zmieniony)
+            if(Przycisk.jednostka[0]==true && zmieniony )
             {
                 Przycisk.jednostka[0]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 0 , Ip.ip);
                 zmianaCofka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && !zmieniony)
+            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && !zmieniony && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[0]=false;
+                Menu.magia[Menu.tura]-=3;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 1 , Ip.ip);
                 wilk();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[1]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 2 , Ip.ip);
+                Menu.magia[Menu.tura]-=3;
                 pająk();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=1)
             {
                 Przycisk.jednostka[2]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 3 , Ip.ip);
+                Menu.magia[Menu.tura]-=1;
                 szczur();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[3]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[3]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[3]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 4 , Ip.ip);
+                Menu.magia[Menu.tura]-=3;
                 jaskolka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[4]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[4]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
             {
                 Przycisk.jednostka[4]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 5 , Ip.ip);
+                Menu.magia[Menu.tura]-=5;
                 niedzwiedz();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[5]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[5]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
             {
                 Przycisk.jednostka[5]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 6 , Ip.ip);
+                Menu.magia[Menu.tura]-=5;
                 gryf();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[6]==true && jednostka.GetComponent<Jednostka>().akcja)
+            if(Przycisk.jednostka[6]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
             {
                 Przycisk.jednostka[6]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 7 , Ip.ip);
+                Menu.magia[Menu.tura]-=7;
                 duchLasu();
                 OnMouseDown();
             }
         }
     }
+    [PunRPC]
+    public void multiPrzemiana(int nr, int ip)
+    {
+        if(Ip.ip != ip)
+            switch(nr)
+            {
+                case 0: zmianaCofka(); break;
+                case 1: wilk(); break;
+                case 2: pająk(); break;
+                case 3: szczur(); break;
+                case 4: jaskolka(); break;
+                case 5: niedzwiedz(); break;
+                case 6: gryf(); break;
+                case 7: duchLasu(); break;
+
+            }
+    }
+
     void niedzwiedz()
     {
         budynki[0] = ciala[0];
@@ -185,7 +227,7 @@ public class ArcyDruid : MonoBehaviour
     void duchLasu()
     {
         budynki[0] = ciala[0];
-        jednostka.GetComponent<SpriteRenderer>().sprite = ciala[6];
+        jednostka.GetComponent<SpriteRenderer>().sprite = ciala[7];
         Jednostka staty = jednostka.GetComponent<Jednostka>();
         HPdruida = staty.HP;
         staty.HP = 7 + + jednostka.GetComponent<Heros>().level * 2;
@@ -199,14 +241,14 @@ public class ArcyDruid : MonoBehaviour
         staty.zdolnosci = 1;
         staty.maxszybkosc = 8;
         staty.szybkosc = 8;
-        staty.nazwa = "Gryf";
+        staty.nazwa = "Duch Lasu";
         staty.lata = false;
         zmieniony = true;
     } 
     void gryf()
     {
         budynki[0] = ciala[0];
-        jednostka.GetComponent<SpriteRenderer>().sprite = ciala[7];
+        jednostka.GetComponent<SpriteRenderer>().sprite = ciala[6];
         Jednostka staty = jednostka.GetComponent<Jednostka>();
         HPdruida = staty.HP;
         staty.HP = 6 + jednostka.GetComponent<Heros>().level * 2;
@@ -220,7 +262,7 @@ public class ArcyDruid : MonoBehaviour
         staty.zdolnosci = 1;
         staty.maxszybkosc = 8;
         staty.szybkosc = 8;
-        staty.nazwa = "Duch Lasu";
+        staty.nazwa = "Gryf";
         staty.lata = true;
         zmieniony = true;
     } 
@@ -234,7 +276,6 @@ public class ArcyDruid : MonoBehaviour
         staty.HP = HPdruida + jednostka.GetComponent<Heros>().level * 2;
         staty.maxHP = 5 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 2;
-        staty.akcja = false;
         staty.obrona = 2;
         staty.mindmg = 2;
         staty.maxdmg = 2;
@@ -252,11 +293,22 @@ public class ArcyDruid : MonoBehaviour
         {
             InterfaceUnit.Czyszczenie(); 
             PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5"; 
+            if(zmieniony)
+                Guzikk.CenaMagic.text = "0"; 
+            else
+                Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5"; 
+            Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[2].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "1"; 
+            Guzikk = InterfaceUnit.przyciski[3].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "3"; 
+            Guzikk = InterfaceUnit.przyciski[4].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = "5"; 
+            Guzikk = InterfaceUnit.przyciski[5].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "5";
+            Guzikk = InterfaceUnit.przyciski[6].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "8"; 
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
             {
                 InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];

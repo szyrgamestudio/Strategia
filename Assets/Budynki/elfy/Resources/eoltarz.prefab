@@ -728,8 +728,8 @@ MonoBehaviour:
   maxHP: 20
   obrona: 2
   zdolnosci: 2
-  zloto: 2
-  drewno: 3
+  zloto: 4
+  drewno: 9
   nazwa: "Rze\u017Ania"
   punktyBudowy: 0
   punktyBudowyMax: 3

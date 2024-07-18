@@ -1000,7 +1000,7 @@ MonoBehaviour:
   szybkosc: 8
   mindmg: 1
   maxdmg: 3
-  zdolnosci: 1
+  zdolnosci: 3
   zbieracz: 0
   lata: 0
   cena: 3
@@ -1079,6 +1079,7 @@ MonoBehaviour:
   - "Przemiana w Jask\xF3\u0142ke"
   - "Przemiana w NIed\u017Awiedzia"
   cooldown: 0
+  photonView: {fileID: 4080598057547060474}
 --- !u!114 &5883602230984839372
 MonoBehaviour:
   m_ObjectHideFlags: 0

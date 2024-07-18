@@ -727,8 +727,8 @@ MonoBehaviour:
   maxHP: 20
   obrona: 2
   zdolnosci: 2
-  zloto: 2
-  drewno: 3
+  zloto: 4
+  drewno: 10
   nazwa: "Le\u015Bna Akademia"
   punktyBudowy: 0
   punktyBudowyMax: 6
