@@ -21,15 +21,15 @@ public class DruidPiorunow : MonoBehaviour
     {
         if(jednostka == Jednostka.Select)
             {
-                if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
+                if(Przycisk.jednostka[0]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
                     {
-                        jednostka.GetComponent<Ramki>().showRamka2();
+                        jednostka.GetComponent<Ramki>().showRamka4();
                         Przycisk.jednostka[0]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                         ignis = true;
                     }
-            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
+            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=6)
                     {
                         jednostka.GetComponent<Ramki>().showRamka2();
                         Przycisk.jednostka[1]=false;
@@ -37,10 +37,10 @@ public class DruidPiorunow : MonoBehaviour
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                         leczenie = true;
                     }
-                if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && ignis)
+                if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 4 && ignis)
                 {
                     ignis = false;
-                    Menu.magia[Menu.tura]-=3;
+                    Menu.magia[Menu.tura]-=5;
                     jednostka.GetComponent<Jednostka>().akcja = false;
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 4;
                     if(MenuGlowne.multi)
@@ -52,9 +52,9 @@ public class DruidPiorunow : MonoBehaviour
                     Menu.usunSelect2();
                 }
             
-                if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && leczenie)
+                if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 2 && leczenie)
                 {
-                    Menu.magia[Menu.tura]-=5;
+                    Menu.magia[Menu.tura]-=6;
                     jednostka.GetComponent<Jednostka>().akcja = false;
                     leczenie = false;  
                     Jednostka.Select2.GetComponent<Jednostka>().HP -= 3;
@@ -120,9 +120,9 @@ public class DruidPiorunow : MonoBehaviour
         {
             InterfaceUnit.Czyszczenie(); 
             PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "3"; 
+            Guzikk.CenaMagic.text = "5"; 
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "7"; 
+            Guzikk.CenaMagic.text = "6"; 
             
             
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)

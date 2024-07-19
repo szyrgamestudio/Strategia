@@ -50,10 +50,10 @@ public class LucznikSzef : MonoBehaviour
             Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
             buff2 = true;
         } 
-        if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) == 1 && buff && 
+        if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) == 1 && buff2 && 
                 Jednostka.Select2.GetComponent<Jednostka>().sojusz == jednostka.GetComponent<Jednostka>().sojusz)
                 {
-                    buff = false;
+                    buff2 = false;
                     Jednostka.Select2.GetComponent<Jednostka>().zasieg += 2;
                     cooldown = 3;
                     Jednostka.Select2.GetComponent<Buff>().buffZ(1, 2, 0,0, 0, 0);

@@ -50,11 +50,11 @@ public class MapLoad : MonoBehaviour
                 return enemySredni[Random.Range(0, enemySredni.Count)];
             case 3:
                 return enemyTrudny[Random.Range(0, enemyTrudny.Count)];
-            case 4:
-                return enemyLata[Random.Range(0, enemyLata.Count)];
-            case 5:
-                return enemyStrzela[Random.Range(0, enemyStrzela.Count)];
             case 6:
+                return enemyLata[Random.Range(0, enemyLata.Count)];
+            case 4:
+                return enemyStrzela[Random.Range(0, enemyStrzela.Count)];
+            case 5:
                 return enemyStrzelaTrudny[Random.Range(0, enemyStrzelaTrudny.Count)];
             default:
                 return null;

@@ -61,7 +61,7 @@ public class BudynekRuch : MonoBehaviour
             transform.position = new Vector3(targetX, targetY, -3f);
             if (Input.GetMouseButtonDown(0))
             {
-                if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
+                if (Walka.odleglosc(budowlaniec, ObiektRuszany) == 1 && Menu.istnieje((int)targetX,(int)targetY))//targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
                 {
                     if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete && !Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().ZajeteLot)
                     {
@@ -78,7 +78,7 @@ public class BudynekRuch : MonoBehaviour
                     }
                 }
             }
-            if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
+            if (Walka.odleglosc(budowlaniec, ObiektRuszany) == 1 && Menu.istnieje((int)targetX,(int)targetY))//targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
             {
                 ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);
             }
@@ -142,10 +142,10 @@ public class BudynekRuch : MonoBehaviour
         {
             switch (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z)
             {
-                case 90.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
-                case 270.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
-                case 0.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1]; break;
-                case 180.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
+                case 90.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x+1,(int)ObiektRuszany.transform.position.y))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 270.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x-1,(int)ObiektRuszany.transform.position.y))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 0.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x,(int)ObiektRuszany.transform.position.y - 1))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1]; break;
+                case 180.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x,(int)ObiektRuszany.transform.position.y + 1)) pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
                 
             }
             if(MenuGlowne.multi)
@@ -166,10 +166,10 @@ public class BudynekRuch : MonoBehaviour
             try{
             switch (stopnie)
             {
-                case 90.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
-                case 270.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
-                case 0.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1];  break;
-                case 180.0f: pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
+                case 90.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x + 1,(int)ObiektRuszany.transform.position.y))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 270.0f:if(Menu.istnieje((int)ObiektRuszany.transform.position.x - 1,(int)ObiektRuszany.transform.position.y )) pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
+                case 0.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x,(int)ObiektRuszany.transform.position.y - 1))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y - 1];  break;
+                case 180.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x,(int)ObiektRuszany.transform.position.y + 1))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x][(int)ObiektRuszany.transform.position.y + 1];  break;
             }
             }catch(Exception ex){Debug.Log(ex.ToString());}
         }
@@ -184,7 +184,6 @@ public class BudynekRuch : MonoBehaviour
     [PunRPC]
     void ded()
     {
-        Debug.Log("o chuj");
         Destroy(ObiektRuszany);
     }
 

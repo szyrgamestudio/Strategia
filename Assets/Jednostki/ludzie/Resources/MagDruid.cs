@@ -101,9 +101,9 @@ public class MagDruid : MonoBehaviour
             niedzwiedz = true;
             Jednostka staty = jednostka.GetComponent<Jednostka>();
             staty.atak = 4;
-            staty.obrona = 4;
+            staty.obrona = 3;
             staty.mindmg = 3;
-            staty.maxdmg = 4;
+            staty.maxdmg = 3;
             staty.zasieg = 1;
             staty.zdolnosci = 1;
             jednostka.GetComponent<SpriteRenderer>().sprite = niedzwiedzArt;

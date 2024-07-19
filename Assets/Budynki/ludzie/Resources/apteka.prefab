@@ -853,7 +853,7 @@ MonoBehaviour:
   - "Medyk polowy to jednostka wspieraj\u0105ca twoje jednostki w walce i po walce
     przywracaj\u0105c im zdrowie"
   - "Przy\u015Bpiesza regeneracje bohatera o jedn\u0105 ture"
-  loock: {fileID: 0}
+  loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}
   wykrzyknik: {fileID: 5368700119896031018}
   koniec: 0
   regeneracja: 0

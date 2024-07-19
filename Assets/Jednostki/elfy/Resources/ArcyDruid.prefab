@@ -1197,6 +1197,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3873313721664626492}
   drewno: 0
+  elf: 1
   boss: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
@@ -1242,8 +1243,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b5a081bdd8b0cde4e8f3a75813e51ffb, type: 3}
   - {fileID: 21300000, guid: b7e5d02c443889146952341d1fd8f52b, type: 3}
   - {fileID: 21300000, guid: e129845a01d0e2b48ac77fc19b9c3ee7, type: 3}
-  - {fileID: 21300000, guid: 41419be002fda9d4bb6b424f2ed7bb98, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: ffcd64a2cb5526047aca6f23f5db6100, type: 3}
+  - {fileID: 21300000, guid: ec020fa646c84cd4291d4f08ac2e8ad3, type: 3}
   zmieniony: 0
   budynki:
   - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}
@@ -1252,7 +1253,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 60b1c6c0fa356d44eaaaff0125465328, type: 3}
   - {fileID: 21300000, guid: 494a9ec87d8b1b14491773bdf6d98a0d, type: 3}
   - {fileID: 21300000, guid: e129845a01d0e2b48ac77fc19b9c3ee7, type: 3}
-  - {fileID: 21300000, guid: 41419be002fda9d4bb6b424f2ed7bb98, type: 3}
+  - {fileID: 21300000, guid: ffcd64a2cb5526047aca6f23f5db6100, type: 3}
+  - {fileID: 21300000, guid: ec020fa646c84cd4291d4f08ac2e8ad3, type: 3}
   teksty:
   - Przemiana w Wilka
   - "Przemiana w Wielkiego Paj\u0105ka"
@@ -1260,7 +1262,8 @@ MonoBehaviour:
   - "Przemiana w Jask\xF3\u0142ke"
   - "Przemiana w nied\u017Awiedzia"
   - Przemiana w Gryfa
-  - Przemiana w Ducha Lasu
+  - Przemiana w Smilodona
+  - Przemiana w Feniksa
   photonView: {fileID: 641337051438856885}
   zdolnosci: 3
 --- !u!114 &4077524004233977690

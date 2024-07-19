@@ -846,7 +846,7 @@ MonoBehaviour:
   druzyna: 0
   jaskolka: {fileID: 6268565104842363223, guid: 3dccf0b58bdc45845b7730878d67505c, type: 3}
   wilk: {fileID: 6268565104842363223, guid: de9558a9c27e8964f931273d4fa30f14, type: 3}
-  gryf: {fileID: 6268565104842363223, guid: 4ce20e1c82a4908469f0bf6c074b5bf3, type: 3}
+  gryf: {fileID: 6268565104842363223, guid: 3eeca0c34e4e36148b620ccb64af3010, type: 3}
   budynki:
   - {fileID: 21300000, guid: 60b1c6c0fa356d44eaaaff0125465328, type: 3}
   - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}

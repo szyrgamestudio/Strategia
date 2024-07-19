@@ -29,7 +29,7 @@ public class DruidZmian : MonoBehaviour
                 zmianaCofka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && !zmieniony && Menu.magia[Menu.tura]>=3)
+            if(Przycisk.jednostka[0]==true   && !zmieniony && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[0]=false;
                 Menu.magia[Menu.tura] -= 3;
@@ -38,7 +38,7 @@ public class DruidZmian : MonoBehaviour
                 wilk();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
+            if(Przycisk.jednostka[1]==true  && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[1]=false;
                 Menu.magia[Menu.tura] -= 3;
@@ -47,7 +47,7 @@ public class DruidZmian : MonoBehaviour
                 jaskolka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=6)
+            if(Przycisk.jednostka[2]==true  && Menu.magia[Menu.tura]>=6)
             {
                 Przycisk.jednostka[2]=false;
                 Menu.magia[Menu.tura] -= 6;
@@ -63,18 +63,17 @@ public class DruidZmian : MonoBehaviour
         budynki[0] = ciala[0];
         jednostka.GetComponent<SpriteRenderer>().sprite = ciala[3];
         Jednostka staty = jednostka.GetComponent<Jednostka>();
-        staty.akcja = false;
+        
         HPdruida = staty.HP;
         staty.HP = 8;
         staty.maxHP = 8;
         staty.atak = 4;
-        staty.obrona = 4;
+        staty.obrona = 3;
         staty.mindmg = 3;
-        staty.maxdmg = 4;
+        staty.maxdmg = 3;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 6;
-        staty.szybkosc = 6;
         staty.nazwa = "Niedźwiedź";
         staty.lata = true;
         zmieniony = true;
@@ -88,14 +87,13 @@ public class DruidZmian : MonoBehaviour
         staty.HP = 1;
         staty.maxHP = 1;
         staty.atak = 1;
-        staty.akcja = false;
+        
         staty.obrona = 1;
         staty.mindmg = 1;
         staty.maxdmg = 3;
         staty.zasieg = 1;
         
         staty.maxszybkosc = 6;
-        staty.szybkosc = 6;
         staty.nazwa = "Jaskółka";
         staty.lata = true;
         zmieniony = true;
@@ -110,13 +108,12 @@ public class DruidZmian : MonoBehaviour
         staty.maxHP = 6;
         staty.atak = 1;
         staty.obrona = 2;
-        staty.akcja = false;
+        
         staty.mindmg = 1;
         staty.maxdmg = 3;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 8;
-        staty.szybkosc = 8;
         staty.nazwa = "Wilk";
         staty.lata = false;
         zmieniony = true;

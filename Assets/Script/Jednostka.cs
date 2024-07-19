@@ -55,6 +55,7 @@ public class Jednostka : MonoBehaviour
 
     public int drewno;
 
+    public bool elf;
     public bool boss = false;
 
     public void Start()
@@ -585,12 +586,18 @@ public class Jednostka : MonoBehaviour
         szybkosc = maxszybkosc;
         akcja = true;
         if((druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1)) || (SimultanTurns.simultanTurns && SimultanTurns.ready))
+        {
             switch(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().magia)
             {
                 case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
                 case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
                 case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(false); break; 
             }
+            if(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().las && elf)
+            {
+                HP+=1 ;if(HP>maxHP) HP=maxHP;
+            }
+        }
         if(MenuGlowne.multi && (druzyna == Ip.ip || druzyna == 0))
         {
             Aktualizuj();

@@ -35,7 +35,7 @@ public class ArcyDruid : MonoBehaviour
                 zmianaCofka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[0]==true  && jednostka.GetComponent<Jednostka>().akcja && !zmieniony && Menu.magia[Menu.tura]>=3)
+            if(Przycisk.jednostka[0]==true   && !zmieniony && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[0]=false;
                 Menu.magia[Menu.tura]-=3;
@@ -44,7 +44,7 @@ public class ArcyDruid : MonoBehaviour
                 wilk();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[1]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
+            if(Przycisk.jednostka[1]==true  && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[1]=false;
                 if(MenuGlowne.multi)
@@ -53,7 +53,7 @@ public class ArcyDruid : MonoBehaviour
                 pająk();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=1)
+            if(Przycisk.jednostka[2]==true  && Menu.magia[Menu.tura]>=1)
             {
                 Przycisk.jednostka[2]=false;
                 if(MenuGlowne.multi)
@@ -62,7 +62,7 @@ public class ArcyDruid : MonoBehaviour
                 szczur();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[3]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=3)
+            if(Przycisk.jednostka[3]==true  && Menu.magia[Menu.tura]>=3)
             {
                 Przycisk.jednostka[3]=false;
                 if(MenuGlowne.multi)
@@ -71,7 +71,7 @@ public class ArcyDruid : MonoBehaviour
                 jaskolka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[4]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
+            if(Przycisk.jednostka[4]==true  && Menu.magia[Menu.tura]>=5)
             {
                 Przycisk.jednostka[4]=false;
                 if(MenuGlowne.multi)
@@ -80,7 +80,7 @@ public class ArcyDruid : MonoBehaviour
                 niedzwiedz();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[5]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
+            if(Przycisk.jednostka[5]==true  && Menu.magia[Menu.tura]>=5)
             {
                 Przycisk.jednostka[5]=false;
                 if(MenuGlowne.multi)
@@ -89,13 +89,22 @@ public class ArcyDruid : MonoBehaviour
                 gryf();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[6]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
+            if(Przycisk.jednostka[6]==true  && Menu.magia[Menu.tura]>=9)
             {
                 Przycisk.jednostka[6]=false;
                 if(MenuGlowne.multi)
                     photonView.RPC("multiPrzemiana", RpcTarget.Others, 7 , Ip.ip);
-                Menu.magia[Menu.tura]-=7;
+                Menu.magia[Menu.tura]-=9;
                 duchLasu();
+                OnMouseDown();
+            }
+            if(Przycisk.jednostka[7]==true  && Menu.magia[Menu.tura]>=13)
+            {
+                Przycisk.jednostka[7]=false;
+                if(MenuGlowne.multi)
+                    photonView.RPC("multiPrzemiana", RpcTarget.Others, 8 , Ip.ip);
+                Menu.magia[Menu.tura]-=13;
+                Feniks();
                 OnMouseDown();
             }
         }
@@ -123,18 +132,17 @@ public class ArcyDruid : MonoBehaviour
         budynki[0] = ciala[0];
         jednostka.GetComponent<SpriteRenderer>().sprite = ciala[3];
         Jednostka staty = jednostka.GetComponent<Jednostka>();
-        staty.akcja = false;
+        
         HPdruida = staty.HP;
         staty.HP = 8 + jednostka.GetComponent<Heros>().level * 2;
         staty.maxHP = 8 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 4;
-        staty.obrona = 4;
+        staty.obrona = 3;
         staty.mindmg = 3;
-        staty.maxdmg = 4;
+        staty.maxdmg = 3;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 6;
-        staty.szybkosc = 6;
         staty.nazwa = "Niedźwiedź";
         staty.lata = true;
         zmieniony = true;
@@ -148,7 +156,7 @@ public class ArcyDruid : MonoBehaviour
         staty.HP = 1 + jednostka.GetComponent<Heros>().level * 2;
         staty.maxHP = 1 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 1;
-        staty.akcja = false;
+        
         staty.obrona = 1;
         staty.mindmg = 1;
         staty.maxdmg = 1;
@@ -156,7 +164,6 @@ public class ArcyDruid : MonoBehaviour
         staty.zdolnosci = 1;
         
         staty.maxszybkosc = 6;
-        staty.szybkosc = 6;
         staty.nazwa = "Jaskółka";
         staty.lata = true;
         zmieniony = true;
@@ -171,13 +178,12 @@ public class ArcyDruid : MonoBehaviour
         staty.maxHP = 6 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 1;
         staty.obrona = 2;
-        staty.akcja = false;
+        
         staty.mindmg = 1;
         staty.maxdmg = 3;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 8;
-        staty.szybkosc = 8;
         staty.nazwa = "Wilk";
         staty.lata = false;
         zmieniony = true;
@@ -193,13 +199,12 @@ public class ArcyDruid : MonoBehaviour
         staty.maxHP = 1 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 1;
         staty.obrona = 1;
-        staty.akcja = false;
+        
         staty.mindmg = 1;
         staty.maxdmg = 2;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 6;
-        staty.szybkosc = 6;
         staty.nazwa = "Szczur";
         staty.lata = false;
         zmieniony = true;
@@ -214,13 +219,12 @@ public class ArcyDruid : MonoBehaviour
         staty.maxHP = 1 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 2;
         staty.obrona = 2;
-        staty.akcja = false;
+        
         staty.mindmg = 1;
         staty.maxdmg = 3;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 8;
-        staty.szybkosc = 8;
         staty.nazwa = "Wielki Pająk";
         staty.lata = false;
         zmieniony = true;
@@ -231,19 +235,38 @@ public class ArcyDruid : MonoBehaviour
         jednostka.GetComponent<SpriteRenderer>().sprite = ciala[7];
         Jednostka staty = jednostka.GetComponent<Jednostka>();
         HPdruida = staty.HP;
-        staty.HP = 7 + + jednostka.GetComponent<Heros>().level * 2;
-        staty.maxHP = 7 + jednostka.GetComponent<Heros>().level * 2;
+        staty.HP = 9 + + jednostka.GetComponent<Heros>().level * 2;
+        staty.maxHP = 9 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 3;
         staty.obrona = 5;
-        staty.akcja = false;
-        staty.mindmg = 2;
+        
+        staty.mindmg = 3;
         staty.maxdmg = 4;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
-        staty.maxszybkosc = 8;
-        staty.szybkosc = 8;
-        staty.nazwa = "Duch Lasu";
+        staty.maxszybkosc = 9;
+        staty.nazwa = "Smilodon";
         staty.lata = false;
+        zmieniony = true;
+    } 
+    void Feniks()
+    {
+        budynki[0] = ciala[0];
+        jednostka.GetComponent<SpriteRenderer>().sprite = ciala[8];
+        Jednostka staty = jednostka.GetComponent<Jednostka>();
+        HPdruida = staty.HP;
+        staty.HP = 11 + + jednostka.GetComponent<Heros>().level * 2;
+        staty.maxHP = 11 + jednostka.GetComponent<Heros>().level * 2;
+        staty.atak = 4;
+        staty.obrona = 4;
+        
+        staty.mindmg = 2;
+        staty.maxdmg = 5;
+        staty.zasieg = 2;
+        staty.zdolnosci = 1;
+        staty.maxszybkosc = 8;
+        staty.nazwa = "Feniks";
+        staty.lata = true;
         zmieniony = true;
     } 
     void gryf()
@@ -256,13 +279,12 @@ public class ArcyDruid : MonoBehaviour
         staty.maxHP = 6 + jednostka.GetComponent<Heros>().level * 2;
         staty.atak = 3;
         staty.obrona = 3;
-        staty.akcja = false;
+        
         staty.mindmg = 2;
         staty.maxdmg = 3;
         staty.zasieg = 1;
         staty.zdolnosci = 1;
         staty.maxszybkosc = 8;
-        staty.szybkosc = 8;
         staty.nazwa = "Gryf";
         staty.lata = true;
         zmieniony = true;
@@ -284,7 +306,6 @@ public class ArcyDruid : MonoBehaviour
         staty.zdolnosci = zdolnosci;
         staty.maxszybkosc = 6;
         staty.nazwa = "Zmiennokształtny druid";
-        staty.szybkosc = 6;
         staty.lata = false;
         zmieniony = false;
     } 
@@ -340,10 +361,8 @@ public class ArcyDruid : MonoBehaviour
                 zdolnosci += 1;
                 break;
             case 5:
-                staty.atak += 2;
-                staty.obrona += 1;
-                staty.maxdmg += 2;
-                staty.maxszybkosc += 2;
+                zdolnosci += 1;
+                staty.zdolnosci += 1;
                 break;
         }
     }

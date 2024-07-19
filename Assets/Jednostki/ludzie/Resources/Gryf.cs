@@ -36,7 +36,6 @@ public class Gryf : MonoBehaviour
                 {
                     leczenie = false;
                     Jednostka.Select2.GetComponent<Jednostka>().szybkosc += 3;
-                    Jednostka.Select2.GetComponent<Buff>().buffZ(0,0,0,3,0,0);
                     cooldown = 2;
                     Menu.usunSelect2();
                     OnMouseDown();
