@@ -520,6 +520,8 @@ public class MapLoad : MonoBehaviour
 
         if(MenuGlowne.multi)
             GetComponent<PhotonView>().RPC("UpdateSceneInfo", RpcTarget.OthersBuffered, currentScene);
+        if(!End.boss)
+            End.tureDoKonca = 0;
     }
 
     [PunRPC]

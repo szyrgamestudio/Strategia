@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.6622, y: -18.597298}
+  m_AnchoredPosition: {x: 0, y: 0.0000019073}
   m_SizeDelta: {x: 663.95, y: 804.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &37229983
@@ -318,8 +318,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Projektant, Programista, Pomys\u0142odawca\nIgor \"SzyRRogi\" R\xF3\u017Canowski\n\nNaczelna
     pomoc i wsparcie\nMateusz \"Massyn\" Afelt\n\nGrafika\nTogii, Magda Brzezi\u0144ska,
-    Copilot AI\n\nMuzyka\nSuno AI\n\nTesty\nCas-Borg, Shadow Inside, \nxfx_winner,
-    Sir Teodoriusz\n\nGra by SzyrGameStudio\n"
+    Copilot AI\n\nMuzyka\nSuno AI\n\nMapy\nIgor \"SzyRRogi\" R\xF3\u017Canowski,
+    Filip Rogalski\n\nTesty\nCas-Borg, Shadow Inside, \nxfx_winner, Sir Teodoriusz\n\nGra
+    by SzyrGameStudio\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -346,8 +347,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2514,7 +2515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc7cd6c2f337794488b373b2851cd410, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e0e080093fa6b7c41a7c2c01cc8a8ae4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
