@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 300910691063939994}
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
-  - component: {fileID: 6979891045211855995}
+  - component: {fileID: 9164765561625487951}
   - component: {fileID: 337435299929857363}
   - component: {fileID: 8956365773136594117}
   - component: {fileID: -6395144789366715599}
@@ -829,7 +829,7 @@ MonoBehaviour:
   poczatek: 0
   koniec: 0
   src: {fileID: 4081694050817361902}
---- !u!114 &6979891045211855995
+--- !u!114 &9164765561625487951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -838,15 +838,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0efd8160261964441a11ab56c591156f, type: 3}
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
   pole: {fileID: 0}
   druzyna: 0
-  jaskolka: {fileID: 6268565104842363223, guid: 3dccf0b58bdc45845b7730878d67505c, type: 3}
-  wilk: {fileID: 6268565104842363223, guid: de9558a9c27e8964f931273d4fa30f14, type: 3}
-  gryf: {fileID: 6268565104842363223, guid: 3eeca0c34e4e36148b620ccb64af3010, type: 3}
+  jednostki:
+  - {fileID: 6268565104842363223, guid: 3dccf0b58bdc45845b7730878d67505c, type: 3}
+  - {fileID: 6268565104842363223, guid: de9558a9c27e8964f931273d4fa30f14, type: 3}
+  - {fileID: 6268565104842363223, guid: 3eeca0c34e4e36148b620ccb64af3010, type: 3}
+  wymagany: 000000000000000001000000
   budynki:
   - {fileID: 21300000, guid: 60b1c6c0fa356d44eaaaff0125465328, type: 3}
   - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}

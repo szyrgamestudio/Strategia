@@ -447,7 +447,10 @@ public class MapLoad : MonoBehaviour
                 nowy = Instantiate(id, new Vector3(x, y, -2f), Quaternion.identity);
             //PhotonView photonView = nowy.AddComponent<PhotonView>();
             nowy.GetComponent<Jednostka>().druzyna = team;
-            Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
+            if(nowy.GetComponent<Jednostka>().lata)
+                Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().ZajeteLot = true;
+            else
+                Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
             // if (ip == 10 || ip == 9)
             // {

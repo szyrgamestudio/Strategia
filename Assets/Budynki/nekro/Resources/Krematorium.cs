@@ -102,6 +102,18 @@ public class Krematorium : MonoBehaviour
                 Debug.Log("jeden " + staty.nazwa);
                 switch(staty.nazwa)
                 {
+                    case "Bojownik" : staty.obrona += Kuznia.update1[druzyna] * 2; staty.atak += Kuznia.update2[druzyna] * 2;  break;
+                    case "Rycerz" : staty.obrona += Kuznia.update1[druzyna] * 2; staty.atak += Kuznia.update2[druzyna] * 2;  break;
+                    case "Kawalerzysta" : staty.obrona += Kuznia.update1[druzyna] * 2; staty.atak += Kuznia.update2[druzyna] * 2; staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; break;
+                    case "Wilk" : staty.atak += Kuznia.update2[druzyna] * 2; staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; staty.atak += Kuznia.update4[druzyna] * 2;break;
+                    case "Jaskółka" : staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; break;
+                    case "Gryf" : staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; staty.atak += Kuznia.update4[druzyna] * 2;staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    case "Łucznik" : staty.atak += Kuznia.update4[druzyna] * 2; break;
+                    case "Kusznik" : staty.atak += Kuznia.update4[druzyna] * 2; break;
+                    case "Piroman" : staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    case "Druid" : staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    case "Kapłan" : staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    ////////////////////////////////
                     case "Szczur" : staty.maxdmg += Biblioteka.update1[druzyna]; break;
                     case "Zoombie" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
                     case "Mumia" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;

@@ -35,7 +35,6 @@ public class Budynek : MonoBehaviour
     //[HideInInspector]
     public int poZniszczeniu;
     
-    public Sprite budowaArt;
     public Sprite budynekArt;
 
     public bool update;
@@ -239,10 +238,8 @@ public class Budynek : MonoBehaviour
             }
         }
         if(punktyBudowy<punktyBudowyMax)
-         //   budynek.GetComponent<SpriteRenderer>().sprite = budowaArt;
             budynek.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
         else
-          //  budynek.GetComponent<SpriteRenderer>().sprite = budynekArt;
             budynek.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);
 
         if(budynek==Jednostka.Select)

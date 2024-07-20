@@ -215,7 +215,7 @@ public class nRatusz : MonoBehaviour
                 while(Menu.bazy[druzyna,nr_jednostki+1] != null)
                 {
                     Menu.bazy[druzyna,nr_jednostki] = Menu.bazy[druzyna,nr_jednostki+1];
-                    Menu.bazy[druzyna,nr_jednostki].GetComponent<Ratusz>().nr_jednostki -= 1;
+                    Menu.bazy[druzyna,nr_jednostki].GetComponent<nRatusz>().nr_jednostki -= 1;
                     nr_jednostki++;
                 }
                 Menu.maxludnosc[druzyna] -= 6;

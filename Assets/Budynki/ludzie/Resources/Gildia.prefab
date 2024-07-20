@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 300910691063939994}
   - component: {fileID: 4232731899803520721}
   - component: {fileID: 1198703769388397205}
-  - component: {fileID: 6630053050888283458}
+  - component: {fileID: 3769502611690514637}
   - component: {fileID: 337435299929857363}
   - component: {fileID: 8956365773136594117}
   - component: {fileID: -9031954956011199783}
@@ -829,7 +829,7 @@ MonoBehaviour:
   poczatek: 0
   koniec: 0
   src: {fileID: 4201835067200892828}
---- !u!114 &6630053050888283458
+--- !u!114 &3769502611690514637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -838,16 +838,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580749336134018094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af07928edc503af49bc14df11fffcae3, type: 3}
+  m_Script: {fileID: 11500000, guid: b0578426a08900143b5aad7ec0600951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   budynek: {fileID: 5580749336134018094}
   pole: {fileID: 0}
   druzyna: 0
-  zbieraczMagi: {fileID: 6268565104842363223, guid: db85f2bde42e5024c89f47cefa7cd06b, type: 3}
-  magOgnia: {fileID: 6268565104842363223, guid: b52a6ae921e408e4393738c4ff506ea3, type: 3}
-  magDruid: {fileID: 6268565104842363223, guid: eecf2a986ea8a5547894b370df5e6c50, type: 3}
-  magKaplan: {fileID: 6268565104842363223, guid: bad8d21d418c10748b08125a90b51925, type: 3}
+  jednostki:
+  - {fileID: 6268565104842363223, guid: b52a6ae921e408e4393738c4ff506ea3, type: 3}
+  - {fileID: 6268565104842363223, guid: eecf2a986ea8a5547894b370df5e6c50, type: 3}
+  - {fileID: 6268565104842363223, guid: bad8d21d418c10748b08125a90b51925, type: 3}
+  wymagany: 000000000100000001000000
   budynki:
   - {fileID: 21300000, guid: 96384f8bc5ae19f419e9226cb5faa4cc, type: 3}
   - {fileID: 21300000, guid: 04848c1c4fe62e946b6e5571505e26d7, type: 3}
