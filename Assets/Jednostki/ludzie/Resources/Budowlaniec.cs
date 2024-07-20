@@ -355,6 +355,11 @@ public class Budowlaniec : MonoBehaviour
                 Guzik.IconZloto.enabled = false;
                 Guzik.IconDrewno.enabled = false;
             }
+            Guzikk = InterfaceUnit.przyciski[11].GetComponent<PrzyciskInter>();
+            if(Menu.ratuszPoziom[jednostka.GetComponent<Jednostka>().druzyna] != 0)
+                Guzikk.Opis.text = teksty[11];
+            else
+                Guzikk.Opis.text = "Portal jest dostępny od 2 poziomu Ratusza";
         }
     }
 }

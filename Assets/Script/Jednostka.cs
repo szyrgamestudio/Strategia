@@ -591,7 +591,7 @@ public class Jednostka : MonoBehaviour
             {
                 case 1: HP+=1 ;if(HP>maxHP) HP=maxHP; break;
                 case 2: HP+=2 ;if(HP>maxHP) HP=maxHP; break;
-                case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; rozdajPunktyKontroli(false); break; 
+                case 3: HP+=4 ;if(HP>maxHP) HP=maxHP; if(!lata) rozdajPunktyKontroli(false); break; 
             }
             if(Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().las && elf)
             {

@@ -302,7 +302,6 @@ public class Kopalnia : MonoBehaviour
             {
                 if(slot[i]!=null)
                     sumaGolda++;
-                    
             }
             Menu.zloto[Menu.tura]+=sumaGolda;
             budynek.GetComponent<Budynek>().ShowDMG(sumaGolda, new Color(1.0f, 1.0f, 0.0f, 1.0f));
@@ -310,7 +309,7 @@ public class Kopalnia : MonoBehaviour
             kolejnatura = 0;
         }
     }
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         if(Jednostka.Select != null && Jednostka.Select.GetComponent<Zbieracz>() != null && Walka.odleglosc(Jednostka.Select,budynek) == 1 && Jednostka.Select.GetComponent<Jednostka>().druzyna == Menu.tura)
         {

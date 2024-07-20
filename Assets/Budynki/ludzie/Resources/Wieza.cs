@@ -102,7 +102,7 @@ public class Wieza : MonoBehaviour
             transform.position = new Vector3(targetX, targetY, targetZ);
             if (Input.GetMouseButtonDown(0))
             {
-                if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec,ObiektRuszany) == 1 && punktyBudowy < punktyBudowyMax) 
+                if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec,ObiektRuszany) <= 3 && punktyBudowy < punktyBudowyMax) 
                     {
                         if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete)
                         {
@@ -119,7 +119,7 @@ public class Wieza : MonoBehaviour
                         }
                     }
             }
-            if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec,ObiektRuszany) == 1) 
+            if (targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec,ObiektRuszany) <= 3 && (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete)) 
             {
                 ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);
             }

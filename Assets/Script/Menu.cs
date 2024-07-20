@@ -79,7 +79,6 @@ public class Menu : MonoBehaviour
             zloto[4] = 17;
             drewno[4] = 17;
         }
-        Debug.Log(BoardSizeX + " skibii");
         kafelki = new GameObject[BoardSizeX][];
         for (int i = 0; i < BoardSizeX; i++)
         {
@@ -102,6 +101,8 @@ public class Menu : MonoBehaviour
         tura = 1;
         turaNPC.gameObject.SetActive(false);
         IloscGraczyStart = IloscGraczy;
+        if(End.tureDoKonca != 0)
+            nrTuryText.text = (End.tureDoKonca).ToString();
     }
     void Update()
     {
@@ -378,7 +379,10 @@ public class Menu : MonoBehaviour
                         else
                         {
                             nrTury++;
-                            nrTuryText.text = (nrTury).ToString();
+                            if(End.tureDoKonca != 0)
+                            nrTuryText.text = (End.tureDoKonca + 1 - (nrTury)).ToString();
+                            else 
+                             nrTuryText.text = (nrTury).ToString();
                             tura++;
                         }
                     }
@@ -397,7 +401,10 @@ public class Menu : MonoBehaviour
     [PunRPC]
     void ZaktualizujNPC()
     {
-        nrTuryText.text = (nrTury + 1).ToString();
+        if(End.tureDoKonca != 0)
+            nrTuryText.text = (End.tureDoKonca + 1 - (nrTury + 1)).ToString();
+        else 
+            nrTuryText.text = (nrTury + 1).ToString();
         if(Ip.ip == 1)
         {
             if(Menu.NPC.Count != 0)
@@ -569,9 +576,19 @@ public class Menu : MonoBehaviour
                 nrTury++;
             }
             if(MenuGlowne.multi)
-                nrTuryText.text = nrTury.ToString();    //ZMIENIC KONIECZNIE XDDD ZMIANA
+            {
+                if(End.tureDoKonca != 0)
+                    nrTuryText.text = (End.tureDoKonca + 1 - (nrTury)).ToString();
+                else 
+                    nrTuryText.text = nrTury.ToString();    //ZMIENIC KONIECZNIE XDDD ZMIANA
+            }
             else
-                nrTuryText.text = (1+(nrTury/(IloscGraczy+2))).ToString();
+            {
+                if(End.tureDoKonca != 0)
+                    nrTuryText.text = (End.tureDoKonca + 1 - (1+(nrTury/(IloscGraczy+2)))).ToString();
+                else 
+                    nrTuryText.text = (1+(nrTury/(IloscGraczy+2))).ToString();
+            }
             Jednostka.CzyJednostka = false;
             if(SimultanTurns.simultanTurns)
                 SimultanTurns.playerTurn();

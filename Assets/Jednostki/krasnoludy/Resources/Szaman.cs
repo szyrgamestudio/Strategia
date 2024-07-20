@@ -238,6 +238,7 @@ public class Szaman : MonoBehaviour
     {
         if(ip != Ip.ip)
         {
+            MoveJednostka((int)Menu.jednostki[team, id].transform.position.x,(int)Menu.jednostki[team, id].transform.position.y,(int)pozycja.x,(int)pozycja.y,Menu.jednostki[team, id]);
             Menu.jednostki[team, id].transform.position = pozycja;
         }
     }

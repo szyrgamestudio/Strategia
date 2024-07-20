@@ -964,6 +964,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 4604450008863701180}
   drewno: 0
+  elf: 0
   boss: 0
 --- !u!114 &958054785506064654
 MonoBehaviour:
@@ -1020,14 +1021,12 @@ MonoBehaviour:
   - "Tartak pozwala zbiera\u0107 drewno z lasu w zasi\u0119gu tartaku, jednoczesnie
     zwi\u0119ksza wydobycie drewna o 1"
   - "Chatka Zwi\u0119ksza maksymaln\u0105 populacje o 3"
-  - "Koszary pozwalaj\u0105 rekrutowa\u0107 rycerzy, strzelc\xF3w oraz kawalerzyst\xF3w"
-  - "Plac dzikich zwierz\u0105t pozwala rekrutowa\u0107 wilki, jask\xF3\u0142ki oraz
-    gryfy"
-  - "Gilidia mag\xF3w pozwala rekrutowa\u0107 adept\xF3w magii, mag\xF3w ognia, druid\xF3w
-    i kap\u0142an\xF3w"
+  - "Kamienna Warownia pozwalaj\u0105 rekrutowa\u0107 krasnoludy gotowe do boju"
+  - "Fabryka Stali zwierz\u0105t pozwala rekrutowa\u0107 golemy"
+  - "Dynamitarnia pozwala rekrutowa\u0107 kamikaze, \u017Congler\xF3w dynamitu i
+    pot\u0119\u017Cne maszyny"
   - Przemienia nierozkwite drzewo na magiczne drzewo
-  - "Dom leczenia pozwala rekrutowa\u0107 medyk\xF3w oraz przy\u015Bpiesza proces
-    regenereacji bohatera"
+  - "Komnata Wskrzesze\u0144 przy\u015Bpiesza proces regenereacji bohatera"
   - "Wie\u017Ca atakuje wrogie jednostki w okolicy"
   - "Droga zmniejsza zu\u017Cycie punkt\xF3w ruchu za przej\u015Bcie po drodze"
   - "Portal pozwala przemieszcza\u0107 si\u0119 mi\u0119dzy portalami"

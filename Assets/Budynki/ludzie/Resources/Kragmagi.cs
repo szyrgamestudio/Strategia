@@ -32,7 +32,7 @@ public class Kragmagi : MonoBehaviour
             transform.position = new Vector3(targetX, targetY, targetZ);
             if (Input.GetMouseButtonDown(0))
                 {
-                if (Walka.odleglosc(budowlaniec,ObiektRuszany) == 1
+                if (Walka.odleglosc(budowlaniec,ObiektRuszany) <= 3
                 && Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia == 1) 
                     {
                         if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete)
@@ -58,7 +58,7 @@ public class Kragmagi : MonoBehaviour
 
                     }
                 }
-            if (Walka.odleglosc(budowlaniec,ObiektRuszany) == 1
+            if (Walka.odleglosc(budowlaniec,ObiektRuszany) <= 3
             && Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().magia == 1) 
             {
                 ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);

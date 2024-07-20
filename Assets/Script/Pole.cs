@@ -704,12 +704,14 @@ int i=0;
                 ziomek.GetComponent<Jednostka>().szybkosc -= droga[k].GetComponent<Pole>().trudnosc + (droga[k].GetComponent<Pole>().Nout % 2);
                 Vector3 start = droga[k].transform.position;
                 Vector3 cel = droga[k+1].transform.position;
+                Menu.kafelki[(int)start.x][(int)start.y].GetComponent<Pole>().postac = null;
                 for(int i=0;i<20;i++)
                 {
                     ziomek.transform.position += (cel - start)/20;
                     yield return new WaitForSeconds(0.015f);
                 }
                 ziomek.transform.position = new Vector3(Mathf.Round(ziomek.transform.position.x), Mathf.Round(ziomek.transform.position.y), -2);
+                Menu.kafelki[(int)cel.x][(int)cel.y].GetComponent<Pole>().postac = ziomek;
                 k++;
                 yield return new WaitForSeconds(0.015f);
             }

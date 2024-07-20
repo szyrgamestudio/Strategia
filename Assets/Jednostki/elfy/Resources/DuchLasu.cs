@@ -24,7 +24,7 @@ public class DuchLasu : Jednostka
         base.umieranie();
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         base.OnMouseDown();
         if(jednostka == Jednostka.Select)

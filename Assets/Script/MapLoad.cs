@@ -370,7 +370,7 @@ public class MapLoad : MonoBehaviour
                 PoleFind pole = Menu.kafelki[kafelekItem[k, 1]][kafelekItem[k, 2]].GetComponent<PoleFind>(); 
                 if(MenuGlowne.multi)
                 {
-                    pole.updateMultiWywolaj(kafelekItem[k, 0]);
+                    pole.updateMultiWywolaj(kafelekItem[k, 0],0);
                 }
                 else
                 {

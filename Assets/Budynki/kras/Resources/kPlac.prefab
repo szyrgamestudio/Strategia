@@ -781,7 +781,7 @@ MonoBehaviour:
   zdolnosci: 3
   zloto: 4
   drewno: 10
-  nazwa: "Plack dzikich zwierz\u0105t"
+  nazwa: Dynamitarnia
   punktyBudowy: 0
   punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}
@@ -822,7 +822,6 @@ MonoBehaviour:
   rodzaj: 0
   strzalka: {fileID: 2695493916781821640}
   poZniszczeniu: 0
-  budowaArt: {fileID: 21300000, guid: ce4146226e9398e49b001b6dce500b03, type: 3}
   budynekArt: {fileID: 21300000, guid: f1701dd4865cc2041bf28ef8de17a611, type: 3}
   update: 0
   damage: 0

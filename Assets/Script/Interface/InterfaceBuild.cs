@@ -106,7 +106,7 @@ public class InterfaceBuild : MonoBehaviour
                 healthGracza.maxValue = Wybrany.maxHP;
             }
             
-            if(Wybrany.punktyBudowy < Wybrany.punktyBudowyMax && ((!Jednostka.Select.GetComponent<Ratusz>() &&  !Jednostka.Select.GetComponent<nRatusz>()) || (Wybrany.punktyBudowyMax < 7) ) )
+            if(Wybrany.punktyBudowy < Wybrany.punktyBudowyMax && ((!Jednostka.Select.GetComponent<Ratusz>() &&  !Jednostka.Select.GetComponent<nRatusz>() &&  !Jednostka.Select.GetComponent<KRatusz>() &&  !Jednostka.Select.GetComponent<eRatusz>()) || (Wybrany.punktyBudowyMax < 7) ) )
             {
                 for(int i=0;i<=Wybrany.zdolnosci;i++)
                     {

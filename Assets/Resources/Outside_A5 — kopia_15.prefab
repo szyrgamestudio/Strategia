@@ -324,6 +324,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dfda37bc8c4d4a041a00053805124b5a, type: 3}
   pole: {fileID: 3520108190265880060}
   rodzaj: 0
+  pulapka: 0
 --- !u!114 &2400305906543381605
 MonoBehaviour:
   m_ObjectHideFlags: 0

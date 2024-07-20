@@ -120,7 +120,7 @@ public class Palladyn : MonoBehaviour
     }
 
     [PunRPC]
-    public void dmg(int ip, int id, int dmg, int team)
+    public void dmg(int ip, int id, float dmg, int team)
     {
         if(ip != Ip.ip)
         {

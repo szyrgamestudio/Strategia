@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class kRatusz : MonoBehaviour
+public class KRatusz : MonoBehaviour
 {
     public GameObject budynek;
 
@@ -168,8 +168,7 @@ public class kRatusz : MonoBehaviour
                     OnMouseDown();
                 }
             }
-            if(Menu.ratuszPoziom[druzyna] < poziom && budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
-                Menu.ratuszPoziom[druzyna] = poziom;
+            
             if(Przycisk.budynek[5]==true)
             {
                 Przycisk.budynek[5]=false;
@@ -215,7 +214,7 @@ public class kRatusz : MonoBehaviour
                 while(Menu.bazy[druzyna,nr_jednostki+1] != null)
                 {
                     Menu.bazy[druzyna,nr_jednostki] = Menu.bazy[druzyna,nr_jednostki+1];
-                    Menu.bazy[druzyna,nr_jednostki].GetComponent<kRatusz>().nr_jednostki -= 1;
+                    Menu.bazy[druzyna,nr_jednostki].GetComponent<KRatusz>().nr_jednostki -= 1;
                     nr_jednostki++;
                 }
                 Menu.maxludnosc[druzyna] -= 6;
@@ -224,6 +223,8 @@ public class kRatusz : MonoBehaviour
             }
             Destroy(budynek);
         }
+        if(Menu.ratuszPoziom[druzyna] < poziom && budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
+                Menu.ratuszPoziom[druzyna] = poziom;
     }
     [PunRPC]
     public void przeniesNaStarcie()

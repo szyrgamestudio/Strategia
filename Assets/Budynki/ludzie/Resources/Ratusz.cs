@@ -169,8 +169,7 @@ public class Ratusz : MonoBehaviour
                     OnMouseDown();
                 }
             }
-            if(Menu.ratuszPoziom[druzyna] < poziom && budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
-                Menu.ratuszPoziom[druzyna] = poziom;
+            
             if(Przycisk.budynek[5]==true)
             {
                 Przycisk.budynek[5]=false;
@@ -225,6 +224,8 @@ public class Ratusz : MonoBehaviour
             }
             Destroy(budynek);
         }
+        if(Menu.ratuszPoziom[druzyna] < poziom && budynek.GetComponent<Budynek>().punktyBudowy >= budynek.GetComponent<Budynek>().punktyBudowyMax)
+                Menu.ratuszPoziom[druzyna] = poziom;
     }
     [PunRPC]
     public void przeniesNaStarcie()

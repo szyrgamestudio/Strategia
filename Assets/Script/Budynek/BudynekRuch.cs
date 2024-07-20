@@ -61,7 +61,7 @@ public class BudynekRuch : MonoBehaviour
             transform.position = new Vector3(targetX, targetY, -3f);
             if (Input.GetMouseButtonDown(0))
             {
-                if (Walka.odleglosc(budowlaniec, ObiektRuszany) == 1 && Menu.istnieje((int)targetX,(int)targetY))//targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
+                if (Walka.odleglosc(budowlaniec, ObiektRuszany) <= 3 && Menu.istnieje((int)targetX,(int)targetY))//targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
                 {
                     if (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete && !Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().ZajeteLot)
                     {
@@ -78,8 +78,9 @@ public class BudynekRuch : MonoBehaviour
                     }
                 }
             }
-            if (Walka.odleglosc(budowlaniec, ObiektRuszany) == 1 && Menu.istnieje((int)targetX,(int)targetY))//targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
+            if (Walka.odleglosc(budowlaniec, ObiektRuszany) <= 3 && Menu.istnieje((int)targetX,(int)targetY) && (!Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().Zajete && !Menu.kafelki[(int)targetX][(int)targetY].GetComponent<Pole>().ZajeteLot))//targetX < Menu.BoardSizeX - 1 && targetY < Menu.BoardSizeY - 1 && targetX > 0 && targetY > 0 && Walka.odleglosc(budowlaniec, ObiektRuszany) == 1)
             {
+                
                 ObiektRuszany.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f);
             }
             else

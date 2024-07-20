@@ -12,6 +12,7 @@ public class PoleFind : MonoBehaviour
     public Pole pole;
 
     public int rodzaj;
+    public int pulapka;
 
     public void Start()
     {
@@ -25,18 +26,19 @@ public class PoleFind : MonoBehaviour
     }
 
     [PunRPC]
-    public void updateMulti(int rodzaj)
+    public void updateMulti(int rodzaj, int pulapka)
     {
         Debug.Log("essa");
         this.rodzaj = rodzaj;
+        this.pulapka = pulapka;
         Start();
     }
-    public void updateMultiWywolaj(int rodzaj)
+    public void updateMultiWywolaj(int rodzaj, int pulapka)
     {
         if(MenuGlowne.multi)
         {
             PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("updateMulti", RpcTarget.All, rodzaj);
+            photonView.RPC("updateMulti", RpcTarget.All, rodzaj, pulapka);
         }
     }
     void Update()
@@ -58,13 +60,17 @@ public class PoleFind : MonoBehaviour
                         case 6: Menu.drewno[jednostka.druzyna] += 8; jednostka.ShowDMG(8, new Color(0.6f, 0.4f, 0.2f, 1.0f)); break;
                         case 7: Menu.magia[jednostka.druzyna] += 3; jednostka.ShowDMG(3, new Color(1.0f, 0.0f, 1.0f, 1.0f)); break;
                         case 8: Menu.magia[jednostka.druzyna] += 8; jednostka.ShowDMG(8, new Color(1.0f, 0.0f, 1.0f, 1.0f)); break;
+                        case 9: if(pulapka != jednostka.druzyna) {jednostka.HP -= 3; jednostka.szybkosc = 0; jednostka.ShowDMG(3, new Color(1.0f, 0.0f, 0.0f, 1.0f));} break;
                     }
-                    rodzaj = 0;
-                    Start();
-                    if(MenuGlowne.multi)
+                    if(pulapka != jednostka.druzyna)
                     {
-                        PhotonView photonView = GetComponent<PhotonView>();
-                        photonView.RPC("updateMulti", RpcTarget.All, rodzaj);
+                        rodzaj = 0;
+                        Start();
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            photonView.RPC("updateMulti", RpcTarget.All, rodzaj);
+                        }
                     }
                 }
             }
