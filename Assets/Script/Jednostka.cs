@@ -76,7 +76,7 @@ public class Jednostka : MonoBehaviour
         healthGracza.value = HP;
         if(!GetComponent<Wieza>())
             StartCoroutine(przyporzadkuj());
-        odkryj(3);
+        odkryj(4);
     }
 
     IEnumerator przyporzadkuj()

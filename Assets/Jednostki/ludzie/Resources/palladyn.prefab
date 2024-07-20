@@ -891,6 +891,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 2290557916098444529}
   drewno: 0
+  elf: 0
   boss: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:

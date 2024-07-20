@@ -31,7 +31,7 @@ public class Menu : MonoBehaviour
     public GameObject camerapriv;
 
 
-    public static GameObject[,] jednostki = new GameObject[5, 50];
+    public static GameObject[,] jednostki = new GameObject[5, 200];
     public static List<GameObject> NPC = new List<GameObject>();
 
 

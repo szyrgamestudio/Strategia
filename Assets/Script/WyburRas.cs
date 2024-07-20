@@ -365,18 +365,20 @@ public class WyburRas : MonoBehaviour
                     photonView = gameObject.AddComponent<PhotonView>();
                 }
                 if(MenuGlowne.multi)
-                    photonView.RPC("LoadSceneRPC", RpcTarget.All, End.tureKontroli, End.poziomRatusza, End.tureDoKonca);
+                    photonView.RPC("LoadSceneRPC", RpcTarget.All, End.tureKontroli, End.poziomRatusza, End.tureDoKonca, rasa, heros);
             }
         }
     }
 
     [PunRPC]
-    void LoadSceneRPC(int tureKontroli, int poziomRatusza, int tureDoKonca)
+    void LoadSceneRPC(int tureKontroli, int poziomRatusza, int tureDoKonca, int[] rasa, int[] heroes)
     {
         End.tureKontroli = tureKontroli;
         End.poziomRatusza = poziomRatusza;
         End.tureDoKonca = tureDoKonca;
         SceneManager.LoadScene(2);
+        WyburRas.rasa = rasa;
+        WyburRas.heros = heroes;
     }
 
 

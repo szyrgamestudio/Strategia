@@ -964,6 +964,8 @@ MonoBehaviour:
   animator: {fileID: 1709095401773075343}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 4604450008863701180}
+  drewno: 0
+  elf: 0
   boss: 0
 --- !u!114 &958054785506064654
 MonoBehaviour:
@@ -1020,8 +1022,8 @@ MonoBehaviour:
   - "Tartak pozwala zbiera\u0107 drewno z lasu w zasi\u0119gu tartaku, jednoczesnie
     zwi\u0119ksza wydobycie drewna o 1"
   - "Cmentarz Zwi\u0119ksza maksymaln\u0105 populacje o 3"
-  - "Krematorium pozwala rekrutowa\u0107 szczury, szkielety i liszeyst\xF3w"
-  - "Piramida pozwala rekrutowa\u0107 mumie, zoombie i wampiry"
+  - "Krematorium pozwala rekrutowa\u0107 szczury, szkielety i lisze"
+  - "Piramida pozwala rekrutowa\u0107 mumie, zombie i wampiry"
   - "Jaskinia pozwala rekrutowa\u0107 olbrzymie paj\u0105ki, gargulce i \u017Cniwiarzy"
   - Przemienia nierozkwite drzewo na magiczne drzewo
   - "Rze\u017Ania pozwala po\u015Bwi\u0119ca\u0107 jednostki w zamian za z\u0142oto

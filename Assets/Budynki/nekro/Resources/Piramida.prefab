@@ -726,7 +726,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3ccb6d0ac6b987b42b502e13e6c65cb5, type: 3}
   - {fileID: 21300000, guid: 31668eaf9765f5743a88678faf915ed3, type: 3}
   teksty:
-  - "Zoombi po \u015Bmierci przywraca si\u0119 do \u017Cycia z 1 HP"
+  - "Zombie po \u015Bmierci przywraca si\u0119 do \u017Cycia z 1 HP"
   - "Mumia na ko\u0144cu tury przywraca sobie zdrowie"
   - "Wampir przy ataku wysysa zdrowie z przeciwnika, przy czym si\u0119 lecz\u0105c"
   loock: {fileID: 21300000, guid: ac7f1ac238cae424fb634cf83d82cc1d, type: 3}

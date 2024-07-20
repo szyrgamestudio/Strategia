@@ -12,6 +12,9 @@ public class Szaman : MonoBehaviour
 
     public int silaWiatru;
     public int silaWiatru2;
+
+    public Sprite[] budynki;
+    public string[] teksty;
     // Start is called before the first frame update
     void Update()
     { 
@@ -30,10 +33,10 @@ public class Szaman : MonoBehaviour
                 Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                 odrzut = true;
             }
-            if(Przycisk.jednostka[1] == true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=4)
+            if(Przycisk.jednostka[1] == true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=5)
             {
                 Przycisk.jednostka[1] = false;
-                Menu.magia[Menu.tura]-=4;
+                Menu.magia[Menu.tura]-=5;
                 List<GameObject> lista = new List<GameObject>();
                 przeszukanie(0,jednostka,lista);
                 foreach(GameObject ludek in lista)
@@ -139,8 +142,30 @@ public class Szaman : MonoBehaviour
             odrzut = false;
         }
     }
+     void OnMouseDown()
+    {
+        if(jednostka == Jednostka.Select)
+        {
+            InterfaceUnit.Czyszczenie(); 
+            PrzyciskInter Guzikk = InterfaceUnit.przyciski[0].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "3"; 
+            Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "5"; 
+
+            for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
+            {
+                InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];
+                PrzyciskInter Guzik = InterfaceUnit.przyciski[i].GetComponent<PrzyciskInter>();
+                Guzik.IconZloto.enabled = false;
+                Guzik.IconDrewno.enabled = false;
+                Guzik.IconMagic.enabled = true;
+                Guzik.Opis.text = teksty[i];  
+            }       
+        }
+    }
+
     [PunRPC]
-    public void dmg(int ip, int id, int dmg, int team)
+    public void dmg(int ip, int id, float dmg, int team)
     {
         if(ip != Ip.ip)
         {

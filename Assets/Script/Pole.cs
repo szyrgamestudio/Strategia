@@ -716,7 +716,7 @@ int i=0;
             else{
                 break;
             }
-            ziomek.GetComponent<Jednostka>().odkryj(3);
+            ziomek.GetComponent<Jednostka>().odkryj(4);
             if(SimultanTurns.simultanTurns && MenuGlowne.multi)
                 {
                 PhotonView photonView = ziomek.GetComponent<PhotonView>();
@@ -768,7 +768,7 @@ int i=0;
             else{
                 break;
             }
-            ziomek.GetComponent<Jednostka>().odkryj(3);
+            ziomek.GetComponent<Jednostka>().odkryj(4);
             if(SimultanTurns.simultanTurns && MenuGlowne.multi)
                 {
                 PhotonView photonView = ziomek.GetComponent<PhotonView>();

@@ -59,6 +59,7 @@ public class Budynek : MonoBehaviour
         healthGracza.maxValue = punktyBudowyMax;
         healthGracza.value = punktyBudowy;
         sojusz = WyburRas.team[druzyna-1] + 1;
+        odkryj(3);
          
     }
     public void OnMouseDown()
@@ -344,6 +345,17 @@ public class Budynek : MonoBehaviour
             textColor.a = 1f - 0.025f*(float)i;
             TextShowDMG.color = textColor;
         }
+    }
+
+    public void odkryj(int zasieg)
+    {
+        if(MenuGlowne.multi && druzyna == Ip.ip)
+        for(int p = -zasieg; p<=zasieg;p++)
+            for(int p2 = -zasieg; p2<=zasieg;p2++)
+            {
+                if(Mathf.Abs(p) + Mathf.Abs(p2) <= zasieg &&Menu.istnieje(p+(int)transform.position.x,p2+ (int)transform.position.y) && Menu.kafelki[p+(int)transform.position.x][p2+(int)transform.position.y].GetComponent<PoleOdkryj>().dark != null)
+                    Menu.kafelki[p+(int)transform.position.x][p2+(int)transform.position.y].GetComponent<PoleOdkryj>().remove();
+            }
     }
 
         void UpdateHealthBarColor()

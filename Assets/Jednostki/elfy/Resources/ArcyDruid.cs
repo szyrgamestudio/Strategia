@@ -144,7 +144,7 @@ public class ArcyDruid : MonoBehaviour
         staty.zdolnosci = 1;
         staty.maxszybkosc = 6;
         staty.nazwa = "Niedźwiedź";
-        staty.lata = true;
+        staty.lata = false;
         zmieniony = true;
     } 
     void jaskolka()
