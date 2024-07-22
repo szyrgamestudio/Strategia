@@ -121,6 +121,14 @@ public class InterfaceBuild : MonoBehaviour
             else
                 CzasBudowy.text = Wybrany.punktyBudowy.ToString() + "/" + Wybrany.punktyBudowyMax.ToString();
             nazwa.text = Wybrany.nazwa;
+            if(Jednostka.Select.GetComponent<Ratusz>())
+                nazwa.text = Wybrany.nazwa + " Lv " + (Jednostka.Select.GetComponent<Ratusz>().poziom + 1);
+            if(Jednostka.Select.GetComponent<nRatusz>())
+                nazwa.text = Wybrany.nazwa + " Lv " + (Jednostka.Select.GetComponent<nRatusz>().poziom + 1);
+            if(Jednostka.Select.GetComponent<eRatusz>())
+                nazwa.text = Wybrany.nazwa + " Lv " + (Jednostka.Select.GetComponent<eRatusz>().poziom + 1);
+            if(Jednostka.Select.GetComponent<KRatusz>())
+                nazwa.text = Wybrany.nazwa + " Lv " + (Jednostka.Select.GetComponent<KRatusz>().poziom + 1);
         }
     }
 

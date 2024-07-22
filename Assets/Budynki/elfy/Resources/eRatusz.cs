@@ -329,6 +329,8 @@ public class eRatusz : MonoBehaviour
                 Guzik.IconMagic.enabled = true;
                 Guzik.Opis.text = teksty[i];  
             }       
+            Guzikk = InterfaceBuild.przyciski[5].GetComponent<PrzyciskInter>();
+            Guzikk.Opis.text = teksty[5] + "    [Czas budowy: " + (poziom * 2 + 8) + "]"; 
             Guzikk = InterfaceBuild.przyciski[4].GetComponent<PrzyciskInter>();
             if(Budowlaniec.punktyBudowyBonus[druzyna]==0)
             {

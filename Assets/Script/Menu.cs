@@ -100,7 +100,9 @@ public class Menu : MonoBehaviour
         PanelUnit.SetActive(false);
         tura = 1;
         turaNPC.gameObject.SetActive(false);
+        
         IloscGraczyStart = IloscGraczy;
+        Debug.Log(IloscGraczyStart + " = " + IloscGraczy);
         if(End.tureDoKonca != 0)
             nrTuryText.text = (End.tureDoKonca).ToString();
     }
@@ -131,6 +133,13 @@ public class Menu : MonoBehaviour
             tura=0;
             turaNPC.value = 0;
             StartCoroutine(NPCtura(0));
+        }
+        if(Ip.ip > 1)
+        {
+            if(tura == 0)
+                turaNPC.gameObject.SetActive(true);
+            else
+                turaNPC.gameObject.SetActive(false);
         }
 
         switch (tura)
@@ -168,7 +177,8 @@ public class Menu : MonoBehaviour
         Menu.BoardSizeY = BoardSizeY;
         Menu.IloscGraczy = IloscGraczy;
         Menu.nrTury = nrTury;
-        Menu.IloscGraczyStart = IloscGraczyStart;
+        if(IloscGraczyStart != 0)
+            Menu.IloscGraczyStart = IloscGraczyStart;
     }
 
     [PunRPC]
@@ -322,6 +332,7 @@ public class Menu : MonoBehaviour
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("IloscUpdate", RpcTarget.All, IloscGraczy);
                 }
+                Debug.Log("Czy wygrana? " + End.czyWygrana());
                 if(End.czyWygrana())
                 {
                     //Ending.wygrany = wygrany;
@@ -564,6 +575,12 @@ public class Menu : MonoBehaviour
         {
             turaNPC.value = id;
             turaNPC.maxValue = Menu.NPC.Count - 2;
+            if(MenuGlowne.multi)
+            {
+                PhotonView photonView = GetComponent<PhotonView>();
+                photonView.RPC("pasekNPC", RpcTarget.All, Ip.ip, id, Menu.NPC.Count - 2);
+            }
+
             yield return new WaitForSeconds(0.15f);
             StartCoroutine(NPCtura(id + 1));
             
@@ -599,6 +616,16 @@ public class Menu : MonoBehaviour
             }
             
         }
+    }
+    [PunRPC]
+    void pasekNPC(int ip, int a, int b)
+    {
+        if(Ip.ip != ip)
+        {
+            turaNPC.value = a;
+            turaNPC.maxValue = b;
+        }
+
     }
 
     private GameObject przeszukanie(int odleglosc, GameObject NPC)

@@ -28,7 +28,6 @@ public class Portal : MonoBehaviour
     void Start()
     {
       druzyna = budynek.GetComponent<Budynek>().druzyna;
-      OnMouseDown();
     }
 
     void Update()

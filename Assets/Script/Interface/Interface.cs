@@ -35,12 +35,9 @@ public class Interface : MonoBehaviour
     void Update()
     {
         tura.text = "KOLEJNA TURA";//\nTura gracza " + Menu.tura.ToString();
-        //if (Jednostka.Select != null)
-        //    twarz.sprite = Jednostka.Select.GetComponent<SpriteRenderer>().sprite;
-        //else
-        //    twarz.sprite = puste;
 
-        twarz.sprite = (Jednostka.Select != null) ? Jednostka.Select.GetComponent<SpriteRenderer>().sprite : puste;
+
+        twarz.sprite = (Jednostka.Select != null && !(MenuGlowne.multi && Menu.tura == 0)) ? Jednostka.Select.GetComponent<SpriteRenderer>().sprite : puste;
 
         int wyswietlanaWartosc = Menu.tura;
         if(MenuGlowne.multi)

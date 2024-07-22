@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wersja 0.3.3
+  m_text: Wersja 0.4.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_text: "Projektant, Programista, Pomys\u0142odawca\nIgor \"SzyRRogi\" R\xF3\u017Canowski\n\nNaczelna
     pomoc i wsparcie\nMateusz \"Massyn\" Afelt\n\nGrafika\nTogii, Magda Brzezi\u0144ska,
     Copilot AI\n\nMuzyka\nSuno AI\n\nMapy\nIgor \"SzyRRogi\" R\xF3\u017Canowski,
-    Filip Rogalski\n\nTesty\nCas-Borg, Shadow Inside, \nxfx_winner, Sir Teodoriusz\n\nGra
+    Filip Rogalski\n\nTesty\nCasTheDev, Shadow Inside, \nxfx_winner, Sir Teodoriusz\n\nGra
     by SzyrGameStudio\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -83,8 +83,8 @@ public class LucznikSzef : MonoBehaviour
         if(koniec && !Menu.Next && jednostka.GetComponent<Jednostka>().druzyna == Menu.tura)
         {
             koniec = false;
-            Jednostka staty = jednostka.GetComponent<Jednostka>();
-            akcja1 = true;
+            if(jednostka.GetComponent<Heros>().level >= 4)
+                akcja1 = true;
         }
     }
 

@@ -876,8 +876,8 @@ MonoBehaviour:
   budynki:
   - {fileID: 21300000, guid: e33aeabf1067b33409d0a7a610a6b4e6, type: 3}
   teksty:
-  - "Pasywnie: Jednostka mo\u017Ce pobiera\u0107 magi\u0119 z niebieskich i \u017C\xF3\u0142tych
-    kr\u0119g\xF3w"
+  - "Pasywnie: Jednostka mo\u017Ce pobiera\u0107 magi\u0119 z rozkwit\u0142ych magicznych
+    drzew"
 --- !u!114 &1043078326864456597
 MonoBehaviour:
   m_ObjectHideFlags: 0

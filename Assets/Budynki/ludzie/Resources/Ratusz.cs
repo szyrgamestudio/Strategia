@@ -330,6 +330,8 @@ public class Ratusz : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }       
             Guzikk = InterfaceBuild.przyciski[5].GetComponent<PrzyciskInter>();
+            Guzikk.Opis.text = teksty[5] + "    [Czas budowy: " + (poziom * 2 + 8) + "]"; 
+            Guzikk = InterfaceBuild.przyciski[5].GetComponent<PrzyciskInter>();
             Guzikk.IconZloto.enabled = true;
             Guzikk.IconDrewno.enabled = true;
             Guzikk.IconMagic.enabled = false;

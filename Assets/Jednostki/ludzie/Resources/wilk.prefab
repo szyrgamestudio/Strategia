@@ -982,7 +982,8 @@ MonoBehaviour:
   budynki:
   - {fileID: 21300000, guid: b5acb5ab3ee936b41ab105394c67112a, type: 3}
   teksty:
-  - "Pasywnie: Otrzymuje +2 do ataku za ka\u017Cdego wilka dooko\u0142a"
+  - "Pasywnie: Otrzymuje +2 do ataku za ka\u017Cdego wilka na s\u0105siaduj\u0105cym
+    polu (W\u0142\u0105cznie ze skosem)"
 --- !u!114 &5239144753499111589
 MonoBehaviour:
   m_ObjectHideFlags: 0

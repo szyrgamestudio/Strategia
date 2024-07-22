@@ -1017,22 +1017,26 @@ MonoBehaviour:
   teksty:
   - "Ratusz to podstawowy budynek. Pozwala rekrutowa\u0107 podstawowe jednostki oraz
     zbiera\u0107 surowce na obszarze 3 p\xF3l od ratuszu. Zwi\u0119ksza maksymaln\u0105
-    populacje o 6"
-  - "W kopalni jest zbierane z\u0142oto"
+    populacje o 6 [Czas budowy: 6]"
+  - "W kopalni jest zbierane z\u0142oto. Ilo\u015B\u0107 z\u0142ota zale\u017Cy od
+    pol, na kt\xF3rym zosta\u0142a wybudowana [Czas budowy: 8]"
   - "Tartak pozwala zbiera\u0107 drewno z lasu w zasi\u0119gu tartaku, jednoczesnie
-    zwi\u0119ksza wydobycie drewna o 1"
-  - "Cmentarz Zwi\u0119ksza maksymaln\u0105 populacje o 3"
-  - "Krematorium pozwala rekrutowa\u0107 szczury, szkielety i lisze"
-  - "Piramida pozwala rekrutowa\u0107 mumie, zombie i wampiry"
-  - "Jaskinia pozwala rekrutowa\u0107 olbrzymie paj\u0105ki, gargulce i \u017Cniwiarzy"
-  - Przemienia nierozkwite drzewo na magiczne drzewo
+    zwi\u0119ksza wydobycie drewna o 1 [Czas budowy: 4]"
+  - "Cmentarz Zwi\u0119ksza maksymaln\u0105 populacje o 3 [Czas budowy: 4]"
+  - "Krematorium pozwala rekrutowa\u0107 szczury, szkielety i lisze [Czas budowy:
+    6]"
+  - "Piramida pozwala rekrutowa\u0107 mumie, zombie i wampiry [Czas budowy: 6]"
+  - "Jaskinia pozwala rekrutowa\u0107 olbrzymie paj\u0105ki, gargulce i \u017Cniwiarzy
+    [Czas budowy: 6]"
+  - "Przemienia nie dokwit\u0142e drzewo na magiczne drzewo [Czas budowy: 0]"
   - "Rze\u017Ania pozwala po\u015Bwi\u0119ca\u0107 jednostki w zamian za z\u0142oto
-    oraz przy\u015Bpiesza proces regenereacji bohatera"
-  - "Wie\u017Ca atakuje wrogie jednostki w okolicy"
+    oraz przy\u015Bpiesza proces regenereacji bohatera [Czas budowy: 5]"
+  - "Wie\u017Ca atakuje wrogie jednostki w okolicy [Czas budowy: 4]"
   - "Droga zmniejsza zu\u017Cycie punkt\xF3w ruchu za przej\u015Bcie po drodze"
-  - "Portal pozwala przemieszcza\u0107 si\u0119 mi\u0119dzy portalami"
+  - "Droga zmniejsza zu\u017Cycie punkt\xF3w ruchu za przej\u015Bcie po drodze (Pojawia
+    si\u0119 pod budowla\u0144cem)"
   - "Mur blokuje przej\u015Bcie"
-  - "Biblioteka pozwala kupowa\u0107 ulepszenia dla jednostek"
+  - "Biblioteka pozwala kupowa\u0107 ulepszenia dla jednostek [Czas budowy: 6]"
   - "Buduje rozpocz\u0119t\u0105 budowle w promieniu 1 pola"
   - 
   budowanie: 0

@@ -770,7 +770,6 @@ MonoBehaviour:
   rodzaj: 3
   strzalka: {fileID: 5652922063109434622}
   poZniszczeniu: 0
-  budowaArt: {fileID: 21300000, guid: ce4146226e9398e49b001b6dce500b03, type: 3}
   budynekArt: {fileID: 21300000, guid: efd1985bca25ab9418bc10cd5759487b, type: 3}
   update: 0
   damage: 0
@@ -827,7 +826,7 @@ MonoBehaviour:
   - ID portalu
   puste: {fileID: 21300000, guid: 9f9dd9f6d1fdf2c43a364c1513ad5343, type: 3}
   druzyna: 0
-  dostepny: 0
+  dostepny: 1
   id: 0
   koniec: 0
 --- !u!61 &8956365773136594117

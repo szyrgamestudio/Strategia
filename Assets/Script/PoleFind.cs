@@ -14,6 +14,8 @@ public class PoleFind : MonoBehaviour
     public int rodzaj;
     public int pulapka;
 
+    public GameObject siatka;
+
     public void Start()
     {
         if(rodzaj != 0)
@@ -43,6 +45,13 @@ public class PoleFind : MonoBehaviour
     }
     void Update()
     {
+         if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (siatka != null)
+            {
+                siatka.SetActive(!siatka.activeSelf); // Przełączanie stanu aktywności obiektu
+            }
+        }
         if(rodzaj != 0)
         {
             if(pole.postac != null)

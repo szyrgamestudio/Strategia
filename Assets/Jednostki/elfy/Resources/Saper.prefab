@@ -1003,8 +1003,8 @@ MonoBehaviour:
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 3
-  nazwa: "Wielki Paj\u0105k"
+  cena: 5
+  nazwa: Saper
   akcja: 1
   spanie: 0
   nr_jednostki: 0

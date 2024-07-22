@@ -35,6 +35,10 @@ public class WyburRas : MonoBehaviour
 
     private PhotonView photonView;
 
+    public GameObject info1;
+    public GameObject info2;
+    public GameObject info3;
+
     public void Start()
     {
         photonView = updaterZiom.GetComponent<PhotonView>();
@@ -302,6 +306,11 @@ public class WyburRas : MonoBehaviour
         prawy.enabled = true;
         strzalka1.enabled = true;
         strzalka2.enabled = true;
+    
+
+        info1.SetActive(true);
+        info2.SetActive(true);
+        info3.SetActive(true);
     }
     public void unloock()
     {

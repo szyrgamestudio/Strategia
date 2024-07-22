@@ -520,7 +520,11 @@ public class Jednostka : MonoBehaviour
             {
                 End.bossPokonany = true;
             }
-            Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = false;
+            if(lata)
+                Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = false;
+            else
+                Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().ZajeteLot = false;
+            Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().postac = null;
             while(Menu.jednostki[druzyna,nr_jednostki+1] != null)
             {
                 Menu.jednostki[druzyna,nr_jednostki] = Menu.jednostki[druzyna,nr_jednostki+1];
@@ -533,7 +537,9 @@ public class Jednostka : MonoBehaviour
             Heros heros = jednostka.GetComponent<Heros>(); if(heros == null)
             Destroy(jednostka);
             else
-                jednostka.SetActive(false);
+                {
+                    jednostka.SetActive(false);
+                }
     }
 
     public void rozdajeExp()

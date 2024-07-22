@@ -15,7 +15,7 @@ public class MultiRasy : MonoBehaviourPunCallbacks
         {
             // Pobierz aktualną liczbę graczy w pokoju
             int playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
-            if(Ip.ip==0)
+            //if(Ip.ip==0)
                 Ip.ip = playerCount;
         }
     }

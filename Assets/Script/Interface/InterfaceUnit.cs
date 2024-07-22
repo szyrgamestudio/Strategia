@@ -47,7 +47,7 @@ public class InterfaceUnit : MonoBehaviour
 
     void Update()
     {
-        if(Jednostka.Select!=null && Jednostka.CzyJednostka)
+        if(Jednostka.Select!=null && Jednostka.CzyJednostka && !(MenuGlowne.multi && Menu.tura == 0))
         {
             Jednostka Wybrany = Jednostka.Select.GetComponent<Jednostka>();
             try{
