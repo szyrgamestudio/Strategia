@@ -1004,7 +1004,7 @@ MonoBehaviour:
   lata: 0
   cena: 2
   nazwa: Duch Lasu
-  akcja: 0
+  akcja: 1
   spanie: 0
   nr_jednostki: 0
   koniec: 0
