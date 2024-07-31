@@ -286,6 +286,7 @@ public class Budowlaniec : MonoBehaviour
     }
     public void budowanieMulti(string nazwa)
     {
+        wybieranie = true;
         BudowanyObiekt = PhotonNetwork.Instantiate(nazwa, new Vector3(-10f, 0, -3), Quaternion.identity);
         BudowanyObiekt.GetComponent<Budynek>().druzyna = jednostka.GetComponent<Jednostka>().druzyna;
         BudowanyObiekt.GetComponent<Budynek>().sojusz = jednostka.GetComponent<Jednostka>().sojusz;

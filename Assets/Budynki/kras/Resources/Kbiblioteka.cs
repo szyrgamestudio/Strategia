@@ -108,7 +108,7 @@ public class Kbiblioteka : MonoBehaviour
         int i = 0;
         while(Menu.jednostki[druzyna,i] != null)
         {
-            if(Menu.jednostki[druzyna,i] != null && (Menu.jednostki[druzyna,i].GetComponent<Jednostka>().nazwa == nazwa || nazwa == "all"))
+            if(Menu.jednostki[druzyna,i] != null && !Menu.jednostki[druzyna,i].GetComponent<Heros>() && (Menu.jednostki[druzyna,i].GetComponent<Jednostka>().nazwa == nazwa || nazwa == "all"))
                 {
                     switch(parametr){
                         case 0: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().atak += 2; break;

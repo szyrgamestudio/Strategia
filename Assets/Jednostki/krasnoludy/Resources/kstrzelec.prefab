@@ -990,13 +990,13 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 5
-  maxHP: 5
+  HP: 4
+  maxHP: 4
   atak: 1
   obrona: 2
   zasieg: 4
-  maxszybkosc: 6
-  szybkosc: 6
+  maxszybkosc: 5
+  szybkosc: 5
   mindmg: 1
   maxdmg: 2
   zdolnosci: 0
@@ -1048,6 +1048,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
   drewno: 0
+  elf: 0
   boss: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:

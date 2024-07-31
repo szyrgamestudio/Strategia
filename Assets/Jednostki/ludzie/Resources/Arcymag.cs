@@ -197,7 +197,8 @@ public class Arcymag : MonoBehaviour
         staty.maxHP += 1;   
         switch (level){
             case 2:
-                staty.atak += 1;
+                staty.szybkosc++;
+                staty.maxszybkosc++;
                 staty.obrona += 2;
                 staty.HP += 1;
                 staty.maxHP += 1;   

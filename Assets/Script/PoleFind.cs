@@ -30,7 +30,6 @@ public class PoleFind : MonoBehaviour
     [PunRPC]
     public void updateMulti(int rodzaj, int pulapka)
     {
-        Debug.Log("essa");
         this.rodzaj = rodzaj;
         this.pulapka = pulapka;
         Start();

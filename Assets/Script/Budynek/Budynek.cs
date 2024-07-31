@@ -166,10 +166,25 @@ public class Budynek : MonoBehaviour
                             {
                                 roundedResult = 1;
                             }
-                                if(MenuGlowne.multi)
+                            if(MenuGlowne.multi)
                             {
                                 PhotonView photonView = GetComponent<PhotonView>();
                                 photonView.RPC("zaatakowanieMulti", RpcTarget.All, Ip.ip, roundedResult);
+                            }
+
+                            GameObject atakujacy = Jednostka.Select;
+
+                            if(Walka.odleglosc(budynek, atakujacy)==1)
+                                Atakujacy.animacjaMiecz(budynek);
+                            else
+                            {
+                                Atakujacy.animacjaPocisk(budynek);
+                                if(MenuGlowne.multi)
+                                {
+                                    PhotonView photonView = atakujacy.GetComponent<PhotonView>();
+                                    photonView.RPC("pociskeMulti", RpcTarget.All, Ip.ip, budynek.transform.position);
+
+                                }
                             }
                             HP -= roundedResult;
                             damage = roundedResult;

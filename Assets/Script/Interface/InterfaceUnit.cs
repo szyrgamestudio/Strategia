@@ -77,7 +77,7 @@ public class InterfaceUnit : MonoBehaviour
             TObrona.text = Wybrany.obrona.ToString();
             Tdmg.text = Wybrany.mindmg.ToString() + "-" + Jednostka.Select.GetComponent<Jednostka>().maxdmg.ToString();
             TSzybkosc.text = ((float)(Wybrany.szybkosc) / 2).ToString() + "/" + ((float)(Jednostka.Select.GetComponent<Jednostka>().maxszybkosc) / 2).ToString();
-            THP.text = Math.Round(Wybrany.HP, 1).ToString("N1") + "/" + Jednostka.Select.GetComponent<Jednostka>().maxHP.ToString("N1");
+            THP.text = ((float)((int)(Wybrany.HP * 10))/10).ToString() + "/" + Wybrany.maxHP.ToString(); //Math.Round(Wybrany.HP, 1).ToString("N1") + "/" + Jednostka.Select.GetComponent<Jednostka>().maxHP.ToString("N1");
             TZasieg.text = Wybrany.zasieg.ToString();
             TNazwa.text = Wybrany.nazwa;
             if(heros != null)

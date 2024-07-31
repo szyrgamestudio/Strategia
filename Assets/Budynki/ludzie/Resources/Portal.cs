@@ -75,13 +75,18 @@ public class Portal : MonoBehaviour
                     Debug.Log("j " + j);
                     if(j>0)
                     {
-                    int n = Random.Range(0, j);
-                    teleport(portal[nr_portal[n]],pole.GetComponent<Pole>().postac);
-                    if(MenuGlowne.multi)
-                    {
-                        PhotonView photonView = GetComponent<PhotonView>();
-                        photonView.RPC("trzyMulti", RpcTarget.All,Ip.ip,n,pole.GetComponent<Pole>().postac.GetComponent<Jednostka>().nr_jednostki);
-                    }
+                        int n = Random.Range(0, j);
+                        
+                        if(MenuGlowne.multi)
+                        {
+                            PhotonView photonView = GetComponent<PhotonView>();
+                            Debug.Log(portal[nr_portal[n]].name);
+                            Debug.Log(portal[nr_portal[n]].transform.position);
+                            Debug.Log(portal[nr_portal[n]].GetComponent<BudynekRuch>().pole.name);
+                            Vector3 nowy = portal[nr_portal[n]].GetComponent<BudynekRuch>().pole.transform.position;
+                            photonView.RPC("trzyMulti", RpcTarget.All , Ip.ip , n , pole.GetComponent<Pole>().postac.GetComponent<Jednostka>().nr_jednostki, pole.GetComponent<Pole>().postac.GetComponent<Jednostka>().druzyna, nowy);
+                        }
+                        teleport(portal[nr_portal[n]],pole.GetComponent<Pole>().postac);
                         for(int i = 0; i<50; i++)
                         {
                             nr_portal[j] = 0;    
@@ -182,11 +187,22 @@ public class Portal : MonoBehaviour
         }
     }
     [PunRPC]
-    public void trzyMulti(int ip, int n, int nr)
+    public void trzyMulti(int ip, int n, int nr, int druzyna, Vector3 wektor)
     {
         if(ip != Ip.ip)
         {
-            teleport(portal[nr_portal[n]],Menu.jednostki[Menu.tura,nr]);
+            Vector3 przed = Menu.jednostki[druzyna,nr].transform.position;
+            Menu.kafelki[(int)przed.x][(int)przed.y].GetComponent<Pole>().postac = null;
+            if(Menu.jednostki[druzyna,nr].GetComponent<Jednostka>().lata)
+                Menu.kafelki[(int)przed.x][(int)przed.y].GetComponent<Pole>().ZajeteLot = false;
+            else
+                Menu.kafelki[(int)przed.x][(int)przed.y].GetComponent<Pole>().Zajete = false;
+            Menu.jednostki[druzyna,nr].transform.position = wektor;
+            Menu.kafelki[(int)wektor.x][(int)wektor.y].GetComponent<Pole>().postac = Menu.jednostki[druzyna,nr];
+            if(Menu.jednostki[druzyna,nr].GetComponent<Jednostka>().lata)
+                Menu.kafelki[(int)wektor.x][(int)wektor.y].GetComponent<Pole>().ZajeteLot = true;
+            else
+                Menu.kafelki[(int)wektor.x][(int)wektor.y].GetComponent<Pole>().Zajete = true;
         }
     }
     public void jeden()

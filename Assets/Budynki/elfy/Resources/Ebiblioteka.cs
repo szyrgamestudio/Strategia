@@ -89,7 +89,7 @@ public class Ebiblioteka : MonoBehaviour
         int i = 0;
         while(Menu.jednostki[druzyna,i] != null)
         {
-            if(Menu.jednostki[druzyna,i] != null && (Menu.jednostki[druzyna,i].GetComponent<Jednostka>().nazwa == nazwa || nazwa == "all"))
+            if(Menu.jednostki[druzyna,i] != null && !Menu.jednostki[druzyna,i].GetComponent<Heros>() && (Menu.jednostki[druzyna,i].GetComponent<Jednostka>().nazwa == nazwa || nazwa == "all"))
                 {
                     switch(parametr){
                         case 0: Menu.jednostki[druzyna,i].GetComponent<Jednostka>().atak += 2; break;
@@ -127,7 +127,7 @@ public class Ebiblioteka : MonoBehaviour
             Guzikk.CenaMagic.text = (4 + update5[druzyna]* 2).ToString();
           
             
-            for(int i = 0 ; i < 5 ; i++)
+            for(int i = 0 ; i < 4 ; i++)
             {
                 InterfaceBuild.przyciski[i].GetComponent<Image>().sprite = budynki[i];
                 PrzyciskInter Guzik = InterfaceBuild.przyciski[i].GetComponent<PrzyciskInter>();

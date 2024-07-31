@@ -729,7 +729,7 @@ MonoBehaviour:
   zdolnosci: 1
   zloto: 4
   drewno: 9
-  nazwa: "Rze\u017Ania"
+  nazwa: "O\u0142tarz"
   punktyBudowy: 0
   punktyBudowyMax: 6
   healthGracza: {fileID: 8826697438269049201}

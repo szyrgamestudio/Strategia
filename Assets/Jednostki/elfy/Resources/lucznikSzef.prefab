@@ -1258,8 +1258,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9dacb569239658446ad525cc4bac2035, type: 3}
   - {fileID: 21300000, guid: 96c1c62d9290296478efacdf6de72565, type: 3}
   teksty:
-  - "Zwi\u0119ksz obra\u017Cenia wybranemu strzelcowi na 2 tury"
-  - "Zwi\u0119ksz zasi\u0119g wybranej jednostki o 2"
+  - "Zwi\u0119ksz atak wybranemu strzelcowi na 2 tury"
+  - "Zwi\u0119ksz zasi\u0119g wybranej nie wystansowej jednostki o 2"
   - Dodatkowa akcja
   customCursorBudowa: {fileID: 2800000, guid: 1a32552cae4247a4389da6bf6b93058c, type: 3}
 --- !u!61 &7022607786726823304

@@ -145,6 +145,8 @@ public class MapLoad : MonoBehaviour
                 // Odczytanie i przypisanie wysokości planszy z drugiej linii pliku
                 Menu.BoardSizeY = int.Parse(reader.ReadLine().Trim());
 
+                Debug.Log("aaaa" + Menu.BoardSizeY);
+
                 // Odczytywanie kolejnych linii pliku
                 char piatyOdKoncaZnak = nazwa[nazwa.Length - 6];
                 int.TryParse(piatyOdKoncaZnak.ToString(), out int maxGraczy);

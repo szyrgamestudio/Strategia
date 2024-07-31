@@ -21,13 +21,19 @@ public class SimultanTurns : MonoBehaviourPun
 
             if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
             {
-                Debug.Log(readyCount + " + " + Menu.IloscGraczy);
+                Debug.Log(Menu.IloscGraczy + " " + Menu.IloscGraczyStart);
             }
+            
             if (readyCount == Menu.IloscGraczy && readyCount != 0)
             {
                 readyCount = 0;
                 photonView.RPC("NextTurn", RpcTarget.All);
                 Menu.menu.NextTurn();
+            }
+            if(Menu.sumReady > readyCount) 
+            {
+                photonView.RPC("UpdateCount", RpcTarget.All, Menu.sumReady-1);
+                Menu.sumReady = 0;
             }
         }
     }

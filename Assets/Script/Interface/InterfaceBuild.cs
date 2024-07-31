@@ -115,7 +115,7 @@ public class InterfaceBuild : MonoBehaviour
             } 
             if(Wybrany.punktyBudowy >= Wybrany.punktyBudowyMax)
             {  
-                CzasBudowy.text = Wybrany.HP.ToString() + "/" + Wybrany.maxHP.ToString();
+                CzasBudowy.text = ((float)((int)(Wybrany.HP * 10))/10).ToString() + "/" + Wybrany.maxHP.ToString();
                 TObrona.text = Wybrany.obrona.ToString();
             }
             else

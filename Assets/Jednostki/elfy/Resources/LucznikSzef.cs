@@ -34,12 +34,12 @@ public class LucznikSzef : MonoBehaviour
             buff = true;
         } 
         if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) <= 3 && buff && 
-                Jednostka.Select2.GetComponent<Jednostka>().sojusz == jednostka.GetComponent<Jednostka>().sojusz && jednostka.GetComponent<Jednostka>().zasieg > 2)
+                Jednostka.Select2.GetComponent<Jednostka>().sojusz == jednostka.GetComponent<Jednostka>().sojusz && Jednostka.Select2.GetComponent<Jednostka>().zasieg > 2 && Jednostka.Select2 != jednostka)
                 {
                     buff = false;
-                    Jednostka.Select2.GetComponent<Jednostka>().maxdmg += 2;
+                    Jednostka.Select2.GetComponent<Jednostka>().atak += 3;
                     cooldown = 3;
-                    Jednostka.Select2.GetComponent<Buff>().buffZ(1, 0, 0,0, 0, 2);
+                    Jednostka.Select2.GetComponent<Buff>().buffP(1, 0, 0,3, 0);
                     Menu.usunSelect2();
                     OnMouseDown();
                 }
@@ -51,7 +51,7 @@ public class LucznikSzef : MonoBehaviour
             buff2 = true;
         } 
         if (Jednostka.Select2 != null && Jednostka.CzyJednostka2 && Walka.odleglosc(jednostka, Jednostka.Select2) == 1 && buff2 && 
-                Jednostka.Select2.GetComponent<Jednostka>().sojusz == jednostka.GetComponent<Jednostka>().sojusz)
+                Jednostka.Select2.GetComponent<Jednostka>().sojusz == jednostka.GetComponent<Jednostka>().sojusz && Jednostka.Select2.GetComponent<Jednostka>().zasieg == 1)
                 {
                     buff2 = false;
                     Jednostka.Select2.GetComponent<Jednostka>().zasieg += 2;
@@ -83,6 +83,10 @@ public class LucznikSzef : MonoBehaviour
         if(koniec && !Menu.Next && jednostka.GetComponent<Jednostka>().druzyna == Menu.tura)
         {
             koniec = false;
+            if(cooldown > 0)
+                cooldown --;
+            if(cooldown2 > 0)
+                cooldown2 --;
             if(jednostka.GetComponent<Heros>().level >= 4)
                 akcja1 = true;
         }

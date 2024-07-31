@@ -56,7 +56,7 @@ public class End : MonoBehaviour
         }
         if(lista.Count == 1)
         {
-            Ending.wygrany = lista[0];
+            Ending.wygrany = lista[0] + 1;
         }
         return lista.Count == 1;
     }
@@ -67,7 +67,7 @@ public class End : MonoBehaviour
         // Debug.Log(druzynaKontroli + " " + punktyKontroli);
         if(punktyKontroli >= tureKontroli)
         {
-            Ending.wygrany = druzynaKontroli;
+            Ending.wygrany = druzynaKontroli + 1;
             return true;
         }
         return false;
@@ -79,7 +79,7 @@ public class End : MonoBehaviour
             if(Menu.ratuszPoziom[i] == poziomRatusza)
             {
                 
-                Ending.wygrany = i;
+                Ending.wygrany = i + 1;
                 return true;
             }
         }

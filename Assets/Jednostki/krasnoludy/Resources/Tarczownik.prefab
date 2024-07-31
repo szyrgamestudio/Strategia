@@ -992,8 +992,8 @@ MonoBehaviour:
   jednostka: {fileID: 6268565104842363223}
   druzyna: 1
   sojusz: 1
-  HP: 9
-  maxHP: 9
+  HP: 8
+  maxHP: 8
   atak: 1
   obrona: 4
   zasieg: 1
@@ -1050,6 +1050,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
   drewno: 0
+  elf: 0
   boss: 0
 --- !u!114 &6431125558254926903
 MonoBehaviour:

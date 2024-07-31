@@ -9,10 +9,16 @@ public class PoleOdkryj : MonoBehaviour
     public GameObject dark;
 
     public static bool mgla = true;
-    // Start is called before the first frame update
+
     void Start()
     {
-        if(!MenuGlowne.multi || !mgla)
+        if(!MenuGlowne.multi || !mgla )
+            Destroy(dark);
+    }
+
+    void Update()
+    {
+        if(MenuGlowne.multi && !WyburRas.aktywny[Ip.ip-1])//Ip.ip > Menu.IloscGraczyStart && Menu.IloscGraczyStart != 0)
             Destroy(dark);
     }
 
@@ -29,7 +35,6 @@ public class PoleOdkryj : MonoBehaviour
     [PunRPC]
     public void usunMulti(int soj)
     {
-        //Debug.Log(WyburRas.team[Ip.ip-1] + " --- " + soj);
         if(WyburRas.team[Ip.ip-1] == soj)
             Destroy(dark);
     }

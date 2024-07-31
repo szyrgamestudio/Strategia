@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wersja 0.4.0
+  m_text: Wersja 0.4.2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -319,8 +319,7 @@ MonoBehaviour:
   m_text: "Projektant, Programista, Pomys\u0142odawca\nIgor \"SzyRRogi\" R\xF3\u017Canowski\n\nNaczelna
     pomoc i wsparcie\nMateusz \"Massyn\" Afelt\n\nGrafika\nTogii, Magda Brzezi\u0144ska,
     Copilot AI\n\nMuzyka\nSuno AI\n\nMapy\nIgor \"SzyRRogi\" R\xF3\u017Canowski,
-    Filip Rogalski\n\nTesty\nCasTheDev, Shadow Inside, \nxfx_winner, Sir Teodoriusz\n\nGra
-    by SzyrGameStudio\n"
+    Filip Rogalski\n\nTesty\nCasTheDev, Shadow Inside\n\nGra by SzyrGameStudio\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4354,7 +4353,7 @@ MonoBehaviour:
   pierwszyRaz: 0
   glos: {fileID: 1080040248}
   glosSFX: {fileID: 840985063}
-  youtubeURL: https://www.youtube.com/watch?v=50HR3NsY47w
+  youtubeURL: https://youtu.be/o0hYqNzSbJE
 --- !u!1 &1561513032
 GameObject:
   m_ObjectHideFlags: 0

@@ -139,9 +139,10 @@ public class BudynekRuch : MonoBehaviour
                     ObiektRuszany.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, -90.0f);
             }
         }
+        
         if (wybudowany && ObiektRuszany.transform.position.x != -10f && (!MenuGlowne.multi || ObiektRuszany.GetComponent<Budynek>().druzyna == Ip.ip) && polepomoc)
         {
-            switch (ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z)
+            switch (Mathf.Round(ObiektRuszany.GetComponent<Budynek>().strzalka.transform.rotation.eulerAngles.z))
             {
                 case 90.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x+1,(int)ObiektRuszany.transform.position.y))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
                 case 270.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x-1,(int)ObiektRuszany.transform.position.y))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;
@@ -165,7 +166,7 @@ public class BudynekRuch : MonoBehaviour
         if(Ip.ip != ip)
         {
             try{
-            switch (stopnie)
+            switch (Mathf.Round(stopnie))
             {
                 case 90.0f: if(Menu.istnieje((int)ObiektRuszany.transform.position.x + 1,(int)ObiektRuszany.transform.position.y))pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x + 1][(int)ObiektRuszany.transform.position.y];  break;
                 case 270.0f:if(Menu.istnieje((int)ObiektRuszany.transform.position.x - 1,(int)ObiektRuszany.transform.position.y )) pole = Menu.kafelki[(int)ObiektRuszany.transform.position.x - 1][(int)ObiektRuszany.transform.position.y];  break;

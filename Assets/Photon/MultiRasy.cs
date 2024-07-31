@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MultiRasy : MonoBehaviourPunCallbacks
@@ -8,6 +9,10 @@ public class MultiRasy : MonoBehaviourPunCallbacks
     public GameObject[] graczDostepny;
     public  static int playerCount;
     public int dd;
+
+    public Image tlo;
+
+    public GameObject start;
     void Start()
     {
         // Sprawdź, czy jesteśmy połączeni z Master Server
@@ -17,6 +22,16 @@ public class MultiRasy : MonoBehaviourPunCallbacks
             int playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
             //if(Ip.ip==0)
                 Ip.ip = playerCount;
+            switch(Ip.ip)
+            {
+                case 1: tlo.color = new Color(1.0f, 0.0f, 0.0f); break;
+                case 2: tlo.color = new Color(0.0f, 1.0f, 0.0f); break;
+                case 3: tlo.color = new Color(0.0f, 0.0f, 1.0f); break;
+                case 4: tlo.color = new Color(1.0f, 1.0f, 0.0f); break;
+            }
+
+            if(Ip.ip != 1)
+                start.SetActive(false);
         }
     }
 

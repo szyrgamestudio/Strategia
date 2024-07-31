@@ -43,6 +43,7 @@ public class Pole : MonoBehaviour
         pomocnicza = new int[3];
         if(Ip.ip == 1)
             AktualizujPołożenie();
+        
         Menu.kafelki[(int)transform.position.x][(int)transform.position.y] = kafelek;
     }
     void Update()

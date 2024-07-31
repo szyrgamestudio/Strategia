@@ -252,7 +252,7 @@ public class Jednostka : MonoBehaviour
             atakujacy.GetComponent<Jednostka>().atak += atakujacy.GetComponent<Wilk>().dodatkowyAtak();
         if(End.boss && boss)
         {
-            Ending.wygrany = atakujacy.GetComponent<Jednostka>().sojusz;
+            Ending.wygrany = atakujacy.GetComponent<Jednostka>().sojusz + 1;
         }
         Jednostka Atakujacy = atakujacy.GetComponent<Jednostka>();
         if(Atakujacy.zasieg>=Walka.odleglosc(jednostka, atakujacy) && Atakujacy.akcja && (Atakujacy.zasieg > 1 || Atakujacy.lata || !jednostka.GetComponent<Jednostka>().lata))
@@ -273,9 +273,18 @@ public class Jednostka : MonoBehaviour
                 jednostka.GetComponent<Golem>().zadaj(atakujacy);
             if(Atakujacy.GetComponent<Ent>())
             {
-                szybkosc = 0;
-                jednostka.GetComponent<Buff>().buffZ(0,0,-maxszybkosc,0,0,0);
-                maxszybkosc = 0;
+                
+                if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = GetComponent<PhotonView>();
+                    photonView.RPC("updateEnt", RpcTarget.All);
+                }
+                else
+                {
+                    szybkosc = 0;
+                    jednostka.GetComponent<Buff>().buffZ(0,-maxszybkosc,-maxszybkosc,0,0,0);
+                    maxszybkosc = 0;
+                }
             }
             float result;
             if(atakujacy.GetComponent<Jednostka>().lata || jednostka.GetComponent<Jednostka>().lata)
@@ -292,7 +301,15 @@ public class Jednostka : MonoBehaviour
             if(Walka.odleglosc(jednostka, atakujacy)==1)
                 Atakujacy.animacjaMiecz(jednostka);
             else
+            {
                 Atakujacy.animacjaPocisk(jednostka);
+                if(MenuGlowne.multi)
+                {
+                    PhotonView photonView = atakujacy.GetComponent<PhotonView>();
+                    photonView.RPC("pociskeMulti", RpcTarget.All, Ip.ip, jednostka.transform.position);
+
+                }
+            }
             if(roundedResult<1)
             {
                 roundedResult = 1;
@@ -349,6 +366,25 @@ public class Jednostka : MonoBehaviour
     }
 
     [PunRPC]
+    public void updateEnt()
+    {
+        szybkosc = 0;
+        jednostka.GetComponent<Buff>().buffZ(0,-maxszybkosc,-maxszybkosc,0,0,0);
+        maxszybkosc = 0;
+    }
+
+   [PunRPC]
+    public void pociskeMulti(int ip, Vector3 pos)
+    {
+        if(ip != Ip.ip)
+        {
+            
+            GameObject Atakujacy = Menu.kafelki[(int)pos.x][(int)pos.y].GetComponent<Pole>().postac;
+            jednostka.GetComponent<Jednostka>().animacjaPocisk(Atakujacy);
+        }
+    }
+
+    [PunRPC]
     public void updateMusic(int a, int b)
     {
         Muzyka.muzyka.progresja[a - 1] = 2;
@@ -385,6 +421,9 @@ public class Jednostka : MonoBehaviour
     }
     public void animacjaPocisk(GameObject cel)
     {
+        Debug.Log("robir");
+        Debug.Log(cel.name);
+        Debug.Log(jednostka.name);
         GameObject strzal = Instantiate(pocisk, jednostka.transform.position, Quaternion.identity); 
         strzal.GetComponent<Pocisk>().cel = cel;
         src.clip = Sound.sound.GetComponent<Sound>().magic;
@@ -520,7 +559,7 @@ public class Jednostka : MonoBehaviour
             {
                 End.bossPokonany = true;
             }
-            if(lata)
+            if(!lata)
                 Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().Zajete = false;
             else
                 Menu.kafelki[(int)jednostka.transform.position.x][(int)jednostka.transform.position.y].GetComponent<Pole>().ZajeteLot = false;
@@ -658,7 +697,7 @@ public class Jednostka : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        if(druzyna!=Menu.tura && Select!=null && CzyJednostka && Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Select, jednostka) && (Select.GetComponent<Jednostka>().akcja) && !Jednostka.wybieranie && Select.GetComponent<Jednostka>().druzyna != druzyna && (!MenuGlowne.multi || (Select.GetComponent<Jednostka>().druzyna == Ip.ip)))
+        if(druzyna!=Menu.tura && Select!=null && CzyJednostka && Select.GetComponent<Jednostka>().zasieg >= Walka.odleglosc(Select, jednostka) && (Select.GetComponent<Jednostka>().akcja) && !Jednostka.wybieranie && Select.GetComponent<Jednostka>().sojusz != sojusz && (!MenuGlowne.multi || (Select.GetComponent<Jednostka>().druzyna == Ip.ip)))
         {
             Cursor.SetCursor(customCursor, Vector2.zero, CursorMode.Auto);
         }    

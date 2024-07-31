@@ -173,14 +173,15 @@ public class Krematorium : MonoBehaviour
 
             for(int i = 0 ; i < budynek.GetComponent<Budynek>().zdolnosci ; i++)
             {
+                // Debug.Log(i + " " + wymagany[i] + " > " + Menu.ratuszPoziom[druzyna])
                 if(wymagany[i] > Menu.ratuszPoziom[druzyna])
                 {
                     InterfaceBuild.przyciski[i].GetComponent<Image>().sprite = loock;
                     switch(wymagany[i])
                     {
-                        case 1:  teksty[i] = "Wymagany 2 poziom ratusza"; break;
-                        case 2:  teksty[i] = "Wymagany 3 poziom ratusza"; break;
-                        case 3:  teksty[i] = "Wymagany 4 poziom ratusza"; break;
+                        case 1:  InterfaceBuild.przyciski[i].GetComponent<PrzyciskInter>().Opis.text = "Wymagany 2 poziom ratusza"; break;
+                        case 2:  InterfaceBuild.przyciski[i].GetComponent<PrzyciskInter>().Opis.text = "Wymagany 3 poziom ratusza"; break;
+                        case 3:  InterfaceBuild.przyciski[i].GetComponent<PrzyciskInter>().Opis.text = "Wymagany 4 poziom ratusza"; break;
                     }
                 }
             }

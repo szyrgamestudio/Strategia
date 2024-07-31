@@ -121,7 +121,6 @@ public class Kopalnia : MonoBehaviour
                     slot[0].SetActive(true);
                     pole.GetComponent<Pole>().Zajete = true;
                     slot[0].transform.position = new Vector3(pole.transform.position.x,pole.transform.position.y,-2f);
-                    Debug.Log(pole.name);
                     pole.GetComponent<Pole>().postac = slot[0];
                     InterfaceBuild.obrazkikopalnia[1].GetComponent<Image>().sprite = puste;
                     slot[0] = null;
@@ -250,7 +249,6 @@ public class Kopalnia : MonoBehaviour
         {
             float damagehelp = budynek.GetComponent<Budynek>().damage;
             budynek.GetComponent<Budynek>().damage = 0;
-            Debug.Log(budynek.GetComponent<Budynek>().damage);
             float help = 99;
             
             GameObject bity = null;
@@ -282,7 +280,6 @@ public class Kopalnia : MonoBehaviour
                     Menu.jednostki[druzyna_oponenta,nr_jednostki] = null;
                     Menu.ludnosc[druzyna_oponenta]--;
                     Destroy(bity); 
-                    Debug.Log(dhelp);
                     slot[dhelp] = null;
                 }
                         
@@ -298,6 +295,8 @@ public class Kopalnia : MonoBehaviour
         {
             kolejnatura = 2;
             int sumaGolda = 0;
+            if(budynek.GetComponent<Budynek>().zdolnosci > 6)
+                budynek.GetComponent<Budynek>().zdolnosci = 6;
             for(int i=0;i<budynek.GetComponent<Budynek>().zdolnosci;i++)
             {
                 if(slot[i]!=null)
@@ -314,6 +313,8 @@ public class Kopalnia : MonoBehaviour
         if(Jednostka.Select != null && Jednostka.Select.GetComponent<Zbieracz>() != null && Walka.odleglosc(Jednostka.Select,budynek) == 1 && Jednostka.Select.GetComponent<Jednostka>().druzyna == Menu.tura)
         {
             polePomoc = Menu.kafelki[(int)Jednostka.Select.transform.position.x][(int)Jednostka.Select.transform.position.y];
+            if(budynek.GetComponent<Budynek>().zdolnosci > 6)
+                budynek.GetComponent<Budynek>().zdolnosci = 6;
             for(int i=0;i<budynek.GetComponent<Budynek>().zdolnosci;i++)
             {
                 if(slot[i]==null)
@@ -364,7 +365,6 @@ public class Kopalnia : MonoBehaviour
             slot[i].SetActive(true);
             pole.GetComponent<Pole>().Zajete = true;
             slot[i].transform.position = new Vector3(pole.transform.position.x,pole.transform.position.y,-2f);
-            Debug.Log(pole.name);
             pole.GetComponent<Pole>().postac = slot[0];
             InterfaceBuild.obrazkikopalnia[i+1].GetComponent<Image>().sprite = puste;
             slot[i] = null;

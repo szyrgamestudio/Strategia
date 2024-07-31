@@ -999,7 +999,7 @@ MonoBehaviour:
   szybkosc: 5
   mindmg: 1
   maxdmg: 3
-  zdolnosci: 1
+  zdolnosci: 0
   zbieracz: 0
   lata: 0
   cena: 5

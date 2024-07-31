@@ -740,12 +740,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 877f21135b24cfd41bfda18cf785a8d3, type: 3}
   - {fileID: 21300000, guid: 877f21135b24cfd41bfda18cf785a8d3, type: 3}
   teksty:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - "Zbieracz to podstawowa jednostka zbieraj\u0105ca z\u0142oto i drewno"
+  - "Poszukiwacz zarazy mo\u017Ce sprawdzi\u0107 czy pole na kt\xF3rym stoi zawiera
+    z\u0142oto. Idealna jednostka by wybra\u0107 miejsce na now\u0105 baze"
+  - "Budowlaniec s\u0142u\u017Cy do budowy nowych budynk\xF3w"
+  - "Adept zbiera magi\u0119 z magicznych kr\u0119g\xF3w"
+  - "Po zakupie tego ulepszenia, budowa trwa kr\xF3cej"
+  - "Ulepszony ratusz otwiera nowe mo\u017Cliwo\u015Bci takie jak nowe jednostki
+    w pozosta\u0142ych budynkach oraz odblokowanie zablokowanych budynk\xF3w"
   - 
   - 
   - 

@@ -84,15 +84,8 @@ public class Menu : MonoBehaviour
         {
             kafelki[i] = new GameObject[BoardSizeY];
         }
-         if(!MenuGlowne.multi) 
-         {
-             GetComponent<MapLoad>().LoadMapData();
-         }
-         else
-         {
-            if(Ip.ip == 1)
-                StartCoroutine(Aktualizuj(10,IloscGraczy, IloscGraczyStart));
-         }
+
+         
 
         PanelUnit = PrivPanelUnity;
         PanelBuild = PrivPanelBuild;
@@ -102,7 +95,18 @@ public class Menu : MonoBehaviour
         turaNPC.gameObject.SetActive(false);
         
         IloscGraczyStart = IloscGraczy;
-        Debug.Log(IloscGraczyStart + " = " + IloscGraczy);
+
+        if(!MenuGlowne.multi) 
+         {
+             GetComponent<MapLoad>().LoadMapData();
+         }
+         else
+         {
+            Debug.Log(Menu.IloscGraczy + " ddd " + Menu.IloscGraczyStart);
+            if(Ip.ip == 1)
+                StartCoroutine(Aktualizuj(10,IloscGraczy, IloscGraczyStart));
+         }
+
         if(End.tureDoKonca != 0)
             nrTuryText.text = (End.tureDoKonca).ToString();
     }
@@ -116,6 +120,7 @@ public class Menu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.BackQuote)) // Tylda znajduje się na klawiszu BackQuote
         {
             Debug.Log(IloscGraczy);
+            Debug.Log("sum " + sumReady);
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -179,6 +184,8 @@ public class Menu : MonoBehaviour
         Menu.nrTury = nrTury;
         if(IloscGraczyStart != 0)
             Menu.IloscGraczyStart = IloscGraczyStart;
+
+        Debug.Log(Menu.IloscGraczy + " " + Menu.IloscGraczyStart);
     }
 
     [PunRPC]
@@ -237,9 +244,35 @@ public class Menu : MonoBehaviour
 
         }
     }
+    public static int sumReady;
+
+    [PunRPC]
+    public void sumuj(int ip)
+    {
+        if(SimultanTurns.ready)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("sumujZwienksz", RpcTarget.All, ip);
+        }
+    }
+
+    [PunRPC]
+    public void sumujZwienksz(int ip)
+    {
+        if(Ip.ip == ip)
+        {
+            sumReady++;
+        }
+    }
 
     public void NextTurn()
     {
+        if(NIERUSZAC && SimultanTurns.simultanTurns && WyburRas.aktywny[Ip.ip-1] && tura != 0)
+        {
+            sumReady = 0;
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("sumuj", RpcTarget.All, Ip.ip);
+        }
         if((!NIERUSZAC || (SimultanTurns.ready && SimultanTurns.readyCount == 0)) && (!MenuGlowne.multi || (Ip.ip == tura || tura == 0)))
         {
             NaPewnoKoniec++;
@@ -332,7 +365,6 @@ public class Menu : MonoBehaviour
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("IloscUpdate", RpcTarget.All, IloscGraczy);
                 }
-                Debug.Log("Czy wygrana? " + End.czyWygrana());
                 if(End.czyWygrana())
                 {
                     //Ending.wygrany = wygrany;
@@ -381,7 +413,7 @@ public class Menu : MonoBehaviour
                     }
                     else
                     {
-                        if(Menu.NPC.Count != 0)
+                        if(Menu.NPC.Count != 0 && Menu.NPC[0] != null)
                         {
                             NIERUSZAC = true;
                             turaNPC.value = 0;
@@ -652,7 +684,7 @@ public class Menu : MonoBehaviour
                         help = pole.postac;
                         Jednostka czek = help.GetComponent<Jednostka>();
 
-                        if (czek != null && czek.druzyna != 0 && czek.HP > 0.1 && !czek.lata)
+                        if (czek != null && czek.druzyna != 0 && czek.HP > 0.1 && (!czek.lata || NPC.GetComponent<Jednostka>().lata || NPC.GetComponent<Jednostka>().zasieg >= 3))
                         {
                             lista.Add(help);
                         }

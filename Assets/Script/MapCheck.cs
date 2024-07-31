@@ -132,9 +132,10 @@ public class MapCheck : MonoBehaviour
 
         //niech wczyta drugą linie i przypisze ją do wartości Menu.BoardSizeX
         string secondLine = LoadSecondLine(filePath);
-        string trzeciaLine = LoadSecondLine(filePath);
+        string trzeciaLine = LoadTrzeciaLine(filePath);
         Menu.BoardSizeX = int.Parse(secondLine);
         Menu.BoardSizeY = int.Parse(trzeciaLine);
+        Debug.Log("X " + Menu.BoardSizeX + " y " + Menu.BoardSizeY);
         opisText.text = "Opis:\n" + opis;
         MapLoad.rozdziel(firstLine);
         przyciskiControl();
@@ -169,6 +170,24 @@ public class MapCheck : MonoBehaviour
         {
             using (StreamReader reader = new StreamReader(filePath))
             {
+                reader.ReadLine(); // Skip the first line
+                return reader.ReadLine(); // Read the second line
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error loading second line: " + ex.Message);
+            return string.Empty;
+        }
+    }
+
+    private string LoadTrzeciaLine(string filePath)
+    {
+        try
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                reader.ReadLine(); // Skip the first line
                 reader.ReadLine(); // Skip the first line
                 return reader.ReadLine(); // Read the second line
             }
