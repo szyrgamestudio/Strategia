@@ -54,7 +54,8 @@ public class Budowlaniec : MonoBehaviour
                 if(ruch != null && !ruch.wybudowany)
                 {
                     Apteka apteka2 = BudowanyObiekt.GetComponent<Apteka>();
-                    if(apteka2 != null)
+                    Rzez apteka3 = BudowanyObiekt.GetComponent<Rzez>();
+                    if(apteka2 != null || apteka3 != null)
                         Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna] = false;
                     BudowanyObiekt.GetComponent<BudynekRuch>().dedMulti();
                     Destroy(BudowanyObiekt);
@@ -230,7 +231,8 @@ public class Budowlaniec : MonoBehaviour
                 if(ruch != null && !ruch.wybudowany)
                 {
                     Apteka apteka2 = BudowanyObiekt.GetComponent<Apteka>();
-                    if(apteka2 != null)
+                    Rzez apteka3 = BudowanyObiekt.GetComponent<Rzez>();
+                    if(apteka2 != null || apteka3 != null )
                         Apteka.apteka[jednostka.GetComponent<Jednostka>().druzyna] = false;
                     BudowanyObiekt.GetComponent<BudynekRuch>().dedMulti();
                     Destroy(BudowanyObiekt);

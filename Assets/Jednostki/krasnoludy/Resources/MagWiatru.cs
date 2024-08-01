@@ -105,7 +105,7 @@ public class MagWiatru : MonoBehaviour
                         help = pole.postac;
                         Jednostka czek = help.GetComponent<Jednostka>();
 
-                        if (czek != null  && czek.HP > 0.1 && !lista.Contains(help))
+                        if (czek != null  && czek.HP > 0.1 && !lista.Contains(help) && !help.GetComponent<Wieza>())
                         {
                             lista.Add(help);
                         }

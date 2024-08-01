@@ -162,7 +162,7 @@ public class Jednostka : MonoBehaviour
     public void OnMouse()
     {
         Menu.przyciskiClear();
-        if(wybieranie)
+        if(wybieranie && !jednostka.GetComponent<Wieza>())
             {
                 Select2 = jednostka;
                 CzyJednostka2 = true;
@@ -282,7 +282,7 @@ public class Jednostka : MonoBehaviour
                 else
                 {
                     szybkosc = 0;
-                    jednostka.GetComponent<Buff>().buffZ(0,-maxszybkosc,-maxszybkosc,0,0,0);
+                    jednostka.GetComponent<Buff>().buffZ(0,0,-maxszybkosc,0,0,0);
                     maxszybkosc = 0;
                 }
             }
@@ -369,7 +369,7 @@ public class Jednostka : MonoBehaviour
     public void updateEnt()
     {
         szybkosc = 0;
-        jednostka.GetComponent<Buff>().buffZ(0,-maxszybkosc,-maxszybkosc,0,0,0);
+        jednostka.GetComponent<Buff>().buffZ(0,0,-maxszybkosc,0,0,0);
         maxszybkosc = 0;
     }
 
@@ -594,7 +594,10 @@ public class Jednostka : MonoBehaviour
                             Heros herosSkrypt = heros.GetComponent<Heros>();
                             if(herosSkrypt != null && heros.GetComponent<Jednostka>().sojusz != sojusz)
                             {
-                                herosSkrypt.exp += cena;
+                                if(cena > drewno)
+                                    herosSkrypt.exp += cena;
+                                else
+                                    herosSkrypt.exp += drewno;
                             }
                         }
                     }

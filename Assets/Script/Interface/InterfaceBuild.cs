@@ -132,7 +132,7 @@ public class InterfaceBuild : MonoBehaviour
         }
     }
 
-        public static void Czyszczenie()
+    public static void Czyszczenie()
     {
         for (int i = 0; i < 16; i++)
             {
@@ -150,7 +150,7 @@ public class InterfaceBuild : MonoBehaviour
     }
 
 
-            void UpdateHealthBarColor()
+    void UpdateHealthBarColor()
     {
         float normalizedHP;
         if(Jednostka.Select.GetComponent<Budynek>().punktyBudowy<Jednostka.Select.GetComponent<Budynek>().punktyBudowyMax)

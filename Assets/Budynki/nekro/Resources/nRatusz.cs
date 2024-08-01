@@ -251,7 +251,6 @@ public class nRatusz : MonoBehaviour
         Menu.bazy[druzyna , Menu.bazyIlosc[druzyna]] = budynek;
         nr_jednostki = Menu.bazyIlosc[druzyna];
         Menu.bazyIlosc[druzyna]++;
-        Debug.Log("w domu najlepiej");
         if(MenuGlowne.multi)
         {
             PhotonView photonView = GetComponent<PhotonView>();

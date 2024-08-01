@@ -141,7 +141,6 @@ public class Rzez : MonoBehaviour
         [PunRPC]
     public void wskrzeszenieMulti(int x, int y)
     {
-        Debug.Log("zaczynamy");
         Jednostka staty = Menu.heros[druzyna].GetComponent<Jednostka>();
             regeneracja = 0;
             Menu.ludnosc[druzyna]++;
@@ -158,6 +157,8 @@ public class Rzez : MonoBehaviour
 
     void OnMouseDown()
     {
+        if(budynek == Jednostka.Select)
+        {
         InterfaceBuild.obrazkikopalnia[1].SetActive(false);
         InterfaceBuild.obrazkikopalnia[2].SetActive(false);
         InterfaceBuild.obrazkikopalnia[3].SetActive(false);
@@ -195,6 +196,6 @@ public class Rzez : MonoBehaviour
                 budynek.GetComponent<Budynek>().OnMouseDown();
             }
 
-           
+        }
     }
 }

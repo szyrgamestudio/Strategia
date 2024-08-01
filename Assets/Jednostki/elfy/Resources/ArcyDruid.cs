@@ -71,39 +71,39 @@ public class ArcyDruid : MonoBehaviour
                 jaskolka();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[4]==true  && Menu.magia[Menu.tura]>=5)
+            if(Przycisk.jednostka[4]==true  && Menu.magia[Menu.tura]>=7)
             {
                 Przycisk.jednostka[4]=false;
                 if(MenuGlowne.multi)
                     photonView.RPC("multiPrzemiana", RpcTarget.Others, 5 , Ip.ip);
-                Menu.magia[Menu.tura]-=5;
+                Menu.magia[Menu.tura]-=7;
                 niedzwiedz();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[5]==true  && Menu.magia[Menu.tura]>=5)
+            if(Przycisk.jednostka[5]==true  && Menu.magia[Menu.tura]>=7)
             {
                 Przycisk.jednostka[5]=false;
                 if(MenuGlowne.multi)
                     photonView.RPC("multiPrzemiana", RpcTarget.Others, 6 , Ip.ip);
-                Menu.magia[Menu.tura]-=5;
+                Menu.magia[Menu.tura]-=7;
                 gryf();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[6]==true  && Menu.magia[Menu.tura]>=9)
+            if(Przycisk.jednostka[6]==true  && Menu.magia[Menu.tura]>=12)
             {
                 Przycisk.jednostka[6]=false;
                 if(MenuGlowne.multi)
                     photonView.RPC("multiPrzemiana", RpcTarget.Others, 7 , Ip.ip);
-                Menu.magia[Menu.tura]-=9;
+                Menu.magia[Menu.tura]-=12;
                 duchLasu();
                 OnMouseDown();
             }
-            if(Przycisk.jednostka[7]==true  && Menu.magia[Menu.tura]>=13)
+            if(Przycisk.jednostka[7]==true  && Menu.magia[Menu.tura]>=15)
             {
                 Przycisk.jednostka[7]=false;
                 if(MenuGlowne.multi)
                     photonView.RPC("multiPrzemiana", RpcTarget.Others, 8 , Ip.ip);
-                Menu.magia[Menu.tura]-=13;
+                Menu.magia[Menu.tura]-=15;
                 Feniks();
                 OnMouseDown();
             }

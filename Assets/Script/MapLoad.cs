@@ -145,7 +145,6 @@ public class MapLoad : MonoBehaviour
                 // Odczytanie i przypisanie wysokości planszy z drugiej linii pliku
                 Menu.BoardSizeY = int.Parse(reader.ReadLine().Trim());
 
-                Debug.Log("aaaa" + Menu.BoardSizeY);
 
                 // Odczytywanie kolejnych linii pliku
                 char piatyOdKoncaZnak = nazwa[nazwa.Length - 6];
@@ -213,7 +212,6 @@ public class MapLoad : MonoBehaviour
             } // Zakończenie bloku 'using', automatycznie zamyka obiekt StreamReader
 
 
-            Debug.Log(tempMapData[0].Count);
             int[,] kafelekObraz = new int[100, 100];
             int[,] kafelekWysokosc = new int[100, 100];
             int[,] kafelekGold = new int[5000, 5];
