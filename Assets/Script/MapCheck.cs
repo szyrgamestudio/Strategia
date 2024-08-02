@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Photon.Pun;
 using System;
-using System.IO;
 
 public class MapCheck : MonoBehaviour
 {

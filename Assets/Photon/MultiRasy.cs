@@ -15,6 +15,16 @@ public class MultiRasy : MonoBehaviourPunCallbacks
     public GameObject start;
     void Start()
     {
+        if (DiscordManager.Instance != null)
+        {
+            DiscordManager.Instance.State = "Wybiera rasę";
+            Debug.Log("Updated Discord state");
+        }
+        else
+        {
+            Debug.LogError("DiscordManager instance is null.");
+        }
+
         // Sprawdź, czy jesteśmy połączeni z Master Server
         if (PhotonNetwork.IsConnected)
         {

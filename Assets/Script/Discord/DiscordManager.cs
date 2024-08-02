@@ -1,6 +1,7 @@
 using Discord;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DiscordManager : MonoBehaviour
 {
@@ -10,11 +11,31 @@ public class DiscordManager : MonoBehaviour
     private Discord.Discord discord;
 
     [Header("Rich Presence Settings")]
-    [SerializeField]
-    private string details;
 
     [SerializeField]
-    private string state;
+    private string _details;
+    public string Details
+    {
+        get => _details;
+        set
+        {
+            _details = value;
+            UpdateRichPresence(details: _details);
+        }
+    }
+
+    [SerializeField]
+    private string _state;
+
+    public string State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            UpdateRichPresence(state: _state);
+        }
+    }
 
     [SerializeField]
     private string largeImage;
@@ -45,23 +66,48 @@ public class DiscordManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject); // Make sure the instance is persistent
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (discord != null)
+        {
+            discord.Dispose();
+            discord = null;
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Update the rich presence data based on the new scene
+        //UpdateRichPresence(details: $"W {scene.name}", updateTimestamp: true);
     }
 
     void Start()
     {
-        discord = new Discord.Discord(1268613606937985056, (long)CreateFlags.Default);
-        UpdateRichPresence(updateTimestamp: true);
+        if (discord == null)
+        {
+            discord = new Discord.Discord(1268613606937985056, (long)CreateFlags.Default);
+            UpdateRichPresence(updateTimestamp: true);
+        }
     }
 
     void UpdateRichPresence(string details = null, string state = null, string largeImage = null, string largeText = null, string smallImage = null, string smallText = null, int currentPartySize = -1, int maxPartySize = -1, bool updateTimestamp = false, long endTimestamp = -1)
     {
-        this.details = details ?? this.details;
-        this.state = state ?? this.state;
+        this._details = details ?? this._details;
+        this._state = state ?? this._state;
         this.largeImage = largeImage ?? this.largeImage;
         this.largeText = largeText ?? this.largeText;
         this.smallImage = smallImage ?? this.smallImage;
@@ -71,26 +117,29 @@ public class DiscordManager : MonoBehaviour
         this.timestamp = updateTimestamp ? new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds() : this.timestamp;
         this.endTimestamp = endTimestamp != -1 ? endTimestamp : this.endTimestamp;
 
-        ActivityManager activityManager = discord.GetActivityManager();
-        Activity activity = new()
+        if (discord != null)
         {
-            Details = this.details,
-            State = this.state,
-            Assets = { LargeImage = this.largeImage, LargeText = this.largeText, SmallImage = this.smallImage, SmallText = this.smallText },
-            Timestamps = { Start = this.timestamp, End = this.endTimestamp },
-            Party = { Size = { CurrentSize = this.currentPartySize, MaxSize = this.maxPartySize } }
-        };
-        activityManager.UpdateActivity(activity, (res) =>
-        {
-            if (res == Result.Ok)
+            ActivityManager activityManager = discord.GetActivityManager();
+            Activity activity = new()
             {
-                Debug.Log("Daj ziobu");
-            }
-            else
+                Details = this._details,
+                State = this._state,
+                Assets = { LargeImage = this.largeImage, LargeText = this.largeText, SmallImage = this.smallImage, SmallText = this.smallText },
+                Timestamps = { Start = this.timestamp, End = this.endTimestamp },
+                Party = { Size = { CurrentSize = this.currentPartySize, MaxSize = this.maxPartySize } }
+            };
+            activityManager.UpdateActivity(activity, (res) =>
             {
-                Debug.LogError("xpp");
-            }
-        });
+                if (res == Result.Ok)
+                {
+                    Debug.Log("Rich presence updated successfully.");
+                }
+                else
+                {
+                    Debug.LogError("Failed to update rich presence.");
+                }
+            });
+        }
     }
 
     void Update()
@@ -98,14 +147,6 @@ public class DiscordManager : MonoBehaviour
         if (discord != null)
         {
             discord.RunCallbacks();
-        }
-    }
-
-    void OnDisable()
-    {
-        if (discord != null)
-        {
-            discord.Dispose();
         }
     }
 }

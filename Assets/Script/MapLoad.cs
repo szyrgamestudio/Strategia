@@ -10,6 +10,7 @@ public class MapLoad : MonoBehaviour
 {
     public Sprite[] obraz = new Sprite[66];
     public static Sprite[] obrazStatic = new Sprite[66];
+    [SerializeField]
     public static string nazwa;// = "mmap1.txt";
     public GameObject kafelek;
     public GameObject[][] enemyList;
@@ -31,16 +32,16 @@ public class MapLoad : MonoBehaviour
     public List<GameObject> enemyStrzela;
     public List<GameObject> enemyStrzelaTrudny;
     public GameObject boss;
-    
+
 
     [PunRPC]
     public void manaZwieksz(int ip, int i)
     {
-        if(Ip.ip != ip)
+        if (Ip.ip != ip)
             Menu.magia[1 + (i)] += 6;
     }
 
-     public GameObject RandomEnemy(int poziom)
+    public GameObject RandomEnemy(int poziom)
     {
         switch (poziom)
         {
@@ -66,7 +67,7 @@ public class MapLoad : MonoBehaviour
         {
             nazwa = nazwa.TrimEnd(';');
         }
-        
+
         string[] tablica = nazwa.Split(';');
 
         if (tablica[0] == "0")
@@ -96,15 +97,15 @@ public class MapLoad : MonoBehaviour
         {
             End.economy = false;
         }
-        if(tablica[3] != "0")
+        if (tablica[3] != "0")
         {
             End.boss = true;
-             string[] dane = tablica[3].Split(',');
-             int.TryParse(dane[0], out int x);
-             int.TryParse(dane[1], out int y);
-             int.TryParse(dane[2], out int z);
-             End.bossPosition = new Vector3((float)x, (float)y, 0);
-             End.tureDoKonca = z;
+            string[] dane = tablica[3].Split(',');
+            int.TryParse(dane[0], out int x);
+            int.TryParse(dane[1], out int y);
+            int.TryParse(dane[2], out int z);
+            End.bossPosition = new Vector3((float)x, (float)y, 0);
+            End.tureDoKonca = z;
         }
         else
         {
@@ -129,7 +130,7 @@ public class MapLoad : MonoBehaviour
         List<List<int>> tempMapGold = new List<List<int>>();
         List<List<int>> tempMapUnit = new List<List<int>>();
         List<List<int>> tempMapEnemy = new List<List<int>>();
-        List<List<int>> tempMapItem  = new List<List<int>>();
+        List<List<int>> tempMapItem = new List<List<int>>();
 
         // Sprawdzenie, czy plik istnieje
         if (File.Exists(filePath))
@@ -150,15 +151,15 @@ public class MapLoad : MonoBehaviour
                 char piatyOdKoncaZnak = nazwa[nazwa.Length - 6];
                 int.TryParse(piatyOdKoncaZnak.ToString(), out int maxGraczy);
                 End.maxGraczy = maxGraczy;
-                if(Menu.IloscGraczy > End.maxGraczy)
+                if (Menu.IloscGraczy > End.maxGraczy)
                     Menu.IloscGraczy = End.maxGraczy;
-                for(int i = 0; i < 4; i++) 
+                for (int i = 0; i < 4; i++)
                 {
-                    if(i >= End.maxGraczy)
+                    if (i >= End.maxGraczy)
                         WyburRas.aktywny[i] = false;
 
-                }         
-                if(MenuGlowne.multi)
+                }
+                if (MenuGlowne.multi)
                 {
                     PhotonView photonView = GetComponent<PhotonView>();
                     photonView.RPC("updateAktywny", RpcTarget.All, WyburRas.aktywny);
@@ -181,7 +182,7 @@ public class MapLoad : MonoBehaviour
                     // Wstawienie listy z danymi wiersza na początek listy mapy
                     if (line == "7777")
                         break;
-                    if(itemStart)
+                    if (itemStart)
                         tempMapItem.Add(row);
                     if (line == "01111011")
                         itemStart = true;
@@ -253,7 +254,7 @@ public class MapLoad : MonoBehaviour
                 {
                     kafelekItem[l, j] = tempMapItem[l][j];
                 }
-                
+
             for (int x = 0; x < Menu.BoardSizeX; x++)
                 for (int y = 0; y < Menu.BoardSizeY; y++)
                 {
@@ -329,37 +330,37 @@ public class MapLoad : MonoBehaviour
             {
                 if (WyburRas.aktywny[i] == true)
                 {
-                    StartCoroutine(ludzik(0+11*WyburRas.rasa[i], kafelekUnit[0 + (i * 5), 0], kafelekUnit[0 + (i * 5), 1], 1 + i));
-                    StartCoroutine(ludzik(0+11*WyburRas.rasa[i], kafelekUnit[1 + (i * 5), 0], kafelekUnit[1 + (i * 5), 1], 1 + i));
-                    StartCoroutine(ludzik(7+11*WyburRas.rasa[i], kafelekUnit[2 + (i * 5), 0], kafelekUnit[2 + (i * 5), 1], 1 + i));
+                    StartCoroutine(ludzik(0 + 11 * WyburRas.rasa[i], kafelekUnit[0 + (i * 5), 0], kafelekUnit[0 + (i * 5), 1], 1 + i));
+                    StartCoroutine(ludzik(0 + 11 * WyburRas.rasa[i], kafelekUnit[1 + (i * 5), 0], kafelekUnit[1 + (i * 5), 1], 1 + i));
+                    StartCoroutine(ludzik(7 + 11 * WyburRas.rasa[i], kafelekUnit[2 + (i * 5), 0], kafelekUnit[2 + (i * 5), 1], 1 + i));
                     if (WyburRas.heros[i] == 0)
                     {
-                        StartCoroutine(ludzik(1+11*WyburRas.rasa[i], kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
-                        StartCoroutine(ludzik(9+11*WyburRas.rasa[i], kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(1 + 11 * WyburRas.rasa[i], kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(9 + 11 * WyburRas.rasa[i], kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
                     }
                     if (WyburRas.heros[i] == 1)
                     {
                         Menu.magia[1 + (i)] += 6;
-                        if(MenuGlowne.multi)
+                        if (MenuGlowne.multi)
                         {
                             PhotonView photonView = GetComponent<PhotonView>();
-                            photonView.RPC("manaZwieksz", RpcTarget.All,Ip.ip, i);
+                            photonView.RPC("manaZwieksz", RpcTarget.All, Ip.ip, i);
                         }
-                        StartCoroutine(ludzik(8+11*WyburRas.rasa[i], kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
-                        StartCoroutine(ludzik(10+11*WyburRas.rasa[i], kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(8 + 11 * WyburRas.rasa[i], kafelekUnit[3 + (i * 5), 0], kafelekUnit[3 + (i * 5), 1], 1 + i));
+                        StartCoroutine(ludzik(10 + 11 * WyburRas.rasa[i], kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 1 + i));
                     }
                 }
                 else//TUTTAJ KOMBIJNUJE
                 {
-                    if(End.maxGraczy >= i+1)
-                    StartCoroutine(ludzik(3, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 0));
+                    if (End.maxGraczy >= i + 1)
+                        StartCoroutine(ludzik(3, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 0));
                 }
             }
             k = 0;
             while (kafelekEnemy[k, 0] != 0)
             {
                 if (kafelekEnemy[k, 0] == 1)
-                    StartCoroutine(ludzik(RandomEnemy(kafelekEnemy[k,1]), kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                    StartCoroutine(ludzik(RandomEnemy(kafelekEnemy[k, 1]), kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
                 if (kafelekEnemy[k, 0] == 2)
                     StartCoroutine(budynek(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
                 k++;
@@ -367,10 +368,10 @@ public class MapLoad : MonoBehaviour
             k = 0;
             while (kafelekItem[k, 0] != 0)
             {
-                PoleFind pole = Menu.kafelki[kafelekItem[k, 1]][kafelekItem[k, 2]].GetComponent<PoleFind>(); 
-                if(MenuGlowne.multi)
+                PoleFind pole = Menu.kafelki[kafelekItem[k, 1]][kafelekItem[k, 2]].GetComponent<PoleFind>();
+                if (MenuGlowne.multi)
                 {
-                    pole.updateMultiWywolaj(kafelekItem[k, 0],0);
+                    pole.updateMultiWywolaj(kafelekItem[k, 0], 0);
                 }
                 else
                 {
@@ -379,23 +380,23 @@ public class MapLoad : MonoBehaviour
                 }
                 k++;
             }
-            for(int i = -1; i < Menu.BoardSizeX; i++)
+            for (int i = -1; i < Menu.BoardSizeX; i++)
             {
                 GameObject newUnit = null;
-                
-                
+
+
                 Vector3 TilePosition = new Vector3(i, -1, 3);
                 if (MenuGlowne.multi)
                     newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
                 else
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
                 newUnit.name = i.ToString() + "  -1";
-                TilePosition = new Vector3(i, Menu.BoardSizeY+1, 3);
+                TilePosition = new Vector3(i, Menu.BoardSizeY + 1, 3);
                 if (MenuGlowne.multi)
                     newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
                 else
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
-                newUnit.name = Menu.BoardSizeY+1.ToString() + "  " + Menu.BoardSizeX+1.ToString();
+                newUnit.name = Menu.BoardSizeY + 1.ToString() + "  " + Menu.BoardSizeX + 1.ToString();
                 TilePosition = new Vector3(i, Menu.BoardSizeY, 3);
                 if (MenuGlowne.multi)
                     newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
@@ -403,27 +404,27 @@ public class MapLoad : MonoBehaviour
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
                 newUnit.name = Menu.BoardSizeY.ToString() + "  " + Menu.BoardSizeX.ToString();
             }
-            for(int i = -1; i < Menu.BoardSizeY+2; i++)
+            for (int i = -1; i < Menu.BoardSizeY + 2; i++)
             {
                 GameObject newUnit = null;
-                
-                
+
+
                 Vector3 TilePosition = new Vector3(-1, i, 3);
                 if (MenuGlowne.multi)
                     newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
                 else
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
                 newUnit.name = "-1 " + i.ToString();
-                TilePosition = new Vector3(Menu.BoardSizeX, i,  3);
+                TilePosition = new Vector3(Menu.BoardSizeX, i, 3);
                 if (MenuGlowne.multi)
                     newUnit = PhotonNetwork.Instantiate(kafelekFake.name, TilePosition, Quaternion.identity);
                 else
                     newUnit = Instantiate(kafelekFake, TilePosition, Quaternion.identity);
-                newUnit.name =  Menu.BoardSizeX.ToString() + " " + Menu.BoardSizeY.ToString();
+                newUnit.name = Menu.BoardSizeX.ToString() + " " + Menu.BoardSizeY.ToString();
             }
-            if(End.boss)
+            if (End.boss)
             {
-                StartCoroutine(ludzik(boss, End.bossPosition.x , End.bossPosition.y, 0));
+                StartCoroutine(ludzik(boss, End.bossPosition.x, End.bossPosition.y, 0));
             }
             // Przykład użycia wczytanych danych (możesz dostosować do swoich potrzeb)
             Debug.Log($"Wczytano dane z pliku. BoardSizeX: {Menu.BoardSizeX}, BoardSizeY: {Menu.BoardSizeY}");
@@ -447,7 +448,7 @@ public class MapLoad : MonoBehaviour
                 nowy = Instantiate(id, new Vector3(x, y, -2f), Quaternion.identity);
             //PhotonView photonView = nowy.AddComponent<PhotonView>();
             nowy.GetComponent<Jednostka>().druzyna = team;
-            if(nowy.GetComponent<Jednostka>().lata)
+            if (nowy.GetComponent<Jednostka>().lata)
                 Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().ZajeteLot = true;
             else
                 Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
@@ -464,7 +465,7 @@ public class MapLoad : MonoBehaviour
             if (MenuGlowne.multi)
             {
                 nowy.GetComponent<Jednostka>().Aktualizuj();
-                if(Ip.ip != 1)
+                if (Ip.ip != 1)
                     nowy.GetComponent<Jednostka>().Start();
                 nowy.GetComponent<Jednostka>().rozlozenie();
             }
@@ -472,7 +473,7 @@ public class MapLoad : MonoBehaviour
     }
     IEnumerator ludzik(int ip, float x, float y, int team)
     {
-        StartCoroutine(ludzik(jednostki[ip],x,y,team));
+        StartCoroutine(ludzik(jednostki[ip], x, y, team));
         yield return null;
     }
 
@@ -484,10 +485,10 @@ public class MapLoad : MonoBehaviour
             GameObject nowy = null;
             if (MenuGlowne.multi)
             {
-                nowy = PhotonNetwork.Instantiate(budyneki[ip+11*WyburRas.rasa[team-1]].name, new Vector3(x, y, -2f), Quaternion.identity);
+                nowy = PhotonNetwork.Instantiate(budyneki[ip + 11 * WyburRas.rasa[team - 1]].name, new Vector3(x, y, -2f), Quaternion.identity);
             }
             else
-                nowy = Instantiate(budyneki[ip+11*WyburRas.rasa[team-1]], new Vector3(x, y, -2f), Quaternion.identity);
+                nowy = Instantiate(budyneki[ip + 11 * WyburRas.rasa[team - 1]], new Vector3(x, y, -2f), Quaternion.identity);
             nowy.GetComponent<Budynek>().druzyna = team;
             nowy.GetComponent<Budynek>().punktyBudowy = nowy.GetComponent<Budynek>().punktyBudowyMax;
             nowy.GetComponent<BudynekRuch>().wybudowany = true;
@@ -499,7 +500,7 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 180.0f);
             if (team == 3)
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 270.0f);
-            
+
             if (MenuGlowne.multi)
             {
                 nowy.GetComponent<Budynek>().Aktualizuj();
@@ -518,10 +519,25 @@ public class MapLoad : MonoBehaviour
 
         // Wyślij informacje o scenie do innych graczy
 
-        if(MenuGlowne.multi)
+        if (MenuGlowne.multi)
             GetComponent<PhotonView>().RPC("UpdateSceneInfo", RpcTarget.OthersBuffered, currentScene);
-        if(!End.boss)
+        if (!End.boss)
             End.tureDoKonca = 0;
+
+        string selectedMap = nazwa;
+        selectedMap = selectedMap.Replace(".txt", "");
+
+        if (DiscordManager.Instance != null)
+        {
+            DiscordManager.Instance.Details = "W trakcie rozgrywki";
+            DiscordManager.Instance.State = "Mapa: " + selectedMap;
+            Debug.Log("Updated Discord state");
+        }
+        else
+        {
+            Debug.LogError("DiscordManager instance is null.");
+        }
+
     }
 
     [PunRPC]
