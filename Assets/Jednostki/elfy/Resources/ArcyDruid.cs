@@ -326,11 +326,13 @@ public class ArcyDruid : MonoBehaviour
             Guzikk = InterfaceUnit.przyciski[3].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[4].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5"; 
+            Guzikk.CenaMagic.text = "7"; 
             Guzikk = InterfaceUnit.przyciski[5].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "5";
+            Guzikk.CenaMagic.text = "7";
             Guzikk = InterfaceUnit.przyciski[6].GetComponent<PrzyciskInter>();
-            Guzikk.CenaMagic.text = "8"; 
+            Guzikk.CenaMagic.text = "12"; 
+            Guzikk = InterfaceUnit.przyciski[7].GetComponent<PrzyciskInter>();
+            Guzikk.CenaMagic.text = "15"; 
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
             {
                 InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];

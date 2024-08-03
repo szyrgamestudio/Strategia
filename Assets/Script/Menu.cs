@@ -620,6 +620,7 @@ public class Menu : MonoBehaviour
         else{
             turaNPC.gameObject.SetActive(false);
             NIERUSZAC = false;
+            Jednostka.Select = null;
             if(!SimultanTurns.simultanTurns)
             {
                 nrTury++;

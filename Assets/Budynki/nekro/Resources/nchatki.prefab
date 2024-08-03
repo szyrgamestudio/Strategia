@@ -822,7 +822,6 @@ MonoBehaviour:
   rodzaj: 0
   strzalka: {fileID: 4236019216978801637}
   poZniszczeniu: 1
-  budowaArt: {fileID: 21300000, guid: f7388a9c0d51fb04b95fd79b11aeb07b, type: 3}
   budynekArt: {fileID: 21300000, guid: f7388a9c0d51fb04b95fd79b11aeb07b, type: 3}
   update: 0
   damage: 0

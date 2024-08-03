@@ -59,7 +59,7 @@ public class Apteka : MonoBehaviour
                             GameObject nowyLucznik = null;
                             if(MenuGlowne.multi)
                             {
-                                jednostkaMulti("medyk",ref nowyLucznik);
+                                jednostkaMulti(medyk.name,ref nowyLucznik);
                             }
                             else
                                 nowyLucznik = Instantiate(medyk, pole.transform.position, Quaternion.identity); 

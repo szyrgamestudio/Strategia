@@ -594,10 +594,10 @@ public class Jednostka : MonoBehaviour
                             Heros herosSkrypt = heros.GetComponent<Heros>();
                             if(herosSkrypt != null && heros.GetComponent<Jednostka>().sojusz != sojusz)
                             {
-                                if(cena > drewno)
+                                if(cena > drewno )
                                     herosSkrypt.exp += cena;
                                 else
-                                    herosSkrypt.exp += drewno;
+                                    herosSkrypt.exp += (drewno * 3/5);
                             }
                         }
                     }
