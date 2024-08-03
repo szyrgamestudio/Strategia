@@ -2,6 +2,8 @@ using Discord;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 public class DiscordManager : MonoBehaviour
 {
@@ -97,15 +99,27 @@ public class DiscordManager : MonoBehaviour
 
     void Start()
     {
-        if (discord == null)
+        if (!IsDiscordRunning())
+        {
+            UnityEngine.Debug.LogWarning("Discord is not running. Rich presence will not be initialized.");
+            return;
+        }
+
+        try
         {
             discord = new Discord.Discord(1268613606937985056, (long)CreateFlags.Default);
             UpdateRichPresence(updateTimestamp: true);
+        }
+        catch (Exception ex)
+        {
+            UnityEngine.Debug.LogError($"Failed to initialize Discord: {ex.Message}");
         }
     }
 
     void UpdateRichPresence(string details = null, string state = null, string largeImage = null, string largeText = null, string smallImage = null, string smallText = null, int currentPartySize = -1, int maxPartySize = -1, bool updateTimestamp = false, long endTimestamp = -1)
     {
+        if (discord == null) return;
+
         this._details = details ?? this._details;
         this._state = state ?? this._state;
         this.largeImage = largeImage ?? this.largeImage;
@@ -148,5 +162,11 @@ public class DiscordManager : MonoBehaviour
         {
             discord.RunCallbacks();
         }
+    }
+
+    private bool IsDiscordRunning()
+    {
+        Process[] processes = Process.GetProcessesByName("Discord");
+        return processes.Length > 0;
     }
 }
