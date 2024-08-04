@@ -17,6 +17,8 @@ public class Palladyn : MonoBehaviour
     public bool koniec;
     public int cooldown2;
 
+    public Sprite klepsydra;
+
     public Texture2D customCursorBudowa;
 
     void Update()
@@ -168,6 +170,8 @@ public class Palladyn : MonoBehaviour
                 Guzik.IconDrewno.enabled = false;
                 Guzik.IconMagic.enabled = true;
                 Guzik.Opis.text = teksty[i];  
+                if(i == 1)
+                    Guzik.IconMagic.sprite = klepsydra;
             }       
         }
     }

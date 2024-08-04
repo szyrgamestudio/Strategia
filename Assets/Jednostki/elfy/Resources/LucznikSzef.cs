@@ -19,6 +19,7 @@ public class LucznikSzef : MonoBehaviour
     bool buff2;
     int cooldown2 = 0;
 
+    public Sprite klepsydra;
     public Texture2D customCursorBudowa;
 
 
@@ -55,7 +56,7 @@ public class LucznikSzef : MonoBehaviour
                 {
                     buff2 = false;
                     Jednostka.Select2.GetComponent<Jednostka>().zasieg += 2;
-                    cooldown = 3;
+                    cooldown2 = 3;
                     Jednostka.Select2.GetComponent<Buff>().buffZ(1, 2, 0,0, 0, 0);
                     Menu.usunSelect2();
                     OnMouseDown();
@@ -127,8 +128,13 @@ public class LucznikSzef : MonoBehaviour
                 PrzyciskInter Guzik = InterfaceUnit.przyciski[i].GetComponent<PrzyciskInter>();
                 Guzik.IconZloto.enabled = false;
                 Guzik.IconDrewno.enabled = false;
-                Guzik.IconMagic.enabled = true;
-                Guzik.Opis.text = teksty[i];  
+                //Guzik.IconMagic.enabled = true;
+                if(i < 2)
+                {
+                    Guzik.IconMagic.enabled = true;
+                    Guzik.IconMagic.sprite = klepsydra;
+                    Guzik.Opis.text = teksty[i];  
+                }
             }       
         }
     }

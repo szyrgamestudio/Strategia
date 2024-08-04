@@ -76,7 +76,7 @@ public class End : MonoBehaviour
     {
         for(int i = 0; i < 5; i++)
         {
-            if(Menu.ratuszPoziom[i] == poziomRatusza)
+            if(Menu.ratuszPoziom[i] - 1 >= poziomRatusza)
             {
                 
                 Ending.wygrany = i + 1;

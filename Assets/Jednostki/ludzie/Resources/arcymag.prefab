@@ -1152,7 +1152,7 @@ MonoBehaviour:
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 20
+  cena: 10
   nazwa: Arcymag
   akcja: 1
   spanie: 0
@@ -1273,12 +1273,14 @@ MonoBehaviour:
   budynki:
   - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
   - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
+  - {fileID: 21300000, guid: 0133169af9765a04696aa90aa31e7778, type: 3}
   - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
   teksty:
   - "Obra\u017Cenia 4                                    Zasi\u0119g 3                          
     Wystrzeliwuje kule ognia"
   - "Obra\u017Cenia 2                                    Zasi\u0119g 3                          
     Zadaje obra\u017Cenia s\u0105siednim jednostk\u0105 w obszarze 3x3"
+  - 'Pasywnie: Co ture otrzymujesz 2 magii'
   - " Zasi\u0119g 3                          Zamienia dwie jednostki miejscami"
   ignis: 0
   fireBall: 0

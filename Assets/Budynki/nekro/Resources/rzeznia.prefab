@@ -795,8 +795,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0fbb93a8e4feb3b41b01f24379395cd1, type: 3}
   - {fileID: 21300000, guid: 4827125098f7d8c4fa53d6d6a22a9100, type: 3}
   teksty:
-  - "Jednostki wchodz\u0105ce zostaj\u0105 zniszczone w zamian za 50% ich warto\u015Bci"
-  - "Jednostki wchodz\u0105ce zostaj\u0105 zniszczone w zamian za 50% ich warto\u015Bci"
+  - "Jednostki wchodz\u0105ce zostaj\u0105 zniszczone w zamian za 80% ich warto\u015Bci"
+  - "Jednostki wchodz\u0105ce zostaj\u0105 zniszczone w zamian za 80% ich warto\u015Bci"
   puste: {fileID: 21300000, guid: 9f9dd9f6d1fdf2c43a364c1513ad5343, type: 3}
   druzyna: 0
   dostepny: 0

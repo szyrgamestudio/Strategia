@@ -58,7 +58,8 @@ public class WyburRas : MonoBehaviour
         else
         {
             aktywny[id] = true;
-            unlockArt.enabled = false;
+            if(id == 0 || MenuGlowne.multi)
+                unlockArt.enabled = false;
             loockArt.enabled = false;
         }
         if(Ip.ip != 1 && MenuGlowne.multi)// && id == 0)

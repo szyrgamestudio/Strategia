@@ -845,7 +845,7 @@ MonoBehaviour:
   zdolnosci: 1
   zbieracz: 0
   lata: 0
-  cena: 20
+  cena: 10
   nazwa: Palladyn
   akcja: 1
   spanie: 0
@@ -961,6 +961,7 @@ MonoBehaviour:
   cooldown: 0
   koniec: 0
   cooldown2: 0
+  klepsydra: {fileID: 21300000, guid: be071d1fd14b21e459da6e383f84ef48, type: 3}
   customCursorBudowa: {fileID: 2800000, guid: 1a32552cae4247a4389da6bf6b93058c, type: 3}
 --- !u!61 &7022607786726823304
 BoxCollider2D:

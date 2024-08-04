@@ -87,6 +87,7 @@ public class InterfaceBuild : MonoBehaviour
                 if(Wybrany.punktyBudowy>=Wybrany.punktyBudowyMax) 
                 {
                     medykschowaj.SetActive(true);
+                    obrazkikopalnia[0].SetActive(true);
                 }
                 else
                 {

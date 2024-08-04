@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5436fa6464ccd4cb95e2c3fc5eea92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  details: W lobby multiplayer
+  _details: 
   _state: 
   largeImage: ' large_image'
   largeText: 

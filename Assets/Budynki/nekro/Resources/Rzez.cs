@@ -24,7 +24,7 @@ public class Rzez : MonoBehaviour
 
     private bool dodaj=false;
 
-    public static float zysk = 0.5f;
+    public static float zysk = 0.8f;
 
     public bool koniec;
 
@@ -46,7 +46,7 @@ public class Rzez : MonoBehaviour
             if(Przycisk.budynek[0] == true)
             {
                 Przycisk.budynek[0] = false;
-                if(budynek.GetComponent<Budynek>().punktyBudowy == 3 && InterfaceBuild.obrazkikopalnia[0].activeSelf && pole.GetComponent<Pole>().postac.GetComponent<Jednostka>() && !pole.GetComponent<Pole>().postac.GetComponent<Heros>()) //niepotrzebne w sumie
+                if(budynek.GetComponent<Budynek>().punktyBudowy >= 5 && InterfaceBuild.obrazkikopalnia[0].activeSelf && pole.GetComponent<Pole>().postac.GetComponent<Jednostka>() && !pole.GetComponent<Pole>().postac.GetComponent<Heros>()) //niepotrzebne w sumie
                 {
                     pole.GetComponent<Pole>().postac.GetComponent<Jednostka>().zdolnosci = 0;
                     Menu.zloto[druzyna] += (int)(pole.GetComponent<Pole>().postac.GetComponent<Jednostka>().cena * zysk);

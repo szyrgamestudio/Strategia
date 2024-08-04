@@ -27,6 +27,7 @@ public class Heros : MonoBehaviour
         {
             exp = 0;
             level++;
+            jednostka.GetComponent<Jednostka>().cena += 4;
             expToNext = level * 20;
             levelUp = true;
         }

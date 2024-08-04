@@ -48,10 +48,10 @@ public class Arcymag : MonoBehaviour
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                         fireBall = true;
                     }
-                if(Przycisk.jednostka[2]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
+                if(Przycisk.jednostka[3]==true && jednostka.GetComponent<Jednostka>().akcja && Menu.magia[Menu.tura]>=7)
                     {
                         jednostka.GetComponent<Ramki>().showRamka3();
-                        Przycisk.jednostka[2]=false;
+                        Przycisk.jednostka[3]=false;
                         Jednostka.wybieranie = true;
                         Cursor.SetCursor(customCursorBudowa, Vector2.zero, CursorMode.Auto);
                         teleportacja = 1;
@@ -135,7 +135,7 @@ public class Arcymag : MonoBehaviour
             {
                 koniec = false;
                 if(regenMany)
-                    Menu.magia[Menu.tura]++;
+                    Menu.magia[Menu.tura] += 2;
             }
     }
     [PunRPC]
@@ -176,7 +176,7 @@ public class Arcymag : MonoBehaviour
             Guzikk.CenaMagic.text = "3"; 
             Guzikk = InterfaceUnit.przyciski[1].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = "7"; 
-            Guzikk = InterfaceUnit.przyciski[2].GetComponent<PrzyciskInter>();
+            Guzikk = InterfaceUnit.przyciski[3].GetComponent<PrzyciskInter>();
             Guzikk.CenaMagic.text = "7"; 
             
             for(int i = 0 ; i < jednostka.GetComponent<Jednostka>().zdolnosci  ; i++)
@@ -207,6 +207,7 @@ public class Arcymag : MonoBehaviour
                 staty.zdolnosci += 1;
                 break;
             case 4:
+                staty.zdolnosci += 1;
                 regenMany = true;
                 break;
             case 5:
