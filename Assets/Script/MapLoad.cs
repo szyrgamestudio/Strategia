@@ -535,7 +535,7 @@ public class MapLoad : MonoBehaviour
         }
         else
         {
-            Debug.LogError("DiscordManager instance is null.");
+            Debug.LogWarning("DiscordManager instance is null.");
         }
 
     }

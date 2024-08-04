@@ -22,7 +22,7 @@ public class MultiRasy : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.LogError("DiscordManager instance is null.");
+            Debug.LogWarning("DiscordManager instance is null.");
         }
 
         // Sprawdź, czy jesteśmy połączeni z Master Server
