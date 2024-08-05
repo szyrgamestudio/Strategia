@@ -10,8 +10,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public InputField joinInput;
     public void CreateRoom()
     {
-        Ip.ip = 1;
-        PhotonNetwork.CreateRoom(createInput.text);
+        if(createInput.text != "")
+        {
+            Ip.ip = 1;
+            PhotonNetwork.CreateRoom(createInput.text);
+            SimultanTurns.simultanTurns = true;
+        }
     }
     public void JoinRoom()
     {

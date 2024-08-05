@@ -12,6 +12,7 @@ public class Cierpliwy : MonoBehaviour
 
     public int cooldown;
     public bool koniec;
+    public Sprite klepsydra;
 
     // Update is called once per frame
     void Update()
@@ -65,6 +66,7 @@ public class Cierpliwy : MonoBehaviour
                 Guzik.IconZloto.enabled = false;
                 Guzik.IconDrewno.enabled = false;
                 Guzik.IconMagic.enabled = true;
+                Guzik.IconMagic.sprite = klepsydra;
                 Guzik.Opis.text = teksty[i];  
             }       
         }

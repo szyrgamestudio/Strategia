@@ -1049,6 +1049,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 3193222365307502974}
   drewno: 0
+  elf: 0
   boss: 0
 --- !u!114 &5883602230984839372
 MonoBehaviour:
@@ -1092,6 +1093,7 @@ MonoBehaviour:
   - "Otrzymuje 1 z\u0142ota"
   cooldown: 0
   koniec: 0
+  klepsydra: {fileID: 21300000, guid: be071d1fd14b21e459da6e383f84ef48, type: 3}
 --- !u!61 &7022607786726823304
 BoxCollider2D:
   m_ObjectHideFlags: 0

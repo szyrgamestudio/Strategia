@@ -22,17 +22,46 @@ public class Opcje : MonoBehaviour
     public Slider glos;
     public Slider glosSFX;
 
+    public static String first = "null";
+    public static int nr;
+
 
     void Start()
     {
+        if(first == "null")
+        {
+            first = Screen.currentResolution.width + "x" + Screen.currentResolution.height;
+        }
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
+        if(first != "null")
+        {
+            Debug.Log("przed" + first);
+            string[] parts = first.Split(' '); // Używamy Split zamiast split
+
+            if (parts.Length >= 3) // Sprawdzamy, czy tablica ma wystarczającą liczbę elementów
+            {
+                string width = parts[0];
+                string height = parts[2];
+
+                // Zmiana formatu rozdzielczości i dodanie do listy opcji
+                first = width + "x" + height;
+                options.Add(first);
+                Debug.Log("po" + first);
+            }
+            else
+            {
+                options.Add(first);
+                Debug.Log("popo" + first);
+            }
+        }
         for(int i = 0;i<resolutions.Length;i++)
         {
             string option  = resolutions[i].width + "x" + resolutions[i].height;
-            options.Add(option);
+            if(i != nr)
+                options.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
@@ -52,17 +81,27 @@ public class Opcje : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            int width = Screen.width;
+            int height = Screen.height;
+            first = width + "x" + height;
             opcjeOn();
         }
     }
 
     public void SetResolution(int resolutionIndex)
     {
+        if(resolutionIndex == 0)
+            resolutionIndex = nr;
+        else
+            nr = resolutionIndex;
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
                 // Update dropdown value
         resolutionDropdown.value = resolutionIndex;
         resolutionDropdown.RefreshShownValue();
+        first = resolution.ToString();
+        
+        Debug.Log(first);
     }
         public void CofnijMenu(int resolutionIndex)
     {
@@ -71,6 +110,18 @@ public class Opcje : MonoBehaviour
             PhotonNetwork.Disconnect();
         }
         SceneManager.LoadScene(0);
+        for(int i = 0; i < 4; i++)
+        {
+            WyburRas.aktywny[i] = false;
+            WyburRas.rasa[i] = 0;
+            WyburRas.heros[i] = 0;
+            WyburRas.team[i] = 0;
+            SimultanTurns.simultanTurns = false;
+            PoleOdkryj.mgla = true;
+        }
+        MenuGlowne.multi = false;
+        Ip.ip = 0;
+        
     }
 
     public void SetMusicVolume(float volume)
