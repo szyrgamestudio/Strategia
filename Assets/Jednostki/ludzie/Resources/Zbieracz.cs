@@ -11,6 +11,8 @@ public class Zbieracz : MonoBehaviour
     public Sprite[] budynki;
     public string[] teksty;
 
+    public bool poszukiwacz;
+
     void Update()
     {
         if(Menu.Next)
@@ -75,7 +77,7 @@ public class Zbieracz : MonoBehaviour
 
     void OnMouseDown()
     {
-        if(jednostka == Jednostka.Select)
+        if(jednostka == Jednostka.Select && !poszukiwacz)
         {
             InterfaceUnit.Czyszczenie(); 
             

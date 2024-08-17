@@ -134,7 +134,6 @@ public class MapCheck : MonoBehaviour
         string trzeciaLine = LoadTrzeciaLine(filePath);
         Menu.BoardSizeX = int.Parse(secondLine);
         Menu.BoardSizeY = int.Parse(trzeciaLine);
-        Debug.Log("X " + Menu.BoardSizeX + " y " + Menu.BoardSizeY);
         opisText.text = "Opis:\n" + opis;
         MapLoad.rozdziel(firstLine);
         przyciskiControl();
@@ -300,7 +299,6 @@ public class MapCheck : MonoBehaviour
         MapLoad.nazwa = name + ".txt";
         Menu.BoardSizeX = BoardSizeX;
         Menu.BoardSizeY = BoardSizeY;
-        Debug.Log(Menu.BoardSizeX + " " + Menu.BoardSizeY);
         przyciskiControl();
     }
 }

@@ -110,6 +110,7 @@ MonoBehaviour:
   - sumuj
   - sumujZwienksz
   - updateEnt
+  - sancherr
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -453,7 +453,7 @@ int i=0;
                 pomocnicza[0]++;
             }
 
-            if (x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
+            if (!Kod.sancher && x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
                 Menu.kafelki[x + 1][y + 1].GetComponent<Pole>().Nin == 0 &&
                 Menu.kafelki[x + 1][y + 1].GetComponent<Pole>().Zajete == false &&
                 Menu.kafelki[x][y + 1].GetComponent<Pole>().Zajete == false &&
@@ -468,7 +468,7 @@ int i=0;
                 pomocnicza[0]++;
             }
 
-            if (x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
+            if (!Kod.sancher && x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
                 Menu.kafelki[x + 1][y - 1].GetComponent<Pole>().Nin == 0 &&
                 Menu.kafelki[x + 1][y - 1].GetComponent<Pole>().Zajete == false &&
                 Menu.kafelki[x][y - 1].GetComponent<Pole>().Zajete == false &&
@@ -483,7 +483,7 @@ int i=0;
                 pomocnicza[0]++;
             }
 
-            if (x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
+            if (!Kod.sancher && x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
                 Menu.kafelki[x - 1][y + 1].GetComponent<Pole>().Nin == 0 &&
                 Menu.kafelki[x - 1][y + 1].GetComponent<Pole>().Zajete == false &&
                 Menu.kafelki[x][y + 1].GetComponent<Pole>().Zajete == false &&
@@ -498,7 +498,7 @@ int i=0;
                 pomocnicza[0]++;
             }
 
-            if (x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
+            if (!Kod.sancher && x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
                 Menu.kafelki[x - 1][y - 1].GetComponent<Pole>().Nin == 0 &&
                 Menu.kafelki[x - 1][y - 1].GetComponent<Pole>().Zajete == false &&
                 Menu.kafelki[x][y - 1].GetComponent<Pole>().Zajete == false &&
@@ -561,7 +561,7 @@ int i=0;
                     pomocnicza[1]++;
                 }
 
-                if (x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
+                if (!Kod.sancher && x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
                     Math.Abs(Menu.kafelki[x + 1][y + 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x + 1][y].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x][y + 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
@@ -576,7 +576,7 @@ int i=0;
                     pomocnicza[1]++;
                 }
 
-                if (x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
+                if (!Kod.sancher && x + 1 >= 0 && x + 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
                     Math.Abs(Menu.kafelki[x + 1][y - 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x + 1][y].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x][y - 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
@@ -591,7 +591,7 @@ int i=0;
                     pomocnicza[1]++;
                 }
 
-                if (x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
+                if (!Kod.sancher && x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y + 1 >= 0 && y + 1 < Menu.BoardSizeY &&
                     Math.Abs(Menu.kafelki[x - 1][y + 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x - 1][y].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x][y + 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
@@ -606,7 +606,7 @@ int i=0;
                     pomocnicza[1]++;
                 }
 
-                if (x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
+                if (!Kod.sancher && x - 1 >= 0 && x - 1 < Menu.BoardSizeX && y - 1 >= 0 && y - 1 < Menu.BoardSizeY &&
                     Math.Abs(Menu.kafelki[x - 1][y - 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x - 1][y].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
                     Math.Abs(Menu.kafelki[x][y - 1].GetComponent<Pole>().poziom - Menu.kafelki[x][y].GetComponent<Pole>().poziom) <= 1 &&
@@ -641,13 +641,13 @@ int i=0;
                     {lista1[pomocnicza[0]] = Menu.kafelki[x][y+1];lista1[pomocnicza[0]].GetComponent<Pole>().CzasDrogi = n+lista1[pomocnicza[0]].GetComponent<Pole>().trudnosc;lista1[pomocnicza[0]].GetComponent<Pole>().Nin = 4; pomocnicza[0]++;}
                     if(x>=0 && x < Menu.BoardSizeX && y-1 >=0 && y-1 < Menu.BoardSizeY) if(Menu.kafelki[x][y-1].GetComponent<Pole>().Nin == 0) 
                     {lista1[pomocnicza[0]] = Menu.kafelki[x][y-1];lista1[pomocnicza[0]].GetComponent<Pole>().CzasDrogi = n+lista1[pomocnicza[0]].GetComponent<Pole>().trudnosc;lista1[pomocnicza[0]].GetComponent<Pole>().Nin = 8; pomocnicza[0]++;}
-                    if(x+1>=0 && x+1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y+1].GetComponent<Pole>().Nin == 0) 
+                    if(!Kod.sancher && x+1>=0 && x+1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y+1].GetComponent<Pole>().Nin == 0) 
                     {lista1[pomocnicza[0]] = Menu.kafelki[x+1][y+1];lista1[pomocnicza[0]].GetComponent<Pole>().CzasDrogi = n+lista1[pomocnicza[0]].GetComponent<Pole>().trudnosc+1;lista1[pomocnicza[0]].GetComponent<Pole>().Nin = 5; pomocnicza[0]++;}
-                    if(x+1>=0 && x+1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y-1].GetComponent<Pole>().Nin == 0) 
+                    if(!Kod.sancher && x+1>=0 && x+1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y-1].GetComponent<Pole>().Nin == 0) 
                     {lista1[pomocnicza[0]] = Menu.kafelki[x+1][y-1];lista1[pomocnicza[0]].GetComponent<Pole>().CzasDrogi = n+lista1[pomocnicza[0]].GetComponent<Pole>().trudnosc+1;lista1[pomocnicza[0]].GetComponent<Pole>().Nin = 7; pomocnicza[0]++;}
-                    if(x-1>=0 && x-1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y+1].GetComponent<Pole>().Nin == 0) 
+                    if(!Kod.sancher && x-1>=0 && x-1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y+1].GetComponent<Pole>().Nin == 0) 
                     {lista1[pomocnicza[0]] = Menu.kafelki[x-1][y+1];lista1[pomocnicza[0]].GetComponent<Pole>().CzasDrogi = n+lista1[pomocnicza[0]].GetComponent<Pole>().trudnosc+1;lista1[pomocnicza[0]].GetComponent<Pole>().Nin = 3; pomocnicza[0]++;}
-                    if(x-1>=0 && x-1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y-1].GetComponent<Pole>().Nin == 0) 
+                    if(!Kod.sancher && x-1>=0 && x-1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y-1].GetComponent<Pole>().Nin == 0) 
                     {lista1[pomocnicza[0]] = Menu.kafelki[x-1][y-1];lista1[pomocnicza[0]].GetComponent<Pole>().CzasDrogi = n+lista1[pomocnicza[0]].GetComponent<Pole>().trudnosc+1;lista1[pomocnicza[0]].GetComponent<Pole>().Nin = 1; pomocnicza[0]++;}
                }
             }
@@ -665,13 +665,13 @@ int i=0;
                     {lista2[pomocnicza[1]] = Menu.kafelki[x][y+1];lista2[pomocnicza[1]].GetComponent<Pole>().CzasDrogi = n+lista2[pomocnicza[1]].GetComponent<Pole>().trudnosc;lista2[pomocnicza[1]].GetComponent<Pole>().Nout = 4; pomocnicza[1]++;}
                     if(x>=0 && x < Menu.BoardSizeX && y-1 >=0 && y-1 < Menu.BoardSizeY) if(Menu.kafelki[x][y-1].GetComponent<Pole>().Nout == 0) 
                     {lista2[pomocnicza[1]] = Menu.kafelki[x][y-1];lista2[pomocnicza[1]].GetComponent<Pole>().CzasDrogi = n+lista2[pomocnicza[1]].GetComponent<Pole>().trudnosc;lista2[pomocnicza[1]].GetComponent<Pole>().Nout = 8; pomocnicza[1]++;}
-                    if(x+1>=0 && x+1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y+1].GetComponent<Pole>().Nout == 0 ) 
+                    if(!Kod.sancher && x+1>=0 && x+1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y+1].GetComponent<Pole>().Nout == 0 ) 
                     {lista2[pomocnicza[1]] = Menu.kafelki[x+1][y+1];lista2[pomocnicza[1]].GetComponent<Pole>().CzasDrogi = n+lista2[pomocnicza[1]].GetComponent<Pole>().trudnosc+1;lista2[pomocnicza[1]].GetComponent<Pole>().Nout = 5; pomocnicza[1]++;}
-                    if(x+1>=0 && x+1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y-1].GetComponent<Pole>().Nout == 0) 
+                    if(!Kod.sancher && x+1>=0 && x+1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x+1][y-1].GetComponent<Pole>().Nout == 0) 
                     {lista2[pomocnicza[1]] = Menu.kafelki[x+1][y-1];lista2[pomocnicza[1]].GetComponent<Pole>().CzasDrogi = n+lista2[pomocnicza[1]].GetComponent<Pole>().trudnosc+1;lista2[pomocnicza[1]].GetComponent<Pole>().Nout = 7; pomocnicza[1]++;}
-                    if(x-1>=0 && x-1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y+1].GetComponent<Pole>().Nout == 0) 
+                    if(!Kod.sancher && x-1>=0 && x-1 < Menu.BoardSizeX && y+1>=0 && y+1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y+1].GetComponent<Pole>().Nout == 0) 
                     {lista2[pomocnicza[1]] = Menu.kafelki[x-1][y+1];lista2[pomocnicza[1]].GetComponent<Pole>().CzasDrogi = n+lista2[pomocnicza[1]].GetComponent<Pole>().trudnosc+1;lista2[pomocnicza[1]].GetComponent<Pole>().Nout = 3; pomocnicza[1]++;}
-                    if(x-1>=0 && x-1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y-1].GetComponent<Pole>().Nout == 0) 
+                    if(!Kod.sancher && x-1>=0 && x-1 < Menu.BoardSizeX && y-1>=0 && y-1 < Menu.BoardSizeY)if(Menu.kafelki[x-1][y-1].GetComponent<Pole>().Nout == 0) 
                     {lista2[pomocnicza[1]] = Menu.kafelki[x-1][y-1];lista2[pomocnicza[1]].GetComponent<Pole>().CzasDrogi = n+lista2[pomocnicza[1]].GetComponent<Pole>().trudnosc+1;lista2[pomocnicza[1]].GetComponent<Pole>().Nout = 1; pomocnicza[1]++;}
                }
             }     

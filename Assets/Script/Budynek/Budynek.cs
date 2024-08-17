@@ -46,6 +46,8 @@ public class Budynek : MonoBehaviour
 
     public AudioSource src;
 
+    public int typ;
+
     public void Start()
     {
         switch(druzyna)

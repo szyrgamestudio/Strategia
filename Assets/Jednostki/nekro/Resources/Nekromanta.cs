@@ -68,19 +68,19 @@ public class Nekromanta : MonoBehaviour
         int x = (int)transform.position.x; 
         int y = (int)transform.position.y; 
         
-        if (Menu.istnieje(x - 1, y) && Menu.kafelki[x - 1][y].GetComponent<Pole>().postac == null)
+        if (Menu.istnieje(x - 1, y) && Menu.kafelki[x - 1][y].GetComponent<Pole>().postac == null && !Menu.kafelki[x-1][y].GetComponent<Pole>().Zajete)
         {
             pola.Add(Menu.kafelki[x - 1][y]);
         }
-        if (Menu.istnieje(x + 1, y) && Menu.kafelki[x + 1][y].GetComponent<Pole>().postac == null)
+        if (Menu.istnieje(x + 1, y) && Menu.kafelki[x + 1][y].GetComponent<Pole>().postac == null && !Menu.kafelki[x+1][y].GetComponent<Pole>().Zajete)
         {
             pola.Add(Menu.kafelki[x + 1][y]);
         }
-        if (Menu.istnieje(x, y - 1) && Menu.kafelki[x][y - 1].GetComponent<Pole>().postac == null)
+        if (Menu.istnieje(x, y - 1) && Menu.kafelki[x][y - 1].GetComponent<Pole>().postac == null && !Menu.kafelki[x][y - 1].GetComponent<Pole>().Zajete)
         {
             pola.Add(Menu.kafelki[x][y - 1]);
         }
-        if (Menu.istnieje(x, y + 1) && Menu.kafelki[x][y + 1].GetComponent<Pole>().postac == null)
+        if (Menu.istnieje(x, y + 1) && Menu.kafelki[x][y + 1].GetComponent<Pole>().postac == null && !Menu.kafelki[x][y + 1].GetComponent<Pole>().Zajete)
         {
             pola.Add(Menu.kafelki[x][y + 1]);
         }

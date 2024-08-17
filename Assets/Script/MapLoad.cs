@@ -114,9 +114,11 @@ public class MapLoad : MonoBehaviour
     }
 
     [PunRPC]
-    public void updateAktywny(bool[] aktywne)
+    public void updateAktywny(bool[] aktywne, int end, int ilosc)
     {
         WyburRas.aktywny = aktywne;
+        End.maxGraczy = end;
+        Menu.IloscGraczy = ilosc;
     }
 
     public void LoadMapData()
@@ -151,6 +153,7 @@ public class MapLoad : MonoBehaviour
                 char piatyOdKoncaZnak = nazwa[nazwa.Length - 6];
                 int.TryParse(piatyOdKoncaZnak.ToString(), out int maxGraczy);
                 End.maxGraczy = maxGraczy;
+                Debug.Log("end" + End.maxGraczy);
                 if (Menu.IloscGraczy > End.maxGraczy)
                     Menu.IloscGraczy = End.maxGraczy;
                 for (int i = 0; i < 4; i++)
@@ -162,7 +165,7 @@ public class MapLoad : MonoBehaviour
                 if (MenuGlowne.multi)
                 {
                     PhotonView photonView = GetComponent<PhotonView>();
-                    photonView.RPC("updateAktywny", RpcTarget.All, WyburRas.aktywny);
+                    photonView.RPC("updateAktywny", RpcTarget.All, WyburRas.aktywny, End.maxGraczy, Menu.IloscGraczy);
                 }
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -178,7 +181,8 @@ public class MapLoad : MonoBehaviour
                         // Konwersja odczytanej wartości na liczbę całkowitą i dodanie do listy
                         row.Add(int.Parse(value));
                     }
-
+                    // if(line == "71040")
+                    //     randomGold();
                     // Wstawienie listy z danymi wiersza na początek listy mapy
                     if (line == "7777")
                         break;
@@ -194,7 +198,8 @@ public class MapLoad : MonoBehaviour
                         tempMapUnit.Add(row);
                     if (line == "01101010")
                         jednostkiStart = true;
-                    if (wysokoscStart && zlotoStart && !jednostkiStart)
+                    
+                    if (wysokoscStart && zlotoStart && !jednostkiStart && line != "71040")
                         tempMapGold.Insert(0, row);
                     if (line == "01111010")
                     {
@@ -209,6 +214,7 @@ public class MapLoad : MonoBehaviour
                     }
                     if (!wysokoscStart)
                         tempMapData.Insert(0, row);
+                    
                 }
             } // Zakończenie bloku 'using', automatycznie zamyka obiekt StreamReader
 
@@ -237,6 +243,7 @@ public class MapLoad : MonoBehaviour
             for (int l = 0; l < tempMapGold.Count; l++)
                 for (int j = 0; j < 5; j++)
                 {
+                    Debug.Log(l + " " + j);
                     kafelekGold[l, j] = tempMapGold[l][j];
                 }
             for (int l = 0; l < tempMapUnit.Count; l++)
@@ -426,6 +433,7 @@ public class MapLoad : MonoBehaviour
             {
                 StartCoroutine(ludzik(boss, End.bossPosition.x, End.bossPosition.y, 0));
             }
+            randomGold();
             // Przykład użycia wczytanych danych (możesz dostosować do swoich potrzeb)
             Debug.Log($"Wczytano dane z pliku. BoardSizeX: {Menu.BoardSizeX}, BoardSizeY: {Menu.BoardSizeY}");
         }
@@ -508,6 +516,44 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<BudynekRuch>().startMultiMap();
             }
         }
+    }
+    void randomGold()
+    {
+        for(int x = 1; x < Menu.BoardSizeX; x+=5)
+            for(int y = 1; y < Menu.BoardSizeY; y+=5)
+                {
+                    int a = 0;
+                    int b = 0;
+                    if(Menu.istnieje(x+5, y+5))
+                    {
+                        a = Random.Range(x,x+5);
+                        b = Random.Range(y,y+5);
+                    }
+                    else
+                    {
+                        a = Random.Range(x, Menu.BoardSizeX);
+                        b = Random.Range(y, Menu.BoardSizeY);
+                    }
+                    if(Menu.kafelki[a][b].GetComponent<Pole>().zloto <= 1)
+                    {
+                         Menu.kafelki[a][b].GetComponent<Pole>().zloto = 1;
+                    }
+                    if(Menu.istnieje(x+5, y+5))
+                    {
+                        a = Random.Range(x,x+5);
+                        b = Random.Range(y,y+5);
+                    }
+                    else
+                    {
+                        a = Random.Range(x, Menu.BoardSizeX);
+                        b = Random.Range(y, Menu.BoardSizeY);
+                    }
+                    if(Menu.kafelki[a][b].GetComponent<Pole>().zloto <= 2)
+                    {
+                        Menu.kafelki[a][b].GetComponent<Pole>().zloto = 2;
+                    }
+                }
+                
     }
     private string currentScene;
 

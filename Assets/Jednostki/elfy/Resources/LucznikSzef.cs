@@ -133,8 +133,9 @@ public class LucznikSzef : MonoBehaviour
                 {
                     Guzik.IconMagic.enabled = true;
                     Guzik.IconMagic.sprite = klepsydra;
-                    Guzik.Opis.text = teksty[i];  
+                    
                 }
+                Guzik.Opis.text = teksty[i];  
             }       
         }
     }

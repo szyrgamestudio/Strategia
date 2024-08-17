@@ -56,7 +56,7 @@ public class Poszukiwacz : MonoBehaviour
         if(jednostka == Jednostka.Select)
         {
             InterfaceUnit.Czyszczenie(); 
-            jednostka.GetComponent<Jednostka>().zdolnosci = 2 + Menu.ratuszPoziom[jednostka.GetComponent<Jednostka>().druzyna];
+            jednostka.GetComponent<Jednostka>().zdolnosci = 3 + Menu.ratuszPoziom[jednostka.GetComponent<Jednostka>().druzyna];
             jednostka.GetComponent<Jednostka>().OnMouseDown();
             if(jednostka.GetComponent<Jednostka>().zdolnosci > 4)
                 jednostka.GetComponent<Jednostka>().zdolnosci = 4;
@@ -69,7 +69,7 @@ public class Poszukiwacz : MonoBehaviour
                 Guzik.Opis.text = teksty[i];  
             }    
 
-            jednostka.GetComponent<Jednostka>().zdolnosci = 2;
+            jednostka.GetComponent<Jednostka>().zdolnosci = 3;
 
         }
     }

@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 7254608854548605690}
   - component: {fileID: 36873823500742661}
   - component: {fileID: 4306608885763393642}
+  - component: {fileID: 3654198233909134504}
   - component: {fileID: 4897976169665099749}
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 1818726380436655410}
@@ -915,10 +916,10 @@ MonoBehaviour:
   szybkosc: 7
   mindmg: 1
   maxdmg: 2
-  zdolnosci: 2
+  zdolnosci: 3
   zbieracz: 0
   lata: 0
-  cena: 4
+  cena: 6
   nazwa: Poszukiwacz
   akcja: 1
   spanie: 0
@@ -963,6 +964,9 @@ MonoBehaviour:
   animator: {fileID: 5141754882103801134}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 4696940076015808588}
+  drewno: 0
+  elf: 0
+  boss: 0
 --- !u!114 &4306608885763393642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,6 +997,22 @@ MonoBehaviour:
     polach"
   - "Ilo\u015B\u0107 z\u0142ota w odleg\u0142o\u015Bci dw\xF3ch p\xF3l"
   - "Ilo\u015B\u0107 z\u0142ota w odleg\u0142o\u015Bci trzech p\xF3l"
+--- !u!114 &3654198233909134504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268565104842363223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a2c59af2dd6d54ba8760c72e097b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jednostka: {fileID: 6268565104842363223}
+  budynki: []
+  teksty: []
+  poszukiwacz: 1
 --- !u!114 &4897976169665099749
 MonoBehaviour:
   m_ObjectHideFlags: 0

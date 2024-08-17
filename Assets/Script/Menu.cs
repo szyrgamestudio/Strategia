@@ -339,7 +339,7 @@ public class Menu : MonoBehaviour
 
                 for(int i = 1; i<5;i++)
                 {
-                    if(bazyIlosc[i]==0)
+                    if(bazyIlosc[i]==0 ||  !WyburRas.aktywny[i-1])
                     {
                        
                         //if(!SimultanTurns.simultanTurns)
@@ -358,7 +358,12 @@ public class Menu : MonoBehaviour
                     IloscGraczy = 4 - zostalo;
                 else
                     if(SimultanTurns.ready && tura == 0)
+                    {
+                        Debug.Log("przed" + IloscGraczy);
                         IloscGraczy = 4 - zostalo;
+                        Debug.Log("po" + IloscGraczy);
+                    }
+                        
                 if(MenuGlowne.multi)
                 {
                     //Debug.Log("ludzi: " + IloscGraczy + " zostalo " + zostalo);

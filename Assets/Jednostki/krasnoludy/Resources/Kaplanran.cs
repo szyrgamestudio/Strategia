@@ -32,7 +32,8 @@ public class Kaplanran : MonoBehaviour
                 {
                     leczenie = false;
                     float rozniaca = Jednostka.Select2.GetComponent<Jednostka>().maxHP - Jednostka.Select2.GetComponent<Jednostka>().HP;
-                    if(rozniaca < Menu.magia[Menu.tura] / 2)
+                    Debug.Log(rozniaca + " < " + ((float)Menu.magia[Menu.tura] / 2));
+                    if(rozniaca < (float)Menu.magia[Menu.tura] * 2)
                     {
                         Jednostka.Select2.GetComponent<Jednostka>().HP += rozniaca;
                         if(MenuGlowne.multi)

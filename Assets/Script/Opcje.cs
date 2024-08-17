@@ -38,7 +38,6 @@ public class Opcje : MonoBehaviour
         int currentResolutionIndex = 0;
         if(first != "null")
         {
-            Debug.Log("przed" + first);
             string[] parts = first.Split(' '); // Używamy Split zamiast split
 
             if (parts.Length >= 3) // Sprawdzamy, czy tablica ma wystarczającą liczbę elementów
@@ -49,12 +48,10 @@ public class Opcje : MonoBehaviour
                 // Zmiana formatu rozdzielczości i dodanie do listy opcji
                 first = width + "x" + height;
                 options.Add(first);
-                Debug.Log("po" + first);
             }
             else
             {
                 options.Add(first);
-                Debug.Log("popo" + first);
             }
         }
         for(int i = 0;i<resolutions.Length;i++)

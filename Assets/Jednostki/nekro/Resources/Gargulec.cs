@@ -39,7 +39,7 @@ public class Gargulec : MonoBehaviour
         {
             InterfaceUnit.Czyszczenie(); 
                         
-            for(int i = 0 ; i < 1  ; i++)
+            for(int i = 0 ; i < 2  ; i++)
             {
                 InterfaceUnit.przyciski[i].GetComponent<Image>().sprite = budynki[i];
                 PrzyciskInter Guzik = InterfaceUnit.przyciski[i].GetComponent<PrzyciskInter>();

@@ -894,8 +894,8 @@ GameObject:
   - component: {fileID: 8287434606867666639}
   - component: {fileID: 7254608854548605690}
   - component: {fileID: 36873823500742661}
+  - component: {fileID: -6671187014111410654}
   - component: {fileID: -573976898982341302}
-  - component: {fileID: 5827698543674720939}
   - component: {fileID: 5883602230984839372}
   - component: {fileID: 7022607786726823304}
   - component: {fileID: 4080598057547060474}
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   drewno: 0
   elf: 0
   boss: 0
---- !u!114 &-573976898982341302
+--- !u!114 &-6671187014111410654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1061,12 +1061,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268565104842363223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f4051d150fc8a44bf6e8423ba1bdf4, type: 3}
+  m_Script: {fileID: 11500000, guid: d67b094ee7a796d43b066d97ae039871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  budynki:
+  - {fileID: 21300000, guid: 622b37b62d0c0924caa5569112a09ee1, type: 3}
+  teksty:
+  - "Na ko\u0144cu tury, traci tyle zdrowia, ile obecie masz pieni\u0119dzy"
   jednostka: {fileID: 6268565104842363223}
-  koniec: 0
---- !u!114 &5827698543674720939
+  nieStandardowy: 0
+--- !u!114 &-573976898982341302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

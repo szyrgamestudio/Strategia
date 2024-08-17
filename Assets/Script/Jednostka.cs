@@ -54,6 +54,7 @@ public class Jednostka : MonoBehaviour
     public AudioSource src;
 
     public int drewno;
+    public int typ;
 
     public bool elf;
     public bool boss = false;
@@ -631,7 +632,10 @@ public class Jednostka : MonoBehaviour
         {
             zdrada(0);
         }
-        szybkosc = maxszybkosc;
+        if(szybkosc > 0)
+            szybkosc = maxszybkosc + 1;
+        else
+            szybkosc = maxszybkosc;
         akcja = true;
         if((druzyna == (Menu.tura+Menu.IloscGraczy)%(Menu.IloscGraczy+1)) || (SimultanTurns.simultanTurns && SimultanTurns.ready))
         {
