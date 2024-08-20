@@ -59,6 +59,7 @@ public class Jednostka : MonoBehaviour
     public bool elf;
     public bool boss = false;
 
+
     public void Start()
     {
         switch(druzyna)

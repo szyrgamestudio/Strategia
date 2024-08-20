@@ -25,7 +25,7 @@ public class Heros : MonoBehaviour
         healthGracza.maxValue = expToNext;
         if(exp>=expToNext)
         {
-            exp = 0;
+            exp -= expToNext;
             level++;
             jednostka.GetComponent<Jednostka>().cena += 4;
             expToNext = level * 20;

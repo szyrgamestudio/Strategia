@@ -435,6 +435,7 @@ public class Menu : MonoBehaviour
                         }
                     }
                 }
+                Save.zapis.save();
 
                 if(!SimultanTurns.simultanTurns)
                     GetComponent<Muzyka>().Start();

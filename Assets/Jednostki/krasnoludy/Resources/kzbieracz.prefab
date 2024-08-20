@@ -863,6 +863,7 @@ MonoBehaviour:
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 8575592721979644502}
   drewno: 0
+  typ: 22
   elf: 0
   boss: 0
 --- !u!114 &4831904122305438739
@@ -883,6 +884,7 @@ MonoBehaviour:
   teksty:
   - "Pasywnie: Jednostka mo\u017Ce zbiera\u0107 z\u0142oto z kopalni oraz drewno
     z las\xF3w oddalonych o 3 pola od ratusza"
+  poszukiwacz: 0
 --- !u!114 &8924023265595303249
 MonoBehaviour:
   m_ObjectHideFlags: 0

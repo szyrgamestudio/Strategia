@@ -16,6 +16,77 @@ public class MapCheck : MonoBehaviour
     public static string opis;
     PhotonView photonView;
 
+    public static bool save;
+    public Image mapyButton;
+    public Image saveButton;
+
+    public GameObject usun;
+
+    public void usunMape()
+    {
+        string mapsFolderPath = Path.Combine(Application.streamingAssetsPath, "Save");
+        
+        // Ustawienie ścieżki do pliku, który ma być usunięty
+         string filePath = Path.Combine(mapsFolderPath,  MapLoad.nazwa);
+
+          if (File.Exists(filePath))
+        {
+            try
+            {
+                // Usunięcie pliku
+                File.Delete(filePath);
+                
+                Debug.Log("Plik został usunięty: " + filePath);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Błąd podczas usuwania pliku: " + e.Message);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Plik nie istnieje: " + filePath);
+        }
+
+        LoadMapFiles();
+        PopulateDropdown();
+        if(!MenuGlowne.multi || Ip.ip == 1)
+            SelectFirstItem();
+        mapDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(mapDropdown); });
+    }
+
+    public void saveChanges(bool zmiana)
+    {
+        // if(save != false)
+        // {
+            save = zmiana;
+            if(save)
+            {
+                usun.SetActive(true);
+                saveButton.color = Color.grey;
+                mapyButton.color = Color.white;
+                mapsFolderPath = Path.Combine(Application.streamingAssetsPath, "Save");
+                LoadMapFiles();
+                PopulateDropdown();
+                if(!MenuGlowne.multi || Ip.ip == 1)
+                    SelectFirstItem();
+                mapDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(mapDropdown); });
+            }
+            else
+            {
+                usun.SetActive(false);
+                saveButton.color = Color.white;
+                mapyButton.color = Color.grey;
+                mapsFolderPath = Path.Combine(Application.streamingAssetsPath, "Maps");
+                LoadMapFiles();
+                PopulateDropdown();
+                if(!MenuGlowne.multi || Ip.ip == 1)
+                    SelectFirstItem();
+                mapDropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(mapDropdown); });
+            }
+        //}
+    }
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -125,7 +196,11 @@ public class MapCheck : MonoBehaviour
         mapNameText.text = "Mapa: " + selectedMap; // Update the map name text
         Debug.Log("Selected map: " + selectedMap);
 
-        string filePath = Path.Combine(Application.streamingAssetsPath, "Maps", MapLoad.nazwa);
+        string filePath;
+        if(save)
+            filePath = Path.Combine(Application.streamingAssetsPath, "Save", MapLoad.nazwa);
+        else
+            filePath = Path.Combine(Application.streamingAssetsPath, "Maps", MapLoad.nazwa);
         string firstLine = LoadFirstLine(filePath);
         opis = LoadUntil7777(filePath);
 
@@ -279,6 +354,7 @@ public class MapCheck : MonoBehaviour
             przyciski[3].SetActive(false);
         }
     }
+
     [PunRPC]
     void updateTogler(int ip)
     {

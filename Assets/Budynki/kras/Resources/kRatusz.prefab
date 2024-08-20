@@ -701,6 +701,7 @@ MonoBehaviour:
   poczatek: 0
   koniec: 0
   src: {fileID: 3325116486702123896}
+  typ: 22
 --- !u!114 &6190871129465287358
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1119,6 +1119,10 @@ MonoBehaviour:
   animator: {fileID: 1932338423165335917}
   pocisk: {fileID: 6268565104842363223, guid: b2939317c0f05794fbd76a8b9adde328, type: 3}
   src: {fileID: 2809171008904476264}
+  drewno: 0
+  typ: 44
+  elf: 0
+  boss: 0
 --- !u!114 &1106659066701329073
 MonoBehaviour:
   m_ObjectHideFlags: 0

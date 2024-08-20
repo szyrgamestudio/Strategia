@@ -33,6 +33,8 @@ public class MapLoad : MonoBehaviour
     public List<GameObject> enemyStrzelaTrudny;
     public GameObject boss;
 
+    public int save;
+
 
     [PunRPC]
     public void manaZwieksz(int ip, int i)
@@ -120,11 +122,47 @@ public class MapLoad : MonoBehaviour
         End.maxGraczy = end;
         Menu.IloscGraczy = ilosc;
     }
+    public void zasoby(string line, int i)
+    {
+        string[] tablica = line.Split(' ');
+        
+        // Przekonwertowanie wartości z tablicy na int i przypisanie ich do odpowiednich pól
+        Menu.zloto[i] = int.Parse(tablica[0]);
+        Menu.drewno[i] = int.Parse(tablica[1]);
+        Menu.magia[i] = int.Parse(tablica[2]);
+    }
+    public void kuznia(string[] tablica, int i)
+    {
+        Kuznia.update1[i] = int.Parse(tablica[0]);
+        Kuznia.update2[i] = int.Parse(tablica[1]);
+        Kuznia.update3[i] = int.Parse(tablica[2]);
+        Kuznia.update4[i] = int.Parse(tablica[3]);
+        Kuznia.update5[i] = int.Parse(tablica[4]);
+        Biblioteka.update1[i] = int.Parse(tablica[5]);
+        Biblioteka.update2[i] = int.Parse(tablica[6]);
+        Biblioteka.update3[i] = int.Parse(tablica[7]);
+        Biblioteka.update4[i] = int.Parse(tablica[8]);
+        Biblioteka.update5[i] = int.Parse(tablica[9]);
+        Kbiblioteka.update1[i] = int.Parse(tablica[10]);
+        Kbiblioteka.update2[i] = int.Parse(tablica[11]);
+        Kbiblioteka.update3[i] = int.Parse(tablica[12]);
+        Kbiblioteka.update4[i] = int.Parse(tablica[13]);
+        Kbiblioteka.update5[i] = int.Parse(tablica[14]);
+        Ebiblioteka.update1[i] = int.Parse(tablica[15]);
+        Ebiblioteka.update2[i] = int.Parse(tablica[16]);
+        Ebiblioteka.update3[i] = int.Parse(tablica[17]);
+        Ebiblioteka.update4[i] = int.Parse(tablica[18]);
+    }
+
 
     public void LoadMapData()
     {
         // Łączenie ścieżki pliku z katalogiem "Maps" i nazwą pliku "map1.txt"
-        string filePath = Path.Combine(Application.dataPath, "StreamingAssets/Maps", nazwa);
+        string filePath;
+        if(MapCheck.save)
+            filePath = Path.Combine(Application.dataPath, "StreamingAssets/Save", nazwa);
+        else
+            filePath = Path.Combine(Application.dataPath, "StreamingAssets/Maps", nazwa);
 
         // Lista przechowująca dane mapy (listy liczb całkowitych)
         List<List<int>> tempMapData = new List<List<int>>();
@@ -148,12 +186,39 @@ public class MapLoad : MonoBehaviour
                 // Odczytanie i przypisanie wysokości planszy z drugiej linii pliku
                 Menu.BoardSizeY = int.Parse(reader.ReadLine().Trim());
 
+                save = int.Parse(reader.ReadLine().Trim());
+                //wczutuwamoe pierdul
+                if(save != 0)
+                {
+                    Menu.tura = save;
+
+                    for(int i = 1; i <= 4 ; i++)
+                    {
+                        string linia = reader.ReadLine();
+                        zasoby(linia, i);
+                    }
+
+                    string linka = reader.ReadLine();
+                    string[] tablica = linka.Split(' ');
+                    for(int i = 1; i <= 4; i++)
+                        Budowlaniec.punktyBudowyBonus[i] = int.Parse(tablica[i-1]);
+                    for(int i = 1; i <= 4; i++)
+                    {
+                        
+                        linka = reader.ReadLine();
+                        Debug.Log(linka);
+                        tablica = linka.Split(' ');
+                        kuznia(tablica, i);
+                    }
+
+                }
+
 
                 // Odczytywanie kolejnych linii pliku
                 char piatyOdKoncaZnak = nazwa[nazwa.Length - 6];
                 int.TryParse(piatyOdKoncaZnak.ToString(), out int maxGraczy);
                 End.maxGraczy = maxGraczy;
-                Debug.Log("end" + End.maxGraczy);
+
                 if (Menu.IloscGraczy > End.maxGraczy)
                     Menu.IloscGraczy = End.maxGraczy;
                 for (int i = 0; i < 4; i++)
@@ -181,9 +246,6 @@ public class MapLoad : MonoBehaviour
                         // Konwersja odczytanej wartości na liczbę całkowitą i dodanie do listy
                         row.Add(int.Parse(value));
                     }
-                    // if(line == "71040")
-                    //     randomGold();
-                    // Wstawienie listy z danymi wiersza na początek listy mapy
                     if (line == "7777")
                         break;
                     if (itemStart)
@@ -199,8 +261,11 @@ public class MapLoad : MonoBehaviour
                     if (line == "01101010")
                         jednostkiStart = true;
                     
-                    if (wysokoscStart && zlotoStart && !jednostkiStart && line != "71040")
+                    if (wysokoscStart && zlotoStart && !jednostkiStart)
+                    {
+
                         tempMapGold.Insert(0, row);
+                    }
                     if (line == "01111010")
                     {
                         zlotoStart = true;
@@ -223,7 +288,7 @@ public class MapLoad : MonoBehaviour
             int[,] kafelekWysokosc = new int[100, 100];
             int[,] kafelekGold = new int[5000, 5];
             int[,] kafelekUnit = new int[20, 2];
-            int[,] kafelekEnemy = new int[5000, 5];
+            int[,] kafelekEnemy = new int[5000, 8];
             int[,] kafelekItem = new int[5000, 5];
 
             for (int i = 0; i < Menu.BoardSizeY; i++)
@@ -243,7 +308,7 @@ public class MapLoad : MonoBehaviour
             for (int l = 0; l < tempMapGold.Count; l++)
                 for (int j = 0; j < 5; j++)
                 {
-                    Debug.Log(l + " " + j);
+
                     kafelekGold[l, j] = tempMapGold[l][j];
                 }
             for (int l = 0; l < tempMapUnit.Count; l++)
@@ -252,9 +317,10 @@ public class MapLoad : MonoBehaviour
                     kafelekUnit[l, j] = tempMapUnit[l][j];
                 }
             for (int l = 0; l < tempMapEnemy.Count; l++)
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    kafelekEnemy[l, j] = tempMapEnemy[l][j];
+                    if (j < tempMapEnemy[l].Count)
+                        kafelekEnemy[l, j] = tempMapEnemy[l][j];
                 }
             for (int l = 0; l < tempMapItem.Count; l++)
                 for (int j = 0; j < 3; j++)
@@ -333,6 +399,7 @@ public class MapLoad : MonoBehaviour
                 Menu.kafelki[x][y].GetComponent<Pole>().zloto = kafelekGold[k, 0];
                 k++;
             }
+            if(save == 0)
             for (int i = 0; i < End.maxGraczy; i++)
             {
                 if (WyburRas.aktywny[i] == true)
@@ -363,13 +430,38 @@ public class MapLoad : MonoBehaviour
                         StartCoroutine(ludzik(3, kafelekUnit[4 + (i * 5), 0], kafelekUnit[4 + (i * 5), 1], 0));
                 }
             }
+            else
+            {
+                k = 0;
+                while (kafelekUnit[k, 0] != 0 || kafelekUnit[k, 1] != 0)
+                {
+                    if(Menu.kafelki[kafelekUnit[k,0]][ kafelekUnit[k,1]].GetComponent<Pole>().magia == 0)
+                        Menu.kafelki[kafelekUnit[k,0]][ kafelekUnit[k,1]].GetComponent<Droga>().updateDroga(1);
+                    else
+                    {
+                        Menu.kafelki[kafelekUnit[k,0]][ kafelekUnit[k,1]].GetComponent<SpriteRenderer>().sprite = obraz[20];
+                        Menu.kafelki[kafelekUnit[k,0]][ kafelekUnit[k,1]].GetComponent<Pole>().magia = 2;
+                    }
+                    
+                    k++;
+                }
+            }
             k = 0;
             while (kafelekEnemy[k, 0] != 0)
             {
                 if (kafelekEnemy[k, 0] == 1)
-                    StartCoroutine(ludzik(RandomEnemy(kafelekEnemy[k, 1]), kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                    if(save == 0)
+                        StartCoroutine(ludzik(RandomEnemy(kafelekEnemy[k, 1]), kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                    else
+                        StartCoroutine(ludzik(jednostki[kafelekEnemy[k, 1]], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4], kafelekEnemy[k, 5], kafelekEnemy[k, 6]));
                 if (kafelekEnemy[k, 0] == 2)
-                    StartCoroutine(budynek(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                    if(save == 0)
+                        StartCoroutine(budynek(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4]));
+                    else
+                    {
+                        Debug.Log(kafelekEnemy[k,7]);
+                        StartCoroutine(budynek(kafelekEnemy[k, 1], kafelekEnemy[k, 2], kafelekEnemy[k, 3], kafelekEnemy[k, 4], kafelekEnemy[k,5], kafelekEnemy[k,6], kafelekEnemy[k,7]));
+                    }
                 k++;
             }
             k = 0;
@@ -433,7 +525,8 @@ public class MapLoad : MonoBehaviour
             {
                 StartCoroutine(ludzik(boss, End.bossPosition.x, End.bossPosition.y, 0));
             }
-            randomGold();
+            if(save == 0)
+                randomGold();
             // Przykład użycia wczytanych danych (możesz dostosować do swoich potrzeb)
             Debug.Log($"Wczytano dane z pliku. BoardSizeX: {Menu.BoardSizeX}, BoardSizeY: {Menu.BoardSizeY}");
         }
@@ -442,7 +535,61 @@ public class MapLoad : MonoBehaviour
             Debug.LogError($"Plik {nazwa} w folderze Maps nie istnieje.");
         }
     }
-    IEnumerator ludzik(GameObject id, float x, float y, int team)
+
+    GameObject ulepszony(GameObject obj)
+    {
+        Jednostka staty = obj.GetComponent<Jednostka>();
+        int druzyna = staty.druzyna;
+                staty.obrona += Kbiblioteka.update1[druzyna] * 2;
+                staty.atak += Ebiblioteka.update1[druzyna] * 2;
+                staty.obrona += Ebiblioteka.update2[druzyna] * 2;
+                staty.maxszybkosc += Ebiblioteka.update3[druzyna]; staty.szybkosc += Ebiblioteka.update3[druzyna]; 
+
+                Debug.Log("jeden " + staty.nazwa);
+                switch(staty.nazwa)
+                {
+                    case "Bojownik" : staty.obrona += Kuznia.update1[druzyna] * 2; staty.atak += Kuznia.update2[druzyna] * 2;  break;
+                    case "Rycerz" : staty.obrona += Kuznia.update1[druzyna] * 2; staty.atak += Kuznia.update2[druzyna] * 2;  break;
+                    case "Kawalerzysta" : staty.obrona += Kuznia.update1[druzyna] * 2; staty.atak += Kuznia.update2[druzyna] * 2; staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; break;
+                    case "Wilk" : staty.atak += Kuznia.update2[druzyna] * 2; staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; staty.atak += Kuznia.update4[druzyna] * 2;break;
+                    case "Jaskółka" : staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; break;
+                    case "Gryf" : staty.maxszybkosc += Kuznia.update3[druzyna] * 2; staty.szybkosc += Kuznia.update3[druzyna] * 2; staty.atak += Kuznia.update4[druzyna] * 2;staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    case "Łucznik" : staty.atak += Kuznia.update4[druzyna] * 2; break;
+                    case "Kusznik" : staty.atak += Kuznia.update4[druzyna] * 2; break;
+                    case "Piroman" : staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    case "Druid" : staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    case "Kapłan" : staty.obrona += Kuznia.update5[druzyna] * 2; break;
+                    ////////////////////////////////
+                    case "Szczur" : staty.maxdmg += Biblioteka.update1[druzyna]; break;
+                    case "Zoombie" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Mumia" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Wampir" : staty.maxHP += Biblioteka.update2[druzyna] * 2; staty.HP += Biblioteka.update2[druzyna] * 2; staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Marty Łucznik" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; break;
+                    case "Lisz" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    case "Martwy Wojak" : staty.atak += Biblioteka.update3[druzyna]; staty.obrona += Biblioteka.update3[druzyna]; break;
+                    case "Wielki Pająk" : staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Gargulec" : staty.atak += Biblioteka.update4[druzyna] * 2; break;
+                    case "Żniwiarz" : staty.obrona += Biblioteka.update5[druzyna] * 2; break;
+                    ///////////////////////////////
+                    case "Kamikaze" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Żongler dynamitu" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Anty-Budynkowa-Maszyna" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Kwatermistrz" : staty.atak += Kbiblioteka.update2[druzyna] * 2; break;
+                    case "Golem" : staty.HP += Kbiblioteka.update3[druzyna] * 2; staty.maxHP += Kbiblioteka.update3[druzyna] * 2; break;
+                    case "Wielki Golem" : staty.HP += Kbiblioteka.update3[druzyna] * 2; staty.maxHP += Kbiblioteka.update3[druzyna] * 2; obj.GetComponent<Golem>().DMG += Kbiblioteka.update4[druzyna];break;
+                    case "Strzelec" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    case "Charpunnik" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    case "Tarczownik" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    case "Cierpliwy" : staty.atak += Kbiblioteka.update5[druzyna] * 2; break;
+                    ///////////////////////////////
+                    case "Ent" : staty.HP += Ebiblioteka.update4[druzyna] * 2; staty.maxHP += Ebiblioteka.update4[druzyna] * 2; break;
+                    case "Drzewiec" : staty.HP += Ebiblioteka.update4[druzyna] * 2; staty.maxHP += Ebiblioteka.update4[druzyna] * 2; break;
+                }
+
+        return obj;
+    }
+
+    IEnumerator ludzik(GameObject id, float x, float y, int team, float hp, int exp)
     {
         if (team == 0 || WyburRas.aktywny[team - 1] == true)
         {
@@ -456,20 +603,22 @@ public class MapLoad : MonoBehaviour
                 nowy = Instantiate(id, new Vector3(x, y, -2f), Quaternion.identity);
             //PhotonView photonView = nowy.AddComponent<PhotonView>();
             nowy.GetComponent<Jednostka>().druzyna = team;
+            if(hp != -1f)
+                nowy.GetComponent<Jednostka>().HP = hp;
             if (nowy.GetComponent<Jednostka>().lata)
                 Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().ZajeteLot = true;
             else
                 Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
+            if(exp != 0)
+                nowy.GetComponent<Heros>().exp = exp;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
-            // if (ip == 10 || ip == 9)
-            // {
-            //     Menu.heros[team] = nowy;
-            // }
+
             if (team == 0)
             {
                 Menu.NPC.Add(nowy);
                 nowy.GetComponent<Jednostka>().spanie = true;
             }
+            nowy = ulepszony(nowy);
             if (MenuGlowne.multi)
             {
                 nowy.GetComponent<Jednostka>().Aktualizuj();
@@ -479,13 +628,23 @@ public class MapLoad : MonoBehaviour
             }
         }
     }
+    IEnumerator ludzik(GameObject id, float x, float y, int team)
+    {
+        StartCoroutine(ludzik(id, x, y, team, -1f, 0));
+        yield return null;
+    }
     IEnumerator ludzik(int ip, float x, float y, int team)
     {
         StartCoroutine(ludzik(jednostki[ip], x, y, team));
         yield return null;
     }
-
     IEnumerator budynek(int ip, float x, float y, int team)
+    {
+        StartCoroutine(budynek(ip, x, y, team, -1f, -1, -2));
+        yield return null;
+    }
+
+    IEnumerator budynek(int ip, float x, float y, int team, float HP, int punkty, int poziom)
     {
         if (WyburRas.aktywny[team - 1] == true)
         {
@@ -499,6 +658,22 @@ public class MapLoad : MonoBehaviour
                 nowy = Instantiate(budyneki[ip + 11 * WyburRas.rasa[team - 1]], new Vector3(x, y, -2f), Quaternion.identity);
             nowy.GetComponent<Budynek>().druzyna = team;
             nowy.GetComponent<Budynek>().punktyBudowy = nowy.GetComponent<Budynek>().punktyBudowyMax;
+            if(HP != -1f)
+                 nowy.GetComponent<Budynek>().HP = HP;
+            if(punkty != -1f)
+                nowy.GetComponent<Budynek>().punktyBudowy = punkty;
+
+            if(nowy.GetComponent<Ratusz>() && poziom != -2f)
+            {
+                nowy.GetComponent<Ratusz>().poziom = poziom;
+            }
+            if(nowy.GetComponent<nRatusz>()  && poziom != -2f)
+                nowy.GetComponent<nRatusz>().poziom = poziom;
+            if(nowy.GetComponent<KRatusz>()  && poziom != -2f)
+                nowy.GetComponent<KRatusz>().poziom = poziom;
+            if(nowy.GetComponent<eRatusz>()  && poziom != -2f)
+                nowy.GetComponent<eRatusz>().poziom = poziom;
+
             nowy.GetComponent<BudynekRuch>().wybudowany = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().Zajete = true;
             Menu.kafelki[(int)x][(int)y].GetComponent<Pole>().postac = nowy;
@@ -508,7 +683,38 @@ public class MapLoad : MonoBehaviour
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 180.0f);
             if (team == 3)
                 nowy.GetComponent<Budynek>().strzalka.transform.Rotate(0.0f, 0.0f, 270.0f);
+            if(nowy.GetComponent<Kopalnia>()  && poziom != -2f)
+            {
+                Debug.Log("2 " + nowy.transform.position);
+                for(int i = 0; i < poziom ; i++)
+                {
+                        yield return new WaitForSeconds(0.015f);
+                    GameObject zbieracz = null;
+                    if (MenuGlowne.multi)
+                    {
+                        zbieracz = PhotonNetwork.Instantiate(jednostki[((ip-2)/10)*11].name, new Vector3(x, y, -2f), Quaternion.identity);
+                    }
+                    else
+                        zbieracz = Instantiate(jednostki[((ip-2)/10)*11], new Vector3(x, y, -2f), Quaternion.identity);
+                    //PhotonView photonView = nowy.AddComponent<PhotonView>();
+                    zbieracz.GetComponent<Jednostka>().druzyna = team;
+                    
 
+                    if (MenuGlowne.multi)
+                    {
+                        zbieracz.GetComponent<Jednostka>().Aktualizuj();
+                        if (Ip.ip != 1)
+                            zbieracz.GetComponent<Jednostka>().Start();
+                        zbieracz.GetComponent<Jednostka>().rozlozenie();
+                    }
+                    nowy.GetComponent<Kopalnia>().slot[i] = zbieracz;
+                    zbieracz.GetComponent<Jednostka>().Start();
+                    yield return new WaitForSeconds(0.015f);
+                    zbieracz.SetActive(false);
+                    Menu.ludnosc[team]++;
+                }
+                Debug.Log("3 " + nowy.transform.position);
+            }
             if (MenuGlowne.multi)
             {
                 nowy.GetComponent<Budynek>().Aktualizuj();
